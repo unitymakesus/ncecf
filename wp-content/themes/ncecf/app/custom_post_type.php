@@ -68,7 +68,7 @@ function create_post_type() {
     'exclude_from_search' => false,
     'publicly_queryable' => true,
     'show_ui' => true,
-    'show_in_nav_menus' => false,
+    'show_in_nav_menus' => true,
     'menu_position' => 22,
     'menu_icon' => 'dashicons-store',
     'capability_type' => 'page',
