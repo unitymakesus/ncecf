@@ -13,13 +13,20 @@
     </div>
     <div class="filter-section">
       <h4>Filter Results</h4>
+      <!-- TODO 4 dropdowns that for listing resources -->
+      <!-- <select id="issue-select" name="issue-select" class="form-control">
+        @foreach ($issues as $issue)
+          <option value="{{ $issue }}">{{ $issue }}</option>
+        @endforeach
+      </select> -->
       <button type="button">Apply Filters</button>
       <button type="button">Clear Filters</button>
     </div>
     <!-- TODO Interpolate list number of results and print -->
   </section>
   <section>
-    @if (!have_posts())
+    <!-- TODO This will list the reources -->
+    <!-- @if (!have_posts())
       <div class="alert alert-warning">
         <h5>No Resources Found</h5>
       </div>
@@ -30,6 +37,6 @@
         {{ isset($resource->title) ? $resource->title : 'No Title' }}
         {{ isset($author) ? $author : 'No Author' }}
       </div>
-    @endforeach
+    @endforeach -->
   </section>
 </div>
