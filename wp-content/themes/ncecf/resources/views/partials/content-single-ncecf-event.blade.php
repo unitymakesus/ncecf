@@ -1,14 +1,15 @@
-<!-- Events Table -->
+<!-- Events Table (I need to reroute, I think - with the menu appearance in Admin) -->
 <div class="container">
   <div class="left">
     <h1>Events</h1>
+    <p>This will be a short paragraph of ontent that will talk about events</p>
   </div>
   <div class="right">
     <p>Questions about a<br> meeting or training</p><br>
     <button type="button">Contact Us</button>
     <!-- NOTE: Find WP tool / Contact Form Plugin -->
   </div>
-  <table style="width:100%">
+  <table>
     <tr>
       <!-- TODO: Fill in with PHP/Blade WP Values -->
       <th>Program / Initiative</th>
