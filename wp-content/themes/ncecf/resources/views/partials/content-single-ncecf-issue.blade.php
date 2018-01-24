@@ -5,7 +5,7 @@
       <?php the_field('introduction-text'); ?>
     </div>
     <div class="right-introduction">
-      <?php the_flexible_field('introduction-visual', $post_id); ?>
+      <?php the_flexible_field('introduction-visual', $post->ID); ?>
     </div>
   </section>
   <section id="percentage-charts">
