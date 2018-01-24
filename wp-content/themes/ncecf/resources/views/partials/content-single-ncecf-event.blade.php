@@ -1,4 +1,4 @@
-<!-- Events Table (I need to reroute, I think - with the menu appearance in Admin) -->
+<!-- NOTE TODO Now understanding the way we are handling this I will be redoing a lot of this.-->
 <div class="container">
   <div class="left">
     <h1>Events</h1>

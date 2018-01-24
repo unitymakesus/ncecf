@@ -1,6 +1,4 @@
-<!-- Resources Page (I need to reroute, I think - with the menu appearance in Admin) -->
-
-<!-- NOTE TODO I think we will need an if/else type think with blade for individual resource view template VS. the aggregate resource page (showing here)-->
+<!-- NOTE TODO Now understanding the way we are handling this I will be redoing a lot of this.-->
 <div class="container">
   <section>
     <div class="left">

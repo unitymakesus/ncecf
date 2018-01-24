@@ -25,10 +25,12 @@ function create_post_type() {
       'revisions',
       'page-attributes'
     ),
-    // 'query_var' => true,
-    // rewrite (issue)
+    'query_var' => true,
     'has_archive' => false,
-    'rewrite' => true
+    'rewrite' => array(
+     'slug' => 'issue',
+     'hierarchical' => true
+    )
   );
   register_post_type( 'ncecf-issue', $argsIssues );
 

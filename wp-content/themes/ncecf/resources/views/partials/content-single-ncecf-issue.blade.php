@@ -1,41 +1,116 @@
 <!-- Issues Page (I need to reroute, I think - with the menu appearance in Admin) -->
-
-<!-- NOTE TODO I think we will need an if/else type think with blade for individual issue view template VS. the aggregate issue page (showing here)-->
-
-<div class="container">
-  <div class="left">
-    <h1>Issues</h1>
-    <p>this is a short paragraph wasd advaer asaer fbaef asdwe aaerg daergv daregadv <br>
-      asdfarg agre dverg sdvwew nrasd regerbbd arwerg njtyjy sdfwe awet awgre aw<br>
-      afrwerg wetrg wewe asg</p>
-  </div>
-  <div class="right">
-    <h6>How to partner<br> with us</h6><br>
-    <button type="button">Join Us</button>
-    <!-- NOTE: Find WP tool / Contact Form Plugin -->
-  </div>
-  <div class="list-issues-section">
-    <h3>Health and Development</h3>
-      <li><a href="{{ home_url('/ncecf-issue/healthy-birthweight/') }}">Healthy Birthweight</li>
-      <li><a href="{{ home_url('/ncecf-issue/social-emotional-health/') }}">Social-Emotional Health</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/oral-health/') }}">Oral Health</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/physical-health/') }}">Physical Health</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/early-intervention/') }}">Early Intervention</a></li>
-    <h3>Families and Communities</h3>
-      <li><a href="{{ home_url('/ncecf-issue/knowledgeable-parents/') }}">Knowledgeable Parents</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/parentchild-interactions/') }}">Parent/Child Interactions</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/reading-with-children/') }}">Reading with Children</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/supports-for-family/') }}">Supports for Family</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/safe-at-home/') }}">Safe at Home</a></li>
-    <h3>Education</h3>
-      <li><a href="{{ home_url('/ncecf-issue/regular-school-attendance/') }}">Regular School Attendance</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/high-quality-early-care-education/') }}">High-Quality Early Care & Education</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/school-climate/') }}">School Climate</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/grade-promotion/') }}">Grade Promotion</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/summer-learning/') }}">Summer Learning</a></li>
-    <h3>Policy</h3>
-      <li><a href="{{ home_url('/ncecf-issue/federal/') }}">Federal</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/local/') }}">Local</a></li>
-      <li><a href="{{ home_url('/ncecf-issue/state/') }}">State</a></li>
-  </div>
+<div class="issue-container">
+  <secion id="introduction-content">
+    <div class="left-introduction">
+      <?php the_field('introduction-text'); ?>
+    </div>
+    <div class="right-introduction">
+      <?php
+        if( have_rows('introduction-visual') ):
+          the_row();
+        endif;
+      ?>
+    </div>
+  </section>
+  <section id="percentage-charts">
+    <?php if( have_rows('numbers-data-repeater') ): ?>
+      <ul class="slides">
+        <?php while( have_rows('numbers-data-repeater') ): the_row();
+          // vars
+          $number = get_sub_field('number-sub');
+          $content = get_sub_field('text-sub');
+          $link = get_sub_field('percent-of-circle-sub');
+        ?>
+          <li class="slide">
+            <?php if( $number ): ?>
+              <?php echo $number; ?>
+            <?php endif; ?>
+              <?php echo $link; ?>
+            <?php if( $link ): ?>
+              </a>
+            <?php endif; ?>
+              <?php echo $content; ?>
+          </li>
+        <?php endwhile; ?>
+    	</ul>
+    <?php endif; ?>
+  </section>
+  <section id="what-can-we-do-about-it">
+    <div class="what-can-we-do">
+      <?php the_field('what_can_we_do'); ?>
+    </div>
+  </section>
+  <section id="featured-resources">
+    <?php
+      $posts = get_field('featured_resources');
+      if( $posts ): ?>
+        <ul>
+          <?php foreach( $posts as $post): ?>
+            <?php setup_postdata($post); ?>
+            <li>
+              <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+              <span>Author: <?php the_field('author'); ?></span>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
+  </section>
+  <section id="related-issues-blogs">
+    <div class="left-related">
+      <?php
+        $posts = get_field('related_blog_posts');
+        if( $posts ): ?>
+          <ul>
+            <?php foreach( $posts as $post): ?>
+              <?php setup_postdata($post); ?>
+              <li>
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <span>Author: <?php the_field('author'); ?></span>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        <?php wp_reset_postdata(); ?>
+      <?php endif; ?>
+    </div>
+    <div class="right-related">
+      <?php
+        $posts = get_field('related_issues');
+        if( $posts ): ?>
+          <ul>
+            <?php foreach( $posts as $post): ?>
+              <?php setup_postdata($post); ?>
+              <li>
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <span>Author: <?php the_field('author'); ?></span>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        <?php wp_reset_postdata(); ?>
+      <?php endif; ?>
+    </div>
+  </section>
+  <section id="issue-elaborations">
+  <?php if( have_rows('more_issue_elaboration') ): ?>
+  	<ul class="slides">
+  	<?php while( have_rows('more_issue_elaboration') ): the_row();
+  		// vars
+  		$title = get_sub_field('title-sub');
+  		$content = get_sub_field('content-sub');
+  		$id = get_sub_field('id-sub');
+  		?>
+  		<li class="slide">
+  			<?php if( $id ): ?>
+  				<?php echo $id; ?>
+  			<?php endif; ?>
+  				<?php echo $title; ?>
+  			<?php if( $id ): ?>
+  				</a>
+  			<?php endif; ?>
+  		    <?php echo $content; ?>
+  		</li>
+  	<?php endwhile; ?>
+  	</ul>
+  <?php endif; ?>
+  </section>
 </div>
