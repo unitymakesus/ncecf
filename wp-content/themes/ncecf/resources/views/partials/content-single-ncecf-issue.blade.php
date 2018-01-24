@@ -5,11 +5,7 @@
       <?php the_field('introduction-text'); ?>
     </div>
     <div class="right-introduction">
-      <?php
-        if( have_rows('introduction-visual') ):
-          the_row();
-        endif;
-      ?>
+      <?php the_flexible_field('introduction-visual', $post_id); ?>
     </div>
   </section>
   <section id="percentage-charts">
