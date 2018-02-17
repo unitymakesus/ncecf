@@ -78,7 +78,7 @@ function create_post_type() {
       'revisions',
       'page-attributes'
     ),
-    'has_archive' => true,
+    'has_archive' => 'events',
     'rewrite' => 'event'
   );
   register_post_type( 'ncecf-event', $argsEvents );
@@ -105,7 +105,7 @@ function create_post_type() {
       'revisions',
       'page-attributes'
     ),
-    'has_archive' => true,
+    'has_archive' => 'resources',
     'rewrite' => 'resource'
   );
   register_post_type( 'ncecf-resource', $argsResources );
