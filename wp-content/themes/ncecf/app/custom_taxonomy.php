@@ -15,7 +15,7 @@ function create_taxonomies() {
 		'hierarchical' => false,
 		'rewrite' => true
 	);
-	register_taxonomy('resource-type', 'resource', $argsResourceType);
+	register_taxonomy('resource-type', 'ncecf-resource', $argsResourceType);
 
 	$argsIssueCategories = array(
 		'labels' => array(
@@ -28,7 +28,7 @@ function create_taxonomies() {
 		'hierarchical' => false,
 		'rewrite' => true
 	);
-	register_taxonomy('issue-category', 'issue', $argsIssueCategories);
+	register_taxonomy('issue-category', 'ncecf-issue', $argsIssueCategories);
 
 }
 

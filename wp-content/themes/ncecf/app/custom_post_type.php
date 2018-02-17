@@ -26,9 +26,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => false,
-    'rewrite' => true
+    'rewrite' => 'issue'
   );
-  register_post_type( 'issue', $argsIssues );
+  register_post_type( 'ncecf-issue', $argsIssues );
 
 
   $argsInitiatives = array(
@@ -53,9 +53,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => false,
-    'rewrite' => true
+    'rewrite' => 'initiative'
   );
-  register_post_type( 'initiative',  $argsInitiatives );
+  register_post_type( 'ncecf-initiative',  $argsInitiatives );
 
   $argsEvents = array(
     'labels' => array(
@@ -79,9 +79,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => true,
-    'rewrite' => false
+    'rewrite' => 'event'
   );
-  register_post_type( 'event', $argsEvents );
+  register_post_type( 'ncecf-event', $argsEvents );
 
 
   $argsResources = array(
@@ -106,9 +106,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => true,
-    'rewrite' => true
+    'rewrite' => 'resource'
   );
-  register_post_type( 'resource', $argsResources );
+  register_post_type( 'ncecf-resource', $argsResources );
 
 }
 
