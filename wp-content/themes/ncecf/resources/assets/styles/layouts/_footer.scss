@@ -1,7 +1,7 @@
 .page-footer {
   background-image: url('../images/paper-fibers.png');
   background-repeat: repeat;
-  border-top: 30px $color-green solid;
+  border-top: 30px solid $color-green;
   padding-top: 50px;
 
   .row {
@@ -33,6 +33,7 @@
   .footer-copyright {
     min-height: 30px;
     padding: 0;
+    font-size: 0.9em;
 
     a {
       color: $color-white;

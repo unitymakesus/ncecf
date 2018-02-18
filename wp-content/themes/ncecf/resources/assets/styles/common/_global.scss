@@ -3,6 +3,15 @@
   font-family: $font-open;
 }
 
+.container {
+  @media #{$medium-and-up} {
+    width: 90%;
+  }
+  @media #{$large-and-up} {
+    width: 85%;
+  }
+}
+
 .flex {
   display: flex;
 }
