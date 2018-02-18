@@ -12,7 +12,7 @@ function create_taxonomies() {
 		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_nav_menus' => false,
-		'hierarchical' => false,
+		'hierarchical' => true,
 		'rewrite' => true
 	);
 	register_taxonomy('resource-type', 'ncecf-resource', $argsResourceType);
@@ -25,7 +25,7 @@ function create_taxonomies() {
 		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_nav_menus' => false,
-		'hierarchical' => false,
+		'hierarchical' => true,
 		'rewrite' => true
 	);
 	register_taxonomy('issue-category', 'ncecf-issue', $argsIssueCategories);

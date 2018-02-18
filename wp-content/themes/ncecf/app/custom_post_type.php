@@ -27,16 +27,19 @@ function create_post_type() {
     'menu_position' => 20,
     'menu_icon' => 'dashicons-paperclip',
     'capability_type' => 'page',
-    'hierarchical' => false,
+    'hierarchical' => true,
     'supports' => array(
       'title',
       'editor',
       'author',
       'revisions',
-      'page-attributes'
+      'page-attributes',
+      'thumbnail'
     ),
     'has_archive' => false,
-    'rewrite' => 'issue'
+    'rewrite' => array(
+      'slug' => 'issue'
+    )
   );
   register_post_type( 'ncecf-issue', $argsIssues );
 
@@ -73,7 +76,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => false,
-    'rewrite' => 'initiative'
+    'rewrite' => array(
+      'slug' => 'initiative'
+    )
   );
   register_post_type( 'ncecf-initiative',  $argsInitiatives );
 
@@ -109,7 +114,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => 'events',
-    'rewrite' => 'event'
+    'rewrite' => array(
+      'slug' => 'event'
+    )
   );
   register_post_type( 'ncecf-event', $argsEvents );
 
@@ -145,7 +152,9 @@ function create_post_type() {
       'page-attributes'
     ),
     'has_archive' => 'resources',
-    'rewrite' => 'resource'
+    'rewrite' => array(
+      'slug' => 'resource'
+    )
   );
   register_post_type( 'ncecf-resource', $argsResources );
 

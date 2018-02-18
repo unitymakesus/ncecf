@@ -1,0 +1,42 @@
+.breadcrumbs {
+  background: url('../images/paper-fibers.png') repeat;
+  color: $color-slate-dark;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+
+  nav {
+    @extend .z-depth-0;
+  }
+
+  .trail-browse {
+    display: none;
+  }
+
+  .trail-items {
+    list-style: none;
+    padding: 0 !important;
+    line-height: 2em;
+
+    .trail-item {
+      display: inline-block;
+
+      &::after {
+        content: '\0025B6';
+        display: inline-block;
+        margin: 0 5px;
+        color: $color-brown;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+
+    a {
+      color: $color-brown;
+      text-decoration: underline;
+      display: inline-block;
+    }
+  }
+}

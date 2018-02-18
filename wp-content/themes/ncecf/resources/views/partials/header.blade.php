@@ -36,3 +36,10 @@
     </div>
   </nav>
 </header>
+@if ( !is_home() && function_exists( 'breadcrumb_trail' ) )
+  <div class="breadcrumbs">
+    <div class="container">
+      @php (breadcrumb_trail())
+    </div>
+  </div>
+@endif

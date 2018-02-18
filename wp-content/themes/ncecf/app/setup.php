@@ -63,6 +63,11 @@ add_action('after_setup_theme', function () {
     add_theme_support('customize-selective-refresh-widgets');
 
     /**
+     * Add image quality
+     */
+    add_filter('jpeg_quality', function($arg){return 100;});
+
+    /**
      * Enable logo uploader in customizer
      */
      add_image_size('ncecf-logo', 289, 127, false);
