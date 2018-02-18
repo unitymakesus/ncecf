@@ -177,9 +177,8 @@ class FacetWP_Renderer
             }
         }
 
-        // Static facet - the active facet's operator is "or"
-        $static_facet = $params['static_facet'];
-        $used_facets = $params['used_facets'];
+        // Don't render these facets
+        $frozen_facets = $params['frozen_facets'];
 
         // Calculate pager args
         $pager_args = array(
@@ -235,14 +234,13 @@ class FacetWP_Renderer
             // Get facet labels
             $output['settings']['labels'][ $facet_name ] = facetwp_i18n( $the_facet['label'] );
 
-            // Skip static facets
-            if ( $static_facet == $facet_name ) {
-                continue;
-            }
+            // Load all facets on back / forward button press (first_load = true)
+            if ( ! $first_load ) {
 
-            // Skip used facets
-            if ( isset( $used_facets[ $facet_name ] ) ) {
-                continue;
+                // Skip frozen facets
+                if ( isset( $frozen_facets[ $facet_name ] ) ) {
+                    continue;
+                }
             }
 
             $args = array(

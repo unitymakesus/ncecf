@@ -27,7 +27,7 @@ add_action('after_setup_theme', function () {
     add_theme_support('soil-jquery-cdn');
     add_theme_support('soil-nav-walker');
     add_theme_support('soil-nice-search');
-    add_theme_support('soil-relative-urls');
+    // add_theme_support('soil-relative-urls');
 
     /**
      * Enable plugins to manage the document title
@@ -40,7 +40,8 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'header_social' => __('Header Social Links', 'sage')
     ]);
 
     /**
@@ -60,6 +61,15 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/themes/advanced-topics/customizer-api/#theme-support-in-sidebars
      */
     add_theme_support('customize-selective-refresh-widgets');
+
+    /**
+     * Enable logo uploader in customizer
+     */
+     add_image_size('ncecf-logo', 289, 127, false);
+     add_image_size('ncecf-logo-2x', 578, 254, false);
+     add_theme_support('custom-logo', array(
+       'size' => 'ncecf-logo-2x'
+     ));
 
     /**
      * Use main stylesheet for visual editor
@@ -83,8 +93,16 @@ add_action('widgets_init', function () {
         'id'            => 'sidebar-primary'
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'sage'),
-        'id'            => 'sidebar-footer'
+        'name'          => __('Footer Column 1', 'sage'),
+        'id'            => 'sidebar-footer-1'
+    ] + $config);
+    register_sidebar([
+        'name'          => __('Footer Column 2', 'sage'),
+        'id'            => 'sidebar-footer-2'
+    ] + $config);
+    register_sidebar([
+        'name'          => __('Footer Column 3', 'sage'),
+        'id'            => 'sidebar-footer-3'
     ] + $config);
 });
 

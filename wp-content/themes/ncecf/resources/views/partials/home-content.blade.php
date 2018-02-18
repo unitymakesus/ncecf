@@ -1,7 +1,6 @@
 <div class="container">
   <div class="left-one">
     <div class="image-section">
-      <img src="http://ncinitiative.local/wp-content/uploads/2018/01/download.png" alt="Logo">
     </div>
   </div>
   <div class="right-one">
@@ -9,7 +8,6 @@
   </div>
   <div class="left-two">
     <div class="image-section">
-      <img src="http://ncinitiative.local/wp-content/uploads/2018/01/download.png" alt="Logo">
     </div>
   </div>
   <div class="right-two">
@@ -19,7 +17,6 @@
   </div>
   <div class="left-three">
     <div class="image-section">
-      <img src="http://ncinitiative.local/wp-content/uploads/2018/01/download.png" alt="Logo">
     </div>
   </div>
   <div class="right-three">
@@ -27,7 +24,6 @@
   </div>
   <div class="left-four">
     <div class="image-section">
-      <img src="http://ncinitiative.local/wp-content/uploads/2018/01/download.png" alt="Logo">
     </div>
   </div>
   <div class="right-four">

@@ -1,5 +1,49 @@
-/** Search form */
-// TODO: .search-form {}
-// TODO: .search-form label {}
-// TODO: .search-form .search-field {}
-// TODO: .search-form .search-submit {}
+.search-form {
+  height: auto;
+  background: $color-slate-dark;
+  border: 2px solid $color-slate-dark;
+  border-radius: 3px;
+  clear: both;
+  line-height: 2.2rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: calc(2.2rem - 12px);
+    height: calc(2.2rem - 12px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url('../images/icon-search.svg');
+  }
+
+  label {
+    float: left;
+    width: calc(100% - 35px);
+  }
+
+  input.search-field {
+    height: 2.2rem;
+    margin: 0;
+    padding: 0 10px;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: $color-white;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+
+  input.search-submit {
+    display: block;
+    height: 2.2rem;
+    width: 2.2rem;
+    color: $color-slate-dark;
+    text-indent: -100em;
+    overflow: hidden;
+    border: none;
+    background: $color-slate-dark;
+  }
+}

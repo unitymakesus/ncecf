@@ -1,5 +1,50 @@
+/** Fonts */
+$font-libre: "Libre Franklin", sans-serif;
+$font-open: "Open Sans", sans-serif;
+
 /** Colors */
-$brand-primary:         #27ae60;
+$color-green:                 #81BC41;
+$color-orange:                #F89C24;
+$color-brown:                 #744F28;
+$color-blue:                  #4597CB;
+$color-slate:                 #8194AA;
+$color-slate-dark:            #4D5C6B;
+$color-black:                 #000;
+$color-gray-dark:             #4A4A4A;
+$color-gray-medium:           #858585;
+$color-gray-light:            #EFEFEF;
+$color-white:                 #FFF;
+$color-red:                   #B90A0A;
+
+$primary-color:               $color-blue;
+$secondary-color:             $color-green;
+
+$success-color:               $color-green;
+$error-color:                 $color-red;
+$link-color:                  $color-blue;
+
+/** Buttons */
+// Shared styles
+$button-background-focus: lighten($color-orange, 4%);
+$button-font-size: 1.2rem;
+$button-height: 50px;
+$button-padding: 0 3rem;
+$button-radius: 25px;
+
+// Raised buttons
+$button-raised-background: $color-orange;
+
+/** Navigation */
+$navbar-height: auto;
+$navbar-line-height: 60px;
+$navbar-height-mobile: auto;
+$navbar-line-height-mobile: $navbar-line-height;
+
+/** Footer */
+$footer-font-color: $color-black;
+$footer-bg-color: $color-gray-medium;
+$footer-copyright-font-color: $color-white;
+$footer-copyright-bg-color: $color-gray-dark;
 
 /** Box Model  */
 $spacer:                2rem;

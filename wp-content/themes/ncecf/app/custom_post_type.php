@@ -6,8 +6,18 @@ function create_post_type() {
 
   $argsIssues = array(
     'labels' => array(
-      'name' => __( 'Issues' ),
-      'singular_name' => __( 'Issue' )
+			'name' => 'Issues',
+			'singular_name' => 'Issue',
+			'add_new' => 'Add New',
+			'add_new_item' => 'Add New Issue',
+			'edit' => 'Edit',
+			'edit_item' => 'Edit Issue',
+			'new_item' => 'New Issue',
+			'view_item' => 'View Issue',
+			'search_items' => 'Search Issues',
+			'not_found' =>  'Nothing found in the Database.',
+			'not_found_in_trash' => 'Nothing found in Trash',
+			'parent_item_colon' => ''
     ),
     'public' => true,
     'exclude_from_search' => false,
@@ -33,8 +43,18 @@ function create_post_type() {
 
   $argsInitiatives = array(
     'labels' => array(
-      'name' => __( 'Initiatives' ),
-      'singular_name' => __( 'Initiative' )
+			'name' => 'Initiatives',
+			'singular_name' => 'Initiative',
+			'add_new' => 'Add New',
+			'add_new_item' => 'Add New Initiative',
+			'edit' => 'Edit',
+			'edit_item' => 'Edit Initiative',
+			'new_item' => 'New Initiative',
+			'view_item' => 'View Initiative',
+			'search_items' => 'Search Initiatives',
+			'not_found' =>  'Nothing found in the Database.',
+			'not_found_in_trash' => 'Nothing found in Trash',
+			'parent_item_colon' => ''
     ),
     'public' => true,
     'exclude_from_search' => false,
@@ -59,8 +79,18 @@ function create_post_type() {
 
   $argsEvents = array(
     'labels' => array(
-      'name' => __( 'Events' ),
-      'singular_name' => __( 'Event' )
+			'name' => 'Events',
+			'singular_name' => 'Event',
+			'add_new' => 'Add New',
+			'add_new_item' => 'Add New Event',
+			'edit' => 'Edit',
+			'edit_item' => 'Edit Event',
+			'new_item' => 'New Event',
+			'view_item' => 'View Event',
+			'search_items' => 'Search Events',
+			'not_found' =>  'Nothing found in the Database.',
+			'not_found_in_trash' => 'Nothing found in Trash',
+			'parent_item_colon' => ''
     ),
     'public' => true,
     'exclude_from_search' => false,
@@ -86,8 +116,18 @@ function create_post_type() {
 
   $argsResources = array(
     'labels' => array(
-      'name' => __( 'Resources' ),
-      'singular_name' => __( 'Resource' )
+				'name' => 'Resources',
+				'singular_name' => 'Resource',
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New Resource',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Resource',
+				'new_item' => 'New Resource',
+				'view_item' => 'View Resource',
+				'search_items' => 'Search Resources',
+				'not_found' =>  'Nothing found in the Database.',
+				'not_found_in_trash' => 'Nothing found in Trash',
+				'parent_item_colon' => ''
     ),
     'public' => true,
     'exclude_from_search' => false,
@@ -100,7 +140,6 @@ function create_post_type() {
     'hierarchical' => false,
     'supports' => array(
       'title',
-      'editor',
       'author',
       'revisions',
       'page-attributes'

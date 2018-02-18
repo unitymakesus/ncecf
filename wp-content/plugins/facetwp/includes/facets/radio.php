@@ -60,7 +60,7 @@ class FacetWP_Facet_Radio_Core extends FacetWP_Facet
         $output = $wpdb->get_results( $sql, ARRAY_A );
 
         // Show "ghost" facet choices
-        if ( FWP()->helper->facet_is( $facet, 'ghosts', 'yes' ) && ! empty( FWP()->unfiltered_post_ids ) ) {
+        if ( FWP()->helper->facet_is( $facet, 'ghosts', 'yes' ) && ! empty( FWP()->unfiltered_post_ids ) && $post_ids !== FWP()->unfiltered_post_ids ) {
             $raw_post_ids = implode( ',', FWP()->unfiltered_post_ids );
 
             $sql = "

@@ -1,2 +1,151 @@
-// TODO: .banner .nav li {}
-// TODO: .banner .nav a {}
+nav {
+  background: none;
+  padding: 10px 0 0;
+
+  .logo {
+    padding-left: 20px;
+    display: block;
+  }
+
+  .utility {
+    padding-right: 20px;
+    padding-bottom: 10px;
+    line-height: 1;
+
+    li {
+      float: none;
+      display: inline-block;
+    }
+  }
+
+  .search-form {
+    margin: 10px 0;
+  }
+
+  .menu-trigger {
+    text-decoration: none;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    margin-right: 20px;
+    display: none;
+
+    i {
+      font-size: 2em;
+    }
+  }
+
+  .navbar {
+    clear: both;
+    background: $color-green;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    li {
+      float: left;
+      position: relative;
+
+      &::before {
+        display: none;
+      }
+
+      a {
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: regular;
+        font-family: $font-libre;
+        font-size: 1.25em;
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      &.active {
+        background: none;
+      }
+
+      &:hover, &:focus, &.hover {
+        z-index: 100;
+
+        &:not(.nav-btn) {
+          a::before {
+            height: 100%;
+          }
+        }
+
+        ul {
+          left: 0;
+          height: auto;
+          opacity: 1;
+        }
+      }
+    }
+
+    @media #{$medium-and-down} {
+      position: fixed;
+      width: 300px;
+      left: auto;
+      right: 0;
+      top: 0;
+      margin: 0;
+      opacity: 0;
+      transform: translateX(100%);
+      height: 100%;
+      height: calc(100% + 60px);
+      height: -moz-calc(100%); //Temporary Firefox Fix
+      padding-bottom: 60px;
+      padding-right: 0;
+      background-color: $color-green;
+      z-index: 999;
+      will-change: transform;
+      backface-visibility: hidden;
+      transition: transform 0.3s ease;
+
+      li {
+        display: block;
+        float: none;
+
+        a {
+          font-size: 1.1em;
+          text-align: center;
+        }
+
+        &.nav-btn {
+          padding-right: 15px;
+        }
+      }
+
+      ul {
+        height: 0;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+    }
+    @media #{$large-and-up} {
+      ul {
+        position: absolute;
+        top: 100%;
+        left: -9999em;
+        width: 280px;
+        background: $color-green;
+
+        li {
+          float: none;
+          position: static;
+        }
+
+        a {
+          color: $color-white;
+
+          &:hover, &:focus {
+            color: $color-white;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
