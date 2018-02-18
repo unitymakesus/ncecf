@@ -143,4 +143,11 @@ add_action('after_setup_theme', function () {
     sage('blade')->compiler()->directive('asset', function ($asset) {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
+
+    /**
+     * Configure SVG location for @svg() Blade directive
+     */
+    add_filter('bladesvg_image_path', function () {
+      return \BladeSvgSage\get_dist_path('images');
+    });
 });

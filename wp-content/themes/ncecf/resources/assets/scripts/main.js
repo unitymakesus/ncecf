@@ -17,7 +17,7 @@ var WebFont = require('webfontloader');
 
 WebFont.load({
  google: {
-   families: ['Libre+Franklin:400,900', 'Open+Sans:400,400i,600'],
+   families: ['Libre+Franklin:700,900', 'Open+Sans:400,400i,600'],
  },
 });
 

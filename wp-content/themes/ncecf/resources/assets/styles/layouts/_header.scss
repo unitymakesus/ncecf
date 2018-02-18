@@ -39,10 +39,9 @@ nav {
     clear: both;
     background: $color-green;
     height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  }
 
+  .navbar-menu {
     li {
       float: left;
       position: relative;
@@ -55,7 +54,6 @@ nav {
         text-transform: uppercase;
         text-decoration: none;
         font-weight: regular;
-        font-family: $font-libre;
         font-size: 1.25em;
 
         &:hover {

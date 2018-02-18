@@ -1,17 +1,25 @@
-<footer class="content-info">
+<footer class="content-info page-footer" role="contentinfo">
   <div class="container">
-    <div class="left">
-      Fat Footer Like You Had Before, Social Meida Inforation, Etc...
+    <div class="row">
+      <div class="col l3 m4 s12">
+        @php(dynamic_sidebar('sidebar-footer-1'))
+      </div>
+      <div class="col l6 m4 s12 center-align">
+        @php(dynamic_sidebar('sidebar-footer-2'))
+      </div>
+      <div class="col l3 m4 s12">
+        @php(dynamic_sidebar('sidebar-footer-3'))
+      </div>
     </div>
-    <div class="right">
-      <h5>Sign Up For Our Newsletter!</h5>
-      <form name="contactform">
-        First Name: <input type="text"><br>
-        Last Name: <input type="text"><br>
-        Email: <input type="text"><br>
-        <button type="button">Sign Up</button>
-      </form>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="flex flex-center space-between">
+        <span class="copyright">&copy; @php(current_time('Y')) North Carolina Early Childhood Foundation</span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Diversity Statement</a>
+        @include('partials.unity')
+      </div>
     </div>
-    @php(dynamic_sidebar('sidebar-footer'))
   </div>
 </footer>

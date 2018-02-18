@@ -1,0 +1,47 @@
+.page-footer {
+  background-image: url('../images/paper-fibers.png');
+  background-repeat: repeat;
+  border-top: 30px $color-green solid;
+  padding-top: 50px;
+
+  .row {
+    margin-bottom: 50px;
+  }
+
+  h3 {
+    font-family: $font-libre;
+    font-weight: 700;
+    font-size: 1.25em;
+    color: $color-blue;
+    margin-top: 0;
+  }
+
+  .textwidget {
+    p {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: underline;
+
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .footer-copyright {
+    min-height: 30px;
+    padding: 0;
+
+    a {
+      color: $color-white;
+      text-decoration: underline;
+
+      &:hover, &:focus, &:active {
+        color: $color-orange;
+        text-decoration: none;
+      }
+    }
+  }
+}
