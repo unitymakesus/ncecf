@@ -1,0 +1,25 @@
+.news-list {
+  .hentry {
+    margin-bottom: 1.5em;
+
+    .home & {
+      border-bottom: 2px solid $color-green;
+      padding-bottom: 1em;
+      margin-bottom: 1em;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .date {
+    color: $color-slate;
+  }
+
+  .entry-title {
+    font-size: 1em;
+    margin: 0.5em 0;
+    font-weight: bold;
+  }
+}

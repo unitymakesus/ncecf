@@ -15,7 +15,7 @@
 
   .trail-items {
     list-style: none;
-    padding: 0 !important;
+    padding: 0 0 0 15px !important;
     line-height: 2em;
 
     .trail-item {
@@ -37,6 +37,7 @@
       color: $color-brown;
       text-decoration: underline;
       display: inline-block;
+      padding: 0;
     }
   }
 }

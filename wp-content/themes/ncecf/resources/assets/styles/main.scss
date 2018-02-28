@@ -27,8 +27,10 @@
 /** Import theme styles */
 @import "common/a11y";
 @import "common/global";
+@import "common/typography";
 @import "components/breadcrumbs";
 @import "components/buttons";
+@import "components/circle-stats";
 @import "components/forms";
 @import "components/icons";
 @import "components/unity";
@@ -37,5 +39,6 @@
 @import "layouts/sidebar";
 @import "layouts/footer";
 @import "layouts/pages";
+@import "layouts/issues";
 @import "layouts/posts";
 @import "layouts/tinymce";

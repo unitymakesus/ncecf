@@ -5,3 +5,19 @@
     background: darken($color-blue, 10%);
   }
 }
+
+.btn-green {
+  background: $color-green;
+
+  &:hover, &:focus, &:active {
+    background: darken($color-green, 10%);
+  }
+}
+
+.btn-slate {
+  background: $color-slate-dark;
+
+  &:hover, &:focus, &:active {
+    background: darken($color-slate-dark, 10%);
+  }
+}

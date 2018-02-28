@@ -1,4 +1,4 @@
-<section class="page-header" role="region" aria-label="Page Header" style="background-image: url('{!! get_the_post_thumbnail_url(get_the_id(), 'large') !!}')">
+<section class="has-background-image wash" role="region" aria-label="Page Header" style="background-image: url('{!! get_the_post_thumbnail_url(get_the_id(), 'large') !!}')">
   <div class="container">
     <h1 class="center-align">{{ the_title() }}</h1>
   </div>
@@ -29,12 +29,28 @@
     @php ($numbers = get_field('numbers-data'))
     @foreach ($numbers as $n)
       <div class="col m3 s6">
-        <div class="stat-circle" data-percent="{{ $n['percent'] }}">
-          <span class="number">{{ $n['number'] }}</span>
-        </div>
-        <div class="stat-fact">
-          {{ $n['text'] }}
-        </div>
+        <figure class="stat">
+          <div class="stat-circle">
+            <svg viewbox="0 0 36 36">
+              <path class="circle-bg"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                stroke-width="1";
+              />
+              <path class="circle"
+                stroke-dasharray="{{ $n['percent'] }}, 100"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <span class="stat-number">{{ $n['number'] }}</span>
+          </div>
+          <figcaption class="stat-fact center-align">
+            {{ $n['text'] }}
+          </figcaption>
+        </figure>
       </div>
     @endforeach
   </div>
@@ -55,12 +71,12 @@
   <h2 id="resources-label" class="center-align">Featured Resources</h2>
   <div class="row">
     @php ($resources = get_field('issues_resources'))
-    <p class="center-align"><a href="#" class="btn">See All Related Resources</a></p>
+    <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col m6 s12">
+      <div class="col m6 s12 news-list">
         @php
           $news_ids = get_field('issues_posts');
           $news_posts = new WP_Query(['post__in' => $news_ids, 'posts_per_page' => 7]);
@@ -70,14 +86,14 @@
           <h2>Related News Posts</h2>
           @while ($news_posts->have_posts())
             @php ($news_posts->the_post())
-            <article @php(post_class('valign-wrapper'))>
+            <article @php(post_class())>
               <header>
                 @include('partials/entry-meta-date')
                 <h3 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h3>
               </header>
             </article>
           @endwhile
-          <p><a href="#" class="btn">All Related Posts</a></p>
+          <p><a href="#" class="btn btn-slate">All Related Posts</a></p>
         @endif
         @php (wp_reset_postdata())
       </div>
@@ -88,7 +104,7 @@
 
         @foreach ($issues as $issue)
           <div class="issue-banner" style="background-image: url('{!! get_the_post_thumbnail_url($issue->ID, 'medium') !!}')">
-            <h3 class="center-align"><a href="{{ get_the_permalink($issue->ID) }}">{{ get_the_title($issue->ID) }}</a></h1>
+            <h3 class="center-align"><a href="{{ get_the_permalink($issue->ID) }}"><span>{{ get_the_title($issue->ID) }}</span></a></h1>
           </div>
         @endforeach
       </div>

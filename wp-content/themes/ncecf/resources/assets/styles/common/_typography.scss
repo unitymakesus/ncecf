@@ -1,0 +1,52 @@
+h1 {
+  font-family: $font-libre;
+  font-weight: 900;
+  font-size: 45px;
+}
+
+h2 {
+  font-family: $font-libre;
+  font-weight: 900;
+  font-size: 36px;
+  color: $color-blue;
+
+  a {
+    color: inherit;
+    text-decoration: none !important;
+  }
+}
+
+.main {
+  p, li {
+    font-size: 18px;
+  }
+
+  a:not(.btn) {
+    text-decoration: underline;
+    color: $color-blue;
+
+    &:hover, &:focus {
+      color: $color-green;
+      text-decoration: none;
+    }
+  }
+
+  ul {
+    li {
+      list-style: none;
+      position: relative;
+      padding-left: 15px;
+
+      &::before {
+        content: '\2022';
+        color: $color-blue;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}
+
+@mixin text-shadow {
+  text-shadow: 0 2px 4px $color-gray-dark;
+}
