@@ -7336,28 +7336,42 @@ h2 a {
 }
 
 .main p,
-.main li {
+.main li,
+.content p,
+.content li,
+.wp-editor p,
+.wp-editor li {
   font-size: 18px;
 }
 
-.main a:not(.btn):not(.btn-large) {
+.main a:not(.btn):not(.btn-large),
+.content a:not(.btn):not(.btn-large),
+.wp-editor a:not(.btn):not(.btn-large) {
   text-decoration: underline;
   color: #4597CB;
 }
 
 .main a:not(.btn):not(.btn-large):hover,
-.main a:not(.btn):not(.btn-large):focus {
+.main a:not(.btn):not(.btn-large):focus,
+.content a:not(.btn):not(.btn-large):hover,
+.content a:not(.btn):not(.btn-large):focus,
+.wp-editor a:not(.btn):not(.btn-large):hover,
+.wp-editor a:not(.btn):not(.btn-large):focus {
   color: #81BC41;
   text-decoration: none;
 }
 
-.main ul li {
+.main ul li,
+.content ul li,
+.wp-editor ul li {
   list-style: none;
   position: relative;
   padding-left: 15px;
 }
 
-.main ul li::before {
+.main ul li::before,
+.content ul li::before,
+.wp-editor ul li::before {
   content: '\2022';
   color: #4597CB;
   position: absolute;
