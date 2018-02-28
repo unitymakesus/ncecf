@@ -18,28 +18,56 @@
 
 global $wpdb;
 
+$request['cmd'] = '_notify-validate';
+$params = array(
+  'sslverify'     => false,
+  'timeout'       => 60,
+  'user-agent'    => 'MI/' . SPARTAN_MCE_VERSION,
+  'body'          => $request
+);
+$response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', $params );
+if( !is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+  $vc_remote = '1';
+} else {
+  $vc_remote = '0';
+}
+
+
 function vc_utm() {
 
   global $wpdb;
 
+  $request['cmd'] = '_notify-validate';
+  $params = array(
+    'sslverify'     => false,
+    'timeout'       => 60,
+    'user-agent'    => 'MI/' . SPARTAN_MCE_VERSION,
+    'body'          => $request
+  );
+  $response = wp_remote_post( 'https://www.paypal.com/cgi-bin/webscr', $params );
+  if( !is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
+    $vc_remote = '1';
+  } else {
+    $vc_remote = '0';
+  }
+
   $utms  = '?utm_source=MailChimp';
-  $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) .'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
+  $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) . '-' . mce_difer_dateact_date() . 'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
   $utms .= '&utm_medium=cme-' . SPARTAN_MCE_VERSION . '';
-  $utms .= '&utm_term=F' . ini_get( 'allow_url_fopen' ) . 'C' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . 'P' . PHP_VERSION . 'S' . $wpdb->db_version() . '';
+  $utms .= '&utm_term=WPR'.$vc_remote. 'F' . ini_get( 'allow_url_fopen' ) . 'C' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . 'P' . PHP_VERSION . 'S' . $wpdb->db_version() . '';
   // $utms .= '&utm_content=';
 
   return $utms;
 
 }
 
+
+
 ?>
 
-
-
-<h2>MailChimp Extension <span class="mc-code"><?php echo SPARTAN_MCE_VERSION . '.' . ini_get( 'allow_url_fopen' ) . '.' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . '.' . WPCF7_VERSION . '.' . get_bloginfo( 'version' ) . '.' . PHP_VERSION . '.' . $wpdb->db_version() ?></span></h2>
+<h2>MailChimp Extension <span class="mc-code"><?php $mce_sents = get_option( 'mce_sent'); echo SPARTAN_MCE_VERSION . ':' . ini_get( 'allow_url_fopen' ) . ':' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . ':' . WPCF7_VERSION . ':' . get_bloginfo( 'version' ) . ':' . PHP_VERSION . ':' . $wpdb->db_version() . ':' . $vc_remote .' = ' . $mce_sents .  ' saved in ' .  mce_difer_dateact_date() ?></span></h2>
 
 <div class="mce-main-fields">
-
 
   <p class="mail-field">
     <label for="wpcf7-mailchimp-api"><?php echo esc_html( __( 'MailChimp API Key:', 'wpcf7' ) ); ?> </label><br />
