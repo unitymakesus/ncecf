@@ -7806,14 +7806,14 @@ header .menu-trigger i {
   }
 
   .navbar-menu li.mega-menu > ul.sub-menu {
-    width: auto;
+    width: 85vw;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
   }
 
   .navbar-menu li.mega-menu > ul.sub-menu > li.menu-item {
-    width: 280px;
+    width: 25%;
   }
 
   .navbar-menu li.mega-menu > ul.sub-menu > li.menu-item > a {
@@ -8022,7 +8022,7 @@ section.container {
 }
 
 .news-list .entry-title {
-  font-size: 1em;
+  font-size: 18px;
   margin: 0.5em 0;
   font-weight: bold;
 }

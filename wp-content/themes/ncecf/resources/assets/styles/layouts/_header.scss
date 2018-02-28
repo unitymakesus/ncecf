@@ -161,11 +161,11 @@ header {
 
     li.mega-menu {
       & > ul.sub-menu {
-        width: auto;
+        width: 85vw;
         display: flex;
 
         & > li.menu-item {
-          width: 280px;
+          width: 25%;
 
           & > a {
             font-weight: bold;
