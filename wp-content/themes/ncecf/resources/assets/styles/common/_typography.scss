@@ -35,13 +35,13 @@ h2 {
     li {
       list-style: none;
       position: relative;
-      padding-left: 15px;
+      padding-left: 30px;
 
       &::before {
         content: '\2022';
         color: $color-blue;
         position: absolute;
-        left: 0;
+        left: 10px;
       }
     }
   }

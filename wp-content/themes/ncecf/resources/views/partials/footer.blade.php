@@ -16,8 +16,8 @@
     <div class="container">
       <div class="flex flex-center space-between">
         <span class="copyright">&copy; @php(current_time('Y')) North Carolina Early Childhood Foundation</span>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Diversity Statement</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/diversity-statement/">Diversity Statement</a>
         @include('partials.unity')
       </div>
     </div>

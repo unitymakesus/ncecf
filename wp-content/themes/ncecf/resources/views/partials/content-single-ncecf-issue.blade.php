@@ -60,7 +60,7 @@
   <div class="container">
     <div class="row">
       <div class="col l8 m10 s12 push-l2 push-m1">
-        <h2 id="action-label">What Can We Do About It?</h2>
+        <h2 id="action-label" class="center-align">What Can We Do About It?</h2>
         {{ the_field('what_can_we_do') }}
       </div>
     </div>
@@ -68,7 +68,7 @@
 </section>
 
 <section role="region" aria-label="Related Content">
-  <h2 id="resources-label" class="center-align">Featured Resources</h2>
+  <h2 class="center-align">Featured Resources</h2>
   <div class="row">
     @php ($resources = get_field('issues_resources'))
     <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
@@ -111,3 +111,41 @@
     </div>
   </div>
 </section>
+
+@php
+  $more = get_field('more_about_issue');
+  $n = 1;
+@endphp
+@if (!empty($more))
+<section role="region" aria-label="More About This Issue">
+  <h2 class="center-align">More About {{ the_title() }}</h2>
+  <ul class="collapsible expandable">
+    @foreach ($more as $m)
+      <li>
+        <div class="collapsible-header">
+          <div class="container">
+            <div class="row">
+              <div class="col l8 m10 s12 push-l2 push-m1">
+                <h3>{{ $m['title'] }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="collapsible-body">
+          <div class="container">
+            <div class="row">
+              <div class="col m1">
+                <a href="#{{ $n }}" class="copy-link">Copy Link</a>
+              </div>
+              <div class="col l8 m10 s12 push-l1">
+                {!! apply_filters('the_content', $m['content']) !!}
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      @php ($n++)
+    @endforeach
+  </ul>
+</section>
+@endif

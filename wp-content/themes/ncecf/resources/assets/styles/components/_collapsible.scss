@@ -1,0 +1,48 @@
+.collapsible {
+  border: none;
+  margin: 0;
+
+  & > li {
+    padding: 0 !important;
+
+    &::before {
+      display: none;
+    }
+
+    &:nth-of-type(4n-3) .collapsible-header {   // Every 4th, starting at the first
+      background: $color-orange;
+    }
+
+    &:nth-of-type(4n-2) .collapsible-header {  // Every 4th, starting at the second
+      background: $color-green;
+    }
+
+    &:nth-of-type(4n-1) .collapsible-header {  // Every 4th, starting at the second
+      background: $color-slate-dark;
+    }
+
+    &:nth-of-type(4n) .collapsible-header {  // Every 4th, starting at the second
+      background: $color-blue;
+    }
+  }
+
+  .row {
+    margin: 0;
+  }
+}
+
+.collapsible-header {
+  padding: 0;
+  color: $color-white;
+  border-bottom: none;
+
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1.2rem 0;
+  }
+}
+
+.collapsible-body {
+  padding: 2rem 0;
+}
