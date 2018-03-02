@@ -17,7 +17,7 @@
     });
 
     $(document).on('facetwp-loaded', function() {
-        $('.facetwp-autocomplete').each(function() {
+        $('.facetwp-autocomplete:not(.ready)').each(function() {
             var $this = $(this);
             var $parent = $this.closest('.facetwp-facet');
             var facet_name = $parent.attr('data-name');
@@ -35,6 +35,7 @@
                 }
             }, { 'facet_name': facet_name });
             $this.autocomplete(opts);
+            $this.addClass('ready');
         });
     });
 

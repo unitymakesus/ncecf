@@ -49,9 +49,13 @@ class FacetWP_Ajax
     function intercept_request() {
         $action = isset( $_POST['action'] ) ? $_POST['action'] : '';
 
-        // Store some variables
+        $valid_actions = array(
+            'facetwp_refresh',
+            'facetwp_autocomplete_load'
+        );
+
         $this->is_refresh = ( 'facetwp_refresh' == $action );
-        $this->is_preload = ( 'facetwp_refresh' != $action );
+        $this->is_preload = ! in_array( $action, $valid_actions );
         $prefix = FWP()->helper->get_setting( 'prefix' );
         $tpl = isset( $_POST['data']['template'] ) ? $_POST['data']['template'] : '';
 
@@ -168,8 +172,9 @@ class FacetWP_Ajax
             'facets'            => array(),
             'template'          => $template_name,
             'http_params'       => array(
-                'get'   => $_GET,
-                'uri'   => FWP()->helper->get_uri(),
+                'get'       => $_GET,
+                'uri'       => FWP()->helper->get_uri(),
+                'url_vars'  => FWP()->ajax->url_vars,
             ),
             'frozen_facets'     => array(),
             'soft_refresh'      => 0,

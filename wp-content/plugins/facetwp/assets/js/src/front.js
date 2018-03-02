@@ -617,8 +617,6 @@ window.FWP = window.FWP || {};
             var facet_name = $(this).closest('li').attr('data-facet');
             var facet_value = $(this).attr('data-value');
 
-            FWP.parse_facets();
-
             if ('' != facet_value) {
                 FWP.reset(facet_name, facet_value);
             }
