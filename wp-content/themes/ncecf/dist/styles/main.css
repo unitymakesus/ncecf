@@ -2710,6 +2710,7 @@ nav,
 .dropdown-content,
 .collapsible,
 .sidenav,
+.toast,
 .issue-banner {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -5749,6 +5750,81 @@ button.btn-floating {
   display: none;
 }
 
+#toast-container {
+  display: block;
+  position: fixed;
+  z-index: 10000;
+}
+
+@media only screen and (max-width: 600px) {
+  #toast-container {
+    min-width: 100%;
+    bottom: 0%;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  #toast-container {
+    left: 5%;
+    bottom: 7%;
+    max-width: 90%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  #toast-container {
+    top: 10%;
+    right: 7%;
+    max-width: 86%;
+  }
+}
+
+.toast {
+  border-radius: 2px;
+  top: 35px;
+  width: auto;
+  margin-top: 10px;
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  min-height: 48px;
+  line-height: 1.5em;
+  word-break: break-all;
+  background-color: #323232;
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: default;
+}
+
+.toast .toast-action {
+  color: #eeff41;
+  font-weight: 500;
+  margin-right: -25px;
+  margin-left: 3rem;
+}
+
+.toast.rounded {
+  border-radius: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+  .toast {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
 /** Import theme styles */
 
 .screen-reader-text,
@@ -5964,55 +6040,6 @@ h2 a {
   background: #38434d;
 }
 
-.collapsible {
-  border: none;
-  margin: 0;
-}
-
-.collapsible > li {
-  padding: 0 !important;
-}
-
-.collapsible > li::before {
-  display: none;
-}
-
-.collapsible > li:nth-of-type(4n-3) .collapsible-header {
-  background: #F89C24;
-}
-
-.collapsible > li:nth-of-type(4n-2) .collapsible-header {
-  background: #81BC41;
-}
-
-.collapsible > li:nth-of-type(4n-1) .collapsible-header {
-  background: #4D5C6B;
-}
-
-.collapsible > li:nth-of-type(4n) .collapsible-header {
-  background: #4597CB;
-}
-
-.collapsible .row {
-  margin: 0;
-}
-
-.collapsible-header {
-  padding: 0;
-  color: #FFF;
-  border-bottom: none;
-}
-
-.collapsible-header h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 1.2rem 0;
-}
-
-.collapsible-body {
-  padding: 2rem 0;
-}
-
 figure.stat {
   width: 100%;
   margin: 0;
@@ -6055,6 +6082,122 @@ figure.stat svg .circle {
   -webkit-animation: progress 1s ease-out forwards;
        -o-animation: progress 1s ease-out forwards;
           animation: progress 1s ease-out forwards;
+}
+
+.expandable {
+  border: none;
+  margin: 0;
+}
+
+.expandable .row {
+  margin: 0;
+}
+
+.expandable .copy-link {
+  font-weight: 700;
+  color: #4597CB;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1em;
+  height: auto;
+  position: relative;
+  padding: 0 0 0 35px;
+  z-index: 100;
+}
+
+.expandable .copy-link::before {
+  content: '';
+  position: absolute;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIyNiIgdmlld0JveD0iMCAwIDI2IDI2Ij4KICA8ZyBmaWxsPSIjNDU5N0NCIj4KICAgIDxwYXRoIGQ9Ik0yNC4yNTQ0NTc2LDEuNzk5Nzc1MDYgQzIxLjkyMzM4ODIsLTAuNjAwMzk4NTkgMTguMTMwMTEwNywtMC41OTk0NTE0MDIgMTUuNzk4NTgxMywxLjc5OTc3NTA2IEwxMS41NzA2NDMyLDYuMTUzMDQ5NzYgQzExLjIxMTQxNTYsNi41MjI5MjY1NiAxMS4yMTE0MTU2LDcuMTIyNDk2MzggMTEuNTcwNjQzMiw3LjQ5MjM3MzE4IEMxMS45Mjk4NzA3LDcuODYyMjQ5OTggMTIuNTEyMTc4MSw3Ljg2MjI0OTk4IDEyLjg3MTQwNTcsNy40OTIzNzMxOCBMMTcuMDk5MzQzOCwzLjEzOTA5ODQ4IEMxNy44NzcxMzM2LDIuMzM4NzI0ODYgMTguOTE2NjM5NywxLjg5NzMzNTM5IDIwLjAyNjA1OTUsMS44OTczMzUzOSBDMjEuMTM1OTM5MywxLjg5NzMzNTM5IDIyLjE3NTQ0NTQsMi4zMzg3MjQ4NiAyMi45NTMyMzUyLDMuMTM5NTcyMDcgQzIzLjczMTAyNDksMy45NDA0MTkyOCAyNC4xNTk3MDYyLDUuMDEwNzQxMzggMjQuMTU5NzA2Miw2LjE1MzUyMzM1IEMyNC4xNTk3MDYyLDcuMjk1ODMxNzMgMjMuNzMxMDI0OSw4LjM2NjE1Mzg0IDIyLjk1MzIzNTIsOS4xNjcwMDEwNCBMMTcuNDI0OTk0NCwxNC44NjA1NDYzIEMxNS44MTA1NDAyLDE2LjUyMTkxMzYgMTMuMTg0NjM3NCwxNi41MjE5MTM2IDExLjU3MDE4MzIsMTQuODYwNTQ2MyBDMTEuMjEwOTU1NiwxNC40OTA2Njk1IDEwLjYyODY0ODIsMTQuNDkwNjY5NSAxMC4yNjk0MjA3LDE0Ljg2MDU0NjMgQzkuOTEwMTkzMTEsMTUuMjMwNDIzMSA5LjkxMDE5MzExLDE1LjgzMDQ2NjYgMTAuMjY5NDIwNywxNi4xOTk4Njk4IEMxMS40MzQ5NTU0LDE3LjM5OTk1NjYgMTIuOTY2MTU3MSwxOCAxNC40OTczNTg4LDE4IEMxNi4wMjg1NjA1LDE4IDE3LjU1OTc2MjMsMTcuMzk5OTU2NiAxOC43MjUyOTcsMTYuMTk5ODY5OCBMMjQuMjU0NDU3NiwxMC41MDY3OTgxIEMyNS4zNzk5NzYsOS4zNDgzODc0OSAyNiw3LjgwMjEwMzU2IDI2LDYuMTUzNTIzMzUgQzI2LDQuNTA0NDY5NTYgMjUuMzc5OTc2LDIuOTU4NjU5MjIgMjQuMjU0NDU3NiwxLjc5OTc3NTA2IFoiLz4KICAgIDxwYXRoIGQ9Ik0xMi43Mzc0NjA3LDE5LjA0OTI2NzggTDkuMDg1NTc2MzcsMjIuODAzMzY3OSBDOC4yOTE2MjcyMywyMy42MTk1Mzk1IDcuMjMwNTI0MzIsMjQuMDY5Mzc1MSA2LjA5NzU4NTY3LDI0LjA2OTM3NTEgQzQuOTY1MTE2NTMsMjQuMDY5Mzc1MSAzLjkwMzU0NDEsMjMuNjE5NTM5NSAzLjEwOTU5NDk3LDIyLjgwMzM2NzkgQzEuNDYyMDY4MzYsMjEuMTA5NzI3MiAxLjQ2MjA2ODM2LDE4LjM1Mzc2MDIgMy4xMDk1OTQ5NywxNi42NjAxMTk1IEw4LjQyMTY4Mjc3LDExLjE5OTM0NzEgQzkuMjE1NjMxOSwxMC4zODM2NTgxIDEwLjI3NjczNDgsOS45MzM4MjI0NyAxMS40MDk2NzM1LDkuOTMzODIyNDcgQzEyLjU0MjE0MjYsOS45MzM4MjI0NyAxMy42MDMyNDU1LDEwLjM4MzY1ODEgMTQuMzk3MTk0NywxMS4xOTkzNDcxIEMxNC43NjM4ODU1LDExLjU3NjMwMTYgMTUuMzU4MjkxLDExLjU3NjMwMTYgMTUuNzI0OTgxOCwxMS4xOTkzNDcxIEMxNi4wOTE2NzI3LDEwLjgyMjM5MjYgMTYuMDkxNjcyNywxMC4yMTEzNDk4IDE1LjcyNDk4MTgsOS44MzQzOTUyOSBDMTMuMzQ1OTUxNSw3LjM4ODc3NjI0IDkuNDczODY0OTEsNy4zODgyOTM1OCA3LjA5MzQyNjA2LDkuODM0Mzk1MjkgTDEuNzgxMzM4MjYsMTUuMjk1NjUwNCBDMC42MzI5MDU2MzUsMTYuNDc2MjI3NSAwLDE4LjA1MjEwMDEgMCwxOS43MzIyMjY0IEMwLDIxLjQxMTg3IDAuNjMyOTA1NjM1LDIyLjk4Nzc0MjUgMS43ODE4MDc3OCwyNC4xNjgzMTk3IEMyLjkzMDI0MDQxLDI1LjM0OTM3OTQgNC40NjMyMDU0NiwyNiA2LjA5NzExNjE1LDI2IEM3LjczMTQ5NjM2LDI2IDkuMjY0NDYxNDIsMjUuMzQ5Mzc5NCAxMC40MTI4OTQsMjQuMTY4MzE5NyBMMTQuMDY0Nzc4MywyMC40MTQyMTk2IEMxNC40MzE0NjkyLDIwLjAzNzI2NTEgMTQuNDMxNDY5MiwxOS40MjYyMjIzIDE0LjA2NDc3ODMsMTkuMDQ5MjY3OCBDMTMuNjk4MDg3NSwxOC42NzIzMTMzIDEzLjEwNDE1MTUsMTguNjcyMzEzMyAxMi43Mzc0NjA3LDE5LjA0OTI2NzggWiIvPgogIDwvZz4KPC9zdmc+Cg==);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 100%;
+  left: 0;
+}
+
+.expandable .group {
+  padding: 0 !important;
+}
+
+.expandable .group::before {
+  display: none;
+}
+
+.expandable .group:nth-of-type(4n-3) .expandable-header {
+  background: #F89C24;
+}
+
+.expandable .group:nth-of-type(4n-2) .expandable-header {
+  background: #81BC41;
+}
+
+.expandable .group:nth-of-type(4n-1) .expandable-header {
+  background: #4D5C6B;
+}
+
+.expandable .group:nth-of-type(4n) .expandable-header {
+  background: #4597CB;
+}
+
+.expandable-header {
+  padding: 0;
+  color: #FFF;
+  border-bottom: none;
+}
+
+.expandable-header h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 1.2rem 0;
+}
+
+.expandable-body {
+  padding: 2rem 0 100px;
+  position: relative;
+}
+
+.expandable-body .container {
+  overflow: hidden;
+  position: relative;
+}
+
+.group.closed .expandable-body::after {
+  content: 'Expand Section \A   \25BE';
+  white-space: pre;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: calc(3em + 300px) 0 0;
+  text-transform: uppercase;
+  font-family: "Libre Franklin", sans-serif;
+  font-weight: 700;
+  color: #4597CB;
+  font-size: 18px;
+  line-height: 1em;
+}
+
+.group.closed .expandable-body .container {
+  height: 300px;
+}
+
+.group.closed .expandable-body .container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#00FFFFFF', endColorstr='#FFFFFFFF');
+  background-image: -o-linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFF 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#FFF));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #FFF 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #FFF 100%);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFF 100%);
 }
 
 .footnotes {

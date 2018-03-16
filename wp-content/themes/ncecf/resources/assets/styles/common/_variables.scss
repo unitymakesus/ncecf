@@ -24,6 +24,7 @@ $error-color:                 $color-red;
 $link-color:                  $color-blue;
 
 $color-blue-trans:                  rgba($color-blue, 0);
+$color-white-trans:                  rgba($color-white, 0);
 
 /** Gradients */
 // Utility mixin from Compass
@@ -39,6 +40,14 @@ $color-blue-trans:                  rgba($color-blue, 0);
   background-image: -moz-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
   background-image: -ms-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
   background-image: linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
+}
+@mixin trans-white-gradient-down {
+  @include filter-gradient($color-white-trans, $color-white, vertical);
+
+  background-image: -o-linear-gradient(180deg, $color-white-trans 0%, $color-white 100%);
+  background-image: -moz-linear-gradient(180deg, $color-white-trans 0%, $color-white 100%);
+  background-image: -ms-linear-gradient(180deg, $color-white-trans 0%, $color-white 100%);
+  background-image: linear-gradient(180deg, $color-white-trans 0%, $color-white 100%);
 }
 
 /** Buttons */

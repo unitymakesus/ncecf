@@ -22,6 +22,7 @@
 @import "~materialize-css/sass/components/dropdown";
 @import "~materialize-css/sass/components/collapsible";
 @import "~materialize-css/sass/components/sidenav";
+@import "~materialize-css/sass/components/toast";
 // @import "~materialize-css/sass/components/forms/forms";
 
 /** Import theme styles */
@@ -30,8 +31,8 @@
 @import "common/typography";
 @import "components/breadcrumbs";
 @import "components/buttons";
-@import "components/collapsible";
 @import "components/circle-stats";
+@import "components/expandable";
 @import "components/footnotes";
 @import "components/forms";
 @import "components/icons";

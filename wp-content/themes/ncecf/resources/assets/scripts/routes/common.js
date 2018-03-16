@@ -1,9 +1,19 @@
+import Clipboard from 'clipboard';
+import M from 'materialize-css';
+
 export default {
   init() {
-    // JavaScript to be fired on all pages
-    $('.collapsible').collapsible({accordion: false});
+    // Expandable sections
+    $('.expandable .closed').on('click', '.expandable-body', function() {
+      $(this).closest('.group').removeClass('closed');
+    });
   },
   finalize() {
-    // JavaScript to be fired on all pages, after page specific JS is fired
+    // Copy links to clipboard
+    const copyLink = new Clipboard('.copy-link');
+
+    copyLink.on('success', function() {
+      M.toast({html: 'Copied!'});
+    });
   },
 };
