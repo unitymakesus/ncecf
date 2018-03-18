@@ -110,14 +110,16 @@ class FacetWP_Renderer
         // Run the query once (prevent duplicate queries when preloading)
         if ( empty( $this->query_args ) ) {
 
-            // Pagination
-            $page = empty( $params['paged'] ) ? 1 : (int) $params['paged'];
+            // Support "post__in" arg
+            if ( empty( $query_args['post__in'] ) ) {
+                $query_args['post__in'] = array();
+            }
 
             // Get the template "query" field
             $this->query_args = apply_filters( 'facetwp_query_args', $query_args, $this );
 
-            $this->query_args['paged'] = $page;
-            $this->query_args['post__in'] = array();
+            // Pagination
+            $this->query_args['paged'] = empty( $params['paged'] ) ? 1 : (int) $params['paged'];
 
             // Narrow the posts based on the selected facets
             $post_ids = $this->get_filtered_post_ids();
@@ -196,9 +198,6 @@ class FacetWP_Renderer
         // Stick the pager args into the JSON response
         $output['settings']['pager'] = $pager_args;
 
-        // Set the num_choices array
-        $output['settings']['num_choices'] = array();
-
         // Display the pagination HTML
         if ( isset( $params['extras']['pager'] ) ) {
             $output['pager'] = $this->paginate( $pager_args );
@@ -218,6 +217,9 @@ class FacetWP_Renderer
         if ( 0 < $params['soft_refresh'] ) {
             return apply_filters( 'facetwp_render_output', $output, $params );
         }
+
+        // Fill "num_choices" (intentionally added after soft_refresh)
+        $output['settings']['num_choices'] = array();
 
         // Display the sort control
         if ( isset( $params['extras']['sort'] ) ) {

@@ -83,7 +83,7 @@ class FacetWP_Ajax
             add_action( 'pre_get_posts', array( $this, 'update_query_vars' ), 999 );
         }
 
-        if ( ! $this->is_preload && 'wp' == $tpl ) {
+        if ( ! $this->is_preload && 'wp' == $tpl && 'facetwp_autocomplete_load' != $action ) {
             add_action( 'shutdown', array( $this, 'inject_template' ), 0 );
             ob_start();
         }

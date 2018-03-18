@@ -305,7 +305,9 @@
                 FWP.frozen_facets[facet_name] = 'soft';
 
                 // freeze choices
-                $(wrap).addClass('fs-disabled');
+                if (FWP.auto_refresh) {
+                    $(wrap).addClass('fs-disabled');
+                }
             }
 
             FWP.autoload();

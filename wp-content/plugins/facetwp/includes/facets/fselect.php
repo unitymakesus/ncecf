@@ -72,7 +72,7 @@ class FacetWP_Facet_fSelect extends FacetWP_Facet
         $show_ghosts = FWP()->helper->facet_is( $facet, 'ghosts', 'yes' );
         $is_filtered = FWP()->unfiltered_post_ids !== FWP()->facet->query_args['post__in'];
 
-        if ( $show_ghosts && $is_filtered ) {
+        if ( $show_ghosts && $is_filtered && ! empty( FWP()->unfiltered_post_ids ) ) {
             $raw_post_ids = implode( ',', FWP()->unfiltered_post_ids );
 
             $sql = "
