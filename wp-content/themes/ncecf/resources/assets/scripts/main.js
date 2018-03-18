@@ -10,6 +10,7 @@ import Router from './util/Router';
 import common from './routes/common';
 import home from './routes/home';
 import aboutUs from './routes/about';
+import archiveNcecfResourceData from './routes/resources';
 
 /**
  * Web Font Loader
@@ -18,7 +19,7 @@ var WebFont = require('webfontloader');
 
 WebFont.load({
  google: {
-   families: ['Libre+Franklin:700,900', 'Open+Sans:400,400i,600'],
+   families: ['Libre+Franklin:700,900', 'Open+Sans:400,400i,600', 'Material+Icons'],
  },
 });
 
@@ -30,6 +31,7 @@ const routes = new Router({
   home,
   // About Us page, note the change from about-us to aboutUs.
   aboutUs,
+  archiveNcecfResourceData,
 });
 
 // Load Events

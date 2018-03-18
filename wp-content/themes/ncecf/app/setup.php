@@ -70,6 +70,7 @@ add_action('after_setup_theme', function () {
     /**
      * Enable logo uploader in customizer
      */
+     add_image_size('medium-square', 400, 400, true);
      add_image_size('ncecf-logo', 289, 127, false);
      add_image_size('ncecf-logo-2x', 578, 254, false);
      add_theme_support('custom-logo', array(

@@ -11959,7 +11959,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
@@ -11976,6 +11976,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes_common__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes_home__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__routes_about__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__routes_resources__ = __webpack_require__(11);
 // import external dependencies
 
 
@@ -11989,14 +11990,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /**
  * Web Font Loader
  */
-var WebFont = __webpack_require__(11);
+var WebFont = __webpack_require__(12);
 
 WebFont.load({
  google: {
-   families: ['Libre+Franklin:700,900', 'Open+Sans:400,400i,600'],
+   families: ['Libre+Franklin:700,900', 'Open+Sans:400,400i,600', 'Material+Icons'],
  },
 });
 
@@ -12008,6 +12010,7 @@ var routes = new __WEBPACK_IMPORTED_MODULE_2__util_Router__["a" /* default */]({
   home: __WEBPACK_IMPORTED_MODULE_4__routes_home__["a" /* default */],
   // About Us page, note the change from about-us to aboutUs.
   aboutUs: __WEBPACK_IMPORTED_MODULE_5__routes_about__["a" /* default */],
+  archiveNcecfResourceData: __WEBPACK_IMPORTED_MODULE_6__routes_resources__["a" /* default */],
 });
 
 // Load Events
@@ -13130,6 +13133,48 @@ module.exports = select;
 
 /***/ }),
 /* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony default export */ __webpack_exports__["a"] = ({
+  finalize: function finalize() {
+    $(document).on('facetwp-loaded', function() {
+      // Add labels above each facet
+      $('.facetwp-facet').each(function() {
+        var facet_icon = '';
+        var facet_name = $(this).attr('data-name');
+        // eslint-disable-next-line no-undef
+        var facet_label = FWP.settings.labels[facet_name];
+        if ($('.facet-label[data-for="' + facet_name + '"]').length < 1) {
+          switch (facet_name) {
+            case "resource_type": {
+              facet_icon = '<i class="material-icons" aria-hidden="true">library_books</i>';
+              break;
+            }
+            case "resource_issue": {
+              facet_icon = '<i class="material-icons" aria-hidden="true">attach_file</i>';
+              break;
+            }
+            case "resource_initiative": {
+              facet_icon = '<i class="material-icons" aria-hidden="true">lightbulb_outline</i>';
+              break;
+            }
+            case "resource_year": {
+              facet_icon = '<i class="material-icons" aria-hidden="true">date_range</i>';
+              break;
+            }
+          }
+          $(this).before('<div class="h4 facet-label" data-for="' + facet_name + '">' + facet_icon + facet_label + '</div>');
+        }
+      });
+    });
+  },
+});
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.28 - (c) Adobe Systems, Google. License: Apache 2.0 */(function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.o=b||a;this.c=this.o.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
@@ -13153,7 +13198,7 @@ g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
