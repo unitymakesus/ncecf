@@ -1,0 +1,98 @@
+.featured-resources {
+  .col {
+    position: relative;
+    padding: 10px;
+
+    & > * {
+      padding: 0;
+    }
+
+    a.mega-link {
+      &:hover, &:focus {
+        & + .flex .title-wrap {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    }
+
+    .flex {
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .types {
+      padding-bottom: 15vw;
+    }
+
+    .chip {
+      color: $color-white;
+      text-transform: uppercase;
+      text-shadow: none;
+    }
+
+    .title-wrap {
+      transform: translate3d(0, 45px, 0);
+      transition: all 0.3s ease;
+    }
+
+    h3 {
+      color: $color-white;
+      margin-top: 0;
+      text-shadow: none;
+    }
+
+    p {
+      font-size: 1em;
+      text-shadow: none;
+    }
+
+    a {
+      color: $color-white !important;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 1.3em;
+    }
+
+    &:nth-of-type(4n-3) {   // Every 4th, starting at the first
+      &::before {
+        @include trans-orange-gradient-down-half;
+      }
+
+      .chip {
+        background: $color-orange;
+      }
+    }
+
+    &:nth-of-type(4n-2) {  // Every 4th, starting at the second
+      &::before {
+        @include trans-green-gradient-down-half;
+      }
+
+      .chip {
+        background: $color-green;
+      }
+    }
+
+    &:nth-of-type(4n-1) {  // Every 4th, starting at the third
+      &::before {
+        @include trans-slate-dark-gradient-down-half;
+      }
+
+      .chip {
+        background: $color-slate-dark;
+      }
+    }
+
+    &:nth-of-type(4n) {  // Every 4th, starting at the fourth
+      &::before {
+        @include trans-blue-gradient-down-half;
+      }
+
+      .chip {
+        background: $color-blue;
+      }
+    }
+  }
+}

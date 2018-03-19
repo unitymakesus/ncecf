@@ -32,6 +32,12 @@
     }
   }
 
+  &.page-header {
+    & > * {
+      padding: 60px 0 30px;
+    }
+  }
+
   &.wash::before {
     background-color: rgba($color-slate-dark, 0.5);
   }

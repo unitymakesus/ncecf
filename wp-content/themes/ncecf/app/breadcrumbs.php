@@ -13,7 +13,11 @@ add_filter('breadcrumb_trail_object', function() {
   $post_type = $post->post_type;
 
   if ($post_type == "ncecf-issue") {
-    array_splice($breadcrumbs->items, 1, 0, '<a href="#">Issues</a>');
+    array_splice($breadcrumbs->items, 1, 0, '<a href="/issues/">Issues</a>');
+  }
+
+  if ($post_type == "ncecf-initiative") {
+    array_splice($breadcrumbs->items, 1, 0, '<a href="/initiatives/">Initiatives</a>');
   }
 
   // var_dump($breadcrumbs);

@@ -23,8 +23,11 @@ $success-color:               $color-green;
 $error-color:                 $color-red;
 $link-color:                  $color-blue;
 
-$color-blue-trans:                  rgba($color-blue, 0);
-$color-white-trans:                  rgba($color-white, 0);
+$color-blue-trans:            rgba($color-blue, 0);
+$color-orange-trans:          rgba($color-orange, 0);
+$color-green-trans:           rgba($color-green, 0);
+$color-slate-dark-trans:      rgba($color-slate-dark, 0);
+$color-white-trans:           rgba($color-white, 0);
 
 /** Gradients */
 // Utility mixin from Compass
@@ -40,6 +43,38 @@ $color-white-trans:                  rgba($color-white, 0);
   background-image: -moz-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
   background-image: -ms-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
   background-image: linear-gradient(180deg, $color-blue-trans 0%, $color-blue 100%);
+}
+@mixin trans-blue-gradient-down-half {
+  @include filter-gradient($color-blue-trans, $color-blue, vertical);
+
+  background-image: -o-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 70%);
+  background-image: -moz-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 70%);
+  background-image: -ms-linear-gradient(180deg, $color-blue-trans 0%, $color-blue 70%);
+  background-image: linear-gradient(180deg, $color-blue-trans 0%, $color-blue 70%);
+}
+@mixin trans-orange-gradient-down-half {
+  @include filter-gradient($color-orange-trans, $color-orange, vertical);
+
+  background-image: -o-linear-gradient(180deg, $color-orange-trans 0%, $color-orange 70%);
+  background-image: -moz-linear-gradient(180deg, $color-orange-trans 0%, $color-orange 70%);
+  background-image: -ms-linear-gradient(180deg, $color-orange-trans 0%, $color-orange 70%);
+  background-image: linear-gradient(180deg, $color-orange-trans 0%, $color-orange 70%);
+}
+@mixin trans-green-gradient-down-half {
+  @include filter-gradient($color-green-trans, $color-green, vertical);
+
+  background-image: -o-linear-gradient(180deg, $color-green-trans 0%, $color-green 70%);
+  background-image: -moz-linear-gradient(180deg, $color-green-trans 0%, $color-green 70%);
+  background-image: -ms-linear-gradient(180deg, $color-green-trans 0%, $color-green 70%);
+  background-image: linear-gradient(180deg, $color-green-trans 0%, $color-green 70%);
+}
+@mixin trans-slate-dark-gradient-down-half {
+  @include filter-gradient($color-slate-dark-trans, $color-slate-dark, vertical);
+
+  background-image: -o-linear-gradient(180deg, $color-slate-dark-trans 0%, $color-slate-dark 70%);
+  background-image: -moz-linear-gradient(180deg, $color-slate-dark-trans 0%, $color-slate-dark 70%);
+  background-image: -ms-linear-gradient(180deg, $color-slate-dark-trans 0%, $color-slate-dark 70%);
+  background-image: linear-gradient(180deg, $color-slate-dark-trans 0%, $color-slate-dark 70%);
 }
 @mixin trans-white-gradient-down {
   @include filter-gradient($color-white-trans, $color-white, vertical);

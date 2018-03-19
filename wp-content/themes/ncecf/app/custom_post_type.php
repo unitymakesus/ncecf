@@ -149,7 +149,8 @@ function create_post_type() {
       'title',
       'author',
       'revisions',
-      'page-attributes'
+      'page-attributes',
+      'thumbnail'
     ),
     'has_archive' => 'resources',
     'rewrite' => array(
