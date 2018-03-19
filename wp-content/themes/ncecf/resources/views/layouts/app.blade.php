@@ -9,15 +9,18 @@
     <![endif]-->
     @php(do_action('get_header'))
     @include('partials.header')
+    @yield('sidebar-header')
     <div id="content" class="content" role="document">
-      <main class="main" role="main">
-        @yield('content')
-      </main>
-      @if (App\display_sidebar())
-        <aside class="sidebar">
-          @include('partials.sidebar')
-        </aside>
-      @endif
+      <div class="wrap">
+        <main class="main" role="main">
+          @yield('content')
+        </main>
+        @if (App\display_sidebar())
+          <aside class="sidebar">
+            @include('partials.sidebar')
+          </aside>
+        @endif
+      </div>
     </div>
     @php(do_action('get_footer'))
     @include('partials.footer')

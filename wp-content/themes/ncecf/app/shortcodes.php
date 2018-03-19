@@ -44,10 +44,15 @@ add_shortcode('people', function($atts) {
           <div><a itemprop="email" target="_blank" rel="noopener" href="mailto:<?php echo eae_encode_str($email); ?>"><?php echo eae_encode_str($email); ?></a></div>
         <?php } ?>
 
-        <?php if (!empty($linkedin = get_field('linkedin')) || !empty($twitter = get_field('twitter_name'))) { ?>
+				<?php
+					$linkedin = get_field('linkedin');
+					$twitter = get_field('twitter_name');
+				?>
+
+        <?php if (!empty($linkedin) || !empty($twitter)) { ?>
           <ul class="social-icons">
-            <?php if (!empty($linkedin)) { ?><li><a href="<?php echo $linkedin; ?>" class="icon-linkedin">LinkedIn</a></li><?php } ?>
-            <?php if (!empty($twitter)) { ?><li><a href="https://www.twitter.com/<?php echo $twitter; ?>" class="icon-twitter">Twitter</a></li><?php } ?>
+            <?php if (!empty($linkedin)) { ?><li class="linkedin"><a href="<?php echo $linkedin; ?>">LinkedIn</a></li><?php } ?>
+            <?php if (!empty($twitter)) { ?><li class="twitter"><a href="https://www.twitter.com/<?php echo $twitter; ?>">Twitter</a></li><?php } ?>
           </ul>
         <?php } ?>
       </div>

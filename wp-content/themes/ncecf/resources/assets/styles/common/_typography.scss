@@ -4,6 +4,10 @@ h1 {
   font-size: 45px;
 }
 
+.h1 {
+  @extend h1;
+}
+
 h2 {
   font-family: $font-libre;
   font-weight: 900;
@@ -12,7 +16,6 @@ h2 {
 
   a {
     color: inherit;
-    text-decoration: none !important;
   }
 }
 

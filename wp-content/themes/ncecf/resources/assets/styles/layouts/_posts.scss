@@ -1,16 +1,15 @@
-.news-list {
-  .hentry {
-    margin-bottom: 1.5em;
+.hentry {
+  border-bottom: 2px solid $color-green;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
 
-    .home & {
-      border-bottom: 2px solid $color-green;
-      padding-bottom: 1em;
-      margin-bottom: 1em;
-    }
+  .home & {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
 
-    &:last-of-type {
-      border-bottom: none;
-    }
+  &:last-of-type {
+    border-bottom: none;
   }
 
   .date {
@@ -21,5 +20,13 @@
     font-size: 18px;
     margin: 0.5em 0;
     font-weight: bold;
+  }
+}
+
+.single-post {
+  .entry-title {
+    @extend h2;
+
+    font-size: 36px;
   }
 }

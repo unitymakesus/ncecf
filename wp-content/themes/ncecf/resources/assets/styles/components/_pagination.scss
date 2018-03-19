@@ -1,0 +1,32 @@
+nav.pagination.pagination {
+  @extend .z-depth-0;
+
+  background: none;
+  color: $color-black;
+
+  .page-numbers {
+    display: inline-block;
+    min-width: 40px;
+    padding: 0 15px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.2em;
+    background: $color-orange;
+    color: $color-white;
+    text-decoration: none;
+
+    &.current {
+      background: $color-slate-dark;
+      font-weight: bold;
+    }
+  }
+
+  a {
+    &:hover, &:focus {
+      @extend .z-depth-1;
+
+      background: darken($color-orange, 10%);
+      color: $color-white !important;
+    }
+  }
+}

@@ -1,9 +1,7 @@
 <article @php(post_class())>
   <header>
-    <h2 class="entry-title"><a href="{{ get_permalink() }}">{{ get_the_title() }}</a></h2>
-    @include('partials/entry-meta')
+    @include('partials/entry-meta-date')
+    <h2 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h2>
   </header>
-  <div class="entry-summary">
-    @php(the_excerpt())
-  </div>
+  <div class="entry-content">{!! the_advanced_excerpt('length=40&add_link=0') !!}</div>
 </article>
