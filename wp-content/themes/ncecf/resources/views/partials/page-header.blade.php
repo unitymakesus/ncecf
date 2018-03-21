@@ -1,4 +1,4 @@
-@if (is_home() || is_singular('post') || is_archive())
+@if (is_home() || is_singular('post') || is_date() || is_category())
   @php
     $id = get_option('page_for_posts')
   @endphp

@@ -79,7 +79,8 @@ add_filter('sage/display_sidebar', function ($display) {
     // The sidebar will be displayed if any of the following return true
     is_singular('post'),
     is_home(),
-    is_archive()
+    is_date(),
+    is_category()
   ]);
 
   return $display;
