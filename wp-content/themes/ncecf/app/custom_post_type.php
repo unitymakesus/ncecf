@@ -73,7 +73,8 @@ function create_post_type() {
       'editor',
       'author',
       'revisions',
-      'page-attributes'
+      'page-attributes',
+      'thumbnail'
     ),
     'has_archive' => false,
     'rewrite' => array(

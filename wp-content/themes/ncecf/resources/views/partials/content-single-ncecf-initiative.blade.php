@@ -4,36 +4,23 @@
       {{ the_content() }}
     </div>
     <div class="col l5 m6 s12">
-      @if (!empty($logo = get_field('logo')))
-        <img src="{{ $logo['sizes']['medium_large'] }}" alt="Logo for {{ the_title() }}" />
-      @endif
+      <h2>Impact</h2>
+      {!! get_field('impact') !!}
     </div>
   </div>
 </section>
 
-<section class="container" role="region" aria-label="Main Points">
-  <div class="row">
-    @if (!empty($boxes = get_field('boxes')))
-      @foreach ($boxes as $box)
-        <div class="col m4 s12">
-          <h2>{{ $box['name'] }}</h2>
-          {!! $box['text'] !!}
-        </div>
-      @endforeach
-    @endif
-  </div>
-</section>
-
-<section class="background-paper" role="region" aria-labelled-by="Impact">
+<section class="background-paper" role="region" aria-label="Main Points">
   <div class="container">
     <div class="row">
-      <div class="col m6 s12">
-        <h2>Impact</h2>
-        {!! get_field('impact') !!}
-      </div>
-      <div class="col m6 s12">
-        {!! get_field('partners') !!}
-      </div>
+      @if (!empty($boxes = get_field('boxes')))
+        @foreach ($boxes as $box)
+          <div class="col m4 s12">
+            <h2>{{ $box['name'] }}</h2>
+            {!! $box['text'] !!}
+          </div>
+        @endforeach
+      @endif
     </div>
     <div class="row">
       <p class="center-align"><a class="btn" href="#">Learn How To Join Us</a><p>
@@ -41,22 +28,40 @@
   </div>
 </section>
 
-<section class="container" role="region" aria-label="Timeline">
+<section class="container" role="region" aria-labelled-by="Advancing Work">
   <div class="row">
-    <div class="col l8 m10 s12 push-l2 push-m1">
-      <h2 class="center-align">Advancing Work</h2>
-      @if (!empty($advancing_work = get_field('advancing_work')))
-        @foreach ($advancing_work as $work)
-          <div class="row">
-            <div class="col m3 s4">
-              {{ $work['date'] }}
+    <div class="col l7 m6 s12">
+      <h2>Advancing Work</h2>
+      <div class="advancing-work">
+        @if (!empty($advancing_work = get_field('advancing_work')))
+          @foreach ($advancing_work as $work)
+            <div class="row flex">
+              @if (empty($work['date']))
+                <div class="col s12">
+                  <div>
+                    {{ $work['summary'] }}
+                  </div>
+                </div>
+              @else
+                  <div class="col m3 s4 date flex flex-center">
+                    <div class="circle"></div>
+                    <div class="date-number">
+                      {{ $work['date'] }}
+                    </div>
+                  </div>
+                  <div class="col m9 s8 flex flex-center">
+                    <div>
+                      {{ $work['summary'] }}
+                    </div>
+                  </div>
+              @endif
             </div>
-            <div class="col m9 s8">
-              {{ $work['summary'] }}
-            </div>
-          </div>
-        @endforeach
-      @endif
+          @endforeach
+        @endif
+      </div>
+    </div>
+    <div class="col l5 m6 s12">
+      {!! get_field('partners') !!}
     </div>
   </div>
 </section>

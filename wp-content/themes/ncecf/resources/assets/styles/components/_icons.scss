@@ -33,6 +33,10 @@
     &.twitter a::before {
       background-image: url('../images/icon-twitter.svg');
     }
+
+    &.youtube a::before {
+      background-image: url('../images/icon-youtube.svg');
+    }
   }
 }
 

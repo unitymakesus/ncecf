@@ -11,11 +11,14 @@
 @endif
 
 <div class="has-background-image wash page-header" style="background-image: url('{!! get_the_post_thumbnail_url($id, 'large') !!}')">
-  <div class="container">
-    @if (is_single())
-      <div class="h1 center-align">{{ get_the_title($id) }}</div>
+  <div class="container center-align">
+    @if (is_singular('post'))
+      <div class="h1">{{ get_the_title($id) }}</div>
+    @elseif (is_singular('ncecf-initiative') && !empty($logo = get_field('logo')))
+      <h1 class="screen-reader-text">{{ get_the_title($id) }}</h1>
+      <img class="initiative-logo" src="{{ $logo['sizes']['medium_large'] }}" alt="Logo for {{ the_title() }}" />
     @else
-      <h1 class="center-align">{{ get_the_title($id) }}</h1>
+      <h1>{{ get_the_title($id) }}</h1>
     @endif
   </div>
 </div>

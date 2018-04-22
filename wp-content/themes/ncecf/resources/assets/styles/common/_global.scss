@@ -58,8 +58,22 @@ img {
   left: 0;
 }
 
+section.alternating {
+  padding: 2em 0;
+
+  &.n-0 {
+    background-image: url('../images/paper-fibers.png');
+    background-repeat: repeat;
+  }
+}
+
+section.container {
+  padding: 2.5em 0;
+}
+
 .background-paper {
+  background-color: #E5E6E6;
   background-image: url('../images/paper-fibers.png');
   background-repeat: repeat;
-  padding: 30px 0;
+  padding: 3em 0;
 }

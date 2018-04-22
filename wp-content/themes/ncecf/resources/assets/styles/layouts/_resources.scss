@@ -1,3 +1,66 @@
+.report-banner {
+  @extend .z-depth-1;
+
+  margin-bottom: 2em;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  * {
+    position: relative;
+    margin: 0;
+    font-size: 24px;
+    font-family: $font-libre;
+    font-weight: 700;
+
+    @include text-shadow;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: $color-white !important;
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 20%;
+
+    span {
+      display: block;
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    }
+  }
+
+  &:hover, &:focus {
+    @extend .z-depth-2;
+  }
+
+  &::before {
+    content: '';
+
+    @include cover;
+  }
+
+  &:nth-of-type(4n-3) {   // Every 4th, starting at the first
+    background: $color-orange;
+  }
+
+  &:nth-of-type(4n-2) {  // Every 4th, starting at the second
+    background: $color-green;
+  }
+
+  &:nth-of-type(4n-1) {  // Every 4th, starting at the third
+    background: $color-slate-dark;
+  }
+
+  &:nth-of-type(4n) {  // Every 4th, starting at the fourth
+    background: $color-blue;
+  }
+}
+
 .featured-resources {
   .col {
     position: relative;

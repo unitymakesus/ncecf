@@ -63,8 +63,8 @@ header {
     a {
       text-transform: uppercase;
       text-decoration: none;
-      font-weight: regular;
-      font-size: 1.25em;
+      font-weight: normal;
+      font-size: 1.2em;
     }
 
     &:hover, &:focus, &.hover {
@@ -149,6 +149,7 @@ header {
       }
 
       a {
+        font-size: 1.1rem;
         line-height: 1.2em;
         text-transform: none;
         color: $color-slate-dark;

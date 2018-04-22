@@ -47,50 +47,50 @@
       @php ($i++)
     @endforeach
 
-    <section class="has-background-image wash" role="region" aria-labelledby="partner-title" style="background-image: url('{!! get_the_post_thumbnail_url(get_the_id(), 'large') !!}')">
+    @php
+      $cta = get_field('cta_section');
+    @endphp
+    <section class="has-background-image wash" role="region" aria-labelledby="partner-title" style="background-image: url('{!! $cta[0]['background_image']['sizes']['large'] !!}')">
       <div class="container center-align">
-        <h2 id="partner-title">Partner With Us</h2>
-        <p><a class="btn" href="#">Join Us</a><p>
+        <h2 id="partner-title">{{ $cta[0]['heading'] }}</h2>
+        <p><a class="btn" href="{{ $cta[0]['button_link'] }}">{{ $cta[0]['button_text'] }}</a><p>
       </div>
     </section>
 
+    <section role="region" aria-label="Recent Updates" class="container">
+      <div class="row">
+        <div class="col m6 s12 news-list">
+          <h2>Latest News</h2>
+          @php ($news = new WP_Query(['posts_per_page' => 4]))
 
-    <section role="region" aria-label="Recent Updates">
-      <div class="container">
-        <div class="row">
-          <div class="col m6 s12 news-list">
-            <h2>Latest News</h2>
-            @php ($news = new WP_Query(['posts_per_page' => 4]))
+          @if ($news->have_posts())
+            @while ($news->have_posts()) @php ($news->the_post())
+              <article @php(post_class())>
+                <header>
+                  @include('partials/entry-meta-date')
+                  <h3 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h3>
+                </header>
+                <div class="entry-content">{!! the_advanced_excerpt('length=40&add_link=0') !!}</div>
+              </article>
+            @endwhile
+          @endif
 
-            @if ($news->have_posts())
-              @while ($news->have_posts()) @php ($news->the_post())
-                <article @php(post_class())>
-                  <header>
-                    @include('partials/entry-meta-date')
-                    <h3 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h3>
-                  </header>
-                  <div class="entry-content">{!! the_advanced_excerpt('length=40&add_link=0') !!}</div>
-                </article>
-              @endwhile
-            @endif
+          @php (wp_reset_postdata())
+        </div>
 
-            @php (wp_reset_postdata())
-          </div>
+        <div class="col m6 s12">
+          <h2>Latest Reports</h2>
+          @php ($resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']))
 
-          <div class="col m6 s12">
-            <h2>Latest Reports</h2>
-            @php ($resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']))
+          @if ($resources->have_posts())
+            @while ($resources->have_posts()) @php ($resources->the_post())
+              <div class="report-banner">
+                <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
+              </div>
+            @endwhile
+          @endif
 
-            @if ($resources->have_posts())
-              @while ($resources->have_posts()) @php ($resources->the_post())
-                <div class="issue-banner" style="background-image: url('{!! get_the_post_thumbnail_url($resource->ID, 'medium') !!}')">
-                  <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
-                </div>
-              @endwhile
-            @endif
-
-            @php (wp_reset_postdata())
-          </div>
+          @php (wp_reset_postdata())
         </div>
       </div>
     </section>

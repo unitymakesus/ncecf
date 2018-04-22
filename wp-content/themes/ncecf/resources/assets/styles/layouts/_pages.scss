@@ -35,26 +35,13 @@
 
   &.page-header {
     & > * {
-      padding: 60px 0 30px;
+      padding: 60px;
     }
   }
 
   &.wash::before {
     background-color: rgba($color-slate-dark, 0.5);
   }
-}
-
-section.alternating {
-  padding: 30px 0;
-
-  &.n-0 {
-    background-image: url('../images/paper-fibers.png');
-    background-repeat: repeat;
-  }
-}
-
-section.container {
-  padding: 30px 0;
 }
 
 .page-template {
