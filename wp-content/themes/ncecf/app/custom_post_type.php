@@ -82,44 +82,44 @@ function create_post_type() {
     )
   );
   register_post_type( 'ncecf-initiative',  $argsInitiatives );
-
-  $argsEvents = array(
-    'labels' => array(
-			'name' => 'Events',
-			'singular_name' => 'Event',
-			'add_new' => 'Add New',
-			'add_new_item' => 'Add New Event',
-			'edit' => 'Edit',
-			'edit_item' => 'Edit Event',
-			'new_item' => 'New Event',
-			'view_item' => 'View Event',
-			'search_items' => 'Search Events',
-			'not_found' =>  'Nothing found in the Database.',
-			'not_found_in_trash' => 'Nothing found in Trash',
-			'parent_item_colon' => ''
-    ),
-    'public' => true,
-    'exclude_from_search' => false,
-    'publicly_queryable' => true,
-    'show_ui' => true,
-    'show_in_nav_menus' => false,
-    'menu_position' => 22,
-    'menu_icon' => 'dashicons-store',
-    'capability_type' => 'page',
-    'hierarchical' => false,
-    'supports' => array(
-      'title',
-      'editor',
-      'author',
-      'revisions',
-      'page-attributes'
-    ),
-    'has_archive' => 'events',
-    'rewrite' => array(
-      'slug' => 'event'
-    )
-  );
-  register_post_type( 'ncecf-event', $argsEvents );
+  // 
+  // $argsEvents = array(
+  //   'labels' => array(
+	// 		'name' => 'Events',
+	// 		'singular_name' => 'Event',
+	// 		'add_new' => 'Add New',
+	// 		'add_new_item' => 'Add New Event',
+	// 		'edit' => 'Edit',
+	// 		'edit_item' => 'Edit Event',
+	// 		'new_item' => 'New Event',
+	// 		'view_item' => 'View Event',
+	// 		'search_items' => 'Search Events',
+	// 		'not_found' =>  'Nothing found in the Database.',
+	// 		'not_found_in_trash' => 'Nothing found in Trash',
+	// 		'parent_item_colon' => ''
+  //   ),
+  //   'public' => true,
+  //   'exclude_from_search' => false,
+  //   'publicly_queryable' => true,
+  //   'show_ui' => true,
+  //   'show_in_nav_menus' => false,
+  //   'menu_position' => 22,
+  //   'menu_icon' => 'dashicons-store',
+  //   'capability_type' => 'page',
+  //   'hierarchical' => false,
+  //   'supports' => array(
+  //     'title',
+  //     'editor',
+  //     'author',
+  //     'revisions',
+  //     'page-attributes'
+  //   ),
+  //   'has_archive' => 'events',
+  //   'rewrite' => array(
+  //     'slug' => 'event'
+  //   )
+  // );
+  // register_post_type( 'ncecf-event', $argsEvents );
 
 
   $argsResources = array(

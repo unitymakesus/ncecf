@@ -10,9 +10,11 @@
       @if ($visual[0][acf_fc_layout] == 'iframe')
         {!! $visual[0][iframe_code] !!}
       @elseif ($visual[0][acf_fc_layout] == 'image')
-
+        <img class="z-depth-1" src="{!! $visual[0]['image']['sizes']['large'] !!}" srcset="{!! $visual[0]['image']['sizes']['medium'] !!} 320w, {!! $visual[0]['image']['sizes']['large'] !!} 992w" />
       @elseif ($visual[0][acf_fc_layout] == 'oembed')
-
+        <div class="embed-container">
+        	{!! $visual[0]['oembed_code'] !!}
+        </div>
       @endif
     </div>
   </div>
@@ -21,32 +23,53 @@
 <section class="container" role="region" aria-label="Quick Facts">
   <div class="row">
     @php ($numbers = get_field('numbers-data'))
-    @foreach ($numbers as $n)
-      <div class="col m3 s6">
-        <figure class="stat">
-          <div class="stat-circle">
-            <svg viewbox="0 0 36 36">
-              <path class="circle-bg"
-                d="M18 2.0845
-                  a 15.9155 15.9155 0 0 1 0 31.831
-                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                stroke-width="1";
-              />
-              <path class="circle"
-                stroke-dasharray="{{ $n['percent'] }}, 100"
-                d="M18 2.0845
-                  a 15.9155 15.9155 0 0 1 0 31.831
-                  a 15.9155 15.9155 0 0 1 0 -31.831"
-              />
-            </svg>
-            <span class="stat-number">{{ $n['number'] }}</span>
-          </div>
-          <figcaption class="stat-fact center-align">
-            {{ $n['text'] }}
-          </figcaption>
-        </figure>
-      </div>
-    @endforeach
+    @if (!empty($numbers))
+      @php
+        switch (count($numbers)) {
+          case "1":
+            $mcol = "m6";
+            break;
+          case "2":
+            $mcol = "m6";
+            break;
+          case "3":
+            $mcol = "m4";
+            break;
+          case "4":
+            $mcol = "m3";
+            break;
+        }
+      @endphp
+      @foreach ($numbers as $n)
+        <div class="col {{ $mcol }} s6">
+          <figure class="stat">
+            <div class="stat-circle">
+              <svg viewbox="0 0 36 36">
+                <path class="circle-bg"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  stroke-width="1";
+                />
+                <path class="circle"
+                  stroke-dasharray="{{ $n['percent'] }}, 100"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+              </svg>
+              <span class="stat-number">{{ $n['number'] }}</span>
+            </div>
+            <figcaption class="stat-fact center-align">
+              {{ $n['text'] }}
+              @if (!empty($n['source']))
+                <div class="source">(Source: {!! $n['source'] !!})</div>
+              @endif
+            </figcaption>
+          </figure>
+        </div>
+      @endforeach
+    @endif
   </div>
 </section>
 
@@ -55,7 +78,7 @@
     <div class="row">
       <div class="col l8 m10 s12 push-l2 push-m1">
         <h2 id="action-label" class="center-align">What Can We Do About It?</h2>
-        {{ the_field('what_can_we_do') }}
+        {!! apply_filters('the_content', get_field('what_can_we_do')) !!}
       </div>
     </div>
   </div>
@@ -63,35 +86,37 @@
 
 <section role="region" aria-label="Related Content">
   @if (!empty($resources = get_field('issues_resources')))
-    <h2 class="center-align">Featured Resources</h2>
-    <div class="row flex flex-wrap featured-resources">
-      @php ($featured_resources = array_slice($resources, 0, 4))
-      @foreach ($featured_resources as $resource)
-        @php
-          $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
-          $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
-        @endphp
-        <div class="col l3 m6 s12 has-background-image wash" style="background-image: url('{!! get_the_post_thumbnail_url($resource->ID, 'medium_large') !!}')">
-          <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>
-          <div class="flex">
-            @if (!empty($term_list))
-              <div class="types">
-                @foreach ($term_list as $term)
-                  <div class="chip"><span aria-label="Type"></span>{{ $term }}</div>
-                @endforeach
+    <div class="section padding">
+      <h2 class="center-align">Featured Resources</h2>
+      <div class="row flex flex-wrap featured-resources">
+        @php ($featured_resources = array_slice($resources, 0, 4))
+        @foreach ($featured_resources as $resource)
+          @php
+            $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
+            $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
+          @endphp
+          <div class="col l3 m6 s12 has-background-image wash" style="background-image: url('{!! get_the_post_thumbnail_url($resource->ID, 'medium_large') !!}')">
+            <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>
+            <div class="flex">
+              @if (!empty($term_list))
+                <div class="types">
+                  @foreach ($term_list as $term)
+                    <div class="chip"><span aria-label="Type"></span>{{ $term }}</div>
+                  @endforeach
+                </div>
+              @endif
+              <div class="title-wrap">
+                <h3>{{ $resource->post_title }}</h3>
+                {!! get_field('description', $resource->ID) !!}
+                <p><a href="{{ $link }}" target="_blank" rel="noopener">See This Resource</a></p>
               </div>
-            @endif
-            <div class="title-wrap">
-              <h3>{{ $resource->post_title }}</h3>
-              {!! get_field('description', $resource->ID) !!}
-              <p><a href="{{ $link }}" target="_blank" rel="noopener">See This Resource</a></p>
             </div>
           </div>
-        </div>
-      @endforeach
-    </div>
-    <div class="row">
-      <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
+        @endforeach
+      </div>
+      <div class="row">
+        <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
+      </div>
     </div>
   @endif
 

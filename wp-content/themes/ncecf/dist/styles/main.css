@@ -2696,7 +2696,7 @@ a {
 }
 
 .z-depth-0,
-.breadcrumbs nav,
+.breadcrumbs.breadcrumbs nav,
 nav.pagination {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
@@ -6647,7 +6647,8 @@ section.alternating.n-0 {
 }
 
 section.container,
-.sidebar-primary section.content {
+.sidebar-primary section.content,
+.section.padding {
   padding: 2.5em 0;
 }
 
@@ -6738,7 +6739,7 @@ h3,
   left: 10px;
 }
 
-.breadcrumbs {
+.breadcrumbs.breadcrumbs {
   background: url(/wp-content/themes/ncecf/dist/images/paper-fibers.png) repeat;
   color: #4D5C6B;
   line-height: 1;
@@ -6746,32 +6747,32 @@ h3,
   z-index: 1;
 }
 
-.breadcrumbs .trail-browse {
+.breadcrumbs.breadcrumbs .trail-browse {
   display: none;
 }
 
-.breadcrumbs .trail-items {
+.breadcrumbs.breadcrumbs .trail-items {
   list-style: none;
   padding: 0 0 0 15px !important;
   line-height: 2em;
 }
 
-.breadcrumbs .trail-items .trail-item {
+.breadcrumbs.breadcrumbs .trail-items .trail-item {
   display: inline-block;
 }
 
-.breadcrumbs .trail-items .trail-item::after {
+.breadcrumbs.breadcrumbs .trail-items .trail-item::after {
   content: '\25B6';
   display: inline-block;
   margin: 0 5px;
   color: #744F28;
 }
 
-.breadcrumbs .trail-items .trail-item:last-child::after {
+.breadcrumbs.breadcrumbs .trail-items .trail-item:last-child::after {
   display: none;
 }
 
-.breadcrumbs .trail-items a {
+.breadcrumbs.breadcrumbs .trail-items a {
   color: #744F28;
   text-decoration: underline;
   display: inline-block;
@@ -6850,6 +6851,15 @@ figure.stat svg .circle {
   -webkit-animation: progress 1s ease-out forwards;
        -o-animation: progress 1s ease-out forwards;
           animation: progress 1s ease-out forwards;
+}
+
+figure.stat .stat-fact p {
+  display: inline;
+}
+
+figure.stat .stat-fact .source {
+  font-size: 85%;
+  color: #858585;
 }
 
 .expandable {

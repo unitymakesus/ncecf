@@ -37,4 +37,15 @@ figure.stat {
       animation: progress 1s ease-out forwards;
     }
   }
+
+  .stat-fact {
+    p {
+      display: inline;
+    }
+
+    .source {
+      font-size: 85%;
+      color: $color-gray-medium;
+    }
+  }
 }
