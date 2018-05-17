@@ -1,10 +1,9 @@
 @php
-  $more = get_field('more_about_issue');
+  $more = get_field('sections');
   $n = 1;
 @endphp
 @if (!empty($more))
-<section role="region" aria-label="More About This Issue">
-  <h2 class="center-align">More About {{ the_title() }}</h2>
+<section role="region" aria-label="Content">
   <div class="expandable">
     @foreach ($more as $m)
       <div class="group closed" id="more{{ $n }}">
