@@ -82,6 +82,18 @@ add_action('after_setup_theme', function () {
      * @see resources/assets/styles/layouts/_tinymce.scss
      */
     add_editor_style(asset_path('styles/main.css'));
+
+    /**
+     * Remove Tribe Filter Bar Styles
+     */
+    add_filter( 'tribe_asset_enqueue', function ($enqueue, $asset) {
+      if ($asset->slug == 'tribe-filterbar-styles' || $asset->slug == 'tribe-filterbar-mobile-styles') {
+        $enqueue = false;
+      } else {
+        $enqueue = true;
+      }
+      return $enqueue;
+    }, 10, 2);
 }, 20);
 
 /**

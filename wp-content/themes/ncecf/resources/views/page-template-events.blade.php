@@ -9,7 +9,16 @@
 @extends('layouts.app')
 
 @section('content')
-	<div id="tribe-events-pg-template" class="section container tribe-event-pg-template">
+	@php
+    $id = get_option('page_for_posts')
+  @endphp
+	<div class="has-background-image wash page-header" style="background-image: url('{!! get_the_post_thumbnail_url($id, 'large') !!}')">
+	  <div class="container center-align">
+      <h1>Events</h1>
+	  </div>
+	</div>
+
+	<div id="tribe-events-pg-template" class="tribe-event-pg-template">
 		{{ tribe_events_before_html() }}
 		{{ tribe_get_view() }}
 		{{ tribe_events_after_html() }}
