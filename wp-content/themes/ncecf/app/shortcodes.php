@@ -3,6 +3,89 @@
 namespace App;
 
 /**
+ * Issues listed by category shortcode
+ */
+add_shortcode('list-issues', function() {
+	$issue_cats = get_terms([
+		'taxonomy' => 'issue-category',
+		'hide_empty' => true,
+		'orderby' => 'menu_order',
+		'order' => 'ASC'
+	]);
+
+	ob_start();
+
+	foreach ($issue_cats as $cat) {
+		$issues = new \WP_Query([
+			'post_type' => 'ncecf-issue',
+			'posts_per_page' => -1,
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
+			'tax_query' => [
+				[
+					'taxonomy' => 'issue-category',
+					'field' => 'slug',
+					'terms' => $cat->slug
+				]
+			]
+		]);
+
+		if ($issues->have_posts()) :
+
+			echo '<h2 class="issue-category">' . $cat->name . '</h2>';
+			echo '<ul>';
+
+			while ($issues->have_posts()) : $issues->the_post();
+			?>
+				<li>
+					<a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a>:
+					<?php the_advanced_excerpt('length=20&read_more='); ?>
+				</li>
+			<?php
+			endwhile;
+
+			echo '</ul>';
+
+		endif; wp_reset_postdata();
+	}
+
+	return ob_get_clean();
+});
+
+
+/**
+ * Initiatives list shortcode
+ */
+add_shortcode('list-initiatives', function() {
+	$initiatives = new \WP_Query([
+		'post_type' => 'ncecf-initiative',
+		'posts_per_page' => -1,
+		'orderby' => 'title',
+		'order' => 'ASC',
+	]);
+
+	ob_start();
+
+	if ($initiatives->have_posts()) :
+
+		echo '<ul>';
+
+		while ($initiatives->have_posts()) : $initiatives->the_post();
+		?>
+			<h2><a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
+			<div><?php the_advanced_excerpt('read_more=Learn More'); ?></div>
+		<?php
+		endwhile;
+
+		echo '</ul>';
+
+	endif; wp_reset_postdata();
+
+	return ob_get_clean();
+});
+
+
+/**
  * Staff list shortcode
  */
 add_shortcode('people', function($atts) {
