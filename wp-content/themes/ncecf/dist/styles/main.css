@@ -7287,6 +7287,10 @@ header .search-form {
   width: 250px;
 }
 
+header .btn-blue {
+  width: 250px;
+}
+
 header .menu-trigger {
   text-decoration: none;
   height: 50px;
