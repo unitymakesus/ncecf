@@ -23,7 +23,7 @@
           {!! wp_nav_menu(['theme_location' => 'header_social', 'menu_class' => 'social-icons right-align', 'menu_id' => 'header-social']) !!}
         @endif
         {!! get_search_form(false) !!}
-        <div class="right-align"><a href="#" class="btn btn-blue">Donate</a></div>
+        <iframe width="270" height="66" src= "https://www.mightycause.com/embed/Buildthefoundation?embed=button" scrolling="no" marginHeight="0" marginWidth="0" frameBorder="0" ></iframe> 
       </div>
     </div>
 
