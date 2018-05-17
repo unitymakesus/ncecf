@@ -1,7 +1,7 @@
 <div class="wpallimport-collapsed closed wpallimport-section">
 	<div class="wpallimport-content-section">
 		<div class="wpallimport-collapsed-header">
-			<h3><?php _e('Advanced Options','wp_all_import_plugin');?></h3>	
+			<h3><?php _e('Configure Advanced Settings','wp_all_import_plugin');?></h3>	
 		</div>
 		<div class="wpallimport-collapsed-content" style="padding: 0;">
 			<div class="wpallimport-collapsed-content-inner">				
@@ -19,11 +19,11 @@
 								<label for="import_ajax_processing"><?php _e('Iterative, Piece-by-Piece Processing', 'wp_all_import_plugin' )?></label>					
 								
 								<span class="switcher-target-import_ajax_processing pl17" style="display:block; clear: both; width: 100%;">
-									<div class="pl17" style="margin:5px 0px;">							
-										<label for="records_per_request"><?php _e('In each iteration, process', 'wp_all_import_plugin');?></label> <input type="text" name="records_per_request" style="vertical-align:middle; font-size:11px; background:#fff !important; width: 40px; text-align:center;" value="<?php echo esc_attr($post['records_per_request']) ?>" /> <?php _e('records', 'wp_all_import_plugin'); ?>
-										<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('WP All Import must be able to process this many records in less than your server\'s timeout settings. If your import fails before completion, to troubleshoot you should lower this number. If you are importing images, especially high resolution images, high numbers here are probably a bad idea, since downloading the images can take lots of time - for example, 20 posts with 5 images each = 100 images. At 500Kb per image that\'s 50Mb that needs to be downloaded. Can your server download that before timing out? If not, the import will fail.', 'wp_all_import_plugin'); ?>">?</a>							
-									</div>
-									<div class="input pl17" style="margin:5px 0px;">
+									
+									<label for="processing_iteration_logic_custom"><?php _e('In each iteration, process', 'wp_all_import_plugin');?></label> <input type="text" name="records_per_request" style="vertical-align:middle; font-size:11px; background:#fff !important; width: 40px; text-align:center;" value="<?php echo esc_attr($post['records_per_request']) ?>" /> <?php _e('records', 'wp_all_import_plugin'); ?>
+									<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('WP All Import must be able to process this many records in less than your server\'s timeout settings. If your import fails before completion, to troubleshoot you should lower this number. If you are importing images, especially high resolution images, high numbers here are probably a bad idea, since downloading the images can take lots of time - for example, 20 posts with 5 images each = 100 images. At 500Kb per image that\'s 50Mb that needs to be downloaded. Can your server download that before timing out? If not, the import will fail.', 'wp_all_import_plugin'); ?>">?</a>
+									
+									<div class="input" style="margin:5px 0px;">
 										<input type="hidden" name="chuncking" value="0" />
 										<input type="checkbox" id="chuncking" name="chuncking" value="1" class="fix_checkbox" <?php echo $post['chuncking'] ? 'checked="checked"': '' ?>/>
 										<label for="chuncking"><?php _e('Split file up into <strong>' . PMXI_Plugin::getInstance()->getOption('large_feed_limit') . '</strong> record chunks.', 'wp_all_import_plugin');?></label> 

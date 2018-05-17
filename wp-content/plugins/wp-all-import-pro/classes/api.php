@@ -376,7 +376,7 @@ class PMXI_API
 
 		}
 
-		$uploads   = wp_upload_dir();
+		$uploads = wp_upload_dir();
 
 		$uploads = apply_filters('wp_all_import_images_uploads_dir', $uploads, false, false, false);
 
@@ -385,15 +385,36 @@ class PMXI_API
 		$download_image = true;
 		$result = false;
 		$wp_filetype = false;
+		$attch = false;
 
-		global $wpdb;		
+		// trying to find existing image in hash table
+		if ("yes" == $download_images && $file_type == 'images'){
+			$logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by URL...', 'wp_all_import_plugin'), rawurldecode($img_url)));
+			$imageList = new PMXI_Image_List();
+			$attch = $imageList->getExistingImageByUrl($img_url);
+			if ($attch){
+				$logger and call_user_func($logger, sprintf(__('Existing image was found by URL `%s`...', 'wp_all_import_plugin'), $img_url));
+			}
+		}
 
-		$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
+		if (empty($attch)){
+			$logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by `_wp_attached_file` `%s`...', 'wp_all_import_plugin'), $img_url, $image_name));
+			$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
+		}
 
-		if ( $attch != null ){			
+		if ( ! empty($attch) ){
+			$logger and call_user_func($logger, sprintf(__('Existing image was found by `_wp_attached_file` ...', 'wp_all_import_plugin'), $img_url));
+			$imageRecord = new PMXI_Image_Record();
+			$imageRecord->getBy(array(
+				'attachment_id' => $attch->ID
+			));
+			$imageRecord->isEmpty() and $imageRecord->set(array(
+				'attachment_id' => $attch->ID,
+				'image_url' => $img_url,
+				'image_filename' => $image_name
+			))->insert();
 
 			return $attch->ID;
-
 		}	
 
 		$image_filename = wp_unique_filename($targetDir, $image_name);
@@ -569,7 +590,18 @@ class PMXI_API
 				$logger and call_user_func($logger, __('- <b>WARNING</b>', 'wp_all_import_plugin') . ': ' . $attid->get_error_message());			
 				return false;
 			} else {				
-				wp_update_attachment_metadata($attid, wp_generate_attachment_metadata($attid, $image_filepath));																
+				wp_update_attachment_metadata($attid, wp_generate_attachment_metadata($attid, $image_filepath));
+				if ($attid && "yes" == $download_images && $file_type == 'images'){
+					$imageRecord = new PMXI_Image_Record();
+					$imageRecord->getBy(array(
+						'attachment_id' => $attid
+					));
+					$imageRecord->isEmpty() and $imageRecord->set(array(
+						'attachment_id' => $attid,
+						'image_url' => $img_url,
+						'image_filename' => $image_filename
+					))->insert();
+				}
 				$logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . $image_filename));
 				return $attid;											
 			}
