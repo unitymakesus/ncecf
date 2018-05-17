@@ -4,7 +4,7 @@
 		Plugin Name: ACF Post-2-Post
 		Plugin URI: https://github.com/Hube2/acf-post2post
 		Description: Two way relationship fields
-		Version: 1.2.8
+		Version: 1.3.1
 		Author: John A. Huebner II
 		Author URI: https://github.com/Hube2
 		GitHub Plugin URI: https://github.com/Hube2/acf-post2post
@@ -58,6 +58,11 @@
 		} // public function meta_box_data
 		
 		public function update_relationship_field($value, $post_id, $field) {
+			$update = true;
+			$update = apply_filters('acf/post2post/update_relationships/key='.$field['key'], $update);
+			if (!$update) {
+				return $value;
+			}
 			$field_name = $field['name'];
 			$previous = maybe_unserialize(get_post_meta($post_id, $field_name, true));
 			if ($previous === '') {

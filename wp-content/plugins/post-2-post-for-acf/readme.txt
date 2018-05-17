@@ -3,7 +3,7 @@ Contributors: Hube2
 Tags: acf, advanced custom fields, add on, bidirectional, 2 way, two way, relationship
 Requires at least: 4.0
 Tested up to: 4.9 
-Stable tag: 1.2.8
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,17 @@ Each element of the $settings array is an array. The index of the array is the f
 
 after a value is removed from the existing list the new value is added to the end of the list.
 
+
+
+== Field Exeptions ==
+
+You can disable automatic bidirectional relationships for specific field keys using the filter
+`
+// field_XXXXXXXX = the field key of the field
+// you want to disable bidirectional relationships for
+add_filter('acf/post2post/update_relationships/key=field_XXXXXXXX', '__return_false');
+`
+
 == Remove Nag ==
 
 If you would like to remove my little nag that appears on some admin pages add the following to your functions.php file
@@ -88,6 +99,12 @@ add_filter('remove_hube2_nag', '__return_true');
 `
 
 == Changelog ==
+
+= 1.3.1 =
+* Corrected bug in 1.3.0 that prevented all fields from updating correctly
+
+= 1.3.0 =
+* added filter to allow disabling bidirectional relationships on fields by field key
 
 = 1.2.8 =
 * changed from plugins_loaded to after_setup_theme for checking if ACF >= 5 is installed to allow for ACF being installed in themes
