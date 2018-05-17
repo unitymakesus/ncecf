@@ -1,4 +1,4 @@
-@if (is_home() || is_singular('post') || is_date() || is_category())
+@if (is_home() || is_singular('post') || is_date() || is_category() || is_search())
   @php
     $id = get_option('page_for_posts')
   @endphp
@@ -12,7 +12,9 @@
 
 <div class="has-background-image wash page-header" style="background-image: url('{!! get_the_post_thumbnail_url($id, 'large') !!}')">
   <div class="container center-align">
-    @if (is_singular('post'))
+    @if (is_search())
+      <h1>Search Results</h1>
+    @elseif (is_singular('post'))
       <div class="h1">{{ get_the_title($id) }}</div>
     @elseif (is_singular('ncecf-initiative') && !empty($logo = get_field('logo')))
       <h1 class="screen-reader-text">{{ get_the_title($id) }}</h1>
