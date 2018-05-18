@@ -96,6 +96,14 @@ header {
     }
   }
 
+  .menu-item-has-children a {
+    cursor: default;
+  }
+
+  .sub-menu a {
+    cursor: pointer;
+  }
+
   @media #{$medium-and-down} {
     position: fixed;
     width: 300px;
