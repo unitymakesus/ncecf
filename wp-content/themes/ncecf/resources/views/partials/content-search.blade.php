@@ -1,5 +1,5 @@
 <article @php(post_class())>
-  <header>
+  <header class="search-container">
     @php
       $post_type = get_post_type();
       switch ($post_type) {
@@ -11,7 +11,7 @@
           $label = 'Page';
           $icon = 'description';
           break;
-        case 'event':
+        case 'tribe_events':
           $label = 'Event';
           $icon = 'calendar_today';
           break;
@@ -33,7 +33,10 @@
           break;
       }
     @endphp
-    <div class="chip"><i class="material-icons" aria-lael="Post Type">{{ $icon }}</i> {{ $label }}</div>
+    <div class="chip {{ $label }}">
+      <i class="material-icons" aria-lael="Post Type">{{ $icon }}</i>
+      <span>{{ $label }}</span>
+    </div>
     <h2 class="entry-title"><a href="{{ get_permalink() }}">{{ get_the_title() }}</a></h2>
     @if (get_post_type() === 'post')
       @include('partials/entry-meta')

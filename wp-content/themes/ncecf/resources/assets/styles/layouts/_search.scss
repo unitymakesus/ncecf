@@ -1,0 +1,48 @@
+.search-container {
+  margin: 2.5em 0;
+
+  .chip {
+    color: $color-white;
+
+    .material-icons {
+      position: relative;
+      top: 4px;
+      left: -3px;
+    }
+
+    span {
+      position: relative;
+      top: -2px;
+    }
+  }
+}
+
+header {
+  .Post {
+    background: purple;
+  }
+
+  .Page {
+    background: $color-green;
+  }
+
+  .Event {
+    background: $color-brown;
+  }
+
+  .Issue {
+    background: $color-blue;
+  }
+
+  .Initiative {
+    background: $color-slate-dark;
+  }
+
+  .Resource {
+    background: $color-slate;
+  }
+
+  .Person {
+    background: $color-orange;
+  }
+}
