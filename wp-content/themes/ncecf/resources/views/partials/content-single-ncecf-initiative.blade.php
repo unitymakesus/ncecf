@@ -23,7 +23,7 @@
       @endif
     </div>
     <div class="row">
-      <p class="center-align"><a class="btn" href="#">Learn How To Join Us</a><p>
+      <p class="center-align"><a class="btn" href="/contact-us/">Learn How To Join Us</a><p>
     </div>
   </div>
 </section>
@@ -96,7 +96,7 @@
       @endforeach
     </div>
     <div class="row">
-      <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
+      <p class="center-align"><a href="/resources/?_resource_initiative={{ get_the_id() }}" class="btn btn-green">See All Related Resources</a></p>
     </div>
   @endif
 
@@ -119,7 +119,7 @@
               </header>
             </article>
           @endwhile
-          <p><a href="#" class="btn btn-slate">All Related Posts</a></p>
+          <p><a href="/news/?_related_initiatives={{ get_the_id() }}" class="btn btn-slate">All Related Posts</a></p>
         @endif
         @php (wp_reset_postdata())
       </div>

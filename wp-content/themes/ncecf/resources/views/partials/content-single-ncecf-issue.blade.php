@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col l7 m6 s12">
       {{ the_content() }}
-      <p><a class="btn" href="#">Read More About This Issue</a><p>
+      <p><a class="btn" href="#more">Read More About This Issue</a><p>
     </div>
     <div class="col l5 m6 s12">
       @php ($visual = get_field('visual'))
@@ -115,7 +115,7 @@
         @endforeach
       </div>
       <div class="row">
-        <p class="center-align"><a href="#" class="btn btn-green">See All Related Resources</a></p>
+        <p class="center-align"><a href="/resources/?_resource_issue={{ get_the_id() }}" class="btn btn-green">See All Related Resources</a></p>
       </div>
     </div>
   @endif
@@ -139,7 +139,7 @@
               </header>
             </article>
           @endwhile
-          <p><a href="#" class="btn btn-slate">All Related Posts</a></p>
+          <p><a href="/news/?_related_issues={{ get_the_id() }}" class="btn btn-slate">All Related Posts</a></p>
         @endif
         @php (wp_reset_postdata())
       </div>
@@ -163,7 +163,7 @@
   $n = 1;
 @endphp
 @if (!empty($more))
-<section role="region" aria-label="More About This Issue">
+<section id="more" role="region" aria-label="More About This Issue">
   <h2 class="center-align">More About {{ the_title() }}</h2>
   <div class="expandable">
     @foreach ($more as $m)

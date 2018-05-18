@@ -37,6 +37,12 @@ do_action( 'tribe_events_filter_view_before_template' );
     			<input type="submit" value="<?php esc_attr_e( 'Submit', 'tribe-events-filter-view' ) ?>" />
 
     		</form>
+
+        <div class="right">
+          <p class="h3">Questions about a meeting or training?</p>
+          <a href="/contact/" class="btn">Contact Us</a>
+        </div>
+
     		<div id="tribe_events_filter_control" class="tribe-events-filters-mobile-controls tribe-clearfix">
     			<!-- <a id="tribe_events_filters_toggle" class="tribe_events_filters_close_filters" href="#" data-state="<?php esc_attr_e( 'Show Advanced Filters', 'tribe-events-filter-view' ); ?>"><?php esc_html_e( 'Collapse Filters', 'tribe-events-filter-view' ); ?></a> -->
     			<!-- <a id="tribe_events_filters_toggle" class="tribe_events_filters_show_filters" href="#" ><?php esc_html_e( 'Show Filters', 'tribe-events-filter-view' ); ?></a> -->

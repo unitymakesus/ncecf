@@ -11,11 +11,21 @@
     <div class="container">
       <div class="row">
         <div class="col m8 s12">
-          <h2>Search by Keyword</h2>
+          <h2 class="h3">Search Resources</h2>
           {!! facetwp_display( 'facet', 'search' ) !!}
-          <h2>Filter Results</h2>
+        </div>
+        <div class="col m4 s12">
+          <p class="h3">Can't find what you need?</p>
+          <a href="/contact/" class="btn">Contact Us</a>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          <h2 class="h3">Filter Results</h2>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_type' ) !!}
@@ -28,6 +38,12 @@
         </div>
         <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_year' ) !!}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <a href="" onclick="FWP.reset()"><span class="dashicons dashicons-image-rotate tribe-reset-icon"></span> Reset Filters</a>
         </div>
       </div>
     </div>
@@ -56,15 +72,11 @@
 
         <h3><a href="{{ $link }}" target="_blank" rel="noopener">{{ the_title() }}</a></h3>
 
+        <div class="chip"><i class="material-icons" aria-label="Year">date_range</i>{{ get_field('year') }}</div>
+
         @if (!empty($term_list))
           @foreach ($term_list as $term)
             <div class="chip"><i class="material-icons" aria-label="Type">library_books</i>{{ $term }}</div>
-          @endforeach
-        @endif
-
-        @if (!empty($issue_list))
-          @foreach ($issue_list as $issue)
-            <div class="chip"><i class="material-icons" aria-label="Issue">attach_file</i>{{ $issue->post_title }}</div>
           @endforeach
         @endif
 
@@ -74,7 +86,11 @@
           @endforeach
         @endif
 
-        <div class="chip"><i class="material-icons" aria-label="Year">date_range</i>{{ get_field('year') }}</div>
+        @if (!empty($issue_list))
+          @foreach ($issue_list as $issue)
+            <div class="chip"><i class="material-icons" aria-label="Issue">attach_file</i>{{ $issue->post_title }}</div>
+          @endforeach
+        @endif
       @endwhile
 
       <div class="center-align">
