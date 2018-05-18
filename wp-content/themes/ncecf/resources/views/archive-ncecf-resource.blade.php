@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <section class="has-background-image wash" role="region" aria-label="Page Header" style="background-image: url('{!! get_the_post_thumbnail_url(get_the_id(), 'large') !!}')">
+  <section class="has-background-image wash" role="region" aria-label="Page Header" style="background-image: url('{!! wp_get_attachment_url( 4668 ) !!}')">
     <div class="container">
       <h1 class="center-align">Resources</h1>
     </div>
@@ -9,12 +9,12 @@
 
   <section class="background-paper" role="region" aria-label="Search Resources">
     <div class="container">
-      <div class="row">
+      <div class="row resources-search">
         <div class="col m8 s12">
           <h2 class="h3">Search Resources</h2>
           {!! facetwp_display( 'facet', 'search' ) !!}
         </div>
-        <div class="col m4 s12">
+        <div class="col m4 s12 resources-cta">
           <p class="h3">Can't find what you need?</p>
           <a href="/contact/" class="btn">Contact Us</a>
         </div>
@@ -26,23 +26,23 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col l3 m6 s12">
+      <div class="row resources-filter">
+        <div>
           {!! facetwp_display( 'facet', 'resource_type' ) !!}
         </div>
-        <div class="col l3 m6 s12">
+        <div>
           {!! facetwp_display( 'facet', 'resource_issue' ) !!}
         </div>
-        <div class="col l3 m6 s12">
+        <div>
           {!! facetwp_display( 'facet', 'resource_initiative' ) !!}
         </div>
-        <div class="col l3 m6 s12">
+        <div>
           {!! facetwp_display( 'facet', 'resource_year' ) !!}
         </div>
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col resources-reset">
           <a href="" onclick="FWP.reset()"><span class="dashicons dashicons-image-rotate tribe-reset-icon"></span> Reset Filters</a>
         </div>
       </div>
@@ -62,6 +62,7 @@
 
     @if( have_posts() )
       @while( have_posts() )
+      <div class="resources-list">
         @php
           the_post();
           $link = (get_field('uploaded_file') == 1) ? wp_get_attachment_url(get_field('file')) : get_field('link');
@@ -70,34 +71,44 @@
           $initiative_list = get_field('initiatives_resources');
         @endphp
 
-        <h3><a href="{{ $link }}" target="_blank" rel="noopener">{{ the_title() }}</a></h3>
+          <h3><a href="{{ $link }}" target="_blank" rel="noopener">{{ the_title() }}</a></h3>
 
-        <div class="chip"><i class="material-icons" aria-label="Year">date_range</i>{{ get_field('year') }}</div>
+          <div class="chip"><i class="material-icons" aria-label="Year">date_range</i>
+            <span>{{ get_field('year') }}</span>
+          </div>
 
-        @if (!empty($term_list))
-          @foreach ($term_list as $term)
-            <div class="chip"><i class="material-icons" aria-label="Type">library_books</i>{{ $term }}</div>
-          @endforeach
-        @endif
+          @if (!empty($term_list))
+            @foreach ($term_list as $term)
+              <div class="chip"><i class="material-icons" aria-label="Type">library_books</i>
+                <span>{{ $term }}</span>
+              </div>
+            @endforeach
+          @endif
 
-        @if (!empty($initiative_list))
-          @foreach ($initiative_list as $initiative)
-            <div class="chip"><i class="material-icons" aria-label="Initiative">lightbulb_outline</i>{{ $initiative->post_title }}</div>
-          @endforeach
-        @endif
+          @if (!empty($initiative_list))
+            @foreach ($initiative_list as $initiative)
+              <div class="chip"><i class="material-icons" aria-label="Initiative">lightbulb_outline</i>
+                <span>{{ $initiative->post_title }}</span>
+              </div>
+            @endforeach
+          @endif
 
-        @if (!empty($issue_list))
-          @foreach ($issue_list as $issue)
-            <div class="chip"><i class="material-icons" aria-label="Issue">attach_file</i>{{ $issue->post_title }}</div>
-          @endforeach
-        @endif
-      @endwhile
+          @if (!empty($issue_list))
+            @foreach ($issue_list as $issue)
+              <div class="chip"><i class="material-icons" aria-label="Issue">attach_file</i>
+                <span>{{ $issue->post_title }}</span>
+              </div>
+            @endforeach
+          @endif
+        </div>
+        @endwhile
+        <div class="center-align">
+          {!! do_shortcode('[facetwp pager="true"]') !!}
+        </div>
 
-      <div class="center-align">
-        {!! do_shortcode('[facetwp pager="true"]') !!}
-      </div>
     @else
       <p><?php _e( 'Sorry, no resources matched your criteria.' ); ?></p>
     @endif
   </section>
+
 @endsection

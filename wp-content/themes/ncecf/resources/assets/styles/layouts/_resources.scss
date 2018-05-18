@@ -1,3 +1,90 @@
+.resources-filter {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 0.75rem;
+
+  .facetwp-checkbox {
+    margin: 10px 0;
+  }
+
+  &::after {
+    content: none;
+  }
+
+  .facet-label {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #81BC41;
+
+    .material-icons {
+      position: relative;
+      top: 4px;
+      left: -5px;
+    }
+  }
+}
+
+.resources-search {
+  .resources-cta {
+    text-align: right;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+.resources-reset {
+  float: none !important;
+  display: flex;
+  justify-content: center;
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.resources-list {
+  margin: 3em 0;
+
+  span {
+    position: relative;
+    bottom: 4px;
+  }
+
+  .material-icons {
+    position: relative;
+    top: 4px;
+    padding-right: 5px;
+  }
+
+  .chip {
+    color: $color-white;
+
+    // Year
+    &:nth-of-type(1) {
+      background: $color-green;
+    }
+
+    // Type
+    &:nth-of-type(2) {
+      background: $color-orange;
+    }
+
+    // Initaitive
+    &:nth-of-type(3) {
+      background: $color-blue;
+    }
+
+    // Issues
+    &:nth-of-type(4) {
+      background: $color-brown;
+    }
+  }
+}
+
 .report-banner {
   @extend .z-depth-1;
 
