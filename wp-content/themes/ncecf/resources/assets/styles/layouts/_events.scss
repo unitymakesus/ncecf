@@ -73,13 +73,13 @@
   h3 {
     margin-top: 0;
   }
-}
 
-.tribe-events-sigle.row {
-  padding-top: 3em;
+  &.tribe-events-single.row {
+    padding-top: 3em;
 
-  .hentry {
-    padding-bottom: 0;
+    .hentry {
+      padding-bottom: 0;
+    }
   }
 }
 

@@ -29,9 +29,11 @@
 
     <div class="navbar">
       @if (has_nav_menu('primary_navigation'))
-        <a href="#" class="right menu-trigger show-on-medium-and-down"><i class="material-icons">menu</i></a>
-        {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'navbar-menu flex flex-center space-between container', 'menu_id' => 'sidenav']) !!}
-        <div class="sidenav-overlay"></div>
+        <div class="menu-trigger-wrapper hide-on-large-only">
+          <input type="checkbox" name="menu-trigger" id="menu-trigger" value="true" />
+          <label for="menu-trigger"><i class="material-icons" aria-label="Show navigation menu">menu</i></a>
+        </div>
+        {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'navbar-menu flex flex-center space-between container']) !!}
       @endif
     </div>
   </nav>

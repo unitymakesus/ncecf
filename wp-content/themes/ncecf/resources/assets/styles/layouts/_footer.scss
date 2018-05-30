@@ -35,6 +35,21 @@
 
     input {
       text-align: center;
+      width: 100%;
+    }
+  }
+
+  @media #{$small-and-down} {
+    text-align: center;
+
+    .widget {
+      margin-bottom: 2em;
+    }
+
+    .widget_nav_menu .menu {
+      max-width: 16em;
+      margin: 0 auto;
+      text-align: left;
     }
   }
 
@@ -50,6 +65,12 @@
       &:hover, &:focus, &:active {
         color: $color-orange;
         text-decoration: none;
+      }
+    }
+
+    @media #{$small-and-down} {
+      .flex {
+        flex-flow: nowrap column;
       }
     }
   }
