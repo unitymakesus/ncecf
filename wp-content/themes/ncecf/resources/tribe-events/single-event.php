@@ -23,6 +23,7 @@ $event_id = get_the_ID();
 ?>
 
 <?php while ( have_posts() ) :  the_post(); ?>
+	<div class="container">
   <div id="tribe-events-content" class="tribe-events-single row">
     <div class="col m6 s12">
     	<?php the_title( '<h2 class="tribe-events-single-event-title">', '</h2>' ); ?>
@@ -75,8 +76,8 @@ $event_id = get_the_ID();
           <?php } ?>
       <?php } ?>
     </div>
-
   </div>
+
   <div class="row">
 
 		<!-- Event meta -->
@@ -87,4 +88,5 @@ $event_id = get_the_ID();
 		<?php if ( get_post_type() == Tribe__Events__Main::POSTTYPE && tribe_get_option( 'showComments', false ) ) comments_template() ?>
 
   </div><!-- #tribe-events-content -->
+</div>
 <?php endwhile; ?>

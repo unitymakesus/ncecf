@@ -16,7 +16,7 @@
         @while(have_posts()) @php(the_post())
           @include('partials.content-search')
         @endwhile
-      
+
         @php
           the_posts_pagination([
             'prev_text' => '&laquo; Previous <span class="screen-reader-text">page</span>',

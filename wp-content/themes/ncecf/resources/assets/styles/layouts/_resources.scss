@@ -28,7 +28,9 @@
 
 .resources-search {
   .resources-cta {
-    text-align: right;
+    @media #{$small-and-up} {
+      text-align: right;
+    }
 
     h3 {
       margin-top: 0;

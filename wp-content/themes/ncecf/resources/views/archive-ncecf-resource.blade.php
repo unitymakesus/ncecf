@@ -9,34 +9,39 @@
 
   <section class="background-paper" role="region" aria-label="Search Resources">
     <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2 class="no-margin">Search Resources</h2>
+        </div>
+      </div>
+
       <div class="row resources-search">
-        <div class="col m8 s12">
-          <h2 class="h3">Search Resources</h2>
+        <div class="col s6 xs12">
           {!! facetwp_display( 'facet', 'search' ) !!}
         </div>
-        <div class="col m4 s12 resources-cta">
-          <p class="h3">Can't find what you need?</p>
+        <div class="col s6 xs12 resources-cta">
+          <p class="h4">Can't find what you need?</p>
           <a href="/contact/" class="btn">Contact Us</a>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <h2 class="h3">Filter Results</h2>
+          <h2 class="no-margin">Filter Results</h2>
         </div>
       </div>
 
       <div class="row resources-filter">
-        <div>
+        <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_type' ) !!}
         </div>
-        <div>
+        <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_issue' ) !!}
         </div>
-        <div>
+        <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_initiative' ) !!}
         </div>
-        <div>
+        <div class="col l3 m6 s12">
           {!! facetwp_display( 'facet', 'resource_year' ) !!}
         </div>
       </div>

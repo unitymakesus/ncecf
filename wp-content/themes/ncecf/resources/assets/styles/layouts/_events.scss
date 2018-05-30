@@ -1,16 +1,14 @@
-#tribe-events-pg-template {
-  max-width: 85%;
-  padding: 2.5em 0;
-
-  .background-paper {
-    padding: 0 0 1em;
-  }
+#tribe-events-pg-template#tribe-events-pg-template {
+  max-width: none;
+  padding: 0;
 
   #tribe_events_filters_form {
-    float: left;
     display: flex;
-    width: 40%;
     justify-content: space-between;
+  }
+
+  #tribe-events-content {
+    @extend .container;
   }
 
   #tribe-events-content a {
@@ -18,11 +16,14 @@
     text-decoration: underline;
   }
 
-  .right {
-    float: right !important;
-    width: 60%;
-    text-align: right;
-    padding-top: 10px;
+  .events-cta {
+    @media #{$small-and-up} {
+      text-align: right;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
   }
 
   li::before, .content ul li::before, .wp-editor ul li::before {
@@ -40,6 +41,7 @@
     display: flex;
     align-items: center;
     margin-left: 0;
+    font-size: 16px;
 
     span {
       padding-left: 10px;
@@ -70,6 +72,14 @@
 #tribe-events-content {
   h3 {
     margin-top: 0;
+  }
+}
+
+.tribe-events-sigle.row {
+  padding-top: 3em;
+
+  .hentry {
+    padding-bottom: 0;
   }
 }
 

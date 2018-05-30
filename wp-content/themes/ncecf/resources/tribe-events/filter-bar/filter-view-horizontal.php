@@ -24,23 +24,29 @@ do_action( 'tribe_events_filter_view_before_template' );
     <div id="tribe_events_filters_wrapper" class="tribe-events-filters-horizontal tribe-clearfix">
     	<?php do_action( 'tribe_events_filter_view_before_filters' ); ?>
     	<div class="tribe-events-filters-content tribe-clearfix">
-    		<h2 class="tribe-events-filters-label"><?php esc_html_e(  'Filter Results', 'tribe-events-filter-view' ); ?></h2>
+        <div class="row">
+          <div class="col">
+        		<h2 class="tribe-events-filters-label no-margin"><?php esc_html_e(  'Filter Results', 'tribe-events-filter-view' ); ?></h2>
+          </div>
+        </div>
     		<!-- <div id="tribe_events_filter_control" class="tribe-clearfix"> -->
     			<!-- <a id="tribe_events_filters_toggle" class="tribe_events_filters_close_filters" href="#" data-state="<?php esc_attr_e( 'Show Advanced Filters', 'tribe-events-filter-view' ); ?>"><?php esc_html_e( 'Collapse Filters', 'tribe-events-filter-view' ); ?></a> -->
     			<!-- <a id="tribe_events_filters_toggle" class="tribe_events_filters_show_filters" href="#" ><?php esc_html_e( 'Show Filters', 'tribe-events-filter-view' ); ?></a> -->
     			<!-- <a id="tribe_events_filters_reset" href="#"><span class="dashicons dashicons-image-rotate tribe-reset-icon"></span><?php esc_html_e( 'Reset Filters', 'tribe-events-filter-view' ); ?></a> -->
     		<!-- </div> -->
-    		<form id="tribe_events_filters_form" method="post" action="">
 
-    			<?php do_action( 'tribe_events_filter_view_do_display_filters' ); ?>
+        <div class="row">
+          <div class="col m6 s7 xs12">
+        		<form id="tribe_events_filters_form" method="post" action="">
+        			<?php do_action( 'tribe_events_filter_view_do_display_filters' ); ?>
+        			<input type="submit" value="<?php esc_attr_e( 'Submit', 'tribe-events-filter-view' ) ?>" />
+        		</form>
+          </div>
 
-    			<input type="submit" value="<?php esc_attr_e( 'Submit', 'tribe-events-filter-view' ) ?>" />
-
-    		</form>
-
-        <div class="right">
-          <p class="h3">Questions about a meeting or training?</p>
-          <a href="/contact/" class="btn">Contact Us</a>
+          <div class="col m6 s5 xs12 events-cta">
+            <p class="h4">Questions about<br />a meeting or training?</p>
+            <a href="/contact/" class="btn">Contact Us</a>
+          </div>
         </div>
 
     		<div id="tribe_events_filter_control" class="tribe-events-filters-mobile-controls tribe-clearfix">

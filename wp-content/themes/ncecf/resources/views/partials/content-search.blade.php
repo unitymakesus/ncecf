@@ -15,19 +15,19 @@
           $label = 'Event';
           $icon = 'calendar_today';
           break;
-        case 'ncecf-issue';
+        case 'ncecf-issue':
           $label = 'Issue';
           $icon = 'attach_file';
           break;
-        case 'ncecf-initiative';
+        case 'ncecf-initiative':
           $label = 'Initiative';
           $icon = 'attach_file';
           break;
-        case 'ncecf-resource';
+        case 'ncecf-resource':
           $label = 'Resource';
           $icon = 'library_books';
           break;
-        case 'ncecf-person';
+        case 'ncecf-person':
           $label = 'Person';
           $icon = 'person';
           break;

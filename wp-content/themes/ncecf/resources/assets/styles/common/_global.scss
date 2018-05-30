@@ -5,10 +5,20 @@
 
 .container {
   @media #{$medium-and-up} {
-    width: 90%;
+    width: 95%;
   }
   @media #{$large-and-up} {
-    width: 85%;
+    width: 90%;
+  }
+}
+
+@media #{$xsmall-and-down} {
+  .row .col {
+    @for $i from 1 through 12 {
+      &.xs#{$i} {
+        width: unquote((100 / (12 / $i)) + "%");
+      }
+    }
   }
 }
 
@@ -40,6 +50,10 @@
   right: 0;
   bottom: 0;
   z-index: 5;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 strong {
