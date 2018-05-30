@@ -513,11 +513,20 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                                 switch ($this->options['custom_type']){
                                                     case 'import_users':
                                                         do_action('pmxi_delete_post', $ids, $this);
+														// delete_user action
+														foreach( $ids as $id) {
+															do_action( 'delete_user', $id, $reassign = null );
+														}
                                                         $sql = "delete a,b
                                                         FROM ".$this->wpdb->users." a
                                                         LEFT JOIN ".$this->wpdb->usermeta." b ON ( a.ID = b.user_id )										
                                                         WHERE a.ID IN (" . implode(',', $ids) . ");";
-                                                        break;
+														// deleted_user action
+														foreach( $ids as $id) {
+															do_action( 'deleted_user', $id, $reassign = null );
+														}
+														
+														break;
                                                     case 'taxonomies':
                                                         do_action('pmxi_delete_taxonomies', $ids);
                                                         foreach ($ids as $term_id){
@@ -3931,10 +3940,19 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                             switch ($this->options['custom_type']){
                                 case 'import_users':
                                     do_action('pmxi_delete_post', $ids, $this);
+									// delete_user action
+									foreach( $ids as $id) {
+                                        do_action( 'delete_user', $id, $reassign = null );
+                                    }
                                     $sql = "delete a,b
                                       FROM ".$this->wpdb->users." a
                                       LEFT JOIN ".$this->wpdb->usermeta." b ON ( a.ID = b.user_id )										
                                       WHERE a.ID IN (" . implode(',', $ids) . ");";
+									// deleted_user action
+									foreach( $ids as $id) {
+                                        do_action( 'deleted_user', $id, $reassign = null );
+                                    }
+									
                                     break;
                                 case 'taxonomies':
                                     do_action('pmxi_delete_taxonomy_term', $ids, $this);
@@ -4183,24 +4201,33 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                 }
             }
 			
-			do_action('pmxi_delete_post', $id, $this);
-			
 			if ( ! in_array($this->options['custom_type'], array('import_users', 'taxonomies')) ) wp_delete_object_term_relationships($id, get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
 		}
 
         switch ($this->options['custom_type']){
             case 'import_users':
+                do_action('pmxi_delete_post', $ids, $this);
+                // delete_user action
+                foreach( $ids as $id) {
+                    do_action( 'delete_user', $id, $reassign = null );
+                }
                 $sql = "delete a,b
                 FROM ".$this->wpdb->users." a
                 LEFT JOIN ".$this->wpdb->usermeta." b ON ( a.ID = b.user_id )					
                 WHERE a.ID IN (".implode(',', $ids).");";
+                // deleted_user action
+                foreach( $ids as $id) {
+                    do_action( 'deleted_user', $id, $reassign = null );
+                }
                 break;
             case 'taxonomies':
+                do_action('pmxi_delete_taxonomies', $ids);
                 foreach ($ids as $term_id){
                     wp_delete_term( $term_id, $this->options['taxonomy_type'] );
                 }
                 break;
             default:
+                do_action('pmxi_delete_post', $ids, $this);
                 $sql = "delete a,b,c
                 FROM ".$this->wpdb->posts." a
                 LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )

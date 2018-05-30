@@ -23,11 +23,11 @@ msgstr ""
 msgid "Filter Bar default state"
 msgstr ""
 
-#: src/Tribe/Filter.php:595
+#: src/Tribe/Filter.php:625
 msgid "Multi-Select"
 msgstr ""
 
-#: src/Tribe/Filter.php:338 src/Tribe/View.php:252
+#: src/Tribe/Filter.php:339 src/Tribe/View.php:252
 msgctxt "Featured Events active fitler display label"
 msgid "Active"
 msgstr ""
@@ -276,26 +276,26 @@ msgstr "Ολισθητής Εύρους"
 msgid "Type: %s %s"
 msgstr "Τύπος: %s %s"
 
-#: src/Tribe/Filter.php:590 src/Tribe/Filters/Cost.php:64
+#: src/Tribe/Filter.php:620 src/Tribe/Filters/Cost.php:64
 msgid "Checkboxes"
 msgstr "Κουτιά Επιλογών"
 
-#: src/Tribe/Filter.php:585
+#: src/Tribe/Filter.php:615
 msgid "Dropdown"
 msgstr "Αναπτυσσόμενο"
 
-#: src/Tribe/Filter.php:581
+#: src/Tribe/Filter.php:611
 msgid "Type: %s %s %s"
 msgstr "Πληκτρολογήστε: %s %s %s"
 
-#: src/Tribe/Filter.php:563
+#: src/Tribe/Filter.php:593
 msgid "Title: %s"
 msgstr "Τίτλος: %s"
 
-#: src/Tribe/Filter.php:320
+#: src/Tribe/Filter.php:321
 msgid "Select an Item"
 msgstr "Επιλέξτε ένα Αντικείμενο"
 
-#: src/Tribe/Filter.php:289
+#: src/Tribe/Filter.php:290
 msgid "Select"
 msgstr "Επιλογή"

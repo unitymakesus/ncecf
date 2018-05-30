@@ -1467,8 +1467,9 @@
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-cpt:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-cpt:before{
 	font-family: "dashicons";
-	content: "\f333";
+	content: "\f111";
 	color: #555;
+	margin-top: 0;
 }
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-import_users:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-import_users:before{

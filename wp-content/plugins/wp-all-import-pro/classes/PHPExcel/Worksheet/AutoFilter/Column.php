@@ -322,7 +322,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
      */
     public function createRule()
     {
-        $this->{ruleset[]} = new PHPExcel_Worksheet_AutoFilter_Column_Rule($this);
+        $this->ruleset[] = new PHPExcel_Worksheet_AutoFilter_Column_Rule($this);
 
         return end($this->ruleset);
     }
@@ -337,7 +337,7 @@ class PHPExcel_Worksheet_AutoFilter_Column
     public function addRule(PHPExcel_Worksheet_AutoFilter_Column_Rule $pRule, $returnRule = true)
     {
         $pRule->setParent($this);
-        $this->{ruleset[]} = $pRule;
+        $this->ruleset[] = $pRule;
 
         return ($returnRule) ? $pRule : $this;
     }

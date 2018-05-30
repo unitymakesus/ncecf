@@ -171,7 +171,13 @@ class PMXI_Chunk {
         );
         // Works like an XmlReader, and walks the XML tree node by node. Captures by node depth setting.
         $parser = new Parser\StringWalker($parseroptions);
-
+        // Create the streamer
+        $streamer = new XmlStringStreamer($parser, $streamProvider);        
+        while ($node = $streamer->getNode()) {        
+            // $simpleXmlNode = simplexml_load_string($node);
+            // echo (string)$simpleXmlNode->firstName;            
+        }
+        
         $this->cloud = $parser->cloud;
 
       }

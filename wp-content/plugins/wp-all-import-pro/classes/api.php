@@ -388,12 +388,13 @@ class PMXI_API
 		$attch = false;
 
 		// trying to find existing image in hash table
-		if ("yes" == $download_images && $file_type == 'images'){
+		if ("yes" == $download_images){
 			$logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by URL...', 'wp_all_import_plugin'), rawurldecode($img_url)));
 			$imageList = new PMXI_Image_List();
 			$attch = $imageList->getExistingImageByUrl($img_url);
 			if ($attch){
 				$logger and call_user_func($logger, sprintf(__('Existing image was found by URL `%s`...', 'wp_all_import_plugin'), $img_url));
+				return $attch->ID;
 			}
 		}
 
@@ -403,7 +404,7 @@ class PMXI_API
 		}
 
 		if ( ! empty($attch) ){
-			$logger and call_user_func($logger, sprintf(__('Existing image was found by `_wp_attached_file` ...', 'wp_all_import_plugin'), $img_url));
+			$logger and call_user_func($logger, sprintf(__('- Existing image was found by `_wp_attached_file` ...', 'wp_all_import_plugin'), $img_url));
 			$imageRecord = new PMXI_Image_Record();
 			$imageRecord->getBy(array(
 				'attachment_id' => $attch->ID
@@ -583,25 +584,25 @@ class PMXI_API
 				if (trim($image_meta['caption']))
 					$attachment['post_content'] = $image_meta['caption'];
 			}
-
+			remove_all_actions('add_attachment');
 			$attid = wp_insert_attachment($attachment, $image_filepath, $pid);
 
 			if (is_wp_error($attid)) {
 				$logger and call_user_func($logger, __('- <b>WARNING</b>', 'wp_all_import_plugin') . ': ' . $attid->get_error_message());			
 				return false;
-			} else {				
+			} else {
+				/**	Fires once an attachment has been added. */
+				do_action( 'wp_all_import_add_attachment', $attid );
 				wp_update_attachment_metadata($attid, wp_generate_attachment_metadata($attid, $image_filepath));
-				if ($attid && "yes" == $download_images && $file_type == 'images'){
-					$imageRecord = new PMXI_Image_Record();
-					$imageRecord->getBy(array(
-						'attachment_id' => $attid
-					));
-					$imageRecord->isEmpty() and $imageRecord->set(array(
-						'attachment_id' => $attid,
-						'image_url' => $img_url,
-						'image_filename' => $image_filename
-					))->insert();
-				}
+				$imageRecord = new PMXI_Image_Record();
+				$imageRecord->getBy(array(
+					'attachment_id' => $attid
+				));
+				$imageRecord->isEmpty() and $imageRecord->set(array(
+					'attachment_id' => $attid,
+					'image_url' => $img_url,
+					'image_filename' => $image_filename
+				))->insert();
 				$logger and call_user_func($logger, sprintf(__('- Attachment has been successfully created for image `%s`', 'wp_all_import_plugin'), $targetUrl . '/' . $image_filename));
 				return $attid;											
 			}
