@@ -95,6 +95,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  border-radius: 25px;
 
   * {
     position: relative;
@@ -112,14 +113,17 @@
     display: block;
     width: 100%;
     height: 0;
-    padding-bottom: 20%;
+    padding-bottom: 15%;
 
     span {
       display: block;
       position: absolute;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      // bottom: 15px;
+      // left: 15px;
+      // right: 15px;
     }
   }
 
