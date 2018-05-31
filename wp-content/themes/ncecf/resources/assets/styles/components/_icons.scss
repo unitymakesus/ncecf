@@ -37,6 +37,10 @@
     &.youtube a::before {
       background-image: url('../images/icon-youtube.svg');
     }
+
+    &.youtube-footer a::before {
+      background-image: url('../images/icon-youtubeFooter.svg');
+    }
   }
 }
 
