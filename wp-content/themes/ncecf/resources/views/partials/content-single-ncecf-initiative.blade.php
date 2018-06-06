@@ -1,4 +1,8 @@
 <section class="container" role="region" aria-label="Introduction">
+  @if (!empty($logo = get_field('logo')))
+    <img class="initiative-logo" src="{{ $logo['sizes']['medium_large'] }}" alt="Logo for {{ the_title() }}" />
+  @endif
+
   <div class="row">
     <div class="col l7 m6 s12">
       {{ the_content() }}
