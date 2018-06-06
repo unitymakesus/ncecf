@@ -100,7 +100,6 @@
   * {
     position: relative;
     margin: 0;
-    font-size: 24px;
     font-family: $font-libre;
     font-weight: 700;
 
@@ -112,18 +111,36 @@
     color: $color-white !important;
     display: block;
     width: 100%;
-    height: 0;
-    padding-bottom: 15%;
+    font-size: 18px;
+    line-height: 1.3em;
 
     span {
       display: block;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       width: 100%;
-      // bottom: 15px;
-      // left: 15px;
-      // right: 15px;
+      padding: 15px;
+    }
+
+    @media #{$small-and-up} {
+      height: 0;
+      padding-bottom: 30%;
+
+      span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 15px;
+      }
+    }
+    @media #{$medium-and-up} {
+      padding-bottom: 30%;
+      font-size: 22px;
+    }
+    @media #{$large-and-up} {
+      padding-bottom: 25%;
+    }
+    @media #{$extra-large-and-up} {
+      padding-bottom: 20%;
+      font-size: 24px;
     }
   }
 

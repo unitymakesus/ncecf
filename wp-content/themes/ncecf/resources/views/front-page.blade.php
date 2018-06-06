@@ -79,7 +79,7 @@
         </div>
 
         <div class="col m6 s12">
-          <h2>Latest Reports</h2>
+          <h2>Featured Resources</h2>
           @php ($resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']))
 
           @if ($resources->have_posts())
