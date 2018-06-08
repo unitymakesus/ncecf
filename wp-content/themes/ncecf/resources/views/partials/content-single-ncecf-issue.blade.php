@@ -96,8 +96,11 @@
           @php
             $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
             $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
+            $numbers = range(1, 48);
+            shuffle($numbers);
+            $i = 1;
           @endphp
-          <div class="col l3 m6 s12 has-background-image wash" style="background-image: url('{!! get_the_post_thumbnail_url($resource->ID, 'medium_large') !!}')">
+          <div class="col l3 m6 s12 has-background-image wash"  data-rand="{{ $numbers[$i] }}">
             <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>
             <div class="flex">
               @if (!empty($term_list))
@@ -114,6 +117,7 @@
               </div>
             </div>
           </div>
+          @php ($i++)
         @endforeach
       </div>
       <div class="row">

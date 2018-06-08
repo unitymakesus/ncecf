@@ -82,7 +82,7 @@
         @php
           $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
           $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
-          $numbers = range(1, 20);
+          $numbers = range(1, 48);
           shuffle($numbers);
           $i = 1;
         @endphp
