@@ -81,20 +81,19 @@
         <div class="col m6 s12">
           <h2><a href="/resources/">Featured Resources</a></h2>
           @php
-            $resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']);
+            $resources = get_field('featured_resources');
+            $featured_resources = array_slice($resources, 0, 6);
             $numbers = range(1, 20);
             shuffle($numbers);
             $i = 1;
           @endphp
 
-          @if ($resources->have_posts())
-            @while ($resources->have_posts()) @php ($resources->the_post())
-              <div class="report-banner" data-rand="{{ $numbers[$i] }}">
-                <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
-              </div>
-              @php ($i++)
-            @endwhile
-          @endif
+          @foreach ($featured_resources as $resource)
+            <div class="report-banner" data-rand="{{ $numbers[$i] }}">
+              <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}" target="_blank" rel="noopener"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
+            </div>
+            @php ($i++)
+          @endforeach
 
           @php (wp_reset_postdata())
         </div>

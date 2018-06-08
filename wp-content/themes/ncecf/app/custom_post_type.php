@@ -82,7 +82,7 @@ function create_post_type() {
     )
   );
   register_post_type( 'ncecf-initiative',  $argsInitiatives );
-  // 
+  //
   // $argsEvents = array(
   //   'labels' => array(
 	// 		'name' => 'Events',
@@ -202,3 +202,14 @@ function create_post_type() {
 }
 
 add_action( 'init', __NAMESPACE__.'\\create_post_type' );
+
+// Redirect all resources single templates to their actual resource
+add_action( 'template_redirect', function() {
+  if ( is_singular('ncecf-resource') ) {
+    $id = get_the_id();
+    $link = (get_field('uploaded_file', $id) == 1) ? wp_get_attachment_url(get_field('file', $id)) : get_field('link', $id);
+
+    wp_redirect( $link, 301 );
+    exit;
+  }
+});

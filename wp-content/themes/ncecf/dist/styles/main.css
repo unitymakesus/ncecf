@@ -7824,6 +7824,11 @@ header .menu-trigger-wrapper label:hover {
   color: #FFF;
 }
 
+.has-background-image.home-header h1,
+.has-background-image.home-header .h1 {
+  margin-top: 14rem;
+}
+
 .has-background-image.home-header::before {
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#004597CB', endColorstr='#FF4597CB');
   background-image: -o-linear-gradient(180deg, rgba(69, 151, 203, 0) 0%, #4597CB 100%);

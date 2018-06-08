@@ -25,11 +25,17 @@
     }
   }
 
-  &.home-header::before {
-    @include trans-blue-gradient-down();
+  &.home-header {
+    h1 {
+      margin-top: 14rem;
+    }
 
-    & > * {
-      padding: 100px 0 50px;
+    &::before {
+      @include trans-blue-gradient-down();
+
+      & > * {
+        padding: 100px 0 50px;
+      }
     }
   }
 
