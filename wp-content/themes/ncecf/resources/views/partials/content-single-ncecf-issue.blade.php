@@ -73,16 +73,18 @@
   </div>
 </section>
 
-<section class="background-paper" role="region" aria-labelled-by="action-label">
-  <div class="container">
-    <div class="row">
-      <div class="col l8 m10 s12 push-l2 push-m1">
-        <h2 id="action-label" class="center-align">What Can We Do About It?</h2>
-        {!! apply_filters('the_content', get_field('what_can_we_do')) !!}
+@if (!empty($whattodo = get_field('what_can_we_do')))
+  <section class="background-paper" role="region" aria-labelled-by="action-label">
+    <div class="container">
+      <div class="row">
+        <div class="col l8 m10 s12 push-l2 push-m1">
+          <h2 id="action-label" class="center-align">What Can We Do About It?</h2>
+          {!! apply_filters('the_content', $whattodo) !!}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+@endif
 
 <section role="region" aria-label="Related Content">
   @if (!empty($resources = get_field('issues_resources')))

@@ -290,6 +290,10 @@ header {
         width: 75vw;
         display: flex;
 
+        ul {
+          width: auto;
+        }
+
         & > li.menu-item {
           width: 25%;
 

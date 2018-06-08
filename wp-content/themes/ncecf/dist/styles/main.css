@@ -7676,6 +7676,10 @@ header .menu-trigger-wrapper label:hover {
     display: flex;
   }
 
+  .navbar-menu li.mega-menu > ul.sub-menu ul {
+    width: auto;
+  }
+
   .navbar-menu li.mega-menu > ul.sub-menu > li.menu-item {
     width: 25%;
   }
