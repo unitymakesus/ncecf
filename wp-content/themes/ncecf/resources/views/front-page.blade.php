@@ -39,7 +39,7 @@
             <div class="col m6 s12 {{ $pull }}">
               <h2 id="section-{{ $i }}-title"><a href="{{ $section['link'] }}">{{ $section['title'] }}</a></h2>
               {!! $section['excerpt'] !!}
-              <p class="right-align"><a href="{{ $section['link'] }}">Learn More</a></p>
+              <p class="right-align"><a href="{{ $section['link'] }}" class="btn">Learn More</a></p>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
     <section role="region" aria-label="Recent Updates" class="container">
       <div class="row">
         <div class="col m6 s12 news-list">
-          <h2>Latest News</h2>
+          <h2><a href="/news/">Latest News</a></h2>
           @php ($news = new WP_Query(['posts_per_page' => 4]))
 
           @if ($news->have_posts())
@@ -79,14 +79,20 @@
         </div>
 
         <div class="col m6 s12">
-          <h2>Latest Reports</h2>
-          @php ($resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']))
+          <h2><a href="/resources/">Featured Resources</a></h2>
+          @php
+            $resources = new WP_Query(['posts_per_page' => 6, 'post_type' => 'ncecf-resource']);
+            $numbers = range(1, 20);
+            shuffle($numbers);
+            $i = 1;
+          @endphp
 
           @if ($resources->have_posts())
             @while ($resources->have_posts()) @php ($resources->the_post())
-              <div class="report-banner">
+              <div class="report-banner" data-rand="{{ $numbers[$i] }}">
                 <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
               </div>
+              @php ($i++)
             @endwhile
           @endif
 

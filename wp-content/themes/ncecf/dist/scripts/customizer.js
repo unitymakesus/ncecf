@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b1b3c7864b5973fd19be"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4bc82a60382626a6267e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -722,11 +722,12 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(42)(__webpack_require__.s = 42);
+/******/ 	return hotCreateRequire(82)(__webpack_require__.s = 82);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /*!*************************!*\
   !*** external "jQuery" ***!
   \*************************/
@@ -737,7 +738,8 @@
 module.exports = jQuery;
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /*!***************************************************************************************************************************************!*\
   !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/lib/html5-entities.js ***!
   \***************************************************************************************************************************************/
@@ -938,8 +940,807 @@ module.exports = Html5Entities;
 
 
 /***/ }),
-/* 2 */,
-/* 3 */
+
+/***/ 10:
+/*!***********************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/ansi-regex/index.js ***!
+  \***********************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = function () {
+	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g;
+};
+
+
+/***/ }),
+
+/***/ 11:
+/*!**************************************************!*\
+  !*** (webpack)-hot-middleware/client-overlay.js ***!
+  \**************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*eslint-env browser*/
+
+var clientOverlay = document.createElement('div');
+clientOverlay.id = 'webpack-hot-middleware-clientOverlay';
+var styles = {
+  background: 'rgba(0,0,0,0.85)',
+  color: '#E8E8E8',
+  lineHeight: '1.2',
+  whiteSpace: 'pre',
+  fontFamily: 'Menlo, Consolas, monospace',
+  fontSize: '13px',
+  position: 'fixed',
+  zIndex: 9999,
+  padding: '10px',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  overflow: 'auto',
+  dir: 'ltr',
+  textAlign: 'left'
+};
+for (var key in styles) {
+  clientOverlay.style[key] = styles[key];
+}
+
+var ansiHTML = __webpack_require__(/*! ansi-html */ 12);
+var colors = {
+  reset: ['transparent', 'transparent'],
+  black: '181818',
+  red: 'E36049',
+  green: 'B3CB74',
+  yellow: 'FFD080',
+  blue: '7CAFC2',
+  magenta: '7FACCA',
+  cyan: 'C3C2EF',
+  lightgrey: 'EBE7E3',
+  darkgrey: '6D7891'
+};
+ansiHTML.setColors(colors);
+
+var Entities = __webpack_require__(/*! html-entities */ 13).AllHtmlEntities;
+var entities = new Entities();
+
+exports.showProblems =
+function showProblems(type, lines) {
+  clientOverlay.innerHTML = '';
+  lines.forEach(function(msg) {
+    msg = ansiHTML(entities.encode(msg));
+    var div = document.createElement('div');
+    div.style.marginBottom = '26px';
+    div.innerHTML = problemType(type) + ' in ' + msg;
+    clientOverlay.appendChild(div);
+  });
+  if (document.body) {
+    document.body.appendChild(clientOverlay);
+  }
+};
+
+exports.clear =
+function clear() {
+  if (document.body && clientOverlay.parentNode) {
+    document.body.removeChild(clientOverlay);
+  }
+};
+
+var problemColors = {
+  errors: colors.red,
+  warnings: colors.yellow
+};
+
+function problemType (type) {
+  var color = problemColors[type] || colors.red;
+  return (
+    '<span style="background-color:#' + color + '; color:#fff; padding:2px 4px; border-radius: 2px">' +
+      type.slice(0, -1).toUpperCase() +
+    '</span>'
+  );
+}
+
+
+/***/ }),
+
+/***/ 12:
+/*!**********************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/ansi-html/index.js ***!
+  \**********************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = ansiHTML
+
+// Reference to https://github.com/sindresorhus/ansi-regex
+var _regANSI = /(?:(?:\u001b\[)|\u009b)(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])|\u001b[A-M]/
+
+var _defColors = {
+  reset: ['fff', '000'], // [FOREGROUD_COLOR, BACKGROUND_COLOR]
+  black: '000',
+  red: 'ff0000',
+  green: '209805',
+  yellow: 'e8bf03',
+  blue: '0000ff',
+  magenta: 'ff00ff',
+  cyan: '00ffee',
+  lightgrey: 'f0f0f0',
+  darkgrey: '888'
+}
+var _styles = {
+  30: 'black',
+  31: 'red',
+  32: 'green',
+  33: 'yellow',
+  34: 'blue',
+  35: 'magenta',
+  36: 'cyan',
+  37: 'lightgrey'
+}
+var _openTags = {
+  '1': 'font-weight:bold', // bold
+  '2': 'opacity:0.5', // dim
+  '3': '<i>', // italic
+  '4': '<u>', // underscore
+  '8': 'display:none', // hidden
+  '9': '<del>' // delete
+}
+var _closeTags = {
+  '23': '</i>', // reset italic
+  '24': '</u>', // reset underscore
+  '29': '</del>' // reset delete
+}
+
+;[0, 21, 22, 27, 28, 39, 49].forEach(function (n) {
+  _closeTags[n] = '</span>'
+})
+
+/**
+ * Converts text with ANSI color codes to HTML markup.
+ * @param {String} text
+ * @returns {*}
+ */
+function ansiHTML (text) {
+  // Returns the text if the string has no ANSI escape code.
+  if (!_regANSI.test(text)) {
+    return text
+  }
+
+  // Cache opened sequence.
+  var ansiCodes = []
+  // Replace with markup.
+  var ret = text.replace(/\033\[(\d+)*m/g, function (match, seq) {
+    var ot = _openTags[seq]
+    if (ot) {
+      // If current sequence has been opened, close it.
+      if (!!~ansiCodes.indexOf(seq)) { // eslint-disable-line no-extra-boolean-cast
+        ansiCodes.pop()
+        return '</span>'
+      }
+      // Open tag.
+      ansiCodes.push(seq)
+      return ot[0] === '<' ? ot : '<span style="' + ot + ';">'
+    }
+
+    var ct = _closeTags[seq]
+    if (ct) {
+      // Pop sequence
+      ansiCodes.pop()
+      return ct
+    }
+    return ''
+  })
+
+  // Make sure tags are closed.
+  var l = ansiCodes.length
+  ;(l > 0) && (ret += Array(l + 1).join('</span>'))
+
+  return ret
+}
+
+/**
+ * Customize colors.
+ * @param {Object} colors reference to _defColors
+ */
+ansiHTML.setColors = function (colors) {
+  if (typeof colors !== 'object') {
+    throw new Error('`colors` parameter must be an Object.')
+  }
+
+  var _finalColors = {}
+  for (var key in _defColors) {
+    var hex = colors.hasOwnProperty(key) ? colors[key] : null
+    if (!hex) {
+      _finalColors[key] = _defColors[key]
+      continue
+    }
+    if ('reset' === key) {
+      if (typeof hex === 'string') {
+        hex = [hex]
+      }
+      if (!Array.isArray(hex) || hex.length === 0 || hex.some(function (h) {
+        return typeof h !== 'string'
+      })) {
+        throw new Error('The value of `' + key + '` property must be an Array and each item could only be a hex string, e.g.: FF0000')
+      }
+      var defHexColor = _defColors[key]
+      if (!hex[0]) {
+        hex[0] = defHexColor[0]
+      }
+      if (hex.length === 1 || !hex[1]) {
+        hex = [hex[0]]
+        hex.push(defHexColor[1])
+      }
+
+      hex = hex.slice(0, 2)
+    } else if (typeof hex !== 'string') {
+      throw new Error('The value of `' + key + '` property must be a hex string, e.g.: FF0000')
+    }
+    _finalColors[key] = hex
+  }
+  _setTags(_finalColors)
+}
+
+/**
+ * Reset colors.
+ */
+ansiHTML.reset = function () {
+  _setTags(_defColors)
+}
+
+/**
+ * Expose tags, including open and close.
+ * @type {Object}
+ */
+ansiHTML.tags = {}
+
+if (Object.defineProperty) {
+  Object.defineProperty(ansiHTML.tags, 'open', {
+    get: function () { return _openTags }
+  })
+  Object.defineProperty(ansiHTML.tags, 'close', {
+    get: function () { return _closeTags }
+  })
+} else {
+  ansiHTML.tags.open = _openTags
+  ansiHTML.tags.close = _closeTags
+}
+
+function _setTags (colors) {
+  // reset all
+  _openTags['0'] = 'font-weight:normal;opacity:1;color:#' + colors.reset[0] + ';background:#' + colors.reset[1]
+  // inverse
+  _openTags['7'] = 'color:#' + colors.reset[1] + ';background:#' + colors.reset[0]
+  // dark grey
+  _openTags['90'] = 'color:#' + colors.darkgrey
+
+  for (var code in _styles) {
+    var color = _styles[code]
+    var oriColor = colors[color] || '000'
+    _openTags[code] = 'color:#' + oriColor
+    code = parseInt(code)
+    _openTags[(code + 10).toString()] = 'background:#' + oriColor
+  }
+}
+
+ansiHTML.reset()
+
+
+/***/ }),
+
+/***/ 13:
+/*!**************************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/index.js ***!
+  \**************************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+  XmlEntities: __webpack_require__(/*! ./lib/xml-entities.js */ 14),
+  Html4Entities: __webpack_require__(/*! ./lib/html4-entities.js */ 15),
+  Html5Entities: __webpack_require__(/*! ./lib/html5-entities.js */ 1),
+  AllHtmlEntities: __webpack_require__(/*! ./lib/html5-entities.js */ 1)
+};
+
+
+/***/ }),
+
+/***/ 14:
+/*!*************************************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/lib/xml-entities.js ***!
+  \*************************************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+var ALPHA_INDEX = {
+    '&lt': '<',
+    '&gt': '>',
+    '&quot': '"',
+    '&apos': '\'',
+    '&amp': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&apos;': '\'',
+    '&amp;': '&'
+};
+
+var CHAR_INDEX = {
+    60: 'lt',
+    62: 'gt',
+    34: 'quot',
+    39: 'apos',
+    38: 'amp'
+};
+
+var CHAR_S_INDEX = {
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    '\'': '&apos;',
+    '&': '&amp;'
+};
+
+/**
+ * @constructor
+ */
+function XmlEntities() {}
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+XmlEntities.prototype.encode = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    return str.replace(/<|>|"|'|&/g, function(s) {
+        return CHAR_S_INDEX[s];
+    });
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+ XmlEntities.encode = function(str) {
+    return new XmlEntities().encode(str);
+ };
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+XmlEntities.prototype.decode = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    return str.replace(/&#?[0-9a-zA-Z]+;?/g, function(s) {
+        if (s.charAt(1) === '#') {
+            var code = s.charAt(2).toLowerCase() === 'x' ?
+                parseInt(s.substr(3), 16) :
+                parseInt(s.substr(2));
+
+            if (isNaN(code) || code < -32768 || code > 65535) {
+                return '';
+            }
+            return String.fromCharCode(code);
+        }
+        return ALPHA_INDEX[s] || s;
+    });
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+ XmlEntities.decode = function(str) {
+    return new XmlEntities().decode(str);
+ };
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+XmlEntities.prototype.encodeNonUTF = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    var strLength = str.length;
+    var result = '';
+    var i = 0;
+    while (i < strLength) {
+        var c = str.charCodeAt(i);
+        var alpha = CHAR_INDEX[c];
+        if (alpha) {
+            result += "&" + alpha + ";";
+            i++;
+            continue;
+        }
+        if (c < 32 || c > 126) {
+            result += '&#' + c + ';';
+        } else {
+            result += str.charAt(i);
+        }
+        i++;
+    }
+    return result;
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+ XmlEntities.encodeNonUTF = function(str) {
+    return new XmlEntities().encodeNonUTF(str);
+ };
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+XmlEntities.prototype.encodeNonASCII = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    var strLenght = str.length;
+    var result = '';
+    var i = 0;
+    while (i < strLenght) {
+        var c = str.charCodeAt(i);
+        if (c <= 255) {
+            result += str[i++];
+            continue;
+        }
+        result += '&#' + c + ';';
+        i++;
+    }
+    return result;
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+ XmlEntities.encodeNonASCII = function(str) {
+    return new XmlEntities().encodeNonASCII(str);
+ };
+
+module.exports = XmlEntities;
+
+
+/***/ }),
+
+/***/ 15:
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/lib/html4-entities.js ***!
+  \***************************************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'OElig', 'oelig', 'Scaron', 'scaron', 'Yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'Dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'Prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'lArr', 'uArr', 'rArr', 'dArr', 'hArr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
+var HTML_CODES = [39, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 34, 38, 60, 62, 338, 339, 352, 353, 376, 710, 732, 8194, 8195, 8201, 8204, 8205, 8206, 8207, 8211, 8212, 8216, 8217, 8218, 8220, 8221, 8222, 8224, 8225, 8240, 8249, 8250, 8364, 402, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 931, 932, 933, 934, 935, 936, 937, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 977, 978, 982, 8226, 8230, 8242, 8243, 8254, 8260, 8472, 8465, 8476, 8482, 8501, 8592, 8593, 8594, 8595, 8596, 8629, 8656, 8657, 8658, 8659, 8660, 8704, 8706, 8707, 8709, 8711, 8712, 8713, 8715, 8719, 8721, 8722, 8727, 8730, 8733, 8734, 8736, 8743, 8744, 8745, 8746, 8747, 8756, 8764, 8773, 8776, 8800, 8801, 8804, 8805, 8834, 8835, 8836, 8838, 8839, 8853, 8855, 8869, 8901, 8968, 8969, 8970, 8971, 9001, 9002, 9674, 9824, 9827, 9829, 9830];
+
+var alphaIndex = {};
+var numIndex = {};
+
+var i = 0;
+var length = HTML_ALPHA.length;
+while (i < length) {
+    var a = HTML_ALPHA[i];
+    var c = HTML_CODES[i];
+    alphaIndex[a] = String.fromCharCode(c);
+    numIndex[c] = a;
+    i++;
+}
+
+/**
+ * @constructor
+ */
+function Html4Entities() {}
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.prototype.decode = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    return str.replace(/&(#?[\w\d]+);?/g, function(s, entity) {
+        var chr;
+        if (entity.charAt(0) === "#") {
+            var code = entity.charAt(1).toLowerCase() === 'x' ?
+                parseInt(entity.substr(2), 16) :
+                parseInt(entity.substr(1));
+
+            if (!(isNaN(code) || code < -32768 || code > 65535)) {
+                chr = String.fromCharCode(code);
+            }
+        } else {
+            chr = alphaIndex[entity];
+        }
+        return chr || s;
+    });
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.decode = function(str) {
+    return new Html4Entities().decode(str);
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.prototype.encode = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    var strLength = str.length;
+    var result = '';
+    var i = 0;
+    while (i < strLength) {
+        var alpha = numIndex[str.charCodeAt(i)];
+        result += alpha ? "&" + alpha + ";" : str.charAt(i);
+        i++;
+    }
+    return result;
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.encode = function(str) {
+    return new Html4Entities().encode(str);
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.prototype.encodeNonUTF = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    var strLength = str.length;
+    var result = '';
+    var i = 0;
+    while (i < strLength) {
+        var cc = str.charCodeAt(i);
+        var alpha = numIndex[cc];
+        if (alpha) {
+            result += "&" + alpha + ";";
+        } else if (cc < 32 || cc > 126) {
+            result += "&#" + cc + ";";
+        } else {
+            result += str.charAt(i);
+        }
+        i++;
+    }
+    return result;
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.encodeNonUTF = function(str) {
+    return new Html4Entities().encodeNonUTF(str);
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.prototype.encodeNonASCII = function(str) {
+    if (!str || !str.length) {
+        return '';
+    }
+    var strLength = str.length;
+    var result = '';
+    var i = 0;
+    while (i < strLength) {
+        var c = str.charCodeAt(i);
+        if (c <= 255) {
+            result += str[i++];
+            continue;
+        }
+        result += '&#' + c + ';';
+        i++;
+    }
+    return result;
+};
+
+/**
+ * @param {String} str
+ * @returns {String}
+ */
+Html4Entities.encodeNonASCII = function(str) {
+    return new Html4Entities().encodeNonASCII(str);
+};
+
+module.exports = Html4Entities;
+
+
+/***/ }),
+
+/***/ 16:
+/*!**************************************************!*\
+  !*** (webpack)-hot-middleware/process-update.js ***!
+  \**************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Based heavily on https://github.com/webpack/webpack/blob/
+ *  c0afdf9c6abc1dd70707c594e473802a566f7b6e/hot/only-dev-server.js
+ * Original copyright Tobias Koppers @sokra (MIT license)
+ */
+
+/* global window __webpack_hash__ */
+
+if (false) {
+  throw new Error("[HMR] Hot Module Replacement is disabled.");
+}
+
+var hmrDocsUrl = "https://webpack.js.org/concepts/hot-module-replacement/"; // eslint-disable-line max-len
+
+var lastHash;
+var failureStatuses = { abort: 1, fail: 1 };
+var applyOptions = { 				
+  ignoreUnaccepted: true,
+  ignoreDeclined: true,
+  ignoreErrored: true,
+  onUnaccepted: function(data) {
+    console.warn("Ignored an update to unaccepted module " + data.chain.join(" -> "));
+  },
+  onDeclined: function(data) {
+    console.warn("Ignored an update to declined module " + data.chain.join(" -> "));
+  },
+  onErrored: function(data) {
+    console.error(data.error);
+    console.warn("Ignored an error while updating module " + data.moduleId + " (" + data.type + ")");
+  } 
+}
+
+function upToDate(hash) {
+  if (hash) lastHash = hash;
+  return lastHash == __webpack_require__.h();
+}
+
+module.exports = function(hash, moduleMap, options) {
+  var reload = options.reload;
+  if (!upToDate(hash) && module.hot.status() == "idle") {
+    if (options.log) console.log("[HMR] Checking for updates on the server...");
+    check();
+  }
+
+  function check() {
+    var cb = function(err, updatedModules) {
+      if (err) return handleError(err);
+
+      if(!updatedModules) {
+        if (options.warn) {
+          console.warn("[HMR] Cannot find update (Full reload needed)");
+          console.warn("[HMR] (Probably because of restarting the server)");
+        }
+        performReload();
+        return null;
+      }
+
+      var applyCallback = function(applyErr, renewedModules) {
+        if (applyErr) return handleError(applyErr);
+
+        if (!upToDate()) check();
+
+        logUpdates(updatedModules, renewedModules);
+      };
+
+      var applyResult = module.hot.apply(applyOptions, applyCallback);
+      // webpack 2 promise
+      if (applyResult && applyResult.then) {
+        // HotModuleReplacement.runtime.js refers to the result as `outdatedModules`
+        applyResult.then(function(outdatedModules) {
+          applyCallback(null, outdatedModules);
+        });
+        applyResult.catch(applyCallback);
+      }
+
+    };
+
+    var result = module.hot.check(false, cb);
+    // webpack 2 promise
+    if (result && result.then) {
+        result.then(function(updatedModules) {
+            cb(null, updatedModules);
+        });
+        result.catch(cb);
+    }
+  }
+
+  function logUpdates(updatedModules, renewedModules) {
+    var unacceptedModules = updatedModules.filter(function(moduleId) {
+      return renewedModules && renewedModules.indexOf(moduleId) < 0;
+    });
+
+    if(unacceptedModules.length > 0) {
+      if (options.warn) {
+        console.warn(
+          "[HMR] The following modules couldn't be hot updated: " +
+          "(Full reload needed)\n" +
+          "This is usually because the modules which have changed " +
+          "(and their parents) do not know how to hot reload themselves. " +
+          "See " + hmrDocsUrl + " for more details."
+        );
+        unacceptedModules.forEach(function(moduleId) {
+          console.warn("[HMR]  - " + moduleMap[moduleId]);
+        });
+      }
+      performReload();
+      return;
+    }
+
+    if (options.log) {
+      if(!renewedModules || renewedModules.length === 0) {
+        console.log("[HMR] Nothing hot updated.");
+      } else {
+        console.log("[HMR] Updated modules:");
+        renewedModules.forEach(function(moduleId) {
+          console.log("[HMR]  - " + moduleMap[moduleId]);
+        });
+      }
+
+      if (upToDate()) {
+        console.log("[HMR] App is up to date.");
+      }
+    }
+  }
+
+  function handleError(err) {
+    if (module.hot.status() in failureStatuses) {
+      if (options.warn) {
+        console.warn("[HMR] Cannot check for update (Full reload needed)");
+        console.warn("[HMR] " + err.stack || err.message);
+      }
+      performReload();
+      return;
+    }
+    if (options.warn) {
+      console.warn("[HMR] Update check failed: " + err.stack || err.message);
+    }
+  }
+
+  function performReload() {
+    if (reload) {
+      if (options.warn) console.warn("[HMR] Reloading page");
+      window.location.reload();
+    }
+  }
+};
+
+
+/***/ }),
+
+/***/ 3:
 /*!*************************************!*\
   !*** ./build/helpers/hmr-client.js ***!
   \*************************************/
@@ -957,7 +1758,8 @@ hotMiddlewareScript.subscribe(function (event) {
 
 
 /***/ }),
-/* 4 */
+
+/***/ 4:
 /*!********************************************************************************!*\
   !*** (webpack)-hot-middleware/client.js?noInfo=true&timeout=20000&reload=true ***!
   \********************************************************************************/
@@ -1239,7 +2041,8 @@ if (module) {
 /* WEBPACK VAR INJECTION */}.call(exports, "?noInfo=true&timeout=20000&reload=true", __webpack_require__(/*! ./../webpack/buildin/module.js */ 5)(module)))
 
 /***/ }),
-/* 5 */
+
+/***/ 5:
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -1272,7 +2075,8 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 6 */
+
+/***/ 6:
 /*!****************************************************************************************************************************!*\
   !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/querystring-es3/index.js ***!
   \****************************************************************************************************************************/
@@ -1288,7 +2092,8 @@ exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ 8);
 
 
 /***/ }),
-/* 7 */
+
+/***/ 7:
 /*!*****************************************************************************************************************************!*\
   !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/querystring-es3/decode.js ***!
   \*****************************************************************************************************************************/
@@ -1384,7 +2189,8 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 8 */
+
+/***/ 8:
 /*!*****************************************************************************************************************************!*\
   !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/querystring-es3/encode.js ***!
   \*****************************************************************************************************************************/
@@ -1481,842 +2287,8 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 9 */
-/*!***********************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/strip-ansi/index.js ***!
-  \***********************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var ansiRegex = __webpack_require__(/*! ansi-regex */ 10)();
-
-module.exports = function (str) {
-	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
-};
-
-
-/***/ }),
-/* 10 */
-/*!***********************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/ansi-regex/index.js ***!
-  \***********************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-module.exports = function () {
-	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g;
-};
-
-
-/***/ }),
-/* 11 */
-/*!**************************************************!*\
-  !*** (webpack)-hot-middleware/client-overlay.js ***!
-  \**************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*eslint-env browser*/
-
-var clientOverlay = document.createElement('div');
-clientOverlay.id = 'webpack-hot-middleware-clientOverlay';
-var styles = {
-  background: 'rgba(0,0,0,0.85)',
-  color: '#E8E8E8',
-  lineHeight: '1.2',
-  whiteSpace: 'pre',
-  fontFamily: 'Menlo, Consolas, monospace',
-  fontSize: '13px',
-  position: 'fixed',
-  zIndex: 9999,
-  padding: '10px',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  overflow: 'auto',
-  dir: 'ltr',
-  textAlign: 'left'
-};
-for (var key in styles) {
-  clientOverlay.style[key] = styles[key];
-}
-
-var ansiHTML = __webpack_require__(/*! ansi-html */ 12);
-var colors = {
-  reset: ['transparent', 'transparent'],
-  black: '181818',
-  red: 'E36049',
-  green: 'B3CB74',
-  yellow: 'FFD080',
-  blue: '7CAFC2',
-  magenta: '7FACCA',
-  cyan: 'C3C2EF',
-  lightgrey: 'EBE7E3',
-  darkgrey: '6D7891'
-};
-ansiHTML.setColors(colors);
-
-var Entities = __webpack_require__(/*! html-entities */ 13).AllHtmlEntities;
-var entities = new Entities();
-
-exports.showProblems =
-function showProblems(type, lines) {
-  clientOverlay.innerHTML = '';
-  lines.forEach(function(msg) {
-    msg = ansiHTML(entities.encode(msg));
-    var div = document.createElement('div');
-    div.style.marginBottom = '26px';
-    div.innerHTML = problemType(type) + ' in ' + msg;
-    clientOverlay.appendChild(div);
-  });
-  if (document.body) {
-    document.body.appendChild(clientOverlay);
-  }
-};
-
-exports.clear =
-function clear() {
-  if (document.body && clientOverlay.parentNode) {
-    document.body.removeChild(clientOverlay);
-  }
-};
-
-var problemColors = {
-  errors: colors.red,
-  warnings: colors.yellow
-};
-
-function problemType (type) {
-  var color = problemColors[type] || colors.red;
-  return (
-    '<span style="background-color:#' + color + '; color:#fff; padding:2px 4px; border-radius: 2px">' +
-      type.slice(0, -1).toUpperCase() +
-    '</span>'
-  );
-}
-
-
-/***/ }),
-/* 12 */
-/*!**********************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/ansi-html/index.js ***!
-  \**********************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = ansiHTML
-
-// Reference to https://github.com/sindresorhus/ansi-regex
-var _regANSI = /(?:(?:\u001b\[)|\u009b)(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])|\u001b[A-M]/
-
-var _defColors = {
-  reset: ['fff', '000'], // [FOREGROUD_COLOR, BACKGROUND_COLOR]
-  black: '000',
-  red: 'ff0000',
-  green: '209805',
-  yellow: 'e8bf03',
-  blue: '0000ff',
-  magenta: 'ff00ff',
-  cyan: '00ffee',
-  lightgrey: 'f0f0f0',
-  darkgrey: '888'
-}
-var _styles = {
-  30: 'black',
-  31: 'red',
-  32: 'green',
-  33: 'yellow',
-  34: 'blue',
-  35: 'magenta',
-  36: 'cyan',
-  37: 'lightgrey'
-}
-var _openTags = {
-  '1': 'font-weight:bold', // bold
-  '2': 'opacity:0.5', // dim
-  '3': '<i>', // italic
-  '4': '<u>', // underscore
-  '8': 'display:none', // hidden
-  '9': '<del>' // delete
-}
-var _closeTags = {
-  '23': '</i>', // reset italic
-  '24': '</u>', // reset underscore
-  '29': '</del>' // reset delete
-}
-
-;[0, 21, 22, 27, 28, 39, 49].forEach(function (n) {
-  _closeTags[n] = '</span>'
-})
-
-/**
- * Converts text with ANSI color codes to HTML markup.
- * @param {String} text
- * @returns {*}
- */
-function ansiHTML (text) {
-  // Returns the text if the string has no ANSI escape code.
-  if (!_regANSI.test(text)) {
-    return text
-  }
-
-  // Cache opened sequence.
-  var ansiCodes = []
-  // Replace with markup.
-  var ret = text.replace(/\033\[(\d+)*m/g, function (match, seq) {
-    var ot = _openTags[seq]
-    if (ot) {
-      // If current sequence has been opened, close it.
-      if (!!~ansiCodes.indexOf(seq)) { // eslint-disable-line no-extra-boolean-cast
-        ansiCodes.pop()
-        return '</span>'
-      }
-      // Open tag.
-      ansiCodes.push(seq)
-      return ot[0] === '<' ? ot : '<span style="' + ot + ';">'
-    }
-
-    var ct = _closeTags[seq]
-    if (ct) {
-      // Pop sequence
-      ansiCodes.pop()
-      return ct
-    }
-    return ''
-  })
-
-  // Make sure tags are closed.
-  var l = ansiCodes.length
-  ;(l > 0) && (ret += Array(l + 1).join('</span>'))
-
-  return ret
-}
-
-/**
- * Customize colors.
- * @param {Object} colors reference to _defColors
- */
-ansiHTML.setColors = function (colors) {
-  if (typeof colors !== 'object') {
-    throw new Error('`colors` parameter must be an Object.')
-  }
-
-  var _finalColors = {}
-  for (var key in _defColors) {
-    var hex = colors.hasOwnProperty(key) ? colors[key] : null
-    if (!hex) {
-      _finalColors[key] = _defColors[key]
-      continue
-    }
-    if ('reset' === key) {
-      if (typeof hex === 'string') {
-        hex = [hex]
-      }
-      if (!Array.isArray(hex) || hex.length === 0 || hex.some(function (h) {
-        return typeof h !== 'string'
-      })) {
-        throw new Error('The value of `' + key + '` property must be an Array and each item could only be a hex string, e.g.: FF0000')
-      }
-      var defHexColor = _defColors[key]
-      if (!hex[0]) {
-        hex[0] = defHexColor[0]
-      }
-      if (hex.length === 1 || !hex[1]) {
-        hex = [hex[0]]
-        hex.push(defHexColor[1])
-      }
-
-      hex = hex.slice(0, 2)
-    } else if (typeof hex !== 'string') {
-      throw new Error('The value of `' + key + '` property must be a hex string, e.g.: FF0000')
-    }
-    _finalColors[key] = hex
-  }
-  _setTags(_finalColors)
-}
-
-/**
- * Reset colors.
- */
-ansiHTML.reset = function () {
-  _setTags(_defColors)
-}
-
-/**
- * Expose tags, including open and close.
- * @type {Object}
- */
-ansiHTML.tags = {}
-
-if (Object.defineProperty) {
-  Object.defineProperty(ansiHTML.tags, 'open', {
-    get: function () { return _openTags }
-  })
-  Object.defineProperty(ansiHTML.tags, 'close', {
-    get: function () { return _closeTags }
-  })
-} else {
-  ansiHTML.tags.open = _openTags
-  ansiHTML.tags.close = _closeTags
-}
-
-function _setTags (colors) {
-  // reset all
-  _openTags['0'] = 'font-weight:normal;opacity:1;color:#' + colors.reset[0] + ';background:#' + colors.reset[1]
-  // inverse
-  _openTags['7'] = 'color:#' + colors.reset[1] + ';background:#' + colors.reset[0]
-  // dark grey
-  _openTags['90'] = 'color:#' + colors.darkgrey
-
-  for (var code in _styles) {
-    var color = _styles[code]
-    var oriColor = colors[color] || '000'
-    _openTags[code] = 'color:#' + oriColor
-    code = parseInt(code)
-    _openTags[(code + 10).toString()] = 'background:#' + oriColor
-  }
-}
-
-ansiHTML.reset()
-
-
-/***/ }),
-/* 13 */
-/*!**************************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/index.js ***!
-  \**************************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-  XmlEntities: __webpack_require__(/*! ./lib/xml-entities.js */ 14),
-  Html4Entities: __webpack_require__(/*! ./lib/html4-entities.js */ 15),
-  Html5Entities: __webpack_require__(/*! ./lib/html5-entities.js */ 1),
-  AllHtmlEntities: __webpack_require__(/*! ./lib/html5-entities.js */ 1)
-};
-
-
-/***/ }),
-/* 14 */
-/*!*************************************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/lib/xml-entities.js ***!
-  \*************************************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports) {
-
-var ALPHA_INDEX = {
-    '&lt': '<',
-    '&gt': '>',
-    '&quot': '"',
-    '&apos': '\'',
-    '&amp': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-    '&quot;': '"',
-    '&apos;': '\'',
-    '&amp;': '&'
-};
-
-var CHAR_INDEX = {
-    60: 'lt',
-    62: 'gt',
-    34: 'quot',
-    39: 'apos',
-    38: 'amp'
-};
-
-var CHAR_S_INDEX = {
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    '\'': '&apos;',
-    '&': '&amp;'
-};
-
-/**
- * @constructor
- */
-function XmlEntities() {}
-
-/**
- * @param {String} str
- * @returns {String}
- */
-XmlEntities.prototype.encode = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    return str.replace(/<|>|"|'|&/g, function(s) {
-        return CHAR_S_INDEX[s];
-    });
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
- XmlEntities.encode = function(str) {
-    return new XmlEntities().encode(str);
- };
-
-/**
- * @param {String} str
- * @returns {String}
- */
-XmlEntities.prototype.decode = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    return str.replace(/&#?[0-9a-zA-Z]+;?/g, function(s) {
-        if (s.charAt(1) === '#') {
-            var code = s.charAt(2).toLowerCase() === 'x' ?
-                parseInt(s.substr(3), 16) :
-                parseInt(s.substr(2));
-
-            if (isNaN(code) || code < -32768 || code > 65535) {
-                return '';
-            }
-            return String.fromCharCode(code);
-        }
-        return ALPHA_INDEX[s] || s;
-    });
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
- XmlEntities.decode = function(str) {
-    return new XmlEntities().decode(str);
- };
-
-/**
- * @param {String} str
- * @returns {String}
- */
-XmlEntities.prototype.encodeNonUTF = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    var strLength = str.length;
-    var result = '';
-    var i = 0;
-    while (i < strLength) {
-        var c = str.charCodeAt(i);
-        var alpha = CHAR_INDEX[c];
-        if (alpha) {
-            result += "&" + alpha + ";";
-            i++;
-            continue;
-        }
-        if (c < 32 || c > 126) {
-            result += '&#' + c + ';';
-        } else {
-            result += str.charAt(i);
-        }
-        i++;
-    }
-    return result;
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
- XmlEntities.encodeNonUTF = function(str) {
-    return new XmlEntities().encodeNonUTF(str);
- };
-
-/**
- * @param {String} str
- * @returns {String}
- */
-XmlEntities.prototype.encodeNonASCII = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    var strLenght = str.length;
-    var result = '';
-    var i = 0;
-    while (i < strLenght) {
-        var c = str.charCodeAt(i);
-        if (c <= 255) {
-            result += str[i++];
-            continue;
-        }
-        result += '&#' + c + ';';
-        i++;
-    }
-    return result;
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
- XmlEntities.encodeNonASCII = function(str) {
-    return new XmlEntities().encodeNonASCII(str);
- };
-
-module.exports = XmlEntities;
-
-
-/***/ }),
-/* 15 */
-/*!***************************************************************************************************************************************!*\
-  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/html-entities/lib/html4-entities.js ***!
-  \***************************************************************************************************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports) {
-
-var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'OElig', 'oelig', 'Scaron', 'scaron', 'Yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'Dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'Prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'lArr', 'uArr', 'rArr', 'dArr', 'hArr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
-var HTML_CODES = [39, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 34, 38, 60, 62, 338, 339, 352, 353, 376, 710, 732, 8194, 8195, 8201, 8204, 8205, 8206, 8207, 8211, 8212, 8216, 8217, 8218, 8220, 8221, 8222, 8224, 8225, 8240, 8249, 8250, 8364, 402, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 931, 932, 933, 934, 935, 936, 937, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 977, 978, 982, 8226, 8230, 8242, 8243, 8254, 8260, 8472, 8465, 8476, 8482, 8501, 8592, 8593, 8594, 8595, 8596, 8629, 8656, 8657, 8658, 8659, 8660, 8704, 8706, 8707, 8709, 8711, 8712, 8713, 8715, 8719, 8721, 8722, 8727, 8730, 8733, 8734, 8736, 8743, 8744, 8745, 8746, 8747, 8756, 8764, 8773, 8776, 8800, 8801, 8804, 8805, 8834, 8835, 8836, 8838, 8839, 8853, 8855, 8869, 8901, 8968, 8969, 8970, 8971, 9001, 9002, 9674, 9824, 9827, 9829, 9830];
-
-var alphaIndex = {};
-var numIndex = {};
-
-var i = 0;
-var length = HTML_ALPHA.length;
-while (i < length) {
-    var a = HTML_ALPHA[i];
-    var c = HTML_CODES[i];
-    alphaIndex[a] = String.fromCharCode(c);
-    numIndex[c] = a;
-    i++;
-}
-
-/**
- * @constructor
- */
-function Html4Entities() {}
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.prototype.decode = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    return str.replace(/&(#?[\w\d]+);?/g, function(s, entity) {
-        var chr;
-        if (entity.charAt(0) === "#") {
-            var code = entity.charAt(1).toLowerCase() === 'x' ?
-                parseInt(entity.substr(2), 16) :
-                parseInt(entity.substr(1));
-
-            if (!(isNaN(code) || code < -32768 || code > 65535)) {
-                chr = String.fromCharCode(code);
-            }
-        } else {
-            chr = alphaIndex[entity];
-        }
-        return chr || s;
-    });
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.decode = function(str) {
-    return new Html4Entities().decode(str);
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.prototype.encode = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    var strLength = str.length;
-    var result = '';
-    var i = 0;
-    while (i < strLength) {
-        var alpha = numIndex[str.charCodeAt(i)];
-        result += alpha ? "&" + alpha + ";" : str.charAt(i);
-        i++;
-    }
-    return result;
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.encode = function(str) {
-    return new Html4Entities().encode(str);
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.prototype.encodeNonUTF = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    var strLength = str.length;
-    var result = '';
-    var i = 0;
-    while (i < strLength) {
-        var cc = str.charCodeAt(i);
-        var alpha = numIndex[cc];
-        if (alpha) {
-            result += "&" + alpha + ";";
-        } else if (cc < 32 || cc > 126) {
-            result += "&#" + cc + ";";
-        } else {
-            result += str.charAt(i);
-        }
-        i++;
-    }
-    return result;
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.encodeNonUTF = function(str) {
-    return new Html4Entities().encodeNonUTF(str);
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.prototype.encodeNonASCII = function(str) {
-    if (!str || !str.length) {
-        return '';
-    }
-    var strLength = str.length;
-    var result = '';
-    var i = 0;
-    while (i < strLength) {
-        var c = str.charCodeAt(i);
-        if (c <= 255) {
-            result += str[i++];
-            continue;
-        }
-        result += '&#' + c + ';';
-        i++;
-    }
-    return result;
-};
-
-/**
- * @param {String} str
- * @returns {String}
- */
-Html4Entities.encodeNonASCII = function(str) {
-    return new Html4Entities().encodeNonASCII(str);
-};
-
-module.exports = Html4Entities;
-
-
-/***/ }),
-/* 16 */
-/*!**************************************************!*\
-  !*** (webpack)-hot-middleware/process-update.js ***!
-  \**************************************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Based heavily on https://github.com/webpack/webpack/blob/
- *  c0afdf9c6abc1dd70707c594e473802a566f7b6e/hot/only-dev-server.js
- * Original copyright Tobias Koppers @sokra (MIT license)
- */
-
-/* global window __webpack_hash__ */
-
-if (false) {
-  throw new Error("[HMR] Hot Module Replacement is disabled.");
-}
-
-var hmrDocsUrl = "https://webpack.js.org/concepts/hot-module-replacement/"; // eslint-disable-line max-len
-
-var lastHash;
-var failureStatuses = { abort: 1, fail: 1 };
-var applyOptions = { 				
-  ignoreUnaccepted: true,
-  ignoreDeclined: true,
-  ignoreErrored: true,
-  onUnaccepted: function(data) {
-    console.warn("Ignored an update to unaccepted module " + data.chain.join(" -> "));
-  },
-  onDeclined: function(data) {
-    console.warn("Ignored an update to declined module " + data.chain.join(" -> "));
-  },
-  onErrored: function(data) {
-    console.error(data.error);
-    console.warn("Ignored an error while updating module " + data.moduleId + " (" + data.type + ")");
-  } 
-}
-
-function upToDate(hash) {
-  if (hash) lastHash = hash;
-  return lastHash == __webpack_require__.h();
-}
-
-module.exports = function(hash, moduleMap, options) {
-  var reload = options.reload;
-  if (!upToDate(hash) && module.hot.status() == "idle") {
-    if (options.log) console.log("[HMR] Checking for updates on the server...");
-    check();
-  }
-
-  function check() {
-    var cb = function(err, updatedModules) {
-      if (err) return handleError(err);
-
-      if(!updatedModules) {
-        if (options.warn) {
-          console.warn("[HMR] Cannot find update (Full reload needed)");
-          console.warn("[HMR] (Probably because of restarting the server)");
-        }
-        performReload();
-        return null;
-      }
-
-      var applyCallback = function(applyErr, renewedModules) {
-        if (applyErr) return handleError(applyErr);
-
-        if (!upToDate()) check();
-
-        logUpdates(updatedModules, renewedModules);
-      };
-
-      var applyResult = module.hot.apply(applyOptions, applyCallback);
-      // webpack 2 promise
-      if (applyResult && applyResult.then) {
-        // HotModuleReplacement.runtime.js refers to the result as `outdatedModules`
-        applyResult.then(function(outdatedModules) {
-          applyCallback(null, outdatedModules);
-        });
-        applyResult.catch(applyCallback);
-      }
-
-    };
-
-    var result = module.hot.check(false, cb);
-    // webpack 2 promise
-    if (result && result.then) {
-        result.then(function(updatedModules) {
-            cb(null, updatedModules);
-        });
-        result.catch(cb);
-    }
-  }
-
-  function logUpdates(updatedModules, renewedModules) {
-    var unacceptedModules = updatedModules.filter(function(moduleId) {
-      return renewedModules && renewedModules.indexOf(moduleId) < 0;
-    });
-
-    if(unacceptedModules.length > 0) {
-      if (options.warn) {
-        console.warn(
-          "[HMR] The following modules couldn't be hot updated: " +
-          "(Full reload needed)\n" +
-          "This is usually because the modules which have changed " +
-          "(and their parents) do not know how to hot reload themselves. " +
-          "See " + hmrDocsUrl + " for more details."
-        );
-        unacceptedModules.forEach(function(moduleId) {
-          console.warn("[HMR]  - " + moduleMap[moduleId]);
-        });
-      }
-      performReload();
-      return;
-    }
-
-    if (options.log) {
-      if(!renewedModules || renewedModules.length === 0) {
-        console.log("[HMR] Nothing hot updated.");
-      } else {
-        console.log("[HMR] Updated modules:");
-        renewedModules.forEach(function(moduleId) {
-          console.log("[HMR]  - " + moduleMap[moduleId]);
-        });
-      }
-
-      if (upToDate()) {
-        console.log("[HMR] App is up to date.");
-      }
-    }
-  }
-
-  function handleError(err) {
-    if (module.hot.status() in failureStatuses) {
-      if (options.warn) {
-        console.warn("[HMR] Cannot check for update (Full reload needed)");
-        console.warn("[HMR] " + err.stack || err.message);
-      }
-      performReload();
-      return;
-    }
-    if (options.warn) {
-      console.warn("[HMR] Update check failed: " + err.stack || err.message);
-    }
-  }
-
-  function performReload() {
-    if (reload) {
-      if (options.warn) console.warn("[HMR] Reloading page");
-      window.location.reload();
-    }
-  }
-};
-
-
-/***/ }),
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
+/***/ 82:
 /*!***************************************************************************!*\
   !*** multi ./build/util/../helpers/hmr-client.js ./scripts/customizer.js ***!
   \***************************************************************************/
@@ -2325,11 +2297,12 @@ module.exports = function(hash, moduleMap, options) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/resources/assets/build/util/../helpers/hmr-client.js */3);
-module.exports = __webpack_require__(/*! ./scripts/customizer.js */43);
+module.exports = __webpack_require__(/*! ./scripts/customizer.js */83);
 
 
 /***/ }),
-/* 43 */
+
+/***/ 83:
 /*!*******************************!*\
   !*** ./scripts/customizer.js ***!
   \*******************************/
@@ -2348,6 +2321,26 @@ wp.customize('blogname', function (value) {
 });
 
 
+/***/ }),
+
+/***/ 9:
+/*!***********************************************************************************************************************!*\
+  !*** /Users/lexinamer/Desktop/Unity/Github/ncecf/app/public/wp-content/themes/ncecf/node_modules/strip-ansi/index.js ***!
+  \***********************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ansiRegex = __webpack_require__(/*! ansi-regex */ 10)();
+
+module.exports = function (str) {
+	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
+};
+
+
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=customizer.js.map

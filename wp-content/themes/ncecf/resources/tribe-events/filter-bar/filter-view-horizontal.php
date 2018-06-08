@@ -45,7 +45,7 @@ do_action( 'tribe_events_filter_view_before_template' );
 
           <div class="col m6 s5 xs12 events-cta">
             <p class="h4">Questions about<br />a meeting or training?</p>
-            <a href="/contact/" class="btn">Contact Us</a>
+            <a href="mailto:ncecf@buildthefoundation.org" class="btn" target="_blank" rel="noopener">Contact Us</a>
           </div>
         </div>
 

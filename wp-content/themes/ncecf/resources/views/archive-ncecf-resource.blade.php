@@ -21,7 +21,7 @@
         </div>
         <div class="col s6 xs12 resources-cta">
           <p class="h4">Can't find what you need?</p>
-          <a href="/contact/" class="btn">Contact Us</a>
+          <a href="mailto:ncecf@buildthefoundation.org" class="btn" target="_blank" rel="noopener">Contact Us</a>
         </div>
       </div>
 
@@ -78,13 +78,13 @@
 
           <h3><a href="{{ $link }}" target="_blank" rel="noopener">{{ the_title() }}</a></h3>
 
-          <div class="chip"><i class="material-icons" aria-label="Year">date_range</i>
+          <div class="chip" data-type="Year"><i class="material-icons" aria-label="Year">date_range</i>
             <span>{{ get_field('year') }}</span>
           </div>
 
           @if (!empty($term_list))
             @foreach ($term_list as $term)
-              <div class="chip"><i class="material-icons" aria-label="Type">library_books</i>
+              <div class="chip" data-type="Type"><i class="material-icons" aria-label="Type">library_books</i>
                 <span>{{ $term }}</span>
               </div>
             @endforeach
@@ -92,7 +92,7 @@
 
           @if (!empty($initiative_list))
             @foreach ($initiative_list as $initiative)
-              <div class="chip"><i class="material-icons" aria-label="Initiative">lightbulb_outline</i>
+              <div class="chip" data-type="Initiative"><i class="material-icons" aria-label="Initiative">lightbulb_outline</i>
                 <span>{{ $initiative->post_title }}</span>
               </div>
             @endforeach
@@ -100,11 +100,13 @@
 
           @if (!empty($issue_list))
             @foreach ($issue_list as $issue)
-              <div class="chip"><i class="material-icons" aria-label="Issue">attach_file</i>
+              <div class="chip" data-type="Issue"><i class="material-icons" aria-label="Issue">attach_file</i>
                 <span>{{ $issue->post_title }}</span>
               </div>
             @endforeach
           @endif
+
+          <div class="description">{!! get_field('description') !!}</div>
         </div>
         @endwhile
         <div class="center-align">
