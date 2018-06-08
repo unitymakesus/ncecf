@@ -59,45 +59,42 @@
 
     <section role="region" aria-label="Recent Updates" class="container">
       <div class="row">
-        <div class="col m6 s12 news-list">
-          <h2><a href="/news/">Latest News</a></h2>
-          @php ($news = new WP_Query(['posts_per_page' => 4]))
+        @php ($news = new WP_Query(['posts_per_page' => 4]))
+        @if ($news->have_posts())
+          <div class="col m6 s12 news-list">
+            <h2><a href="/news/">Latest News</a></h2>
+              @while ($news->have_posts()) @php ($news->the_post())
+                <article @php(post_class())>
+                  <header>
+                    @include('partials/entry-meta-date')
+                    <h3 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h3>
+                  </header>
+                  <div class="entry-content">{!! the_advanced_excerpt('length=40&add_link=0') !!}</div>
+                </article>
+              @endwhile
+            @php (wp_reset_postdata())
+          </div>
+        @endif
 
-          @if ($news->have_posts())
-            @while ($news->have_posts()) @php ($news->the_post())
-              <article @php(post_class())>
-                <header>
-                  @include('partials/entry-meta-date')
-                  <h3 class="entry-title"><a href="{{ the_permalink() }}">{{ the_title() }}</a></h3>
-                </header>
-                <div class="entry-content">{!! the_advanced_excerpt('length=40&add_link=0') !!}</div>
-              </article>
-            @endwhile
-          @endif
-
-          @php (wp_reset_postdata())
+        @php
+          $resources = get_field('featured_resources');
+          $featured_resources = array_slice($resources, 0, 6);
+          $numbers = range(1, 48);
+          shuffle($numbers);
+          $i = 1;
+        @endphp
+        @if (!empty($resources))
+          <div class="col m6 s12">
+            <h2><a href="/resources/">Featured Resources</a></h2>
+            @foreach ($featured_resources as $resource)
+              <div class="report-banner" data-rand="{{ $numbers[$i] }}">
+                <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}" target="_blank" rel="noopener"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
+              </div>
+              @php ($i++)
+            @endforeach
+          </div>
         </div>
-
-        <div class="col m6 s12">
-          <h2><a href="/resources/">Featured Resources</a></h2>
-          @php
-            $resources = get_field('featured_resources');
-            $featured_resources = array_slice($resources, 0, 6);
-            $numbers = range(1, 20);
-            shuffle($numbers);
-            $i = 1;
-          @endphp
-
-          @foreach ($featured_resources as $resource)
-            <div class="report-banner" data-rand="{{ $numbers[$i] }}">
-              <h3 class="center-align"><a href="{{ get_the_permalink($resource->ID) }}" target="_blank" rel="noopener"><span>{{ get_the_title($resource->ID) }}</span></a></h1>
-            </div>
-            @php ($i++)
-          @endforeach
-
-          @php (wp_reset_postdata())
-        </div>
-      </div>
+      @endif
     </section>
   @endwhile
 @endsection

@@ -77,14 +77,16 @@
   @if (!empty($resources = get_field('initiatives_resources')))
     <h2 class="center-align">Featured Resources</h2>
     <div class="row flex flex-wrap featured-resources">
-      @php ($featured_resources = array_slice($resources, 0, 4))
+      @php
+        $featured_resources = array_slice($resources, 0, 4);
+        $numbers = range(1, 20);
+        shuffle($numbers);
+        $i = 1;
+      @endphp
       @foreach ($featured_resources as $resource)
         @php
           $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
           $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
-          $numbers = range(1, 48);
-          shuffle($numbers);
-          $i = 1;
         @endphp
         <div class="col l3 m6 s12 has-background-image wash" data-rand="{{ $numbers[$i] }}">
           <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>

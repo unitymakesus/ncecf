@@ -20,10 +20,10 @@
   </div>
 </section>
 
-<section class="container" role="region" aria-label="Quick Facts">
-  <div class="row">
-    @php ($numbers = get_field('numbers-data'))
-    @if (!empty($numbers))
+@php ($numbers = get_field('numbers-data'))
+@if (!empty($numbers))
+  <section class="container" role="region" aria-label="Quick Facts">
+    <div class="row">
       @php
         switch (count($numbers)) {
           case "1":
@@ -69,9 +69,9 @@
           </figure>
         </div>
       @endforeach
-    @endif
-  </div>
-</section>
+    </div>
+  </section>
+@endif
 
 @if (!empty($whattodo = get_field('what_can_we_do')))
   <section class="background-paper" role="region" aria-labelled-by="action-label">
@@ -91,14 +91,16 @@
     <div class="section padding">
       <h2 class="center-align">Featured Resources</h2>
       <div class="row flex flex-wrap featured-resources">
-        @php ($featured_resources = array_slice($resources, 0, 4))
+        @php
+          $featured_resources = array_slice($resources, 0, 4);
+          $numbers = range(1, 20);
+          shuffle($numbers);
+          $i = 1;
+        @endphp
         @foreach ($featured_resources as $resource)
           @php
             $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
             $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
-            $numbers = range(1, 48);
-            shuffle($numbers);
-            $i = 1;
           @endphp
           <div class="col l3 m6 s12 has-background-image wash"  data-rand="{{ $numbers[$i] }}">
             <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>
@@ -128,13 +130,13 @@
 
   <div class="container">
     <div class="row">
-      <div class="col m6 s12 news-list">
-        @php
-          $news_ids = get_field('issues_posts');
-          $news_posts = new WP_Query(['post__in' => $news_ids, 'posts_per_page' => 7]);
-        @endphp
+      @php
+        $news_ids = get_field('issues_posts');
+        $news_posts = new WP_Query(['post__in' => $news_ids, 'posts_per_page' => 7]);
+      @endphp
 
-        @if ($news_posts->have_posts())
+      @if ($news_posts->have_posts())
+        <div class="col m6 s12 news-list">
           <h2>Related News Posts</h2>
           @while ($news_posts->have_posts())
             @php ($news_posts->the_post())
@@ -146,20 +148,21 @@
             </article>
           @endwhile
           <p><a href="/news/?_related_issues={{ get_the_id() }}" class="btn btn-slate">All Related Posts</a></p>
-        @endif
-        @php (wp_reset_postdata())
-      </div>
+          @php (wp_reset_postdata())
+        </div>
+      @endif
 
-      <div class="col m6 s12">
-        <h2>Connected Issues</h2>
-        @php ($issues = get_field('related_issues'))
-
-        @foreach ($issues as $issue)
-          <div class="issue-banner" style="background-image: url('{!! get_the_post_thumbnail_url($issue->ID, 'medium_large') !!}')">
-            <h3 class="center-align"><a href="{{ get_the_permalink($issue->ID) }}"><span>{{ get_the_title($issue->ID) }}</span></a></h1>
-          </div>
-        @endforeach
-      </div>
+      @php ($issues = get_field('related_issues'))
+      @if (!empty($issues))
+        <div class="col m6 s12">
+          <h2>Connected Issues</h2>
+          @foreach ($issues as $issue)
+            <div class="issue-banner" style="background-image: url('{!! get_the_post_thumbnail_url($issue->ID, 'medium_large') !!}')">
+              <h3 class="center-align"><a href="{{ get_the_permalink($issue->ID) }}"><span>{{ get_the_title($issue->ID) }}</span></a></h1>
+            </div>
+          @endforeach
+        </div>
+      @endif
     </div>
   </div>
 </section>
