@@ -27,7 +27,9 @@
       @endif
     </div>
     <div class="row">
-      <p class="center-align"><a class="btn" href="/contact-us/">Learn How To Join Us</a><p>
+      <?php if( get_field('how_to_join') ): ?>
+        <p class="center-align"><a class="btn" href="/contact-us/">Learn How To Join Us</a><p>
+	    <?php endif; ?>
     </div>
   </div>
 </section>
