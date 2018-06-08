@@ -12,7 +12,7 @@
 	@php
     $id = get_option('page_for_posts')
   @endphp
-	<div class="has-background-image wash page-header" style="background-image: url('{!! wp_get_attachment_url( 4669 ) !!}')">
+	<div class="has-background-image wash page-header" style="background-image: url('{!! wp_get_attachment_url( 1891 ) !!}')">
 	  <div class="container center-align">
       <h1>Events</h1>
 	  </div>
