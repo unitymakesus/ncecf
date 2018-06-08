@@ -1,10 +1,14 @@
-#tribe-events-pg-template#tribe-events-pg-template {
+.archive #tribe-events-pg-template#tribe-events-pg-template {
   max-width: none;
   padding: 0;
 
   #tribe_events_filters_form {
     display: flex;
     justify-content: space-between;
+
+    .tribe_events_filter_item {
+      flex: 1 1 33%;
+    }
   }
 
   #tribe-events-content {
@@ -70,16 +74,24 @@
 }
 
 #tribe-events-content {
-  h3 {
-    margin-top: 0;
-  }
-
-  &.tribe-events-single.row {
+  &.tribe-events-single {
     padding-top: 3em;
 
     .hentry {
       padding-bottom: 0;
     }
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .tribe-events-schedule {
+    margin-top: 0;
+  }
+
+  .tribe-events-event-meta {
+    padding-top: 15px;
   }
 }
 

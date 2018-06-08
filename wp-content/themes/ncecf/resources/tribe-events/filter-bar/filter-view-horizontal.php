@@ -36,14 +36,14 @@ do_action( 'tribe_events_filter_view_before_template' );
     		<!-- </div> -->
 
         <div class="row">
-          <div class="col m6 s7 xs12">
+          <div class="col m9 s12">
         		<form id="tribe_events_filters_form" method="post" action="">
         			<?php do_action( 'tribe_events_filter_view_do_display_filters' ); ?>
         			<input type="submit" value="<?php esc_attr_e( 'Submit', 'tribe-events-filter-view' ) ?>" />
         		</form>
           </div>
 
-          <div class="col m6 s5 xs12 events-cta">
+          <div class="col m3 s12 events-cta">
             <p class="h4">Questions about<br />a meeting or training?</p>
             <a href="mailto:ncecf@buildthefoundation.org" class="btn" target="_blank" rel="noopener">Contact Us</a>
           </div>

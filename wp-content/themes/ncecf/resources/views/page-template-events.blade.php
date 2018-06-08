@@ -14,7 +14,7 @@
   @endphp
 	<div class="has-background-image wash page-header" style="background-image: url('{!! wp_get_attachment_url( 1891 ) !!}')">
 	  <div class="container center-align">
-      <h1>Events</h1>
+      <h2 class="h1">Events</h2>
 	  </div>
 	</div>
 

@@ -85,3 +85,10 @@ add_filter('sage/display_sidebar', function ($display) {
 
   return $display;
 });
+
+/**
+ * Change organizer label in Tribe Events Calendar
+ */
+add_filter( 'tribe_organizer_label_singular', function($label) {
+  return 'Focus';
+});
