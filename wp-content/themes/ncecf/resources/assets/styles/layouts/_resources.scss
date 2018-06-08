@@ -66,22 +66,22 @@
     color: $color-white;
 
     // Year
-    &:nth-of-type(1) {
+    &[data-type="Year"] {
       background: $color-green;
     }
 
     // Type
-    &:nth-of-type(2) {
+    &[data-type="Type"] {
       background: $color-orange;
     }
 
     // Initaitive
-    &:nth-of-type(3) {
+    &[data-type="Initiative"] {
       background: $color-blue;
     }
 
     // Issues
-    &:nth-of-type(4) {
+    &[data-type="Issue"] {
       background: $color-brown;
     }
   }
@@ -95,7 +95,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 25px;
+  // border-radius: 25px;
 
   * {
     position: relative;
@@ -154,20 +154,26 @@
     @include cover;
   }
 
-  &:nth-of-type(4n-3) {   // Every 4th, starting at the first
-    background: $color-orange;
+  &:nth-of-type(4n-3)::before {   // Every 4th, starting at the first
+    background-color: rgba($color-orange, 0.7);
   }
 
-  &:nth-of-type(4n-2) {  // Every 4th, starting at the second
-    background: $color-green;
+  &:nth-of-type(4n-2)::before {  // Every 4th, starting at the second
+    background-color: rgba($color-green, 0.7);
   }
 
-  &:nth-of-type(4n-1) {  // Every 4th, starting at the third
-    background: $color-slate-dark;
+  &:nth-of-type(4n-1)::before {  // Every 4th, starting at the third
+    background-color: rgba($color-slate-dark, 0.7);
   }
 
-  &:nth-of-type(4n) {  // Every 4th, starting at the fourth
-    background: $color-blue;
+  &:nth-of-type(4n)::before {  // Every 4th, starting at the fourth
+    background-color: rgba($color-blue, 0.7);
+  }
+
+  @for $i from 1 through 20 {
+    &[data-rand="#{$i}"] {
+      background-image: url('../images/horizontal/ncecf-banner-#{$i}-min.jpg');
+    }
   }
 }
 
@@ -175,6 +181,8 @@
   .col {
     position: relative;
     padding: 10px;
+    background-size: cover;
+    background-position: center top;
 
     & > * {
       padding: 0;
@@ -265,6 +273,12 @@
 
       .chip {
         background: $color-blue;
+      }
+    }
+
+    @for $i from 1 through 20 {
+      &[data-rand="#{$i}"] {
+        background-image: url('../images/vertical/vertical-banners-#{$i}.jpg');
       }
     }
   }

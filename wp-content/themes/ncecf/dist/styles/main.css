@@ -6824,7 +6824,9 @@ h3,
 }
 
 h4,
-.h4 {
+.h4,
+h5,
+h6 {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 18px;
@@ -7883,6 +7885,22 @@ header .menu-trigger-wrapper label:hover {
   color: #81BC41;
 }
 
+.single-ncecf-initiative .main-points .row.flex .col,
+.single-ncecf-initiative .main-points .sidebar-primary .flex.wrap .col,
+.sidebar-primary .single-ncecf-initiative .main-points .flex.wrap .col,
+.single-ncecf-initiative .main-points .row.flex .sidebar-primary .wrap .main,
+.sidebar-primary .wrap .single-ncecf-initiative .main-points .row.flex .main,
+.single-ncecf-initiative .main-points .sidebar-primary .flex.wrap .main,
+.sidebar-primary .single-ncecf-initiative .main-points .flex.wrap .main,
+.single-ncecf-initiative .main-points .row.flex .sidebar-primary .wrap .sidebar,
+.sidebar-primary .wrap .single-ncecf-initiative .main-points .row.flex .sidebar,
+.single-ncecf-initiative .main-points .sidebar-primary .flex.wrap .sidebar,
+.sidebar-primary .single-ncecf-initiative .main-points .flex.wrap .sidebar {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 25%;
+          flex: 1 1 25%;
+}
+
 .advancing-work .date {
   text-align: center;
   position: relative;
@@ -8082,19 +8100,19 @@ iframe {
   color: #FFF;
 }
 
-.resources-list .chip:nth-of-type(1) {
+.resources-list .chip[data-type="Year"] {
   background: #81BC41;
 }
 
-.resources-list .chip:nth-of-type(2) {
+.resources-list .chip[data-type="Type"] {
   background: #F89C24;
 }
 
-.resources-list .chip:nth-of-type(3) {
+.resources-list .chip[data-type="Initiative"] {
   background: #4597CB;
 }
 
-.resources-list .chip:nth-of-type(4) {
+.resources-list .chip[data-type="Issue"] {
   background: #744F28;
 }
 
@@ -8104,7 +8122,6 @@ iframe {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 25px;
 }
 
 .report-banner * {
@@ -8175,20 +8192,100 @@ iframe {
   left: 0;
 }
 
-.report-banner:nth-of-type(4n-3) {
-  background: #F89C24;
+.report-banner:nth-of-type(4n-3)::before {
+  background-color: rgba(248, 156, 36, 0.7);
 }
 
-.report-banner:nth-of-type(4n-2) {
-  background: #81BC41;
+.report-banner:nth-of-type(4n-2)::before {
+  background-color: rgba(129, 188, 65, 0.7);
 }
 
-.report-banner:nth-of-type(4n-1) {
-  background: #4D5C6B;
+.report-banner:nth-of-type(4n-1)::before {
+  background-color: rgba(77, 92, 107, 0.7);
 }
 
-.report-banner:nth-of-type(4n) {
-  background: #4597CB;
+.report-banner:nth-of-type(4n)::before {
+  background-color: rgba(69, 151, 203, 0.7);
+}
+
+.report-banner[data-rand="1"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-1-min.jpg);
+}
+
+.report-banner[data-rand="2"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-2-min.jpg);
+}
+
+.report-banner[data-rand="3"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-3-min.jpg);
+}
+
+.report-banner[data-rand="4"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-4-min.jpg);
+}
+
+.report-banner[data-rand="5"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-5-min.jpg);
+}
+
+.report-banner[data-rand="6"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-6-min.jpg);
+}
+
+.report-banner[data-rand="7"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-7-min.jpg);
+}
+
+.report-banner[data-rand="8"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-8-min.jpg);
+}
+
+.report-banner[data-rand="9"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-9-min.jpg);
+}
+
+.report-banner[data-rand="10"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-10-min.jpg);
+}
+
+.report-banner[data-rand="11"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-11-min.jpg);
+}
+
+.report-banner[data-rand="12"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-12-min.jpg);
+}
+
+.report-banner[data-rand="13"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-13-min.jpg);
+}
+
+.report-banner[data-rand="14"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-14-min.jpg);
+}
+
+.report-banner[data-rand="15"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-15-min.jpg);
+}
+
+.report-banner[data-rand="16"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-16-min.jpg);
+}
+
+.report-banner[data-rand="17"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-17-min.jpg);
+}
+
+.report-banner[data-rand="18"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-18-min.jpg);
+}
+
+.report-banner[data-rand="19"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-19-min.jpg);
+}
+
+.report-banner[data-rand="20"] {
+  background-image: url(/wp-content/themes/ncecf/dist/images/horizontal/ncecf-banner-20-min.jpg);
 }
 
 .featured-resources .col,
@@ -8198,6 +8295,8 @@ iframe {
 .sidebar-primary .wrap .featured-resources .sidebar {
   position: relative;
   padding: 10px;
+  background-size: cover;
+  background-position: center top;
 }
 
 .featured-resources .col > *,
@@ -8425,6 +8524,166 @@ iframe {
 .featured-resources .sidebar-primary .wrap .sidebar:nth-of-type(4n) .chip,
 .sidebar-primary .wrap .featured-resources .sidebar:nth-of-type(4n) .chip {
   background: #4597CB;
+}
+
+.featured-resources .col[data-rand="1"],
+.featured-resources .sidebar-primary .wrap [data-rand="1"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="1"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="1"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="1"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-1.jpg);
+}
+
+.featured-resources .col[data-rand="2"],
+.featured-resources .sidebar-primary .wrap [data-rand="2"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="2"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="2"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="2"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-2.jpg);
+}
+
+.featured-resources .col[data-rand="3"],
+.featured-resources .sidebar-primary .wrap [data-rand="3"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="3"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="3"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="3"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-3.jpg);
+}
+
+.featured-resources .col[data-rand="4"],
+.featured-resources .sidebar-primary .wrap [data-rand="4"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="4"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="4"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="4"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-4.jpg);
+}
+
+.featured-resources .col[data-rand="5"],
+.featured-resources .sidebar-primary .wrap [data-rand="5"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="5"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="5"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="5"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-5.jpg);
+}
+
+.featured-resources .col[data-rand="6"],
+.featured-resources .sidebar-primary .wrap [data-rand="6"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="6"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="6"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="6"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-6.jpg);
+}
+
+.featured-resources .col[data-rand="7"],
+.featured-resources .sidebar-primary .wrap [data-rand="7"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="7"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="7"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="7"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-7.jpg);
+}
+
+.featured-resources .col[data-rand="8"],
+.featured-resources .sidebar-primary .wrap [data-rand="8"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="8"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="8"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="8"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-8.jpg);
+}
+
+.featured-resources .col[data-rand="9"],
+.featured-resources .sidebar-primary .wrap [data-rand="9"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="9"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="9"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="9"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-9.jpg);
+}
+
+.featured-resources .col[data-rand="10"],
+.featured-resources .sidebar-primary .wrap [data-rand="10"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="10"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="10"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="10"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-10.jpg);
+}
+
+.featured-resources .col[data-rand="11"],
+.featured-resources .sidebar-primary .wrap [data-rand="11"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="11"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="11"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="11"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-11.jpg);
+}
+
+.featured-resources .col[data-rand="12"],
+.featured-resources .sidebar-primary .wrap [data-rand="12"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="12"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="12"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="12"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-12.jpg);
+}
+
+.featured-resources .col[data-rand="13"],
+.featured-resources .sidebar-primary .wrap [data-rand="13"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="13"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="13"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="13"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-13.jpg);
+}
+
+.featured-resources .col[data-rand="14"],
+.featured-resources .sidebar-primary .wrap [data-rand="14"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="14"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="14"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="14"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-14.jpg);
+}
+
+.featured-resources .col[data-rand="15"],
+.featured-resources .sidebar-primary .wrap [data-rand="15"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="15"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="15"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="15"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-15.jpg);
+}
+
+.featured-resources .col[data-rand="16"],
+.featured-resources .sidebar-primary .wrap [data-rand="16"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="16"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="16"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="16"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-16.jpg);
+}
+
+.featured-resources .col[data-rand="17"],
+.featured-resources .sidebar-primary .wrap [data-rand="17"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="17"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="17"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="17"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-17.jpg);
+}
+
+.featured-resources .col[data-rand="18"],
+.featured-resources .sidebar-primary .wrap [data-rand="18"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="18"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="18"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="18"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-18.jpg);
+}
+
+.featured-resources .col[data-rand="19"],
+.featured-resources .sidebar-primary .wrap [data-rand="19"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="19"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="19"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="19"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-19.jpg);
+}
+
+.featured-resources .col[data-rand="20"],
+.featured-resources .sidebar-primary .wrap [data-rand="20"].main,
+.sidebar-primary .wrap .featured-resources [data-rand="20"].main,
+.featured-resources .sidebar-primary .wrap [data-rand="20"].sidebar,
+.sidebar-primary .wrap .featured-resources [data-rand="20"].sidebar {
+  background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-20.jpg);
 }
 
 .hentry {

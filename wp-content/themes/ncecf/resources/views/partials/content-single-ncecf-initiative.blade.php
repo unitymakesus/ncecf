@@ -1,8 +1,4 @@
 <section class="container" role="region" aria-label="Introduction">
-  @if (!empty($logo = get_field('logo')))
-    <img class="initiative-logo" src="{{ $logo['sizes']['medium_large'] }}" alt="Logo for {{ the_title() }}" />
-  @endif
-
   <div class="row">
     <div class="col l7 m6 s12">
       {{ the_content() }}
@@ -14,12 +10,17 @@
   </div>
 </section>
 
-<section class="background-paper" role="region" aria-label="Main Points">
+<section class="background-paper main-points" role="region" aria-label="Main Points">
   <div class="container">
-    <div class="row">
+    <div class="row flex">
+      @if (!empty($logo = get_field('logo')))
+        <div class="col m3 s12">
+          <img class="initiative-logo" src="{{ $logo['sizes']['medium_large'] }}" alt="Logo for {{ the_title() }}" />
+        </div>
+      @endif
       @if (!empty($boxes = get_field('boxes')))
         @foreach ($boxes as $box)
-          <div class="col m4 s12">
+          <div class="col m3 s12">
             <h2>{{ $box['name'] }}</h2>
             {!! $box['text'] !!}
           </div>
@@ -27,7 +28,7 @@
       @endif
     </div>
     <div class="row">
-      <p class="center-align"><a class="btn" href="/contact-us/">Learn How To Join Us</a><p>
+      <p class="center-align"><a class="btn" href="/join-us/">Learn How To Join Us</a><p>
     </div>
   </div>
 </section>
@@ -79,8 +80,11 @@
         @php
           $term_list = wp_get_post_terms($resource->ID, 'resource-type', array('fields' => 'names'));
           $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
+          $numbers = range(1, 20);
+          shuffle($numbers);
+          $i = 1;
         @endphp
-        <div class="col l3 m6 s12 has-background-image wash" style="background-image: url('{!! get_the_post_thumbnail_url($resource->ID, 'medium_large') !!}')">
+        <div class="col l3 m6 s12 has-background-image wash" data-rand="{{ $numbers[$i] }}">
           <a href="{{ $link }}" target="_blank" rel="noopener" class="mega-link" aria-hidden="true"></a>
           <div class="flex">
             @if (!empty($term_list))
@@ -97,6 +101,7 @@
             </div>
           </div>
         </div>
+        @php ($i++)
       @endforeach
     </div>
     <div class="row">
