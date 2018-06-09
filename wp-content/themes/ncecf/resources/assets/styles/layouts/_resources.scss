@@ -203,10 +203,6 @@
       height: 100%;
     }
 
-    .types {
-      padding-bottom: 15vw;
-    }
-
     .chip {
       color: $color-white;
       text-transform: uppercase;
@@ -216,6 +212,8 @@
     .title-wrap {
       transform: translate3d(0, 45px, 0);
       transition: all 0.3s ease;
+      padding-top: 15vw;
+      margin-top: auto;
     }
 
     h3 {

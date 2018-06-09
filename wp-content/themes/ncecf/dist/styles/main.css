@@ -8460,14 +8460,6 @@ iframe {
   height: 100%;
 }
 
-.featured-resources .col .types,
-.featured-resources .sidebar-primary .wrap .main .types,
-.sidebar-primary .wrap .featured-resources .main .types,
-.featured-resources .sidebar-primary .wrap .sidebar .types,
-.sidebar-primary .wrap .featured-resources .sidebar .types {
-  padding-bottom: 15vw;
-}
-
 .featured-resources .col .chip,
 .featured-resources .sidebar-primary .wrap .main .chip,
 .sidebar-primary .wrap .featured-resources .main .chip,
@@ -8488,6 +8480,8 @@ iframe {
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  padding-top: 15vw;
+  margin-top: auto;
 }
 
 .featured-resources .col h3,
