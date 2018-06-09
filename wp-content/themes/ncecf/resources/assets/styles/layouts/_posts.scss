@@ -24,6 +24,10 @@
 }
 
 .single-post {
+  .content .container {
+    padding-top: 2em;
+  }
+
   .entry-title {
     @extend h2;
 

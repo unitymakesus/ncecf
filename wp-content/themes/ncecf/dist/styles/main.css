@@ -7170,6 +7170,7 @@ figure.stat .stat-fact .source {
   background-size: contain;
   background-position: center;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMyIgdmlld0JveD0iMCAwIDIyIDIzIj4KICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjEuNjY1NTA0NCwyMC45NDkzNTU4IEwxNi4yNDIxMjgxLDE1LjI1NjA4MjYgQzE3LjYzNjU3MzQsMTMuNTgyOTQ0MiAxOC40MDA1OTgzLDExLjQ3Nzc5MzggMTguNDAwNTk4Myw5LjI4NjI0MDkyIEMxOC40MDA1OTgzLDQuMTY1ODg4NDIgMTQuMjczMjY0MSwwIDkuMjAwMjk5MTMsMCBDNC4xMjczMzQxOSwwIDAsNC4xNjU4ODg0MiAwLDkuMjg2MjQwOTIgQzAsMTQuNDA2NTkzNCA0LjEyNzMzNDE5LDE4LjU3MjQ4MTggOS4yMDAyOTkxMywxOC41NzI0ODE4IEMxMS4xMDQ3NjExLDE4LjU3MjQ4MTggMTIuOTE5NjIwMSwxNy45OTI2OTc0IDE0LjQ3MTI3MDUsMTYuODkyMDc2IEwxOS45MzU4NDgyLDIyLjYyODU1MDQgQzIwLjE2NDI1NTYsMjIuODY3OTczOSAyMC40NzE0NjU2LDIzIDIwLjgwMDY3NjMsMjMgQzIxLjExMjI4NjQsMjMgMjEuNDA3ODk2LDIyLjg4MDA4NjQgMjEuNjMyMzAzMywyMi42NjIwNjE2IEMyMi4xMDkxMTg4LDIyLjE5ODk2MDggMjIuMTI0MzE5MywyMS40MzEwMjkgMjEuNjY1NTA0NCwyMC45NDkzNTU4IFogTTkuMjAwMjk5MTMsMi40MjI0OTc2MyBDMTIuOTUwMDIxLDIuNDIyNDk3NjMgMTYuMDAwNTIwMiw1LjUwMTQ5MjEyIDE2LjAwMDUyMDIsOS4yODYyNDA5MiBDMTYuMDAwNTIwMiwxMy4wNzA5ODk3IDEyLjk1MDAyMSwxNi4xNDk5ODQyIDkuMjAwMjk5MTMsMTYuMTQ5OTg0MiBDNS40NTA1NzcyMiwxNi4xNDk5ODQyIDIuNDAwMDc4MDMsMTMuMDcwOTg5NyAyLjQwMDA3ODAzLDkuMjg2MjQwOTIgQzIuNDAwMDc4MDMsNS41MDE0OTIxMiA1LjQ1MDU3NzIyLDIuNDIyNDk3NjMgOS4yMDAyOTkxMywyLjQyMjQ5NzYzIFoiLz4KPC9zdmc+Cg==);
+  pointer-events: none;
 }
 
 .search-form label {
@@ -7197,6 +7198,7 @@ figure.stat .stat-fact .source {
   overflow: hidden;
   border: none;
   background: #4D5C6B;
+  cursor: pointer;
 }
 
 fieldset {
@@ -8830,6 +8832,14 @@ iframe {
   font-size: 18px;
   margin: 0.5em 0;
   font-weight: bold;
+}
+
+.single-post .content .container,
+.single-post .content .sidebar-primary .content,
+.sidebar-primary .single-post .content .content,
+.single-post .content .archive #tribe-events-pg-template#tribe-events-pg-template #tribe-events-content,
+.archive #tribe-events-pg-template#tribe-events-pg-template .single-post .content #tribe-events-content {
+  padding-top: 2em;
 }
 
 .single-post .entry-title {

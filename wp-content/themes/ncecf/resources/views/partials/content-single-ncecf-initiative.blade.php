@@ -46,7 +46,7 @@
               @if (empty($work['date']))
                 <div class="col s12">
                   <div>
-                    {{ $work['summary'] }}
+                    {!! $work['summary'] !!}
                   </div>
                 </div>
               @else
@@ -58,7 +58,7 @@
                   </div>
                   <div class="col m9 s8 flex flex-center">
                     <div>
-                      {{ $work['summary'] }}
+                      {!! $work['summary'] !!}
                     </div>
                   </div>
               @endif

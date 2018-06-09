@@ -3,9 +3,11 @@
     $id = get_option('page_for_posts')
   @endphp
 @elseif (is_singular('ncecf-person'))
-  @php
-    $id = get_page_by_path('about/staff');
-  @endphp
+  @if (get_field('staff') == 1)
+    @php ($id = get_page_by_path('about/staff'))
+  @elseif (get_field('staff') == 0)
+    @php ($id = get_page_by_path('about/board'))
+  @endif
 @else
   @php ($id = get_the_id())
 @endif
