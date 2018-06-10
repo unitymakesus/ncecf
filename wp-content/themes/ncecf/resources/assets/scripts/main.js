@@ -36,3 +36,15 @@ const routes = new Router({
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
+
+
+// Footnotes toggle
+$('.footnotes .footnoteshow').click(function(){
+  let e = $(event.target);
+
+  e.text(function(i, v){
+    return v === 'Hide footnotes' ? 'Show footnotes' : 'Hide footnotes'
+  })
+
+  e.closest('.footnotes').find('ol').slideToggle();
+})
