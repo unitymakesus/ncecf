@@ -8421,6 +8421,7 @@ iframe {
   padding: 10px;
   background-size: cover;
   background-position: center top;
+  min-height: 550px;
 }
 
 .featured-resources .col > *,
@@ -8802,6 +8803,16 @@ iframe {
 .featured-resources .sidebar-primary .wrap [data-rand="20"].sidebar,
 .sidebar-primary .wrap .featured-resources [data-rand="20"].sidebar {
   background-image: url(/wp-content/themes/ncecf/dist/images/vertical/vertical-banners-20.jpg);
+}
+
+@media (max-width: 1000px) {
+  .featured-resources .col,
+  .featured-resources .sidebar-primary .wrap .main,
+  .sidebar-primary .wrap .featured-resources .main,
+  .featured-resources .sidebar-primary .wrap .sidebar,
+  .sidebar-primary .wrap .featured-resources .sidebar {
+    min-height: auto;
+  }
 }
 
 .hentry {

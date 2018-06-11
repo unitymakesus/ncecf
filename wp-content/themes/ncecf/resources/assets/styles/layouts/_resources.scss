@@ -183,6 +183,7 @@
     padding: 10px;
     background-size: cover;
     background-position: center top;
+    min-height: 550px;
 
     & > * {
       padding: 0;
@@ -278,6 +279,14 @@
       &[data-rand="#{$i}"] {
         background-image: url('../images/vertical/vertical-banners-#{$i}.jpg');
       }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .featured-resources {
+    .col {
+      min-height: auto;
     }
   }
 }
