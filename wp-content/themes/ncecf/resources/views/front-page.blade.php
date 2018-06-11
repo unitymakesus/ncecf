@@ -73,6 +73,7 @@
                 </article>
               @endwhile
             @php (wp_reset_postdata())
+            <a href="/news/" class="btn">More News</a>
           </div>
         @endif
 

@@ -6956,6 +6956,7 @@ figure.stat .stat-number {
   font-size: 40px;
   font-weight: 900;
   color: #81BC41;
+  text-align: center;
 }
 
 figure.stat svg {
@@ -8966,6 +8967,10 @@ body#tinymce {
 .archive #tribe-events-pg-template#tribe-events-pg-template #tribe_events_filter_control {
   clear: both;
   text-align: center;
+}
+
+.archive #tribe-events-pg-template#tribe-events-pg-template .tribe-events-filter-group {
+  padding-right: 20px;
 }
 
 .archive #tribe-events-pg-template#tribe-events-pg-template #tribe_events_filters_reset {
