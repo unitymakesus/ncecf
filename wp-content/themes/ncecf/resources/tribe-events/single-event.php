@@ -72,9 +72,10 @@ $event_id = get_the_ID();
 						<ul>
 	          <?php
 	          foreach ($resources as $resource) {
-	            $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
+	            // $link = (get_field('uploaded_file', $resource->ID) == 1) ? wp_get_attachment_url(get_field('file', $resource->ID)) : get_field('link', $resource->ID);
+							$link = get_permalink($resource->ID);
 	            ?>
-	              <li><a href="<?php echo $link; ?>"><span><?php echo get_the_title($resource->ID); ?></span></a></li>
+	              <li><a href="<?php echo $link; ?>" target="_blank" rel="noopener"><span><?php echo get_the_title($resource->ID); ?></span></a></li>
 	          	<?php
 						}
 						?>

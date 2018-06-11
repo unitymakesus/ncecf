@@ -70,7 +70,8 @@
       <div class="resources-list">
         @php
           the_post();
-          $link = (get_field('uploaded_file') == 1) ? wp_get_attachment_url(get_field('file')) : get_field('link');
+          // $link = (get_field('uploaded_file') == 1) ? wp_get_attachment_url(get_field('file')) : get_field('link');
+          $link = get_permalink();
           $term_list = wp_get_post_terms(get_the_id(), 'resource-type', array('fields' => 'names'));
           $issue_list = get_field('issues_resources');
           $initiative_list = get_field('initiatives_resources');
