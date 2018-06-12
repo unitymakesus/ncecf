@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col l7 m6 s12">
       {{ the_content() }}
-      <p><a class="btn" href="#more">Read More About This Issue</a><p>
+      @if (!empty(get_field('more_about_issue')))
+        <p><a class="btn" href="#more">Read More About This Issue</a><p>
+      @endif
     </div>
     <div class="col l5 m6 s12">
       @php ($visual = get_field('visual'))
