@@ -55,3 +55,21 @@
     margin-bottom: 3em;
   }
 }
+
+@media (max-width: 767px) {
+  .news-list {
+    margin-bottom: 30px;
+  }
+
+  .main-points .flex {
+    display: block;
+  }
+
+  .s12 {
+    padding-bottom: 20px;
+  }
+
+  .archive #tribe-events-pg-template#tribe-events-pg-template #tribe_events_filters_form {
+    display: block !important;
+  }
+}

@@ -41,7 +41,7 @@
         }
       @endphp
       @foreach ($numbers as $n)
-        <div class="col {{ $mcol }} s6">
+        <div class="col {{ $mcol }} s12">
           <figure class="stat">
             <div class="stat-circle">
               <svg viewbox="0 0 36 36">
