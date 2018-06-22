@@ -77,3 +77,15 @@
     }
   }
 }
+
+@media (max-width: 1160px) {
+  .page-footer {
+    .container {
+      width: 100%;
+    }
+
+    .menu li a {
+      font-size: 14px;
+    }
+  }
+}
