@@ -99,3 +99,14 @@ if (class_exists('Tribe__Events__Filterbar__Filter')) {
 
   new Tribe__Events__Filterbar__Filters__Date_Custom( __( 'Event Date', 'tribe-events-filter-view' ), 'event_display' );
 }
+
+
+// Edit Tribe Events Search
+function remove_dates_from_bar( $filters ) {
+  if ( isset( $filters['tribe-bar-date'] ) ) {
+        unset( $filters['tribe-bar-date'] );
+    }
+
+    return $filters;
+}
+add_filter( 'tribe-events-bar-filters',  'remove_dates_from_bar', 1000, 1 );
