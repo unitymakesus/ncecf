@@ -68,10 +68,8 @@ export default {
     // Toggle mobile nav
     $('#menu-trigger').on('change focusout', function() {
       if ($(this).prop('checked')) {
-        console.log('show1');
         showMobileNav();
       } else {
-        console.log('hide1');
         hideMobileNav();
       }
     });
@@ -89,7 +87,6 @@ export default {
           setTimeout(function () {
             if ($(':focus').closest('#menu-main-menu').length == 0) {
               $('#menu-trigger').prop('checked', false);
-              console.log('hide2');
               hideMobileNav();
             }
           }, 200);
