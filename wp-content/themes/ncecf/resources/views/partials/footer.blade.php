@@ -1,13 +1,13 @@
 <footer class="content-info page-footer" role="contentinfo">
   <div class="container">
     <div class="row">
-      <div class="col l3 m4 s12">
+      <div class="col l3 m6 s12">
         @php(dynamic_sidebar('sidebar-footer-1'))
       </div>
-      <div class="col l6 m4 s12 center-align">
+      <div class="col l6 m6 s12 center-align">
         @php(dynamic_sidebar('sidebar-footer-2'))
       </div>
-      <div class="col l3 m4 s12">
+      <div class="col l3 m6 s12">
         @php(dynamic_sidebar('sidebar-footer-3'))
       </div>
     </div>

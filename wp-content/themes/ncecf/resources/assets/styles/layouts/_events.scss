@@ -141,30 +141,41 @@ nav {
 }
 
 .tribe-bar-filters {
-  background: #E5E6E6;
+  width: 90% !important;
+  margin: 0 auto !important;
+  float: none !important;
 
   .tribe-bar-filters-inner {
-    width: 90%;
-    margin: 0 auto !important;
+    padding: 0 15px 20px;
     position: relative;
+    width: 300px;
+  }
+
+  .tribe-bar-search-filter {
+    width: 100%;
+    padding: 0;
   }
 }
 
-#tribe-bar-form label {
-  text-transform: capitalize;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  font-size: 18px !important;
-  color: #4D5C6B;
-  padding-bottom: 10px;
+#tribe-bar-form {
+  background: #E4E5E5;
+
+  label {
+    text-transform: capitalize;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px !important;
+    color: #4D5C6B;
+    padding-bottom: 10px;
+  }
 }
 
 #tribe-bar-form .tribe-bar-submit {
   margin-left: 0;
   padding: 0;
   position: absolute;
-  top: 48%;
-  left: 15.5%;
+  top: 31px;
+  right: 20px;
   z-index: 40;
   width: 25px;
   height: 2.2rem;
@@ -196,7 +207,7 @@ nav {
   line-height: 1.15;
   height: 2.2rem;
   box-sizing: none;
-  width: 211px !important;
+  width: 100%;
 }
 
 #tribe-bar-form input[type=text]::placeholder {
@@ -209,4 +220,10 @@ nav {
   border: 2px solid #4D5C6B;
   color: #7C7575;
   outline: -webkit-focus-ring-color auto 5px;
+}
+
+@media (max-width: 767px) {
+  #tribe-events-bar, .tribe-events-before-html {
+    display: none;
+  }
 }
