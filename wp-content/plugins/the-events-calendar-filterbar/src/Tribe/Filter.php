@@ -70,6 +70,9 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 
 			$this->setup_query_filters();
 			$this->addHooks();
+
+			tribe_singleton( 'filterbar.integrations', 'Tribe__Events__Filterbar__Integrations__Manager', array( 'hook' ) );
+			tribe( 'filterbar.integrations' );
 		}
 
 		protected function get_submitted_value() {
@@ -528,7 +531,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 		/**
 		 * Convert a string to an Integer rounding the value based on the direction param Up or Down.
 		 *
-		 * @since TBD
+		 * @since 4.5.7
 		 *
 		 * @param string $value
 		 * @param string $direction

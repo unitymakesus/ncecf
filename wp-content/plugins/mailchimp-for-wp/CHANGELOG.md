@@ -1,6 +1,29 @@
 Changelog
 =========
 
+#### 4.2.5 - Sep 11, 2018
+
+**Improvements**
+
+- Only re-add subscriber to list if we want to re-trigger a double opt-in confirmation email.
+- Change Gravity Forms field name to "MailChimp for WordPress"
+- Get rid of cached result of MailChimp API connection.
+
+
+#### 4.2.4 - July 9, 2018
+
+**Improvements**
+
+- Ensure type-safety on some global variables.
+- Stop showing trashed forms immediately.
+- Pre-check MailChimp list when creating a new form if there is only 1 list.
+- Send `null` for unknown values in usage tracking data (only when opted-in).
+
+**Additions**
+
+- Add methods for accessing MailChimp's e-commerce promo code endpoints to API class.
+
+
 #### 4.2.3 - June 11, 2018
 
 **Fixes**
