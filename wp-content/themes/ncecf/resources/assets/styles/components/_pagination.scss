@@ -4,7 +4,7 @@ nav.pagination.pagination {
   background: none;
   color: $color-black;
 
-  .page-numbers {
+  .page-numbers, a {
     display: inline-block;
     min-width: 40px;
     padding: 0 15px;
@@ -12,21 +12,108 @@ nav.pagination.pagination {
     line-height: 40px;
     font-size: 1.2em;
     background: $color-orange;
-    color: $color-white;
-    text-decoration: none;
+    color: $color-white !important;
+    text-decoration: none !important;
 
     &.current {
       background: $color-slate-dark;
       font-weight: bold;
     }
-  }
 
-  a {
     &:hover, &:focus {
-      @extend .z-depth-1;
-
       background: darken($color-orange, 10%);
       color: $color-white !important;
+
+      @extend .z-depth-2;
+    }
+
+    &.active, &.current {
+      background: darken($color-orange, 15%);
+
+      @extend .z-depth-0;
     }
   }
 }
+
+// .pagination {
+//   background: none;
+//
+//   @extend .z-depth-0;
+//
+//   label {
+//     margin: 0;
+//     display: block;
+//     line-height: 1;
+//   }
+//
+//   ul li {
+//     padding: 0;
+//     height: auto;
+//
+//     &::before {
+//       display: none;
+//     }
+//
+//     &.gap {
+//       &.before::before {
+//         display: inline-block;
+//         position: relative;
+//         content: '\2026';
+//         color: $color-black;
+//         margin-right: 20px;
+//         left: 0;
+//       }
+//
+//       &.after::after {
+//         display: inline-block;
+//         position: relative;
+//         content: '\2026';
+//         color: $color-black;
+//         margin-right: 6px;
+//         left: 0;
+//       }
+//     }
+//   }
+//
+//   a, span {
+//     background: $color-green;
+//     border: 2px solid $color-green;
+//     color: $color-white !important;
+//     display: inline-block;
+//     min-width: 40px;
+//     padding: 0 15px !important;
+//     height: 40px;
+//     line-height: 1.7em !important;
+//     font-size: 1.2em;
+//     text-decoration: none;
+//
+//     &:hover, &:focus {
+//       background: lighten($color-green, 10%);
+//       color: $color-white;
+//
+//       @extend .z-depth-2;
+//     }
+//
+//     &.active, &.current {
+//       background: $color-green-dark;
+//       color: $color-white;
+//
+//       @extend .z-depth-0;
+//     }
+//
+//     html[data-contrast="true"] & {
+//       background: $color-black;
+//       border-color: $color-white;
+//
+//       &:hover, &:focus {
+//         background: $color-white;
+//         color: $color-black !important;
+//       }
+//
+//       &.active, &.current {
+//         background: $color-gray-dark;
+//         color: $color-white !important;
+//       }
+//     }
+//   }
+// }

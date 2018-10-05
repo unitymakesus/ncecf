@@ -29,6 +29,16 @@ export default {
         $(this).children('a').attr('aria-current', 'page');
       }
     });
+
+    $(document).on('facetwp-loaded', function() {
+      // eslint-disable-next-line no-undef
+      if (FWP.loaded) {
+        $('html, body').animate({
+          scrollTop: $('.facetwp-template').offset().top,
+        }, 500);
+      }
+    });
+
   },
   finalize() {
     // Copy links to clipboard
