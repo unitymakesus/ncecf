@@ -110,9 +110,10 @@
           <div class="description">{!! get_field('description') !!}</div>
         </div>
         @endwhile
-        <div class="center-align">
+        <nav class="navigation pagination center-align" role="navigation">
+      		<h2 class="screen-reader-text">Posts navigation</h2>
           {!! do_shortcode('[facetwp pager="true"]') !!}
-        </div>
+        </nav>
 
     @else
       <p><?php _e( 'Sorry, no resources matched your criteria.' ); ?></p>

@@ -92,3 +92,17 @@ add_filter('sage/display_sidebar', function ($display) {
 add_filter( 'tribe_organizer_label_singular', function($label) {
   return 'Focus';
 });
+
+/**
+ * Change the number of posts that display on the blog
+ */
+add_action( 'pre_get_posts', function( $query ) {
+  if ( is_admin() || ! $query->is_main_query() )
+    return;
+
+  if ( is_home() ) {
+    // Display only 1 post for the original blog archive
+    // $query->set( 'posts_per_page', -1 );
+    return;
+  }
+}, 1);

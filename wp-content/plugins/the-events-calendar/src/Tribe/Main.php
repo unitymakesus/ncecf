@@ -32,7 +32,11 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 		const VENUE_POST_TYPE     = 'tribe_venue';
 		const ORGANIZER_POST_TYPE = 'tribe_organizer';
 
+<<<<<<< HEAD
 		const VERSION             = '4.6.25';
+=======
+		const VERSION             = '4.6.24';
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 		const MIN_ADDON_VERSION   = '4.4';
 		const MIN_COMMON_VERSION  = '4.7.20';
 
@@ -3187,7 +3191,11 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 			global $post;
 			$options = '';
 			$style   = '';
+<<<<<<< HEAD
 			$event   = $post;
+=======
+			$event    = $post;
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 			if ( $post->post_type == Tribe__Events__Venue::POSTTYPE ) {
 

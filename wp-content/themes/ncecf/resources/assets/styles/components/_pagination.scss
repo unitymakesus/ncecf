@@ -4,7 +4,7 @@ nav.pagination.pagination {
   background: none;
   color: $color-black;
 
-  .page-numbers {
+  .page-numbers, a {
     display: inline-block;
     min-width: 40px;
     padding: 0 15px;
@@ -12,21 +12,25 @@ nav.pagination.pagination {
     line-height: 40px;
     font-size: 1.2em;
     background: $color-orange;
-    color: $color-white;
-    text-decoration: none;
+    color: $color-white !important;
+    text-decoration: none !important;
 
     &.current {
       background: $color-slate-dark;
       font-weight: bold;
     }
-  }
 
-  a {
     &:hover, &:focus {
-      @extend .z-depth-1;
-
       background: darken($color-orange, 10%);
       color: $color-white !important;
+
+      @extend .z-depth-2;
+    }
+
+    &.active, &.current {
+      background: darken($color-orange, 15%);
+
+      @extend .z-depth-0;
     }
   }
 }

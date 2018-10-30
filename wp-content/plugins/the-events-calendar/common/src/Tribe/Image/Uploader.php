@@ -66,12 +66,15 @@ class Tribe__Image__Uploader {
 		}
 
 		/*
+<<<<<<< HEAD
 		 * Since `file_get_contents` would fail silently we set an explicit
 		 * error handler to catch the content of error.s.
 		 */
 		set_error_handler( array( $this, 'handle_error' ) );
 
 		/*
+=======
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 		 * Some CDN services will append query arguments to the image URL; removing
 		 * them now has the potential of blocking the image fetching completely so we
 		 * let them be here.
@@ -82,8 +85,11 @@ class Tribe__Image__Uploader {
 			$message = sprintf( 'Could not upload image file "%s": with message "%s"', $file_url, $e->getMessage() );
 			tribe( 'logger' )->log_error( $message, 'Image Uploader' );
 
+<<<<<<< HEAD
 			restore_error_handler();
 
+=======
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 			return false;
 		}
 
@@ -196,6 +202,7 @@ class Tribe__Image__Uploader {
 			}
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Handles errors generated during the use of `file_get_contents` to
@@ -212,4 +219,6 @@ class Tribe__Image__Uploader {
 	public function handle_error( $unused_error_code, $message ) {
 		throw new RuntimeException( $message );
 	}
+=======
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 }

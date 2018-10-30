@@ -32,8 +32,13 @@ msgid "Search our support help desk"
 msgstr "Cerca il nostro help desk del supporto"
 
 #: src/Tribe/Plugins_API.php:71
+<<<<<<< HEAD
 msgid "Event Tickets Plus allows you to sell tickets to your events using WooCommerce, Easy Digital Downloads, or our built in Tribe Commerce tool. Add tickets to your posts and pages, or add %1$sThe Events Calendar%2$s and sell tickets from your event listings. Create custom registration forms, manage attendees, use custom capacity options, and more. Guest check in is easy with QR codes and our custom scanning app."
 msgstr ""
+=======
+msgid "Event Tickets Plus allows you to sell tickets to your events using WooCommerce, Easy Digital Downloads, or our built in Tribe Commerce tool. Add tickets to your posts and pages, or add %1$sThe Events Calendar%2$s and sell tickets from your event listings. Create custom registration forms, manage attendees, use custom capacity options, and more. Tickets have QR codes for easy check in at the door."
+msgstr "Event Tickets Plus ti consente di vendere i biglietti dei tuoi eventi utilizzando WooCommerce, Easy Digital Downloads o il nostro strumento Tribe Commerce integrato. Aggiungi i biglietti ai tuoi post e pagine o aggiungi %1$sThe Events Calendar%2$s e vendi biglietti dai tuoi elenchi di eventi. Crea moduli di registrazione personalizzati, gestisci i partecipanti, utilizza le opzioni di capacità personalizzate e altro ancora. I biglietti dispongono di codici QR per un facile check-in all'ingresso."
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 #: src/Tribe/Validate.php:184
 msgid "%s must not be empty"
@@ -102,6 +107,13 @@ msgstr "Tutti gli elementi di questa pagina sono stati selezionati. "
 #: src/Tribe/Plugins_API.php:94
 msgid "Accept user-submitted events on your site! With Community Events, you can accept public submissions or require account sign-on. Settings give you the options to save as a draft or publish automatically, enable categories and tags, and choose whether users can edit/manage their own events or simply submit. Best of all - setup is easy! Just activate, configure the options, and off you go."
 msgstr "Accetta gli eventi inviati dagli utenti sul tuo sito! Con Community Events puoi accettare invii pubblici o richiedere la registrazione dell'account. Le impostazioni ti offrono la possibilità di salvare come bozza o pubblicare automaticamente, attivare categorie e tag e scegliere se gli utenti possono modificare/gestire i loro eventi o semplicemente inviarli. L'aspetto migliore di tutti è la facilità di configurazione! Basta attivare e configurare le opzioni e sei libero di andare."
+<<<<<<< HEAD
+=======
+
+#: src/Tribe/Plugins_API.php:37
+msgid "Import events from across the web! Event Aggregator makes it easy to run scheduled or manual imports from Facebook, Meetup, Google Calendar, and iCalendar, along with uploads from CSV and ICS files. You can also import directly from other sites running The Events Calendar thanks to our built-in REST API support."
+msgstr "Importa gli eventi dal web! Event Aggregator rende semplice l'importazione manuale o programmata da Facebook, Meetup, Google Calendar e iCalendar, assieme a caricamenti di file CSV e ICS. Puoi anche importare direttamente da altri siti eseguendo The Events Calendar grazie al nostro supporto REST API integrato."
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 #: src/Tribe/Ajax/Dropdown.php:243
 msgid "The \"%s\" source is invalid and cannot be reached on \"%s\" instance."
@@ -652,7 +664,7 @@ msgstr "Leggi di più sulla nostra politica di assistenza"
 
 #: src/admin-views/tribe-options-help.php:30
 msgid "Please note that all hands-on support is provided via the forums. You can email or tweet at us… ​but we will probably point you back to the forums "
-msgstr ""
+msgstr "Nota: l'intera assistenza pratica viene fornita attraverso i forum. Puoi inviare un'e-mail o twittarci, ma probabilmente ti rimanderemo ai forum "
 
 #: src/admin-views/tribe-options-help.php:33
 msgid "%s. There are very few issues we haven’t seen and it’s likely another user has already asked your question and gotten an answer from our support staff. While posting to the help desk is open only to paid customers, they are open for anyone to search and review."
@@ -1976,8 +1988,13 @@ msgid "Botswana"
 msgstr "Botswana"
 
 #: src/Tribe/Languages/Locations.php:83
+<<<<<<< HEAD
 msgid "Bosnia and Herzegovina"
 msgstr ""
+=======
+msgid "Bosnia and Herzegowina"
+msgstr "Bosnia ed Erzegovina"
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 #: src/Tribe/Languages/Locations.php:82
 msgid "Bolivia"

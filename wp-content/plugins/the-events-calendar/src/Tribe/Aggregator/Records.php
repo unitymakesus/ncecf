@@ -722,6 +722,7 @@ class Tribe__Events__Aggregator__Records {
 
 		// Filter eventbrite events to preserve some fields that aren't supported by Eventbrite
 		add_filter( 'tribe_aggregator_before_update_event', array( 'Tribe__Events__Aggregator__Record__Eventbrite', 'filter_event_to_preserve_fields' ), 10, 2 );
+<<<<<<< HEAD
 	}
 
 	/**
@@ -764,5 +765,7 @@ class Tribe__Events__Aggregator__Records {
 		}
 
 		return false;
+=======
+>>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 	}
 }
