@@ -29,14 +29,11 @@
 			return;
 		}
 
-<<<<<<< HEAD
 		// Bail if we're on single event page
 		if ( $body.hasClass( 'single-tribe_events' ) ) {
 			return;
 		}
 
-=======
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 		var baseUrl = '/';
 
 		if ( 'undefined' !== typeof config.events_base ) {

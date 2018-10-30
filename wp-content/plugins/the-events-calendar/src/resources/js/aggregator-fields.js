@@ -184,7 +184,6 @@ tribe_aggregator.fields = {
 				}
 
 				obj.maybeLimitUrlStartDate()
-<<<<<<< HEAD
 			} )
 			.on( 'change', obj.selector.eventbrite_url_source, function ( e ) {
 				// Show all UI controls at first, even if we bail the user will have a full UI.
@@ -201,8 +200,6 @@ tribe_aggregator.fields = {
 				if ( controlsToHide ) {
 					$( controlsToHide ).hide();
 				}
-=======
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 			} )
 			.on( 'change', obj.selector.field_url_source, function( e ) {
 				var $field = $( this );

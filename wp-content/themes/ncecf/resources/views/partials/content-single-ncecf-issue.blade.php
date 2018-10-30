@@ -124,7 +124,6 @@
           </div>
           @php ($i++)
         @endforeach
-        @php (wp_reset_postdata())
       </div>
       <div class="row">
         <p class="center-align"><a href="/resources/?_resource_issue={{ get_the_id() }}" class="btn btn-green">See All Related Resources</a></p>
@@ -151,8 +150,8 @@
               </header>
             </article>
           @endwhile
-          @php (wp_reset_postdata())
           <p><a href="/news/?_related_issues={{ get_the_id() }}" class="btn btn-slate">All Related Posts</a></p>
+          @php (wp_reset_postdata())
         </div>
       @endif
 

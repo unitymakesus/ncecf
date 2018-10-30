@@ -4,11 +4,7 @@ Contributors: ModernTribe, borkweb, barry.hughes, bordoni, brianjessee, aguseo, 
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget
 Donate link: http://m.tri.be/29
 Requires at least: 4.5
-<<<<<<< HEAD
 Stable tag: 4.6.25
-=======
-Stable tag: 4.6.24
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 Tested up to: 4.9.8
 Requires PHP: 5.2.4
 License: GPLv2 or later
@@ -219,7 +215,6 @@ Still not happy? Shoot us an email to support@theeventscalendar.com or tweet to 
 
 == Changelog ==
 
-<<<<<<< HEAD
 = [4.6.25] 2018-10-22 =
 
 * Fix - List only enabled views on the "Default View" option. Thanks to wescole, John Meuse and others for reporting! [114807]
@@ -238,8 +233,6 @@ Still not happy? Shoot us an email to support@theeventscalendar.com or tweet to 
 * Fix - Handle left-over Facebook scheduled imports and notices [114831]
 * Tweak - Added the `tribe_aggregator_import_setting_origins` filter to the origins available for default import settings [115704]
 
-=======
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 = [4.6.24] 2018-10-03 =
 
 * Fix - Prevent broken and low-resolution Google Maps if user has not provided a Google Maps API key of their own by providing our own fallback API key [114442]
@@ -252,13 +245,10 @@ Still not happy? Shoot us an email to support@theeventscalendar.com or tweet to 
 * Fix - Fixed a bug where it was often not possible to un-check the "Enable JSON-LD" option in the Events List Widget (thanks to @myrunningresource and @craigwilcox for reporting this!) [113541]
 * Fix - Ensure that the `tribe-events-bar-should-show` filter functions as aspected; if `__return_false` is passed, the Tribe Bar will be totally hidden (thanks @debranettles for reporting this!) [112260]
 * Fix - Added checks to prevent JS Type Error in mobile view. Thanks szenenight, agrilife and others for flagging this! [113524]
-<<<<<<< HEAD
 * Tweak - Added the `tribe_events_month_daily_events` filter to the Month view [114041]
 * Tweak - Move Google Maps API loading to tribe_assets and only load once on single views when PRO is active, thanks to info2grow first reporting [112221]
 * Tweak - Accept 0 as an argument in tribe_get_events() so that `'post_parent' => 0` works, thanks Cy for the detailed report [111518]
 * Fix - handle left-over Facebook scheduled imports and notices [114831]
-=======
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 * Tweak - Added new filters for customizing the fallback Google Maps embeds: `tribe_is_using_basic_gmaps_api`, `tribe_get_basic_gmap_embed_url`, and `tribe_get_basic_gmap_embed_url_args` [114442]
 * Tweak - Fixed the handling of the global $post variable in some Month View templates to make it easier for themers to customize those templates [113283]
 * Tweak - Ensure linked posts are listed alphabetically in metabox dropdowns, as they are in all other admin locations [108120]
@@ -276,10 +266,7 @@ Still not happy? Shoot us an email to support@theeventscalendar.com or tweet to 
 * Tweak - Added the `tribe_events_status_third_party` action to allow new EA origins [114652]
 * Tweak - Added the `tribe_events_aggregator_import_form` action to allow new EA origins [114652]
 * Tweak - Added `$origin_show_map_options` parameter to the `tribe_aggregator_fields` filter to allow new EA origins to make use of them [114652]
-<<<<<<< HEAD
 * Fix - Fixed an issue where a fatal error could be generated when trying to save a new Event Aggregator scheduled import [115339]
-=======
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 = [4.6.23] 2018-09-12 =
 

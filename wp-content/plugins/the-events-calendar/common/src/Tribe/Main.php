@@ -17,11 +17,7 @@ class Tribe__Main {
 	const OPTIONNAME          = 'tribe_events_calendar_options';
 	const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
 
-<<<<<<< HEAD
 	const VERSION             = '4.7.22';
-=======
-	const VERSION             = '4.7.21';
->>>>>>> 4a8b973f0ef5352cf2412e02fa87b4a6fecb9219
 
 	const FEED_URL            = 'https://theeventscalendar.com/feed/';
 
