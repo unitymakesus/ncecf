@@ -66,6 +66,15 @@ class Tribe__Events__Filterbar__Additional_Fields__Values {
 			           $and_post_status_set
 		";
 
+		/**
+		 * Allows filtering the additional fields query
+		 *
+		 * @param string The SQL query
+		 * @since 4.5.8
+		 *
+		 */
+		$query = apply_filters( 'tribe_events_filter_additional_fields_query', $query );
+
 		$values = (array) $wpdb->get_col( $wpdb->prepare(
 			$query, $meta_key, Tribe__Events__Main::POSTTYPE
 		) );

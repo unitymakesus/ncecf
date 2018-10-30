@@ -4,8 +4,9 @@ Contributors: ModernTribe, barry.hughes, bordoni, borkweb, brianjessee, brook-tr
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget, pro, filters, categories, sort, tags, taxonomy, find, search
 Donate link: http://m.tri.be/29
 Requires at least: 4.5
-Tested up to: 4.9.6
-Stable tag: 4.5.6
+Tested up to: 4.9.8
+Stable tag: 4.5.8
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -193,6 +194,15 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18h9" target="_blank">The Events Calendar: iCal Importer</a>
 
 == Changelog ==
+
+= [4.5.8] 2018-09-12 =
+
+* Fix - Improved WPML compatibility to avoid mixed languages in the additional fields dropdown. Thanks to the WPML team! [111986]
+* Tweak - Add `tribe_events_filter_additional_fields_query` to make the additional field values query filterable. Thanks to David and the WPML team! [111984]
+
+= [4.5.7] 2018-08-01 =
+
+* Tweak - Manage plugin assets via `tribe_assets()` [40267]
 
 = [4.5.6] 2018-05-29 =
 

@@ -40,9 +40,9 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 */
 		protected static $defaultMuFilters;
 
-		const REQUIRED_TEC_VERSION = '4.5';
+		const REQUIRED_TEC_VERSION = '4.6.21';
 
-		const VERSION = '4.5.6';
+		const VERSION = '4.5.8';
 
 		/**
 		 * Initialize the addon to make sure the versions line up.
@@ -54,10 +54,10 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 */
 		public static function initAddon( $plugins ) {
 			$plugins['TribeFilterView'] = array(
-				'plugin_name' => 'The Events Calendar: Filter Bar',
+				'plugin_name'      => 'The Events Calendar: Filter Bar',
 				'required_version' => self::REQUIRED_TEC_VERSION,
-				'current_version' => self::VERSION,
-				'plugin_dir_file' => basename( dirname( dirname( __FILE__ ) ) ) . '/the-events-calendar-filter-view.php',
+				'current_version'  => self::VERSION,
+				'plugin_dir_file'  => basename( dirname( dirname( __FILE__ ) ) ) . '/the-events-calendar-filter-view.php',
 			);
 			return $plugins;
 		}
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 				}
 			}
 
-			Tribe__Events__Template_Factory::asset_package( 'calendar-script', array( 'jquery-ui-slider' ) );
+			tribe_asset_enqueue( 'tribe-events-calendar-script' );
 
 			wp_enqueue_style( 'custom-jquery-styles' );
 
