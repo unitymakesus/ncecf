@@ -172,7 +172,7 @@
 
   @for $i from 1 through 48 {
     &[data-rand="#{$i}"] {
-      background-image: url('../../images/horizontal/ncecf-banner-#{$i}-min.jpg');
+      background-image: url('../images/horizontal/ncecf-banner-#{$i}-min.jpg');
     }
   }
 }
