@@ -88,6 +88,21 @@
   </section>
 @endif
 
+@if (!empty($howengaged = get_field('how_is_ncecf_engaged')))
+  <section role="region" aria-labelled-by="action-label">
+    <div class="container">
+      <div class="row">
+        <div class="col l8 m10 s12 push-l2 push-m1">
+          <br><br>
+          <h2 id="action-label" class="center-align">How is NCECF Engaged?</h2>
+          {!! apply_filters('the_content', $howengaged) !!}
+        </div>
+      </div>
+    </div>
+  </section>
+@endif
+
+
 <section role="region" aria-label="Related Content">
   @if (!empty($resources = get_field('issues_resources')))
     <div class="section padding">
