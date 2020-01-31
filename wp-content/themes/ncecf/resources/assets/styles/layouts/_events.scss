@@ -38,18 +38,29 @@
   }
 
   li {
+    display: flex;
+    justify-content: flex-start;
     padding-left: 0;
   }
 
-  label {
-    display: flex;
-    align-items: center;
-    margin-left: 0;
-    font-size: 16px;
+  input[type="checkbox"],
+  input[type="radio"] {
+    height: 1.5rem;
+  }
 
-    span {
-      padding-left: 10px;
-    }
+  label {
+    margin-left: 16px;
+    font-size: 16px;
+  }
+
+  .tribe-events-filters-group-heading {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #81BC41;
   }
 
   #tribe_events_filter_control {
@@ -185,6 +196,7 @@ nav {
     background: url(../images/icon-search-grey.svg) no-repeat;
     position: absolute;
     top: 7px;
+    right: 0;
     width: inherit;
     height: inherit;
     z-index: -10;
@@ -226,4 +238,9 @@ nav {
   #tribe-events-bar, .tribe-events-before-html {
     display: none;
   }
+}
+
+#tribe_events_filters_wrapper input[type=submit] {
+  @extend .btn;
+  @extend .btn-slate;
 }
