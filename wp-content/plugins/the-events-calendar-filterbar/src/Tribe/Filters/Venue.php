@@ -3,7 +3,11 @@
 /**
  * Class Tribe__Events__Filterbar__Filters__Venue
  */
+
+use Tribe__Cache_Listener as Cache_Listener;
+
 class Tribe__Events__Filterbar__Filters__Venue extends Tribe__Events__Filterbar__Filter {
+	public static $cache_key_venue_ids = 'tribe_filterbar_venue_ids';
 	public $type = 'select';
 
 	public function get_admin_form() {
@@ -16,25 +20,33 @@ class Tribe__Events__Filterbar__Filters__Venue extends Tribe__Events__Filterbar_
 		/** @var wpdb $wpdb */
 		global $wpdb;
 
-		// get venue IDs associated with published posts
-		$venue_ids =
-			$wpdb->get_col(
-				$wpdb->prepare(
-					"SELECT DISTINCT m.meta_value 
-					FROM {$wpdb->postmeta} m 
-					INNER JOIN {$wpdb->posts} p 
-					ON p.ID=m.post_id 
-					WHERE p.post_type=%s 
-					AND p.post_status='publish' 
-					AND m.meta_key='_EventVenueID' 
+		$venue_ids = tribe( 'cache' )->get_transient( self::$cache_key_venue_ids, Cache_Listener::TRIGGER_SAVE_POST );
+
+		if ( empty( $venue_ids ) ) {
+			// get venue IDs associated with published posts
+			$venue_ids =
+				$wpdb->get_col(
+					$wpdb->prepare(
+						"SELECT m.meta_value
+					FROM {$wpdb->postmeta} m
+					INNER JOIN {$wpdb->posts} p
+					ON p.ID=m.post_id
+					WHERE p.post_type=%s
+					AND p.post_status='publish'
+					AND m.meta_key='_EventVenueID'
 					AND m.meta_value > 0
 					",
-					Tribe__Events__Main::POSTTYPE
-			)
-		);
-		$venue_ids = array_filter( $venue_ids );
-		if ( empty( $venue_ids ) ) {
-			return array();
+						Tribe__Events__Main::POSTTYPE
+					)
+				);
+			$venue_ids = array_filter( $venue_ids );
+			if ( empty( $venue_ids ) ) {
+				return [];
+			}
+
+			$venue_ids = array_unique( $venue_ids );
+
+			tribe( 'cache' )->set_transient( self::$cache_key_venue_ids, $venue_ids, DAY_IN_SECONDS, Cache_Listener::TRIGGER_SAVE_POST );
 		}
 
 		/**
@@ -72,9 +84,9 @@ class Tribe__Events__Filterbar__Filters__Venue extends Tribe__Events__Filterbar_
 	protected function setup_join_clause() {
 		global $wpdb;
 		$this->joinClause =
-			"INNER JOIN {$wpdb->postmeta} 
-			AS venue_filter 
-			ON ({$wpdb->posts}.ID = venue_filter.post_id 
+			"INNER JOIN {$wpdb->postmeta}
+			AS venue_filter
+			ON ({$wpdb->posts}.ID = venue_filter.post_id
 			AND venue_filter.meta_key = '_EventVenueID')
 			";
 	}
@@ -83,7 +95,7 @@ class Tribe__Events__Filterbar__Filters__Venue extends Tribe__Events__Filterbar_
 		if ( is_array( $this->currentValue ) ) {
 			$venue_ids = implode( ',', array_map( 'intval', $this->currentValue ) );
 		} else {
-			$venue_ids = esc_attr( $this->currentValue );
+			$venue_ids = '"' . esc_sql( (string) $this->currentValue ) . '"';
 		}
 
 		$this->whereClause = " AND venue_filter.meta_value IN ($venue_ids) ";

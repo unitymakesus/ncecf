@@ -18,11 +18,11 @@ function _mc4wp_usage_tracking_setting( $opts ) {
 				<td>
 					<label>
 						<input type="radio" name="mc4wp[allow_usage_tracking]" value="1" <?php checked( $opts['allow_usage_tracking'], 1 ); ?> />
-						<?php _e( 'Yes' ); ?>
+						<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>
 					</label> &nbsp;
 					<label>
 						<input type="radio" name="mc4wp[allow_usage_tracking]" value="0" <?php checked( $opts['allow_usage_tracking'], 0 ); ?>  />
-						<?php _e( 'No' ); ?>
+						<?php _e( 'No', 'mailchimp-for-wp' ); ?>
 					</label>
 
 					<p class="help">
@@ -56,7 +56,7 @@ add_action( 'mc4wp_admin_other_settings', '_mc4wp_usage_tracking_setting', 70 );
 
 	<p class="breadcrumbs">
 		<span class="prefix"><?php echo __( 'You are here: ', 'mailchimp-for-wp' ); ?></span>
-		<a href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp' ); ?>">MailChimp for WordPress</a> &rsaquo;
+		<a href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp' ); ?>">Mailchimp for WordPress</a> &rsaquo;
 		<span class="current-crumb"><strong><?php _e( 'Other Settings', 'mailchimp-for-wp' ); ?></strong></span>
 	</p>
 
@@ -99,10 +99,10 @@ add_action( 'mc4wp_admin_other_settings', '_mc4wp_usage_tracking_setting', 70 );
 				<h3><?php _e( 'Debug Log', 'mailchimp-for-wp' ); ?> <input type="text" id="debug-log-filter" class="alignright regular-text" placeholder="<?php esc_attr_e( 'Filter..', 'mailchimp-for-wp' ); ?>" /></h3>
 
 				<?php
-				if( ! $log->test() ) {
+				if ( ! $log->test() ) {
 					echo '<p>';
 					echo __( 'Log file is not writable.', 'mailchimp-for-wp' ) . ' ';
-					echo  sprintf( __( 'Please ensure %s has the proper <a href="%s">file permissions</a>.', 'mailchimp-for-wp' ), '<code>' . $log->file . '</code>', 'https://codex.wordpress.org/Changing_File_Permissions' );
+					echo  sprintf( __( 'Please ensure %1$s has the proper <a href="%2$s">file permissions</a>.', 'mailchimp-for-wp' ), '<code>' . $log->file . '</code>', 'https://codex.wordpress.org/Changing_File_Permissions' );
 					echo '</p>';
 
 					// hack to hide filter input
@@ -113,17 +113,17 @@ add_action( 'mc4wp_admin_other_settings', '_mc4wp_usage_tracking_setting', 70 );
 						<?php
 						$line = $log_reader->read_as_html();
 
-						if (!empty($line)) {
-							while( is_string( $line ) ) {
-								if( ! empty( $line ) ) { 
-									echo '<div class="debug-log-line">' . $line . '</div>'; 
+						if ( ! empty( $line ) ) {
+							while ( is_string( $line ) ) {
+								if ( ! empty( $line ) ) {
+									echo '<div class="debug-log-line">' . $line . '</div>';
 								}
-								
+
 								$line = $log_reader->read_as_html();
 							}
 						} else {
 							echo '<div class="debug-log-empty">';
-							echo '-- ' . __('Nothing here. Which means there are no errors!', 'mailchimp-for-wp');
+							echo '-- ' . __( 'Nothing here. Which means there are no errors!', 'mailchimp-for-wp' );
 							echo '</div>';
 						}
 						?>
@@ -133,13 +133,13 @@ add_action( 'mc4wp_admin_other_settings', '_mc4wp_usage_tracking_setting', 70 );
 						<input type="hidden" name="_mc4wp_action" value="empty_debug_log">
 						<p>
 							<input type="submit" class="button"
-								   value="<?php esc_attr_e('Empty Log', 'mailchimp-for-wp'); ?>"/>
+								   value="<?php esc_attr_e( 'Empty Log', 'mailchimp-for-wp' ); ?>"/>
 						</p>
 					</form>
 					<?php
 				} // end if is writable
 
-				if( $log->level >= 300 ) {
+				if ( $log->level >= 300 ) {
 					echo '<p>';
 					echo __( 'Right now, the plugin is configured to only log errors and warnings.', 'mailchimp-for-wp' );
 					echo '</p>';
@@ -159,9 +159,9 @@ add_action( 'mc4wp_admin_other_settings', '_mc4wp_usage_tracking_setting', 70 );
 
 						// add filter
 						var logFilter = document.getElementById('debug-log-filter');
-						logFilter.addEventListener('keydown', function(e) {
-							if(e.keyCode == 13 ) {
-								searchLog(e.target.value.trim());
+						logFilter.addEventListener('keydown', function(evt) {
+							if(evt.keyCode === 13 ) {
+								searchLog(evt.target.value.trim());
 							}
 						});
 

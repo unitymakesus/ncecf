@@ -40,27 +40,25 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 */
 		protected static $defaultMuFilters;
 
-		const REQUIRED_TEC_VERSION = '4.6.21';
-
-		const VERSION = '4.5.8';
+		const VERSION = '4.9.0';
 
 		/**
-		 * Initialize the addon to make sure the versions line up.
+		 * The Events Calendar Required Version
+		 * Use Tribe__Events__Filterbar__Plugin_Register instead
 		 *
-		 * @author PaulHughes01
-		 * @since 0.1
-		 * @param array $plugins The array of registered plugins.
-		 * @return array The array of registered plugins.
+		 * @deprecated 4.6
+		 *
 		 */
-		public static function initAddon( $plugins ) {
-			$plugins['TribeFilterView'] = array(
-				'plugin_name'      => 'The Events Calendar: Filter Bar',
-				'required_version' => self::REQUIRED_TEC_VERSION,
-				'current_version'  => self::VERSION,
-				'plugin_dir_file'  => basename( dirname( dirname( __FILE__ ) ) ) . '/the-events-calendar-filter-view.php',
-			);
-			return $plugins;
-		}
+		const REQUIRED_TEC_VERSION = '5.0.0';
+
+		/**
+		 * Where in the themes we will look for templates
+		 *
+		 * @since 4.9.0
+		 *
+		 * @var string
+		 */
+		public $template_namespace = 'events-filterbar';
 
 		/**
 		 * Create the plugin instance and include the other class.
@@ -73,34 +71,14 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 
 			if ( null === $plugin_file_path ) {
 				$plugin_file_path = TRIBE_EVENTS_FILTERBAR_FILE;
-			} else {
-				// $plugin_file_path was set but should not be as of 4.3.
-				_deprecated_argument(
-					__FUNCTION__,
-					'4.3',
-					'Specify the plugin file path using the TRIBE_EVENTS_FILTERBAR_FILE constant instead.'
-				);
 			}
 
 			self::$plugin_file = $plugin_file_path;
 			self::$instance = self::instance();
-		}
 
-		// @todo: make sure this is not needed anymore - 3202
-//		public static function autoloader( $class ) {
-//			if ( strpos( $class, 'Tribe__Events__Filterbar__Filter' ) !== 0 ) {
-//				return;
-//			}
-//			$dir = self::plugin_path('lib');
-//			if ( strpos( $class, 'TribeEventsFilter_') === 0 ) {
-//				$dir .= DIRECTORY_SEPARATOR.'filters';
-//			}
-//
-//			if ( file_exists( $dir.DIRECTORY_SEPARATOR.$class.'.php' ) ) {
-//				include_once( $dir.DIRECTORY_SEPARATOR.$class.'.php' );
-//				return;
-//			}
-//		}
+			tribe_register_provider( Tribe\Events\Filterbar\Service_Providers\Context::class );
+			tribe_register_provider( Tribe\Events\Filterbar\Views\V2\Service_Provider::class );
+		}
 
 		/**
 		 * The singleton function.
@@ -131,7 +109,9 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			$this->register_active_plugin();
 
 			add_action( 'wp', array( $this, 'setSidebarDisplayed' ) );
+			add_action( 'tribe_events_ajax_accessibility_check', array( $this, 'display_dynamic_a11y_notice' ) );
 			add_action( 'parse_query', array( $this, 'maybe_initialize_filters_for_query' ), 10, 1 );
+			add_action( 'tribe_repository_events_query', array( $this, 'maybe_initialize_filters_for_query' ), 1, 1 );
 			add_action( 'current_screen', array( $this, 'maybe_initialize_filters_for_screen' ), 10, 0 );
 			add_filter( 'body_class', array( $this, 'addBodyClass' ) );
 
@@ -297,10 +277,10 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 * @return array The new set of body classes.
 		 */
 		public function addBodyClass( $classes ) {
-			if ( $this->sidebarDisplayed ) {
-				$classes[] = 'tribe-events-filter-view';
-				$classes[] = 'tribe-filters-' . tribe_get_option( 'events_filters_default_state', 'closed' );
-			}
+			$classes[] = 'tribe-events-filter-view';
+			$classes[] = 'tribe-filters-' . tribe_get_option( 'events_filters_default_state', 'closed' );
+			$classes[] = 'tribe-filters-' . tribe_get_option( 'events_filters_layout', 'vertical' );
+
 			return $classes;
 		}
 
@@ -369,6 +349,19 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 * @return void
 		 */
 		public function maybe_initialize_filters_for_query( $query = null ) {
+			/**
+			 * Filters whether to initialize Filterbar filters for the query or not.
+			 *
+			 * @since 4.9.0
+			 *
+			 * @param bool          $initialize_filters Whether to initialize Filterbar filters for the query or not.
+			 * @param WP_Query|null $query              The current query object, if any.
+			 */
+			$initialize_filters = apply_filters( 'tribe_events_filter_bar_initialize_filters', true, $query );
+
+			if ( ! $initialize_filters ) {
+				return;
+			}
 
 			if ( $this->is_tribe_query( $query ) ) {
 				if (
@@ -564,5 +557,36 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			}
 		}
 
+		public function display_dynamic_a11y_notice() {
+			if ( tribe_get_option( 'liveFiltersUpdate', true ) ) {
+				echo '<div class="a11y-hidden" aria-label="' . __( 'Accessibility Form Notice', 'tribe-events-filter-view' ) . '">';
+				echo __( 'Notice: Utilizing the form controls will dynamically update the content', 'tribe-events-filter-view' );
+				echo '</div>';
+			}
+
+			return false;
+		}
+
+		/**
+		 * Initialize the addon to make sure the versions line up.
+		 *
+		 * @deprecated 4.6
+		 *
+		 * @author PaulHughes01
+		 * @since 0.1
+		 * @param array $plugins The array of registered plugins.
+		 * @return array The array of registered plugins.
+		 */
+		public static function initAddon( $plugins ) {
+			_deprecated_function( __METHOD__, '4.6', '' );
+
+			$plugins['TribeFilterView'] = array(
+				'plugin_name'      => 'The Events Calendar: Filter Bar',
+				'required_version' => self::REQUIRED_TEC_VERSION,
+				'current_version'  => self::VERSION,
+				'plugin_dir_file'  => basename( dirname( dirname( __FILE__ ) ) ) . '/the-events-calendar-filter-view.php',
+			);
+			return $plugins;
+		}
 	}
 }

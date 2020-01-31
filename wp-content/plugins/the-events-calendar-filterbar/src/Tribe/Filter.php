@@ -4,6 +4,8 @@
  * Each filter is an instance of this class.
  */
 
+use Tribe__Utils__Array as Arr;
+
 // Don't load directly
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
@@ -77,7 +79,15 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 
 		protected function get_submitted_value() {
 			if ( isset( $_REQUEST[ 'tribe_' . $this->slug ] ) ) {
-				return $_REQUEST[ 'tribe_' . $this->slug ];
+				$value = $_REQUEST[ 'tribe_' . $this->slug ];
+
+				if ( is_array( $value ) ) {
+					foreach ( $value as &$item ) {
+						$item = str_replace( ',', '-', $item );
+					}
+				}
+
+				return $value;
 			} elseif ( is_tax( Tribe__Events__Main::TAXONOMY ) && 'eventcategory' === $this->slug ) {
 				$category = get_queried_object();
 
@@ -94,6 +104,8 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 			if ( $this->is_filtering() ) {
 				add_action( 'tribe_events_filter_view_do_display_filters', array( $this, 'displayFilter' ), $this->priority );
 				add_action( 'tribe_events_pre_get_posts', array( $this, 'addQueryArgs' ), 10 );
+				// Filter repository (ORM) queries too.
+				add_action( 'tribe_repository_events_query', array( $this, 'addQueryArgs' ), 10 );
 			}
 			add_filter( 'tribe_events_all_filters_array', array( $this, 'allFiltersArray' ), 10, 1 );
 		}
@@ -117,10 +129,13 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 		 */
 		public function addQueryArgs( $query ) {
 
-			if ( ! $query->tribe_is_event ) {
-				// don't add the query args to other queries besides events queries
+			// Let's only filter event queries or event repository (ORM) queries.
+			if ( ! $query->tribe_is_event && ! ( doing_action( 'tribe_repository_events_query' ) ) ) {
 				return;
 			}
+
+			// For back-compatibility purposes ensure a flag about this being an event query is set.
+			$query->tribe_is_event = true;
 
 			// we only want to apply the filters to a default render context
 			if ( 'default' !== tribe_get_render_context( $query ) ) {
@@ -159,10 +174,15 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 		 * @return string The new WHERE clause.
 		 */
 		public function addQueryWhere( $posts_where, $query ) {
-			// Make sure it's an events query.
-			if ( $query->tribe_is_event || $query->tribe_is_event_category ) {
+			// Make sure it's an events query or a repository (ORM) query.
+			if (
+				$query->tribe_is_event
+				|| $query->tribe_is_event_category
+				|| doing_action( 'tribe_repository_events_query' )
+			) {
 				$posts_where .= $this->whereClause;
 			}
+
 			remove_filter( 'posts_where', array( $this, 'addQueryWhere' ), 11, 2 );
 			return $posts_where;
 		}
@@ -175,10 +195,15 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 		 * @return string The new JOIN clause.
 		 */
 		public function addQueryJoin( $posts_join, $query ) {
-			// Make sure it's an events query.
-			if ( $query->tribe_is_event || $query->tribe_is_event_category ) {
+			// Make sure it's an events query or a repository (ORM) query.
+			if (
+				$query->tribe_is_event
+				|| $query->tribe_is_event_category
+				|| doing_action( 'tribe_repository_events_query' )
+			) {
 				$posts_join .= $this->joinClause;
 			}
+
 			remove_filter( 'posts_join', array( $this, 'addQueryJoin' ), 11, 2 );
 			return $posts_join;
 		}
@@ -222,6 +247,8 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 		 */
 		public function setup_current_value_display( $values, $select_filters, $type = 'select' ) {
 
+			$plucked = [];
+
 			if ( 'checkbox' === $type ) {
 				$plucked = wp_list_pluck( $values, 'name', 'value' );
 			} elseif ( 'multiselect' === $type ) {
@@ -231,16 +258,26 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 				return ! empty( $display_current[ $select_filters ] ) ? $display_current[ $select_filters ] : '';
 			}
 
-			$plucked_keys  = array_keys( $plucked );
-			$selected_vals = array();
+			// Since values can be comma-delimited IDs, we need to build a map of single IDs to their
+			// comma-delimited counterparts.
+			$plucked_key_to_key_group_map = [];
+			foreach ( $plucked as $key_group => $value ) {
+				$key_ids = explode( ',' , $key_group );
+				foreach ( $key_ids as $key_id ) {
+					$plucked_key_to_key_group_map[ (string) $key_id ] = $key_group;
+				}
+			}
+
+			$selected_vals = [];
 			if ( ! is_array( $select_filters ) ) {
-				$single_value = $select_filters;
-				$select_filters = array();
-				$select_filters[] = $single_value;
+				$select_filters = explode( ',', $select_filters );
 			}
 
 			foreach ( $select_filters as $value ) {
-				if ( in_array( $value, $plucked_keys ) ) {
+				$value = str_replace( ',', '-', $value );
+
+				if ( ! empty( $plucked_key_to_key_group_map[ $value ] ) ) {
+					$value = $plucked_key_to_key_group_map[ $value ];
 					$selected_vals[ $value ] = $plucked[ $value ];
 				}
 			}
@@ -263,25 +300,28 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 
 			if ( ! empty( $values ) ) {
 				?>
-				<div class="tribe_events_filter_item<?php echo tribe_get_option( 'events_filters_layout', 'vertical' ) == 'horizontal' ? ' closed' : '';
+				<fieldset class="tribe_events_filter_item<?php echo 'horizontal' === tribe_get_option( 'events_filters_layout', 'vertical' ) ? ' closed' : '';
 				echo ! empty( $this->currentValue ) ? ' active' : ''; ?>" id="tribe_events_filter_item_<?php echo esc_attr( $this->slug ); ?>">
 					<?php
 				switch ( $this->type ) {
 					case 'select':
 						// It's possible for multiple values to be specified in array form, but we can
 						// only use one of those for the select filter
-						$current_value = is_array( $this->currentValue ) ? current( $this->currentValue ) : $this->currentValue;
+						$current_value = is_array( $this->currentValue ) ? implode( '-', $this->currentValue ) : $this->currentValue;
 
 						//Setup options in Tribe Dropdown format
 						$options = $this->setup_dropdown_options( $values, true );
 						$selected_vals = $this->setup_current_value_display( $options, $current_value, 'select' );
-
+						$section_title = esc_html( stripslashes( $this->title ) );
+						$section_slug  = sanitize_html_class( $section_title );
 						?>
-						<h3 class="tribe-events-filters-group-heading">
-							<?php echo esc_html( stripslashes( $this->title ) ); ?><span class="horizontal-drop-indicator"></span>
-							<span class="tribe-filter-status"><?php echo str_replace( '&nbsp;', '', $selected_vals ); ?></span>
-						</h3>
-						<div class="tribe-events-filter-group tribe-events-filter-select2 tribe-events-filter-select">
+						<legend class="tribe-events-filters-legend">
+							<button class="tribe-events-filters-group-heading" type="button" aria-expanded="true" aria-controls="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
+								<?php echo $section_title; ?><span class="horizontal-drop-indicator"></span>
+								<span class="tribe-filter-status"><?php echo str_replace( '&nbsp;', '', $selected_vals ); ?></span>
+							</button>
+						</legend>
+						<div class="tribe-events-filter-group tribe-events-filter-select2 tribe-events-filter-select" id="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
 							<div class="tribe-section-content">
 								<div class="tribe-section-content-field">
 									<input
@@ -304,14 +344,18 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 					case 'multiselect':
 						//Setup options in Tribe Dropdown format
 						$options        = $this->setup_dropdown_options( $values );
-						$select_filters = $this->currentValue ? explode( ',', $this->currentValue ) : '';
+						$select_filters = $this->currentValue ? Arr::to_list( $this->currentValue ) : '';
 						$selected_vals  = $this->setup_current_value_display( $options, $select_filters, 'multiselect' );
+						$section_title  = esc_html( stripslashes( $this->title ) );
+						$section_slug   = sanitize_html_class( $section_title );
 						?>
-						<h3 class="tribe-events-filters-group-heading">
-							<?php echo esc_html( stripslashes( $this->title ) ); ?><span class="horizontal-drop-indicator"></span>
-							<span class="tribe-filter-status"><?php echo $selected_vals; ?></span>
-						</h3>
-						<div class="tribe-events-filter-group tribe-events-filter-select2 tribe-events-filter-multiselect">
+						<legend class="tribe-events-filters-legend">
+							<button class="tribe-events-filters-group-heading" type="button" aria-expanded="false" aria-controls="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
+								<?php echo $section_title; ?><span class="horizontal-drop-indicator"></span>
+								<span class="tribe-filter-status"><?php echo $selected_vals; ?></span>
+							</button>
+						</legend>
+						<div class="tribe-events-filter-group tribe-events-filter-select2 tribe-events-filter-multiselect" id="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
 							<div class="tribe-section-content">
 								<div class="tribe-section-content-field">
 									<input
@@ -323,7 +367,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 										name="<?php echo esc_attr( 'tribe_' . $this->slug ); ?>"
 										placeholder="<?php esc_attr_e( 'Select an Item', 'tribe-events-filter-view' ); ?>"
 										type="hidden"
-										value="<?php echo isset( $this->currentValue ) ? esc_attr( $this->currentValue ) : ''; ?>"
+										value="<?php echo isset( $select_filters ) ? esc_attr( $select_filters ) : ''; ?>"
 									>
 								</div>
 							</div>
@@ -337,55 +381,53 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						}
 
 						$selected_vals = $this->setup_current_value_display( $values, $this->currentValue, 'checkbox' );
+						$section_id    = sanitize_html_class( $this->title );
+						$section_title = esc_html( stripslashes( $this->title ) );
+						$section_slug  = sanitize_html_class( $section_title );
 
 						if ( 'featuredevent' === $this->slug && $selected_vals ) {
-							$selected_vals = _x( 'Active', 'Featured Events active fitler display label', 'tribe-events-filter-view' );
+							$selected_vals = _x( 'Active', 'Featured Events active filter display label', 'tribe-events-filter-view' );
 						}
 						?>
+						<div role="group" id="<?php echo $section_id ?>" aria-label="<?php echo $section_id ?>">
+							<legend class="tribe-events-filters-legend">
+								<button class="tribe-events-filters-group-heading" type="button" aria-expanded="false" aria-controls="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
+									<?php echo $section_title; ?>
+									<span class="horizontal-drop-indicator"></span>
+									<span class="tribe-filter-status"><?php echo $selected_vals; ?></span>
+								</button>
+							</legend>
+							<div class="tribe-events-filter-group tribe-events-filter-checkboxes" id="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
+								<ul>
+									<?php foreach ( $values as $option ) {
 
-						<h3 class="tribe-events-filters-group-heading">
-							<?php echo stripslashes( $this->title ); ?><span class="horizontal-drop-indicator"></span>
-							<span class="tribe-filter-status"><?php echo $selected_vals; ?></span>
-						</h3>
-						<div class="tribe-events-filter-group tribe-events-filter-checkboxes">
-							<ul>
-								<?php foreach ( $values as $option ) {
-
-									$data = array();
-									if ( isset( $option['data'] ) && is_array( $option['data'] ) ) {
-										foreach ( $option['data'] as $attr => $value ) {
-											$data[] = 'data-' . esc_attr( $attr ) . '="' . trim( $value ) . '"';
+										$data = array();
+										if ( isset( $option['data'] ) && is_array( $option['data'] ) ) {
+											foreach ( $option['data'] as $attr => $value ) {
+												$data[] = 'data-' . esc_attr( $attr ) . '="' . trim( $value ) . '"';
+											}
 										}
+										$data = join( ' ', $data );
+
+										// Support CSS classes per list item
+										$class = '';
+
+										if ( ! empty( $option['class'] ) ) {
+											$class = ' class="' . esc_attr( $option['class'] ) . '"';
+										}
+
+										// output option to screen
+										echo '<li' . $class . '>';
+										echo '<input type="checkbox" id="' . esc_html( str_replace( ' ', '-', stripslashes( strtolower( $option['name'] ) ) ) ) . '" value="' . esc_attr( $option['value'] ) . '" ' . checked( $this->is_selected( trim( $option['value'] ) ), true, false ) . ' name="' . esc_attr( 'tribe_' . $this->slug . '[]' ) . '" ' . $data . ' aria-labelledby="' . esc_html( str_replace( ' ', '-', stripslashes( strtolower( $option['name'] ) ) ) ) . ' ' . $section_id . '" />';
+										echo '<label for="' . esc_html( str_replace( ' ', '-', stripslashes( strtolower( $option['name'] ) ) ) ) . '">';
+										echo '<span>' . esc_html( stripslashes( $option['name'] ) ) . '</span>';
+										echo '</label>';
+										echo '</li>';
+
 									}
-									$data = join( ' ', $data );
-
-									// Support CSS classes per list item
-									$class = '';
-
-									if ( ! empty( $option['class'] ) ) {
-										$class = ' class="' . esc_attr( $option['class'] ) . '"';
-									}
-
-									// output option to screen
-									printf( '
-										<li%s>
-											<label>
-												<input type="checkbox" value="%s" %s name="%s" %s />
-												<span title="%s">%s</span>
-											</label>
-											<a href="" class="tribe-toggle-child"></a>
-										</li>',
-										$class,
-										esc_attr( $option['value'] ),
-										checked( $this->is_selected( trim( $option['value'] ) ), true, false ),
-										esc_attr( 'tribe_' . $this->slug . '[]' ),
-										$data,
-										esc_html( stripslashes( $option['name'] ) ),
-										esc_html( stripslashes( $option['name'] ) )
-									);
-								}
-								?>
-							</ul>
+									?>
+								</ul>
+							</div>
 						</div>
 						<?php
 					break;
@@ -396,12 +438,16 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						} else {
 							$current_value = is_array( $this->currentValue ) ? current( $this->currentValue ) : $this->currentValue;
 						}
+						$section_title = esc_html( stripslashes( $this->title ) );
+						$section_slug  = sanitize_html_class( $section_title );
 						?>
-						<h3 class="tribe-events-filters-group-heading">
-							<?php echo stripslashes( $this->title ); ?><span class="horizontal-drop-indicator"></span>
-							<span class="tribe-filter-status"><?php ?></span>
-						</h3>
-						<div class="tribe-events-filter-group tribe-events-filter-radio">
+						<legend class="tribe-events-filters-legend">
+							<button class="tribe-events-filters-group-heading" type="button" aria-expanded="false" aria-controls="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
+								<?php echo $section_title; ?><span class="horizontal-drop-indicator"></span>
+								<span class="tribe-filter-status"><?php ?></span>
+							</button>
+						</legend>
+						<div class="tribe-events-filter-group tribe-events-filter-radio" id="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
 						<ul>
 						<?php foreach ( $values as $option ):
 
@@ -421,21 +467,12 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 							}
 
 							// output option to screen
-							printf( '
-								<li%s>
-									<label>
-										<input type="radio" value="%s" %s name="%s" %s />
-										<span title="%s">%s</span>
-									</label>
-								</li>',
-								$class,
-								esc_attr( $option['value'] ),
-								checked( trim( $option['value'] ), $current_value, false ),
-								esc_attr( 'tribe_' . $this->slug ),
-								$data,
-								esc_html( stripslashes( $option['name'] ) ),
-								esc_html( stripslashes( $option['name'] ) )
-								);
+							echo '<li ' . $class . '>';
+							echo '<input type="radio" id="' . esc_html( str_replace( ' ', '-', stripslashes( strtolower( $option['name'] ) ) ) ) . '" value="' . esc_attr( $option['value'] ) . '" ' . checked( trim( $option['value'] ), $current_value, false ) . ' name="' . esc_attr( 'tribe_' . $this->slug ) . '" ' . $data . ' />';
+							echo '<label for="' . esc_html( str_replace( ' ', '-', stripslashes( strtolower( $option['name'] ) ) ) ) . '">';
+							echo '<span>' . esc_html( stripslashes( $option['name'] ) ) . '</span>';
+							echo '</label>';
+							echo '</li>';
 							?>
 						<?php endforeach; ?>
 						</ul>
@@ -448,6 +485,9 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						} else {
 							$current = $values;
 						}
+
+						$section_title = esc_html( stripslashes( $this->title ) );
+						$section_slug  = sanitize_html_class( $section_title );
 
 						$min_value = $this->to_int( $values['min'] );
 						$max_value = $this->to_int( $values['max'], 'up' );
@@ -481,11 +521,13 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						}
 
 						?>
-							<h3 class="tribe-events-filters-group-heading">
-								<?php echo stripslashes( $this->title ); ?><span class="horizontal-drop-indicator"></span>
-								<span class="tribe-filter-status"><?php esc_html_e( $display_value ); ?></span>
-							</h3>
-							<div class="tribe-events-filter-group tribe-events-filter-range">
+							<legend class="tribe-events-filters-legend">
+								<button class="tribe-events-filters-group-heading" type="button" aria-expanded="false" aria-controls="tribe-filter-<?php echo $section_slug; ?>">
+									<?php echo $section_title; ?><span class="horizontal-drop-indicator"></span>
+									<span class="tribe-filter-status"><?php esc_html_e( $display_value ); ?></span>
+								</button>
+							</legend>
+							<div class="tribe-events-filter-group tribe-events-filter-range" id="tribe-filter-<?php echo $section_slug; ?>">
 								<span id="<?php echo esc_attr( 'tribe_events_filter_' . $this->slug ); ?>_display" class="tribe_events_slider_val"></span>
 								<input type="hidden" id="<?php echo esc_attr( 'tribe_events_filter_' . $this->slug ); ?>" name="<?php echo esc_attr( 'tribe_' . $this->slug ); ?>" value="<?php echo esc_attr( $set_value ); ?>"  />
 							<div id="<?php echo esc_attr( 'tribe_events_filter_' . $this->slug . '_slider' ); ?>"></div>
@@ -523,7 +565,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 					break;
 				}
 				?>
-				</div>
+				</fieldset>
 				<?php
 			}
 		}

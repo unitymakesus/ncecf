@@ -15,7 +15,7 @@
 	<tr valign="top">
 		<th scope="row"><label for="mc4wp_form_subscribed"><?php _e( 'Successfully subscribed', 'mailchimp-for-wp' ); ?></label></th>
 		<td>
-			<input type="text" class="widefat" id="mc4wp_form_subscribed" name="mc4wp_form[messages][subscribed]" value="<?php echo esc_attr( $form->messages['subscribed'] ); ?>" required />
+			<input type="text" class="widefat" id="mc4wp_form_subscribed" name="mc4wp_form[messages][subscribed]" value="<?php echo esc_attr( $form->messages['subscribed'] ); ?>" />
 			<p class="help"><?php _e( 'The text that shows when an email address is successfully subscribed to the selected list(s).', 'mailchimp-for-wp' ); ?></p>
 		</td>
 	</tr>
@@ -41,7 +41,7 @@
 		</td>
 	</tr>
 	<tr valign="top">
-		<th scope="row"><label for="mc4wp_form_error"><?php _e( 'General error' ,'mailchimp-for-wp' ); ?></label></th>
+		<th scope="row"><label for="mc4wp_form_error"><?php _e( 'General error', 'mailchimp-for-wp' ); ?></label></th>
 		<td>
 			<input type="text" class="widefat" id="mc4wp_form_error" name="mc4wp_form[messages][error]" value="<?php echo esc_attr( $form->messages['error'] ); ?>" required />
 			<p class="help"><?php _e( 'The text that shows when a general error occured.', 'mailchimp-for-wp' ); ?></p>
@@ -64,12 +64,17 @@
 	<tr valign="top">
 		<th scope="row"><label for="mc4wp_form_no_lists_selected"><?php _e( 'No list selected', 'mailchimp-for-wp' ); ?></label></th>
 		<td>
-			<input type="text" class="widefat" id="mc4wp_form_no_lists_selected" name="mc4wp_form[messages][no_lists_selected]" value="<?php echo esc_attr( $form->messages[ 'no_lists_selected'] ); ?>" required />
+			<input type="text" class="widefat" id="mc4wp_form_no_lists_selected" name="mc4wp_form[messages][no_lists_selected]" value="<?php echo esc_attr( $form->messages['no_lists_selected'] ); ?>" required />
 			<p class="help"><?php _e( 'When offering a list choice, this is the text that shows when no lists were selected.', 'mailchimp-for-wp' ); ?></p>
 		</td>
 	</tr>
 
-	<?php $config = array( 'element' => 'mc4wp_form[settings][update_existing]', 'value' => 1 ); ?>
+	<?php
+	$config = array(
+		'element' => 'mc4wp_form[settings][update_existing]',
+		'value'   => 1,
+	);
+	?>
 	<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 		<th scope="row"><label for="mc4wp_form_updated"><?php _e( 'Updated', 'mailchimp-for-wp' ); ?></label></th>
 		<td>

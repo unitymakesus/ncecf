@@ -80,7 +80,7 @@
 }
 
 /* Toggle/Reset buttons */
-#tribe_events_filter_control {
+.tribe_events_filter_control {
 	margin: 0 0 15px 0;
 	padding: 0;
 	position: relative;
@@ -92,12 +92,22 @@
 }
 
 /* Hide/Show button */
-#tribe_events_filters_toggle {
+.tribe_events_filters_toggle,
+.tribe-js-filters-toggle {
+	background: transparent;
+	border: 0;
+	color: #464646;
 	display: inline-block;
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0;
+	padding: 0;
 	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		background: transparent;
+	}
 }
 
 .tribe-filters-closed .tribe_events_filters_close_filters {
@@ -109,7 +119,7 @@
 }
 
 /* Filter Bar Hidden State */
-.tribe-filters-closed #tribe_events_filters_wrapper #tribe_events_filter_control {
+.tribe-filters-closed #tribe_events_filters_wrapper .tribe_events_filter_control {
 	border: 0;
 }
 
@@ -119,12 +129,12 @@
 /* Hide Filters */
 .tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_form,
 .tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper .tribe-events-filters-label,
-.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_reset {
+.tribe-events-filter-view.tribe-filters-closed .tribe_events_filters_reset {
 	display: none;
 }
 
 /* Expand Toggle Button */
-.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper #tribe_events_filters_toggle {
+.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper .tribe_events_filters_toggle {
 	display: block;
 	padding-left: 0;
 	width: 100%;
@@ -134,7 +144,7 @@
 	padding-bottom: 0;
 }
 
-.tribe_events_filter_item.closed div {
+.tribe_events_filter_item.closed .tribe-events-filter-group {
 	display: none;
 }
 
@@ -205,9 +215,13 @@
 }
 
 #tribe_events_filters_wrapper .tribe-events-filter-group label {
-	border-bottom: 1px solid #f4f4f4;
-	display: block;
-	padding: 15px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 86%;
+	-o-text-overflow: ellipsis;
 }
 
 .tribe-events-filter-group ul {
@@ -215,8 +229,24 @@
 	overflow-y: auto;
 }
 
+#tribe_events_filters_wrapper .tribe-events-filter-group ul li {
+	border-bottom: 1px solid #f4f4f4;
+	padding: 15px;
+}
+
+#tribe_events_filters_wrapper .tribe-events-filter-group input {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
 /* Events Filters Form Elements
    ========================================================================== */
+.tribe-events-filters-legend {
+	width: 100%;
+	margin: 0;
+}
+
 #tribe_events_filters_wrapper label {
 	cursor: pointer;
 	display: block;
@@ -228,12 +258,20 @@
 	white-space: normal;
 }
 
-#tribe_events_filters_wrapper label input[type=checkbox],
+#tribe_events_filters_wrapper {
+	input[type=checkbox],
+	input[type=radio] {
+		display: inline-block;
+		margin-right: 5px;
+		vertical-align: middle;
+		width: auto;
+	}
+}
+
+#tribe_events_filters_wrapper label input[type=checkbox]:focus,
+#tribe_events_filters_wrapper button:focus,
 #tribe_events_filters_wrapper label input[type=radio] {
-	display: inline-block;
-	margin-right: 5px;
-	vertical-align: middle;
-	width: auto;
+	outline: 1px solid #666;
 }
 
 #tribe_events_filters_wrapper {
@@ -274,16 +312,6 @@
 		margin: 5px 0 0;
 	}
 
-}
-
-#tribe_events_filters_wrapper label span {
-	display: inline-block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	vertical-align: middle;
-	white-space: nowrap;
-	width: 86%;
-	-o-text-overflow: ellipsis;
 }
 
 /* Filter Selects */
@@ -340,6 +368,7 @@
 
 #tribe_events_filters_wrapper .tribe-dropdown .select2-choice > .select2-chosen {
 	font-size: 13px;
+	color: #585858;
 }
 
 .select2-drop-active .select2-results .select2-result,
@@ -378,46 +407,55 @@
 
 
 /* Filter Sliders */
-#tribe_events_filters_wrapper .tribe_events_slider_val {
-	font-size: 12px;
-	font-weight: bold;
-}
+#tribe_events_filters_wrapper {
+	.tribe_events_slider_val {
+		font-size: 12px;
+		font-weight: bold;
+	}
 
-#tribe_events_filters_wrapper .ui-slider {
-	margin: .25em 0;
-}
+	.ui-slider {
+		margin: .25em 0;
+	}
 
-#tribe_events_filters_wrapper .ui-slider-horizontal .ui-slider-handle:first-of-type {
-	margin-left: -1px;
-}
+	.ui-slider-horizontal {
+		.ui-slider-handle {
+			&:first-of-type {
+				margin-left: -1px;
+			}
 
-#tribe_events_filters_wrapper .ui-slider-horizontal .ui-slider-handle:last-of-type {
-	margin-left: -16px;
+			&:last-of-type {
+				margin-left: -16px;
+			}
+		}
+	}
 }
 
 /* Filter Submit */
-#tribe_events_filters_wrapper input[type=submit] {
-	background: #666;
-	border: none;
-	border-radius: 3px;
-	box-shadow: none;
-	color: #fff !important;
-	cursor: pointer;
-	display: block;
-	font-size: 11px;
-	font-weight: bold;
-	height: 30px;
-	margin: 15px;
-	padding: 0 10px;
-	text-transform: uppercase;
-	transition: .1s ease-in-out;
-	-moz-transition: .1s ease-in-out;
-	-o-transition: .1s ease-in-out;
-	-webkit-transition: .1s ease-in-out;
-}
+#tribe_events_filters_wrapper {
+	input[type=submit] {
+		background: #666;
+		border: none;
+		border-radius: 3px;
+		box-shadow: none;
+		color: #fff !important;
+		cursor: pointer;
+		display: block;
+		font-size: 11px;
+		font-weight: bold;
+		height: 30px;
+		margin: 15px;
+		padding: 0 10px;
+		text-transform: uppercase;
+		transition: .1s ease-in-out;
+		-moz-transition: .1s ease-in-out;
+		-o-transition: .1s ease-in-out;
+		-webkit-transition: .1s ease-in-out;
 
-#tribe_events_filters_wrapper input[type=submit]:hover {
-	background: #999;
+		&:hover,
+		&:focus {
+			background: #999;
+		}
+	}
 }
 
 /* ==========================================================================
@@ -432,14 +470,27 @@
 
 #tribe_events_filters_wrapper .tribe-events-filters-group-heading {
 	background: #f5f5f5;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
 	border-bottom: 1px solid #dadada;
+	color: #333;
+	font-weight: bold;
+	font-size: 12px;
 	margin: 0;
 	padding: 15px 20px;
 	position: relative;
-}
+	text-align: left;
+	width: 100%;
 
-#tribe_events_filters_wrapper .tribe-events-filters-group-heading:hover {
-	background: #eaeaea;
+	& > * {
+		font-weight: bold;
+	}
+
+	&:hover,
+	&:focus {
+		background: #eaeaea;
+	}
 }
 
 .tribe-filters-closed .tribe-events-filters-content {
@@ -454,13 +505,27 @@
 	padding: 2px 5px 0 0;
 }
 
-#tribe_events_filters_reset {
+.tribe_events_filters_reset {
+	background: transparent;
+	border: 0;
 	color: #464646;
-	display: inline-block;
 	font-size: 12px;
 	margin: 15px 0;
 	padding: 0 15px;
 	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		background: transparent;
+	}
+}
+
+.tribe_events_filters_reset--desktop {
+	display: none;
+
+	@media only screen and (min-width: 767px) {
+		display: inline-block;
+	}
 }
 
 /* Sidebar Width in Relation To Main Event List */
@@ -481,19 +546,21 @@
 .tribe-events-filter-group {
 	border-bottom: 1px solid #e2e2e2;
 	margin: 0;
+
+	label {
+		border-color: #ebebeb;
+	}
+
+	li {
+		background: #f9fafa;
+		&:hover,
+		&:focus {
+			background: #fff;
+		}
+	}
 }
 
-.tribe-events-filter-group label {
-	border-color: #ebebeb;
-}
 
-.tribe-events-filter-group li {
-	background: #f9fafa;
-}
-
-.tribe-events-filter-group li:hover {
-	background: #fff;
-}
 
 .tribe-filters-open .tribe-events-filters-vertical + #tribe-events-content,
 .tribe-filters-open .tribe-events-filters-vertical + .tribe-bar-disabled + #tribe-events-content {
@@ -532,7 +599,7 @@
 		}
 
 		/* Filter Toggles Triangle */
-		h3 {
+		.tribe-events-filters-group-heading {
 			&:after {
 				border-bottom: 6px solid;
 				border-left: 4px inset transparent;
@@ -551,7 +618,7 @@
 			}
 		}
 		.closed {
-			h3 {
+			.tribe-events-filters-group-heading {
 				&:after {
 					border-bottom: 0 inset transparent;
 					border-left: 4px inset transparent;
@@ -685,7 +752,7 @@
 		top: auto;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control {
+	.tribe-events-filters-horizontal .tribe_events_filter_control {
 		float: right;
 		font-size: 11px;
 		line-height: 1.5;
@@ -693,18 +760,20 @@
 		width: auto;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control a {
+	.tribe-events-filters-horizontal .tribe_events_filter_control button {
+		background: transparent;
+		border: 0;
 		font-weight: bold;
 		margin: 0;
 		padding: 0;
 		text-decoration: none;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control a + a {
+	.tribe-events-filters-horizontal .tribe_events_filter_control button + button {
 		margin-left: 10px;
 	}
 
-	.tribe-filters-closed .tribe-events-filters-horizontal #tribe_events_filter_control {
+	.tribe-filters-closed .tribe-events-filters-horizontal .tribe_events_filter_control {
 		float: none;
 		width: 100%;
 	}
@@ -780,6 +849,7 @@
 		display: inline-block;
 		margin-bottom: 0;
 		margin-left: 12px;
+		margin-top: 0;
 	}
 
 	#tribe_events_filters_wrapper.tribe-events-filters-horizontal .tribe_events_slider_val {
@@ -798,7 +868,7 @@
 	}
 
 	/* Filter Toggles Triangle */
-	h3 {
+	button {
 		.horizontal-drop-indicator {
 			&:before {
 				border-color: #666 transparent transparent;
@@ -808,16 +878,16 @@
 				display: inline-block;
 				height: 0;
 				margin: 5px 0 0 4px;
-				position: absolute;
 				transform: rotate(0);
 				transform-origin: 50% 25%;
 				transition: .25s ease-in-out;
 				width: 0;
+				vertical-align: middle;
 			}
 		}
 	}
 	.closed {
-		h3 {
+		button {
 			.horizontal-drop-indicator {
 
 			}
@@ -829,11 +899,25 @@
 =============================================*/
 
 .tribe_events_filter_item {
-	border-bottom: 0;
+	border: none;
 	margin: 0;
 	padding: 0;
 }
 
 #tribe_events_filters_wrapper .tribe_events_filter_item.closed h3 span:after {
 	border-top-color: transparent;
+}
+
+/* = A11y Helper
+=============================================*/
+
+.a11y-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
 }

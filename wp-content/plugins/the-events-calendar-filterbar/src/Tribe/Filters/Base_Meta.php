@@ -3,7 +3,12 @@
 /**
  * Class Tribe__Events__Filterbar__Filters__Country
  */
+
+use Tribe__Cache_Listener as Cache_Listener;
+
 class Tribe__Events__Filterbar__Filters__Base_Meta extends Tribe__Events__Filterbar__Filter {
+	public static $cache_key_base_ids = 'tribe_filterbar_base_ids';
+
 	public $type = 'select';
 
 	public function get_admin_form() {
@@ -40,56 +45,72 @@ class Tribe__Events__Filterbar__Filters__Base_Meta extends Tribe__Events__Filter
 		/** @var wpdb $wpdb */
 		global $wpdb;
 
-		$search_in = implode( "', '", array_map( 'esc_sql', (array) $this->searched_meta ) );
+		$search_data = tribe( 'cache' )->get_transient( static::$cache_key_base_ids, Cache_Listener::TRIGGER_SAVE_POST );
 
-		if ( empty( $search_in ) ) {
-			return array();
-		}
+		if ( empty( $search_data ) ) {
+			$search_in = implode( "', '", array_map( 'esc_sql', (array) $this->searched_meta ) );
 
-		$search_sql =
-			"SELECT m.post_id, m.meta_value
+			if ( empty( $search_in ) ) {
+				return [];
+			}
+
+			$search_sql =
+				"SELECT m.post_id, m.meta_value
 			FROM {$wpdb->postmeta} m
 			INNER JOIN {$wpdb->posts} p ON p.ID = m.post_id
 			WHERE
 				p.post_type = %s AND
 				p.post_status = 'publish' AND m.meta_key IN ( '{$search_in}' ) AND m.meta_value != ''";
 
-		// Get The Searched Meta
-		$search_data = $wpdb->get_results( $wpdb->prepare( $search_sql, $this->get_searched_post_type() ) );
+			// Get The Searched Meta
+			$search_data = $wpdb->get_results( $wpdb->prepare( $search_sql, $this->get_searched_post_type() ) );
+
+			tribe( 'cache' )->set_transient( static::$cache_key_base_ids, $search_data, DAY_IN_SECONDS, Cache_Listener::TRIGGER_SAVE_POST );
+		}
 
 		// Fetch the possible related ids
-		$possible_ids = array_unique( array_filter( wp_list_pluck( $search_data, 'post_id' ), 'is_numeric' ) );
+		$possible_ids = array_unique( wp_list_pluck( $search_data, 'post_id' ) );
 
 		// Build a SQL structure for Integers for a IN compare
-		$related_sql = implode( ', ', array_map( 'esc_sql', $possible_ids ) );
+		$related_sql = implode( ', ', $possible_ids );
 
 		if ( empty( $related_sql ) ) {
-			return array();
+			return [];
 		}
 
-		$search_related_sql =
-			"SELECT m.post_id, m.meta_value
-			FROM {$wpdb->postmeta} m
-			INNER JOIN {$wpdb->posts} p ON p.ID = m.post_id
+		$search_related_sql = "
+			SELECT
+				m.meta_value
+			FROM
+				{$wpdb->postmeta} m
+				INNER JOIN {$wpdb->posts} p
+					ON p.ID = m.post_id
 			WHERE
-				p.post_type = %s AND
-				p.post_status = 'publish' AND
-				m.meta_key = '{$this->relation_meta}' AND
-				m.meta_value IN ( {$related_sql} )";
+				p.post_type = %s
+				AND p.post_status = 'publish'
+				AND m.meta_key = '{$this->relation_meta}'
+				AND m.meta_value IN ( {$related_sql} )
+		";
 
 		// Get Related data from DB
-		$related_data = $wpdb->get_results( $wpdb->prepare( $search_related_sql, $this->get_related_post_type() ) );
+		$related_ids_raw = $wpdb->get_col( $wpdb->prepare( $search_related_sql, $this->get_related_post_type() ) );
+		$related_ids     = [];
+		foreach ( $related_ids_raw as $id ) {
+			if ( ! is_numeric( $id ) ) {
+				continue;
+			}
 
-		$related_ids = array_unique( array_filter( wp_list_pluck( $related_data, 'meta_value' ), 'is_numeric' ) );
-
-		if ( empty( $search_data ) ) {
-			return array();
+			$related_ids[ $id ] = $id;
 		}
 
-		$related = array();
+		if ( empty( $search_data ) ) {
+			return [];
+		}
+
+		$related = [];
 
 		foreach ( $search_data as $data ) {
-			if ( ! in_array( $data->post_id, $related_ids ) ) {
+			if ( ! isset( $related_ids[ $data->post_id ] ) ) {
 				continue;
 			}
 
@@ -101,13 +122,13 @@ class Tribe__Events__Filterbar__Filters__Base_Meta extends Tribe__Events__Filter
 			}
 
 			//only add a value once
-			if ( ! isset( $related[ $name ] ) || ! in_array( $value, $related[ $name ] ) ) {
-				$related[ $name ][] = $value;
+			if ( ! isset( $related[ $name ] ) || ! isset( $related[ $name ][ $value ] ) ) {
+				$related[ $name ][ $value ] = $value;
 			}
 		}
 
 		if ( empty( $related ) ) {
-			return array();
+			return [];
 		}
 
 		// Order It alphabetically
@@ -116,7 +137,7 @@ class Tribe__Events__Filterbar__Filters__Base_Meta extends Tribe__Events__Filter
 		foreach ( $related as $name => $related_ids ) {
 			$return[] = array(
 				'name' => $name,
-				'value' => implode( ',', $related_ids ),
+				'value' => implode( '-', $related_ids ),
 			);
 		}
 

@@ -48,7 +48,7 @@ class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filt
 
 	protected function setup_where_clause() {
 		global $wpdb;
-		$clauses = array();
+		$clauses = [];
 
 		if ( in_array( 'allday', $this->currentValue ) ) {
 			$clauses[] = "(all_day.meta_value = 'yes')";
@@ -69,15 +69,12 @@ class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filt
 
 			$is_overnight_range = $range_start_hour > $range_end_hour;
 			if ( $is_overnight_range ) {
-				$start_measure_date = new DateTime( '2011-01-01 ' . $range_start_time );
-				$end_measure_date = new DateTime( '2011-01-02 ' . $range_end_time );
-				$interval = date( $end_measure_date->format( 'U' ) - $start_measure_date->format( 'U' ) );
 				$clauses[] = $wpdb->prepare( '
 				(
 					   ( TIME(CAST(tod_start_date.meta_value as DATETIME)) < %s )
 					OR ( TIME(CAST(tod_start_date.meta_value as DATETIME)) >= %s )
 					OR ( MOD(TIME_TO_SEC(TIMEDIFF(%s, TIME(CAST(tod_start_date.meta_value as DATETIME)))) + 86400, 86400) < tod_duration.meta_value )
-				)', $range_end_time, $range_start_time, $range_end_time, $range_start_time, $interval );
+				)', $range_end_time, $range_start_time, $range_end_time );
 			} else {
 				$clauses[] = $wpdb->prepare( '
 				(

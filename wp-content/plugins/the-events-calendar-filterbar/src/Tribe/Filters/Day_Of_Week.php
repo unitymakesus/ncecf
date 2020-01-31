@@ -1,5 +1,7 @@
 <?php
 
+use Tribe__Events__Timezones as Timezones;
+
 /**
  * Class Tribe__Events__Filterbar__Filters__Day_Of_Week
  */
@@ -47,18 +49,31 @@ class Tribe__Events__Filterbar__Filters__Day_Of_Week extends Tribe__Events__Filt
 	 */
 	protected function setup_query_filters() {
 		global $wp_query;
-		// band-aid for month view
-		if ( $wp_query->is_main_query() && $wp_query->get( 'eventDisplay' ) == 'month' ) {
-			$wp_query->set(
-				'meta_query', array(
-					array(
-						'key'  => '_EventStartDate',
-						'type' => 'DATETIME',
-					),
-				)
-			);
+		// Band-aid for month view.
+		if ( $wp_query->is_main_query() && $wp_query->get( 'eventDisplay' ) === 'month' ) {
+			$this->add_date_meta_to_query( $wp_query );
 		}
+
 		parent::setup_query_filters();
+	}
+
+	/**
+	 * Adds the query arguments required by the filter and adds the the custom JOIN and WHERE clauses.
+	 *
+	 * @param \WP_Query $query The query object to filter.
+	 *
+	 * @since 4.8
+	 */
+	public function addQueryArgs( $query ) {
+		/*
+		 * Query arguments will not have been added yet in the context of repository (ORM) queries.
+		 * Let's add them now.
+		 */
+		if ( doing_action( 'tribe_repository_events_query' ) ) {
+			$this->add_date_meta_to_query( $query );
+		}
+
+		parent::addQueryArgs( $query );
 	}
 
 	protected function setup_join_clause() {
@@ -110,5 +125,54 @@ class Tribe__Events__Filterbar__Filters__Day_Of_Week extends Tribe__Events__Filt
 		// Forces the query to use _EventStartDate and _EventEndDate as the times to base results
 		// off of, instead of _EventStartDateUTC, _EventEventDateUTC which can produce weird results.
 		add_filter( 'tribe_events_query_force_local_tz', '__return_true' );
+	}
+
+	/**
+	 * Adds the event start date meta key to the query to use it in the join clauses later.
+	 *
+	 * The added key is Timezone Settings aware.
+	 *
+	 * @since 4.8
+	 *
+	 * @param WP_Query $query The query object to add the meta key to.
+	 */
+	protected function add_date_meta_to_query( $query ) {
+		$date_meta_key = Timezones::is_mode( 'site' ) ? '_EventStartDateUTC' : '_EventStartDate';
+		$meta_query = $query->get( 'meta_query' );
+
+		if ( ! is_array( $meta_query ) ) {
+			return;
+		}
+
+		$exists = false !== strpos( json_encode( $meta_query ), $date_meta_key );
+		$first = reset( $meta_query );
+		$is_first = $exists && is_array( $first ) && $first['key'] === $date_meta_key;
+
+		if ( $is_first ) {
+			return;
+		}
+
+		$entry = [
+			'key'  => $date_meta_key,
+			'type' => 'DATETIME',
+		];
+
+		// Reuse an existing entry to avoid JOIN proliferation if possible.
+		if ( $exists ) {
+			$matches = array_filter( $meta_query, static function ( $existing_entry ) use ( $date_meta_key ) {
+				return is_array( $existing_entry )
+				       && isset( $existing_entry['key'] )
+				       && $date_meta_key === $existing_entry['key'];
+			} );
+			$entry = reset( $matches );
+			$entry_index = array_search( $meta_query, $entry, true );
+			unset( $meta_query[ $entry_index ] );
+		}
+
+		// Prepend the entry in the array.
+		array_unshift( $meta_query, $entry );
+
+		$query->set( 'meta_query', $meta_query );
+		$query->query_vars['meta_query'] = $meta_query;
 	}
 }

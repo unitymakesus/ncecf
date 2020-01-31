@@ -24,29 +24,29 @@
 /* Basic Reset for Filter Items */
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical {
-	float: left;
-	width: 25%;
-}
+		float: left;
+		width: 25%;
+	}
 
 #tribe_events_filters_wrapper h3,
 	#tribe_events_filters_wrapper ul,
 	#tribe_events_filters_wrapper input,
 	#tribe_events_filters_wrapper select,
 	#tribe_events_filters_wrapper label {
-	font-size: 12px;
-	margin: 0;
-	padding: 0;
-}
+		font-size: 12px;
+		margin: 0;
+		padding: 0;
+	}
 
 #tribe_events_filters_wrapper ul,
 	#tribe_events_filters_wrapper ul li {
-	list-style: none;
-}
+		list-style: none;
+	}
 
 #tribe_events_filters_wrapper ul li {
-	margin: 0;
-	padding: 0;
-}
+		margin: 0;
+		padding: 0;
+	}
 
 /* Events Page Title Resets
    ========================================================================== */
@@ -91,7 +91,7 @@
 
 /* Toggle/Reset buttons */
 
-#tribe_events_filter_control {
+.tribe_events_filter_control {
 	margin: 0 0 15px 0;
 	padding: 0;
 	position: relative;
@@ -104,13 +104,25 @@
 
 /* Hide/Show button */
 
-#tribe_events_filters_toggle {
+.tribe_events_filters_toggle,
+.tribe-js-filters-toggle {
+	background: transparent;
+	border: 0;
+	color: #464646;
 	display: inline-block;
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0;
+	padding: 0;
 	text-decoration: none;
 }
+
+.tribe_events_filters_toggle:hover,
+	.tribe_events_filters_toggle:focus,
+	.tribe-js-filters-toggle:hover,
+	.tribe-js-filters-toggle:focus {
+		background: transparent;
+	}
 
 .tribe-filters-closed .tribe_events_filters_close_filters {
 	display: none !important;
@@ -122,7 +134,7 @@
 
 /* Filter Bar Hidden State */
 
-.tribe-filters-closed #tribe_events_filters_wrapper #tribe_events_filter_control {
+.tribe-filters-closed #tribe_events_filters_wrapper .tribe_events_filter_control {
 	border: 0;
 }
 
@@ -133,13 +145,13 @@
 
 .tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_form,
 .tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper .tribe-events-filters-label,
-.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_reset {
+.tribe-events-filter-view.tribe-filters-closed .tribe_events_filters_reset {
 	display: none;
 }
 
 /* Expand Toggle Button */
 
-.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper #tribe_events_filters_toggle {
+.tribe-events-filter-view.tribe-filters-closed #tribe_events_filters_wrapper .tribe_events_filters_toggle {
 	display: block;
 	padding-left: 0;
 	width: 100%;
@@ -149,7 +161,7 @@
 	padding-bottom: 0;
 }
 
-.tribe_events_filter_item.closed div {
+.tribe_events_filter_item.closed .tribe-events-filter-group {
 	display: none;
 }
 
@@ -223,9 +235,13 @@
 }
 
 #tribe_events_filters_wrapper .tribe-events-filter-group label {
-	border-bottom: 1px solid #f4f4f4;
-	display: block;
-	padding: 15px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 86%;
+	-o-text-overflow: ellipsis;
 }
 
 .tribe-events-filter-group ul {
@@ -233,8 +249,23 @@
 	overflow-y: auto;
 }
 
+#tribe_events_filters_wrapper .tribe-events-filter-group ul li {
+	border-bottom: 1px solid #f4f4f4;
+	padding: 15px;
+}
+
+#tribe_events_filters_wrapper .tribe-events-filter-group input {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 /* Events Filters Form Elements
    ========================================================================== */
+
+.tribe-events-filters-legend {
+	width: 100%;
+	margin: 0;
+}
 
 #tribe_events_filters_wrapper label {
 	cursor: pointer;
@@ -247,64 +278,60 @@
 	white-space: normal;
 }
 
-#tribe_events_filters_wrapper label input[type=checkbox],
+#tribe_events_filters_wrapper input[type=checkbox],
+	#tribe_events_filters_wrapper input[type=radio] {
+		display: inline-block;
+		margin-right: 5px;
+		vertical-align: middle;
+		width: auto;
+	}
+
+#tribe_events_filters_wrapper label input[type=checkbox]:focus,
+#tribe_events_filters_wrapper button:focus,
 #tribe_events_filters_wrapper label input[type=radio] {
-	display: inline-block;
-	margin-right: 5px;
-	vertical-align: middle;
-	width: auto;
+	outline: 1px solid #666;
 }
 
 #tribe_events_filters_wrapper .tribe-child-cat {
-	padding: 0 0 0 15px
-}
+		padding: 0 0 0 15px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat {
-	padding: 0 0 0 30px
-}
+		padding: 0 0 0 30px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-3 {
-	padding: 0 0 0 40px
-}
+		padding: 0 0 0 40px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-4 {
-	padding: 0 0 0 50px
-}
+		padding: 0 0 0 50px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-5 {
-	padding: 0 0 0 60px
-}
+		padding: 0 0 0 60px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-6 {
-	padding: 0 0 0 70px
-}
+		padding: 0 0 0 70px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-7 {
-	padding: 0 0 0 80px
-}
+		padding: 0 0 0 80px
+	}
 
 #tribe_events_filters_wrapper .tribe-grandchild-cat.tribe-depth-8 {
-	padding: 0 0 0 90px
-}
+		padding: 0 0 0 90px
+	}
 
 #tribe_events_filters_wrapper .tribe-filter-status {
-	color: #666;
-	display: block;
-	font-size: 12px;
-	font-style: italic;
-	font-weight: 400;
-	margin: 5px 0 0;
-}
-
-#tribe_events_filters_wrapper label span {
-	display: inline-block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	vertical-align: middle;
-	white-space: nowrap;
-	width: 86%;
-	-o-text-overflow: ellipsis;
-}
+		color: #666;
+		display: block;
+		font-size: 12px;
+		font-style: italic;
+		font-weight: 400;
+		margin: 5px 0 0;
+	}
 
 /* Filter Selects */
 
@@ -353,6 +380,7 @@
 
 #tribe_events_filters_wrapper .tribe-dropdown .select2-choice > .select2-chosen {
 	font-size: 13px;
+	color: #585858;
 }
 
 .select2-drop-active .select2-results .select2-result,
@@ -390,47 +418,48 @@
 /* Filter Sliders */
 
 #tribe_events_filters_wrapper .tribe_events_slider_val {
-	font-size: 12px;
-	font-weight: bold;
-}
+		font-size: 12px;
+		font-weight: bold;
+	}
 
 #tribe_events_filters_wrapper .ui-slider {
-	margin: .25em 0;
-}
+		margin: .25em 0;
+	}
 
 #tribe_events_filters_wrapper .ui-slider-horizontal .ui-slider-handle:first-of-type {
-	margin-left: -1px;
-}
+				margin-left: -1px;
+			}
 
 #tribe_events_filters_wrapper .ui-slider-horizontal .ui-slider-handle:last-of-type {
-	margin-left: -16px;
-}
+				margin-left: -16px;
+			}
 
 /* Filter Submit */
 
 #tribe_events_filters_wrapper input[type=submit] {
-	background: #666;
-	border: none;
-	border-radius: 3px;
-	box-shadow: none;
-	color: #fff !important;
-	cursor: pointer;
-	display: block;
-	font-size: 11px;
-	font-weight: bold;
-	height: 30px;
-	margin: 15px;
-	padding: 0 10px;
-	text-transform: uppercase;
-	transition: .1s ease-in-out;
-	-moz-transition: .1s ease-in-out;
-	-o-transition: .1s ease-in-out;
-	-webkit-transition: .1s ease-in-out;
-}
+		background: #666;
+		border: none;
+		border-radius: 3px;
+		box-shadow: none;
+		color: #fff !important;
+		cursor: pointer;
+		display: block;
+		font-size: 11px;
+		font-weight: bold;
+		height: 30px;
+		margin: 15px;
+		padding: 0 10px;
+		text-transform: uppercase;
+		transition: .1s ease-in-out;
+		-moz-transition: .1s ease-in-out;
+		-o-transition: .1s ease-in-out;
+		-webkit-transition: .1s ease-in-out;
+	}
 
-#tribe_events_filters_wrapper input[type=submit]:hover {
-	background: #999;
-}
+#tribe_events_filters_wrapper input[type=submit]:hover,
+		#tribe_events_filters_wrapper input[type=submit]:focus {
+			background: #999;
+		}
 
 /* ==========================================================================
    Vertical Filters Styles
@@ -445,15 +474,28 @@
 
 #tribe_events_filters_wrapper .tribe-events-filters-group-heading {
 	background: #f5f5f5;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
 	border-bottom: 1px solid #dadada;
+	color: #333;
+	font-weight: bold;
+	font-size: 12px;
 	margin: 0;
 	padding: 15px 20px;
 	position: relative;
+	text-align: left;
+	width: 100%;
 }
 
-#tribe_events_filters_wrapper .tribe-events-filters-group-heading:hover {
-	background: #eaeaea;
-}
+#tribe_events_filters_wrapper .tribe-events-filters-group-heading > * {
+		font-weight: bold;
+	}
+
+#tribe_events_filters_wrapper .tribe-events-filters-group-heading:hover,
+	#tribe_events_filters_wrapper .tribe-events-filters-group-heading:focus {
+		background: #eaeaea;
+	}
 
 .tribe-filters-closed .tribe-events-filters-content {
 	background: transparent;
@@ -467,13 +509,23 @@
 	padding: 2px 5px 0 0;
 }
 
-#tribe_events_filters_reset {
+.tribe_events_filters_reset {
+	background: transparent;
+	border: 0;
 	color: #464646;
-	display: inline-block;
 	font-size: 12px;
 	margin: 15px 0;
 	padding: 0 15px;
 	text-decoration: none;
+}
+
+.tribe_events_filters_reset:hover,
+	.tribe_events_filters_reset:focus {
+		background: transparent;
+	}
+
+.tribe_events_filters_reset--desktop {
+	display: none;
 }
 
 /* Sidebar Width in Relation To Main Event List */
@@ -498,16 +550,17 @@
 }
 
 .tribe-events-filter-group label {
-	border-color: #ebebeb;
-}
+		border-color: #ebebeb;
+	}
 
 .tribe-events-filter-group li {
-	background: #f9fafa;
-}
+		background: #f9fafa;
+	}
 
-.tribe-events-filter-group li:hover {
-	background: #fff;
-}
+.tribe-events-filter-group li:hover,
+		.tribe-events-filter-group li:focus {
+			background: #fff;
+		}
 
 .tribe-filters-open .tribe-events-filters-vertical + #tribe-events-content,
 .tribe-filters-open .tribe-events-filters-vertical + .tribe-bar-disabled + #tribe-events-content {
@@ -533,92 +586,93 @@
 }
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .tribe-filter-status {
-	display: none;
-}
+			display: none;
+		}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .tribe_events_filter_item.closed .tribe-filter-status {
-	display: block;
-}
+				display: block;
+			}
 
 /* Filter Toggles Triangle */
 
-#tribe_events_filters_wrapper.tribe-events-filters-vertical h3:after {
-	border-bottom: 6px solid;
-	border-left: 4px inset transparent;
-	border-right: 4px inset transparent;
-	border-top: 0 inset transparent;
-	color: #a3a3a3;
-	content: ' ';
-	height: 0;
-	left: auto;
-	margin: 0;
-	pointer-events: none;
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	width: 0;
-}
+#tribe_events_filters_wrapper.tribe-events-filters-vertical .tribe-events-filters-group-heading:after {
+				border-bottom: 6px solid;
+				border-left: 4px inset transparent;
+				border-right: 4px inset transparent;
+				border-top: 0 inset transparent;
+				color: #a3a3a3;
+				content: ' ';
+				height: 0;
+				left: auto;
+				margin: 0;
+				pointer-events: none;
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				width: 0;
+			}
 
-#tribe_events_filters_wrapper.tribe-events-filters-vertical .closed h3:after {
-	border-bottom: 0 inset transparent;
-	border-left: 4px inset transparent;
-	border-right: 4px inset transparent;
-	border-top: 6px solid;
-	color: #464646;
-}
+#tribe_events_filters_wrapper.tribe-events-filters-vertical .closed .tribe-events-filters-group-heading:after {
+					border-bottom: 0 inset transparent;
+					border-left: 4px inset transparent;
+					border-right: 4px inset transparent;
+					border-top: 6px solid;
+					color: #464646;
+				}
 
 /* Filter Toggles Triangle Parent/Child */
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .has-child {
-	position: relative;
-}
+			position: relative;
+		}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .has-child .tribe-toggle-child {
-	cursor: pointer;
-	height: 30px;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	width: 30px;
-}
+				cursor: pointer;
+				height: 30px;
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				width: 30px;
+			}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .has-child .tribe-toggle-child:hover {
-	cursor: pointer;
-}
+					cursor: pointer;
+				}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .has-child .tribe-toggle-child:after {
-	border-bottom: 6px solid;
-	border-left: 4px inset transparent;
-	border-right: 4px inset transparent;
-	border-top: 0 inset transparent;
-	color: #a3a3a3;
-	content: ' ';
-	height: 0;
-	left: auto;
-	margin: 0;
-	pointer-events: none;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	width: 0;
-}
+					border-bottom: 6px solid;
+					border-left: 4px inset transparent;
+					border-right: 4px inset transparent;
+					border-top: 0 inset transparent;
+					color: #a3a3a3;
+					content: ' ';
+					height: 0;
+					left: auto;
+					margin: 0;
+					pointer-events: none;
+					position: absolute;
+					right: 10px;
+					top: 10px;
+					width: 0;
+				}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .has-child.closed .tribe-toggle-child:after {
-	border-bottom: 0 inset transparent;
-	border-left: 4px inset transparent;
-	border-right: 4px inset transparent;
-	border-top: 6px solid;
-	color: #464646;
-}
+
+						border-bottom: 0 inset transparent;
+						border-left: 4px inset transparent;
+						border-right: 4px inset transparent;
+						border-top: 6px solid;
+						color: #464646;
+					}
 
 #tribe_events_filters_wrapper.tribe-events-filters-vertical .tribe-child-cat,
 		#tribe_events_filters_wrapper.tribe-events-filters-vertical .tribe-grandchild-cat {
-	display: none;
-}
+			display: none;
+		}
 
 #tribe_events_filter_item_featuredevent label span {
-	white-space: normal;
-}
+		white-space: normal;
+	}
 
 /* ==========================================================================
    Horizontal Filters Styles
@@ -627,34 +681,38 @@
 /* These styles only apply to larger screens */
 
 .tribe-events-filters-horizontal .tribe-events-filters-content {
-	background: #f5f5f5;
-	border: 1px solid #f5f5f5;
-}
+		background: #f5f5f5;
+		border: 1px solid #f5f5f5;
+	}
 
 /* Filter Toggles Triangle */
 
-.tribe-events-filters-horizontal h3 .horizontal-drop-indicator:before {
-	border-color: #666 transparent transparent;
-	border-style: solid;
-	border-width: 4px;
-	content: '';
-	display: inline-block;
-	height: 0;
-	margin: 5px 0 0 4px;
-	position: absolute;
-	transform: rotate(0);
-	transform-origin: 50% 25%;
-	transition: .25s ease-in-out;
-	width: 0;
-}
+.tribe-events-filters-horizontal button .horizontal-drop-indicator:before {
+				border-color: #666 transparent transparent;
+				border-style: solid;
+				border-width: 4px;
+				content: '';
+				display: inline-block;
+				height: 0;
+				margin: 5px 0 0 4px;
+				-webkit-transform: rotate(0);
+				        transform: rotate(0);
+				-webkit-transform-origin: 50% 25%;
+				        transform-origin: 50% 25%;
+				transition: .25s ease-in-out;
+				width: 0;
+				vertical-align: middle;
+			}
 
-.tribe-events-filters-horizontal .closed h3 .horizontal-drop-indicator {}
+.tribe-events-filters-horizontal .closed button .horizontal-drop-indicator {
+
+			}
 
 /* = Events Filter Styles
 =============================================*/
 
 .tribe_events_filter_item {
-	border-bottom: 0;
+	border: none;
 	margin: 0;
 	padding: 0;
 }
@@ -663,8 +721,25 @@
 	border-top-color: transparent;
 }
 
+/* = A11y Helper
+=============================================*/
+
+.a11y-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
 @media only screen and (min-width: 767px) {
 
+.tribe_events_filters_reset--desktop {
+		display: inline-block
+}
 	.tribe-filters-closed #tribe_events_filters_wrapper.tribe-events-filters-horizontal {
 		padding: 5px;
 		text-align: center;
@@ -722,7 +797,7 @@
 		top: auto;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control {
+	.tribe-events-filters-horizontal .tribe_events_filter_control {
 		float: right;
 		font-size: 11px;
 		line-height: 1.5;
@@ -730,18 +805,20 @@
 		width: auto;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control a {
+	.tribe-events-filters-horizontal .tribe_events_filter_control button {
+		background: transparent;
+		border: 0;
 		font-weight: bold;
 		margin: 0;
 		padding: 0;
 		text-decoration: none;
 	}
 
-	.tribe-events-filters-horizontal #tribe_events_filter_control a + a {
+	.tribe-events-filters-horizontal .tribe_events_filter_control button + button {
 		margin-left: 10px;
 	}
 
-	.tribe-filters-closed .tribe-events-filters-horizontal #tribe_events_filter_control {
+	.tribe-filters-closed .tribe-events-filters-horizontal .tribe_events_filter_control {
 		float: none;
 		width: 100%;
 	}
@@ -766,7 +843,8 @@
 		padding-top: 3px;
 	}
 
-	.tribe-events-filters-horizontal .tribe-events-filter-group:before {}
+	.tribe-events-filters-horizontal .tribe-events-filter-group:before {
+	}
 
 	.tribe-events-filters-horizontal .tribe-events-filter-group:before,
 	.tribe-events-filters-horizontal .tribe-events-filter-group:after {
@@ -816,6 +894,7 @@
 		display: inline-block;
 		margin-bottom: 0;
 		margin-left: 12px;
+		margin-top: 0;
 	}
 
 	#tribe_events_filters_wrapper.tribe-events-filters-horizontal .tribe_events_slider_val {
@@ -824,4 +903,4 @@
 		position: relative;
 		top: 0;
 	}
-}
+	}

@@ -109,7 +109,7 @@
 		 * @param filter
 		 * @param type
 		 */
-		update_current_filter: function ( filter, type ) {
+		update_current_filter: function( filter, type ) {
 
 			var $filter = $( filter );
 
@@ -179,7 +179,7 @@
 					if ( 'tribe_featuredevent[]' === $( this ).attr( 'name' )  ) {
 						text.push( tribe_filter.featured_active_filter );
 					} else {
-						text.push( $( this ).closest( 'label' ).text() );
+						text.push( $( 'label[for="' + this.id + '"] span' ).text() );
 					}
 				} );
 
@@ -188,7 +188,11 @@
 					if ( 1 < text.length ) {
 						additional_selections = ' <span class="tribe-events-filter-count">+' + ( text.length - 1 ) + '</span>';
 					}
-					$filter.closest( '.tribe_events_filter_item' ).addClass( 'active' ).find( '.tribe-filter-status' ).text( text[0] ).append( additional_selections );
+
+					if ( 0 < text.length ) {
+						$filter.closest( '.tribe_events_filter_item' ).addClass( 'active' ).find( '.tribe-filter-status' ).text( text[0] ).append( additional_selections );
+					}
+
 				}
 
 			}
@@ -310,6 +314,62 @@
 
 			return parent;
 
+		},
+
+		/**
+		 * Open and Close of Tribe Filter Sections
+		 *
+		 * @since ?
+		 *
+		 * @param event
+		 */
+		filter_section_toggle: function ( e ) {
+			var $horizontal   = $( '.tribe-events-filters-horizontal' );
+			var $tribe_events = $( document.getElementById( 'tribe-events' ) );
+			var hover_filters = ( $tribe_events.length && $tribe_events.tribe_has_attr( 'data-hover-filters' ) && $tribe_events.data( 'hover-filters' ) === 1 ) ? true : false;
+
+			if ( $horizontal.length && hover_filters ) {
+				return;
+			}
+
+			var $parent = $( e.target ).closest( '.tribe_events_filter_item' );
+			var filterId = $parent.attr( 'id' );
+
+			if ( $horizontal.length ) {
+				e.stopPropagation();
+				$( '.tribe_events_filter_item' ).not( $parent ).addClass( 'closed' );
+			}
+
+			if ( $parent.hasClass( 'closed' ) ) {
+				$parent.removeClass( 'closed' );
+				tf.a11y_filter_toggle( e, open );
+				if ( tribe_storage ) {
+					tribe_storage.setItem( filterId, 'open' );
+				}
+			}
+			else {
+				$parent.addClass( 'closed' );
+				tf.a11y_filter_toggle( e, closed );
+				if ( tribe_storage ) {
+					tribe_storage.setItem( filterId, 'closed' );
+				}
+			}
+		},
+
+		/**
+		 * Change a11y items on filter open/close
+		 *
+		 * @since ?
+		 *
+		 * @param event
+		 * @param state
+		 */
+		a11y_filter_toggle: function ( e, state ) {
+			var $targetItem = $( e.currentTarget ) || $( e );
+
+			var aria_expanded = ( open === state ) ? 'true' : 'false';
+
+			$targetItem.attr( "aria-expanded", aria_expanded );
 		}
 
 	} );
@@ -407,17 +467,18 @@
 			$( '.tribe_events_filter_item' ).each( function() {
 
 				var $this  = $( this );
-				var f_id   = $this.attr( 'id' );
-				var fts_id = tribe_storage.getItem( f_id );
+				var filterId   = $this.attr( 'id' );
+				var filterStorageID = tribe_storage.getItem( filterId );
 
-				if ( fts_id && fts_id == 'closed' ) {
+				if ( filterStorageID && filterStorageID == 'closed' ) {
 					$this.addClass( 'closed' );
+					tf.a11y_filter_toggle( $this.find( 'button' ), closed );
 				}
 			} );
 		}
 
 		$( document.getElementById( 'tribe_events_filters_wrapper' ) )
-			.on( 'click', '#tribe_events_filters_reset', function( e ) {
+			.on( 'click', '.tribe-js-filters-reset', function( e ) {
 
 				e.preventDefault();
 				$body.addClass( 'tribe-reset-on' );
@@ -449,7 +510,7 @@
 				$form.submit();
 				$body.removeClass( 'tribe-reset-on' );
 			} )
-			.on( 'click', '#tribe_events_filters_toggle', function( e ) {
+			.on( 'click', '.tribe-js-filters-toggle', function( e ) {
 				e.preventDefault();
 				toggle_filters();
 			} );
@@ -492,35 +553,18 @@
 				} );
 		}
 
+		// Toggle show/hide on Filter Section by click
 		$form
-			.on( 'click', 'h3', function( e ) {
+			.on( 'click', '.tribe-events-filters-group-heading', tf.filter_section_toggle );
 
-				if ( $horizontal.length && hover_filters ) {
-					return;
+		// Toggle show/hide on Filter Section by enter button
+		$( 'form .tribe-events-filters-group-heading' )
+			.keypress( function( e ) {
+				if ( 13 === e.which ) {
+					e.preventDefault();
+					tf.filter_section_toggle( e );
 				}
-
-				var $this = $( this ),
-					$parent = $this.parent(),
-					f_id = $parent.attr( 'id' );
-
-				if ( $horizontal.length ) {
-					e.stopPropagation();
-					$( '.tribe_events_filter_item' ).not( $parent ).addClass( 'closed' );
-				}
-
-				if ( $parent.hasClass( 'closed' ) ) {
-					$parent.removeClass( 'closed' );
-					if ( tribe_storage ) {
-						tribe_storage.setItem( f_id, 'open' );
-					}
-				}
-				else {
-					$parent.addClass( 'closed' );
-					if ( tribe_storage ) {
-						tribe_storage.setItem( f_id, 'closed' );
-					}
-				}
-			} );
+			});
 
 		// Force-hides the filters when viewport is under mobile breakpoint (default: 767px)
 		function mobile_close_filters() {

@@ -8,6 +8,7 @@
 */
 class MC4WP_Form_Asset_Manager {
 
+
 	/**
 	 * @var bool
 	 */
@@ -22,7 +23,7 @@ class MC4WP_Form_Asset_Manager {
 	 * MC4WP_Form_Asset_Manager constructor.
 	 */
 	public function __construct() {
-		$this->filename_suffix =( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$this->filename_suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	}
 
 	/**
@@ -39,11 +40,11 @@ class MC4WP_Form_Asset_Manager {
 
 	/**
 	 * Register the various JS files used by the plugin
-	 *
-	 * @deprecated 3.1.9
 	 */
 	public function register_assets() {
 		$suffix = $this->filename_suffix;
+
+		wp_register_script( 'mc4wp-forms-api', MC4WP_PLUGIN_URL . 'assets/js/forms-api' . $this->filename_suffix . '.js', array(), MC4WP_VERSION, true );
 
 		/**
 		 * Runs right after all assets (scripts & stylesheets) for forms have been registered
@@ -57,6 +58,7 @@ class MC4WP_Form_Asset_Manager {
 		do_action( 'mc4wp_register_form_assets', $suffix );
 	}
 
+
 	/**
 	 * @param string $stylesheet
 	 *
@@ -64,7 +66,7 @@ class MC4WP_Form_Asset_Manager {
 	 */
 	public function is_registered_stylesheet( $stylesheet ) {
 		$stylesheets = $this->get_registered_stylesheets();
-		return in_array( $stylesheet, $stylesheets );
+		return in_array( $stylesheet, $stylesheets, true );
 	}
 
 	/**
@@ -73,7 +75,7 @@ class MC4WP_Form_Asset_Manager {
 	public function get_registered_stylesheets() {
 		return array(
 			'basic',
-			'themes'
+			'themes',
 		);
 	}
 
@@ -83,7 +85,7 @@ class MC4WP_Form_Asset_Manager {
 	 * @return string
 	 */
 	public function get_stylesheet_url( $stylesheet ) {
-		if( ! $this->is_registered_stylesheet( $stylesheet ) ) {
+		if ( ! $this->is_registered_stylesheet( $stylesheet ) ) {
 			return '';
 		}
 
@@ -117,11 +119,11 @@ class MC4WP_Form_Asset_Manager {
 	/**
 	 * Load the various stylesheets
 	 */
-	public function load_stylesheets( ) {
+	public function load_stylesheets() {
 		$stylesheets = $this->get_active_stylesheets();
 
-		foreach( $stylesheets as $stylesheet ) {
-			if( ! $this->is_registered_stylesheet( $stylesheet ) ) {
+		foreach ( $stylesheets as $stylesheet ) {
+			if ( ! $this->is_registered_stylesheet( $stylesheet ) ) {
 				continue;
 			}
 
@@ -144,38 +146,31 @@ class MC4WP_Form_Asset_Manager {
 	 * @return array
 	 */
 	public function get_javascript_config() {
-
 		$submitted_form = mc4wp_get_submitted_form();
-
-		if( ! $submitted_form ) {
+		if ( ! $submitted_form instanceof MC4WP_Form ) {
 			return array();
 		}
 
 		$config = array(
 			'submitted_form' => array(
-				'id' => $submitted_form->ID,
-				'data' => $submitted_form->get_data(),
-				'action' => $submitted_form->config['action'],
+				'id'         => $submitted_form->ID,
+				'event'      => $submitted_form->last_event,
+				'data'       => $submitted_form->get_data(),
 				'element_id' => $submitted_form->config['element_id'],
-			)
+			),
 		);
 
-		if( $submitted_form->has_errors() ) {
+		if ( $submitted_form->has_errors() ) {
 			$config['submitted_form']['errors'] = $submitted_form->errors;
 		}
 
-		$auto_scroll = 'default';
+		$auto_scroll = true;
 
 		/**
 		 * Filters the `auto_scroll` setting for when a form is submitted.
+		 * Set to false to disable scrolling to form.
 		 *
-		 * Accepts the following  values:
-		 *
-		 * - false
-		 * - "default"
-		 * - "animated"
-		 *
-		 * @param boolean|string $auto_scroll
+		 * @param boolean $auto_scroll
 		 * @since 3.0
 		 */
 		$config['auto_scroll'] = apply_filters( 'mc4wp_form_auto_scroll', $auto_scroll );
@@ -208,19 +203,18 @@ class MC4WP_Form_Asset_Manager {
 	* Outputs the inline JavaScript that is used to enhance forms
 	*/
 	public function load_scripts() {
-
 		$load_scripts = $this->load_scripts;
 
 		/** @ignore */
 		$load_scripts = apply_filters( 'mc4wp_load_form_scripts', $load_scripts );
-		if( ! $load_scripts ) {
+		if ( ! $load_scripts ) {
 			return;
 		}
 
 		global $wp_scripts;
 
 		// make sure scripts are loaded
-		wp_enqueue_script( 'mc4wp-forms-api', MC4WP_PLUGIN_URL . 'assets/js/forms-api'.  $this->filename_suffix .'.js', array(), MC4WP_VERSION, true );
+		wp_enqueue_script( 'mc4wp-forms-api' );
 		wp_localize_script( 'mc4wp-forms-api', 'mc4wp_forms_config', $this->get_javascript_config() );
 
 		// load placeholder polyfill if browser is Internet Explorer
@@ -239,8 +233,4 @@ class MC4WP_Form_Asset_Manager {
 		/** @ignore */
 		do_action( 'mc4wp_load_form_scripts' );
 	}
-
-
-
-
 }

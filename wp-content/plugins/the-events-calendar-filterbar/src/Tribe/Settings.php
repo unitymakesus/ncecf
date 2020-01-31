@@ -12,6 +12,31 @@ class Tribe__Events__Filterbar__Settings {
 		add_action( 'tribe_settings_after_content_tab_filter-view', array( $this, 'addSettingsContent' ) );
 		add_action( 'tribe_settings_save_tab_filter-view', array( $this, 'save_settings_tab' ), 10, 0 );
 		add_action( 'wp_before_admin_bar_render', array( $this, 'add_toolbar_item' ), 12 );
+		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'filter_live_update_tooltip' ], 15 );
+	}
+
+	/**
+	 * Modifies the Live update tooltip properly.
+	 *
+	 * @since  4.9.0
+	 *
+	 * @param  array $fields  Fields that were passed for the Settigns tab.
+	 *
+	 * @return array          Fields after changing the tooltip.
+	 */
+	public function filter_live_update_tooltip( $fields ) {
+		if ( empty( $fields['liveFiltersUpdate'] ) ) {
+			return $fields;
+		}
+
+		$disable_bar = tribe_is_truthy( tribe_get_option( 'tribeDisableTribeBar', false ) );
+		if ( $disable_bar && ! tribe_events_views_v2_is_enabled() ) {
+			return $fields;
+		}
+
+		$fields['liveFiltersUpdate']['tooltip'] .= esc_html__( '(Note: When Live Refresh is enabled, TEC functionality may not be fully compliant with Web Accessibility Standards)', 'tribe-events-filter-view' );
+
+		return $fields;
 	}
 
 
@@ -26,9 +51,12 @@ class Tribe__Events__Filterbar__Settings {
 				array(),
 				apply_filters( 'tribe_events_filters_css_version', Tribe__Events__Filterbar__View::VERSION )
 			);
+
+			tribe_asset_enqueue( 'tribe-events-filterbar-admin-settings' );
 		}
 
 	}
+
 	/**
 	 * Add the Filters settings tab.
 	 *

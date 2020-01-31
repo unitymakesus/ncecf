@@ -10,7 +10,7 @@
 		<?php _e( 'Add more fields', 'mailchimp-for-wp' ); ?>
 	</a>
 </div>
-<h2><?php _e( "Form Fields", 'mailchimp-for-wp' ); ?></h2>
+<h2><?php _e( 'Form Fields', 'mailchimp-for-wp' ); ?></h2>
 
 <!-- Placeholder for the field wizard -->
 <div id="mc4wp-field-wizard"></div>
@@ -37,7 +37,7 @@
 
 <?php submit_button(); ?>
 
-<p class="mc4wp-form-usage"><?php printf( __( 'Use the shortcode %s to display this form inside a post, page or text widget.' ,'mailchimp-for-wp' ), '<input type="text" onfocus="this.select();" readonly="readonly" value="'. esc_attr( sprintf( '[mc4wp_form id="%d"]', $form->ID ) ) .'" size="'. ( strlen( $form->ID ) + 18 ) .'">' ); ?></p>
+<p class="mc4wp-form-usage"><?php printf( __( 'Use the shortcode %s to display this form inside a post, page or text widget.', 'mailchimp-for-wp' ), '<input type="text" onfocus="this.select();" readonly="readonly" value="' . esc_attr( sprintf( '[mc4wp_form id="%d"]', $form->ID ) ) . '" size="' . ( strlen( $form->ID ) + 18 ) . '">' ); ?></p>
 
 
 <?php // Content for Thickboxes ?>

@@ -7,6 +7,7 @@ class Tribe__Events__Filterbar__Filters__Country extends Tribe__Events__Filterba
 	public $searched_meta = '_VenueCountry';
 	public $relation_meta = '_EventVenueID';
 	public $join_name = 'country_filter';
+	public static $cache_key_base_ids = 'tribe_filterbar_country_ids';
 
 	public function get_searched_post_type() {
 		return Tribe__Events__Main::VENUE_POST_TYPE;
@@ -43,8 +44,13 @@ class Tribe__Events__Filterbar__Filters__Country extends Tribe__Events__Filterba
 	 */
 	public function get_country_code( $country ) {
 		$countries = Tribe__View_Helpers::constructCountries();
-		$code = array_search( $country, $countries );
-		return $code;
+		$codes     = array_flip( $countries );
+
+		if ( ! isset( $codes[ $country ] ) ) {
+			return false;
+		}
+
+		return $codes[ $country ];
 	}
 
 	/**

@@ -7,7 +7,7 @@
 		<div class="main-content col col-4">
 
 			<h1 class="page-title">
-				<?php _e( "Add new form", 'mailchimp-for-wp' ); ?>
+				<?php _e( 'Add new form', 'mailchimp-for-wp' ); ?>
 			</h1>
 
 			<h2 style="display: none;"></h2><?php // fake h2 for admin notices ?>
@@ -34,26 +34,36 @@
 
 						<h3>
 							<label>
-								<?php _e( 'To which MailChimp lists should this form subscribe?', 'mailchimp-for-wp' ); ?>
+								<?php _e( 'To which Mailchimp lists should this form subscribe?', 'mailchimp-for-wp' ); ?>
 							</label>
 						</h3>
 
-						<?php if( ! empty( $lists ) ) { ?>
+						<?php
+						if ( ! empty( $lists ) ) {
+							?>
 						<ul id="mc4wp-lists">
-							<?php foreach( $lists as $list ) { ?>
+							<?php
+							foreach ( $lists as $list ) {
+								?>
 								<li>
 									<label>
 										<input type="checkbox" name="mc4wp_form[settings][lists][<?php echo esc_attr( $list->id ); ?>]" value="<?php echo esc_attr( $list->id ); ?>" <?php checked( $number_of_lists, 1 ); ?> >
 										<?php echo esc_html( $list->name ); ?>
 									</label>
 								</li>
-							<?php } ?>
+								<?php
+							}
+							?>
 						</ul>
-						<?php } else { ?>
+							<?php
+						} else {
+							?>
 						<p class="mc4wp-notice">
-							<?php printf( __( 'No lists found. Did you <a href="%s">connect with MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
+							<?php printf( __( 'No lists found. Did you <a href="%s">connect with Mailchimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 						</p>
-						<?php } ?>
+							<?php
+						}
+						?>
 
 					</div>
 

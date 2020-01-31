@@ -4,7 +4,7 @@
 		Plugin Name: ACF Post-2-Post
 		Plugin URI: https://github.com/Hube2/acf-post2post
 		Description: Two way relationship fields
-		Version: 1.3.1
+		Version: 1.4.1
 		Author: John A. Huebner II
 		Author URI: https://github.com/Hube2
 		GitHub Plugin URI: https://github.com/Hube2/acf-post2post
@@ -39,23 +39,11 @@
 			}
 			add_filter('acf/update_value/type=relationship', array($this, 'update_relationship_field'), 11, 3);
 			add_filter('acf/update_value/type=post_object', array($this, 'update_relationship_field'), 11, 3);
-			add_filter('jh_plugins_list', array($this, 'meta_box_data'));
 		} // end public function plugins_loaded
 		
 		public function missing_acf5() {
 			deactivate_plugins(plugin_basename( __FILE__ ));
 		} // end public function missing_acf5
-			
-		public function meta_box_data($plugins=array()) {
-			
-			$plugins[] = array(
-				'title' => 'Post2Post for ACF',
-				'screens' => array('acf-field-group', 'edit-acf-field-group'),
-				'doc' => 'https://github.com/Hube2/acf-post2post'
-			);
-			return $plugins;
-			
-		} // public function meta_box_data
 		
 		public function update_relationship_field($value, $post_id, $field) {
 			$update = true;
@@ -63,6 +51,7 @@
 			if (!$update) {
 				return $value;
 			}
+			$updated_posts = array();
 			$field_name = $field['name'];
 			$previous = maybe_unserialize(get_post_meta($post_id, $field_name, true));
 			if ($previous === '') {
@@ -84,13 +73,18 @@
 				foreach ($previous as $related_id) {
 					if (!in_array($related_id, $new)) {
 						$this->remove_relationship($related_id, $field_name, $post_id);
+						$updated_posts[] = $related_id;
 					}
 				}
 			}
 			if (count($new)) {
 				foreach ($new as $related_id) {
 					$this->add_relationship($related_id, $field_name, $post_id);
+					$updated_posts[] = $related_id;
 				}
+			}
+			if (count($updated_posts)) {
+				do_action('acf/post2post/relationships_updated', $updated_posts, $field_name, $new, $previous);
 			}
 			return $value;
 		} // end public function update_relationship_field
@@ -135,6 +129,7 @@
 			}
 			update_post_meta($post_id, $field_name, $new_values);
 			update_post_meta($post_id, '_'.$field_name, $field['key']);
+			do_action('acf/post2post/relationship_updated', $post_id, $field_name, $new_values);
 		} // end private function remove_relationship
 		
 		private function add_relationship($post_id, $field_name, $related_id) {
@@ -154,10 +149,10 @@
 				if (!$field['multiple']) {
 					$max_posts = 1;
 					$array_value = false;
-				} elseif ($field['type'] == 'relationship') {
-					if ($field['max']) {
-						$max_posts = $field['max'];
-					}
+				}
+			} elseif ($field['type'] == 'relationship') {
+				if ($field['max']) {
+					$max_posts = $field['max'];
 				}
 			}
 			$value = maybe_unserialize(get_post_meta($post_id, $field_name, true));
@@ -198,6 +193,7 @@
 			}
 			update_post_meta($post_id, $field_name, $value);
 			update_post_meta($post_id, '_'.$field_name, $field['key']);
+			do_action('acf/post2post/relationship_updated', $post_id, $field_name, $value);
 		} // end private function add_relationship
 		
 		public function get_field($post_id, $field_name) {
@@ -254,51 +250,5 @@
 		} // end public function deactivate
 		
 	} // end class acf_post2post
-	
-	if (!function_exists('jh_plugins_list_meta_box')) {
-		function jh_plugins_list_meta_box() {
-			if (apply_filters('remove_hube2_nag', false)) {
-				return;
-			}
-			$plugins = apply_filters('jh_plugins_list', array());
-				
-			$id = 'plugins-by-john-huebner';
-			$title = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/Hube2" target="_blank">Plugins by John Huebner</a>';
-			$callback = 'show_blunt_plugins_list_meta_box';
-			$screens = array();
-			foreach ($plugins as $plugin) {
-				$screens = array_merge($screens, $plugin['screens']);
-			}
-			$context = 'side';
-			$priority = 'low';
-			add_meta_box($id, $title, $callback, $screens, $context, $priority);
-			
-			
-		} // end function jh_plugins_list_meta_box
-		add_action('add_meta_boxes', 'jh_plugins_list_meta_box');
-			
-		function show_blunt_plugins_list_meta_box() {
-			$plugins = apply_filters('jh_plugins_list', array());
-			?>
-				<p style="margin-bottom: 0;">Thank you for using my plugins</p>
-				<ul style="margin-top: 0; margin-left: 1em;">
-					<?php 
-						foreach ($plugins as $plugin) {
-							?>
-								<li style="list-style-type: disc; list-style-position:">
-									<?php 
-										echo $plugin['title'];
-										if ($plugin['doc']) {
-											?> <a href="<?php echo $plugin['doc']; ?>" target="_blank">Documentation</a><?php 
-										}
-									?>
-								</li>
-							<?php 
-						}
-					?>
-				</ul>
-				<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hube02%40earthlink%2enet&lc=US&item_name=Donation%20for%20WP%20Plugins%20I%20Use&no_note=0&cn=Add%20special%20instructions%20to%20the%20seller%3a&no_shipping=1&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">Please consider making a small donation.</a></p><?php 
-		}
-	} // end if !function_exists
 
 ?>

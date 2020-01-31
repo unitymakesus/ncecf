@@ -13,20 +13,20 @@ class Tribe__Events__Filterbar__Filters__Tag extends Tribe__Events__Filterbar__F
 	}
 
 	protected function get_values() {
-		$tags_array = array();
+		$tags_array = [];
 
 		$tags = get_tags();
 		foreach ( $tags as $tag ) {
-			$tags_array[ $tag->term_id ] = array(
+			$tags_array[ $tag->term_id ] = [
 				'name' => $tag->name,
 				'value' => $tag->term_id,
-			);
+			];
 		}
 
 		return $tags_array;
 	}
 
 	protected function setup_query_args() {
-		$this->queryArgs = array( 'tag__in' => $this->currentValue );
+		$this->queryArgs = [ 'tag__in' => $this->currentValue ];
 	}
 }

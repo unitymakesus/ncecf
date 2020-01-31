@@ -18,7 +18,7 @@
 */
 
 /* ==========================================================================
-  	Mobile Styles 
+  	Mobile Styles
    ========================================================================== */
 
 .tribe-events-filter-view.tribe-filters-closed #tribe-events-content,
@@ -36,19 +36,23 @@
 /* position the filters modal-like */
 
 .tribe-filters-open #tribe_events_filters_wrapper,
-.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-horizontal,
-.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-vertical {
-	bottom: 0;
-	box-sizing: border-box;
-	left: 0;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 100%;
-	z-index: 1000;
-}
+		.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-horizontal,
+		.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-vertical {
+			bottom: 0;
+			box-sizing: border-box;
+			left: 0;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100%;
+			z-index: 1000;
+		}
+
+.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-horizontal {
+			bottom: auto;
+		}
 
 .tribe-ajax-success.tribe-filters-open #tribe_events_filters_wrapper {
 	display: none;
@@ -62,7 +66,6 @@
 .tribe-filters-closed #tribe_events_filters_wrapper.tribe-events-filters-horizontal,
 .tribe-filters-closed #tribe_events_filters_wrapper.tribe-events-filters-vertical {
 	border: none;
-	height: 0;
 	margin-bottom: 0;
 	margin-top: -1.5em;
 	padding: 0;
@@ -82,28 +85,24 @@
 	background: #eee;
 }
 
-#tribe_events_filter_control {
+.tribe_events_filter_control {
 	margin: 0;
 }
 
-.tribe-filters-open #tribe_events_filter_control {
+.tribe-filters-open .tribe_events_filter_control {
 	display: none;
 }
 
-.tribe-filters-open #tribe_events_filter_control.tribe-events-filters-mobile-controls {
+.tribe-filters-open .tribe_events_filter_control.tribe-events-filters-mobile-controls {
 	display: block;
 	margin: 10px;
 }
 
-#tribe_events_filters_reset {
-	display: none;
-}
-
-.tribe-filters-open #tribe_events_filter_control.tribe-events-filters-mobile-controls #tribe_events_filters_reset {
+.tribe-filters-open .tribe_events_filter_control.tribe-events-filters-mobile-controls .tribe_events_filters_reset {
 	display: block;
 }
 
-#tribe_events_filter_control a {
+.tribe_events_filter_control button {
 	background: #f5f5f5;
 	border: 1px solid #e2e2e2;
 	display: block;
@@ -115,23 +114,24 @@
 	padding: 0;
 	text-align: center;
 	text-decoration: none;
-	width: auto;
+	width: 100%;
 }
 
-#tribe_events_filter_control a + a {
+.tribe_events_filter_control button + button {
 	margin: 10px 0;
 }
 
-.tribe-events-filters-horizontal #tribe_events_filter_control a + a {
+.tribe-events-filters-horizontal .tribe_events_filter_control button + button {
 	margin: 0;
 }
 
-#tribe_events_filter_control #tribe_events_filters_reset {
+.tribe_events_filter_control .tribe_events_filters_reset {
 	background: #fff;
 }
 
-#tribe_events_filter_control #tribe_events_filters_toggle {
+.tribe_events_filter_control .tribe_events_filters_toggle {
 	background: #666;
+	border: none;
 	color: #fff;
 }
 
@@ -159,7 +159,7 @@
 }
 
 #tribe_events_filters_wrapper.tribe-events-filters-horizontal .tribe-events-filters-label,
-.tribe-events-filters-horizontal #tribe_events_filter_control {
+.tribe-events-filters-horizontal .tribe_events_filter_control {
 	float: none;
 }
 
@@ -167,7 +167,7 @@
 	background: #f9fafa;
 }
 
-.tribe-filters-open .tribe-events-filters-horizontal #tribe_events_filter_control {
+.tribe-filters-open .tribe-events-filters-horizontal .tribe_events_filter_control {
 	margin-top: 10px;
 }
 
@@ -203,5 +203,5 @@
 }
 
 .tribe-theme-twentytwelve.tribe-mobile #tribe_events_filters_wrapper.tribe-events-filters-vertical {
-	margin-bottom: 5em ;
-}
+		margin-bottom: 5em ;
+	}

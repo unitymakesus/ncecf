@@ -11,6 +11,7 @@
 */
 class MC4WP_Form_Manager {
 
+
 	/**
 	 * @var MC4WP_Form_Output_Manager
 	 */
@@ -31,14 +32,17 @@ class MC4WP_Form_Manager {
 	*/
 	protected $previewer;
 
+	protected $recaptcha;
+
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->output_manager = new MC4WP_Form_Output_Manager();
-		$this->tags = new MC4WP_Form_Tags();
-		$this->listener = new MC4WP_Form_Listener();
-		$this->previewer = new MC4WP_Form_Previewer();
+		$this->tags           = new MC4WP_Form_Tags();
+		$this->listener       = new MC4WP_Form_Listener();
+		$this->previewer      = new MC4WP_Form_Previewer();
+		$this->recaptcha      = new MC4WP_Google_Recaptcha();
 	}
 
 	/**
@@ -53,6 +57,7 @@ class MC4WP_Form_Manager {
 		$this->output_manager->add_hooks();
 		$this->tags->add_hooks();
 		$this->previewer->add_hooks();
+		$this->recaptcha->add_hooks();
 	}
 
 	/**
@@ -60,20 +65,36 @@ class MC4WP_Form_Manager {
 	 */
 	public function initialize() {
 		$this->register_post_type();
+		$this->register_block_type();
 	}
 
+	private function register_block_type() {
+		// Bail if register_block_type does not exist (available since WP 5.0)
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		register_block_type(
+			'mailchimp-for-wp/form',
+			array(
+				'render_callback' => array( $this->output_manager, 'shortcode' ),
+			)
+		);
+	}
 
 	/**
 	 * Register post type "mc4wp-form"
 	 */
-	public function register_post_type() {
+	private function register_post_type() {
 		// register post type
-		register_post_type( 'mc4wp-form', array(
+		register_post_type(
+			'mc4wp-form',
+			array(
 				'labels' => array(
-					'name' => 'MailChimp Sign-up Forms',
+					'name'          => 'Mailchimp Sign-up Forms',
 					'singular_name' => 'Sign-up Form',
 				),
-				'public' => false
+				'public' => false,
 			)
 		);
 	}
@@ -102,7 +123,7 @@ class MC4WP_Form_Manager {
 	 *
 	 * @return string
 	 */
-	public function output_form(  $form_id, $config = array(), $echo = true ) {
+	public function output_form( $form_id, $config = array(), $echo = true ) {
 		return $this->output_manager->output_form( $form_id, $config, $echo );
 	}
 
@@ -112,7 +133,7 @@ class MC4WP_Form_Manager {
 	 * @return MC4WP_Form|null
 	 */
 	public function get_submitted_form() {
-		if( $this->listener->submitted_form instanceof MC4WP_Form ) {
+		if ( $this->listener->submitted_form instanceof MC4WP_Form ) {
 			return $this->listener->submitted_form;
 		}
 
@@ -125,6 +146,6 @@ class MC4WP_Form_Manager {
 	 * @return array
 	 */
 	public function get_tags() {
-		return $this->tags->get();
+		return $this->tags->all();
 	}
 }
