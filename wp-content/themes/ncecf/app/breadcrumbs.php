@@ -6,7 +6,7 @@ namespace App;
  * Customize Breadcrumbs plugin
  */
 
-add_filter('breadcrumb_trail_object', function() {
+add_filter('breadcrumb_trail_object', function($args) {
   global $post;
 
   $breadcrumbs = new \Breadcrumb_Trail($args);
