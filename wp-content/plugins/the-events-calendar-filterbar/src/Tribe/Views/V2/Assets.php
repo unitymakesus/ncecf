@@ -13,7 +13,7 @@ namespace Tribe\Events\Filterbar\Views\V2;
 
 use Tribe__Events__Filterbar__View as Plugin;
 use Tribe\Events\Views\V2\Template_Bootstrap;
-
+use Tribe\Events\Views\V2\Assets as TEC_Assets;
 /**
  * Register the Assets for Events Filterbar View V2.
  *
@@ -40,11 +40,20 @@ class Assets extends \tad_DI52_ServiceProvider {
 	public function register() {
 		$plugin = Plugin::instance();
 
+		$required_styles = [
+			'tribe-events-views-v2-skeleton',
+			'tribe-events-custom-jquery-styles'
+		];
+
+		if ( ! tribe( TEC_Assets::class )->is_skeleton_style() ) {
+			$required_styles[] = 'tribe-events-views-v2-full';
+		}
+
 		tribe_asset(
 			$plugin,
 			'tribe-events-filterbar-views-filter-bar-styles',
 			'views-filter-bar.css',
-			[ 'tribe-common-full-style', 'tribe-events-views-v2-full', 'tribe-events-custom-jquery-styles' ],
+			$required_styles,
 			'wp_enqueue_scripts',
 			[
 				'priority'     => 10,

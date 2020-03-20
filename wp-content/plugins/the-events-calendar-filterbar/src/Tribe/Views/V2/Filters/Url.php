@@ -44,15 +44,10 @@ class Url {
 			$filter_request_key = $context->get_read_key_for( $context_key, Context::REQUEST_VAR );
 
 			if ( method_exists( $filter_class, 'fill_query_args' ) ) {
-				$query_args = call_user_func( [
-					$filter_class,
-					'fill_query_args',
-				], $query_args, $value, $context_key, $context );
+				$query_args = $filter_class::fill_query_args( $query_args, $value, $context_key, $context );
 			} elseif ( method_exists( $filter_class, 'build_query_arg_value' ) ) {
-				$query_args[ $filter_request_key ] = call_user_func( [
-					$filter_class,
-					'build_query_arg_value',
-				], $value, $context_key, $context );
+				$value = $filter_class::build_query_arg_value( $value, $context_key, $context );
+				$query_args[ $filter_request_key ] = $value;
 			} else {
 				$query_args[ $filter_request_key ] = $value;
 			}

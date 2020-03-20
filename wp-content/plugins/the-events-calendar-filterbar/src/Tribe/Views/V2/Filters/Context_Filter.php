@@ -10,8 +10,8 @@
 
 namespace Tribe\Events\Filterbar\Views\V2\Filters;
 
-use Tribe__Utils__Array as Arr;
 use Tribe__Context as Context;
+use Tribe__Utils__Array as Arr;
 
 /**
  * Trait Context_Filter
@@ -111,6 +111,11 @@ trait Context_Filter {
 	 */
 	public function filter_query( \WP_Query $query ) {
 		if ( ! $this->is_correct_context( $query ) ) {
+			return;
+		}
+
+		if ( $this->currentValue === null ) {
+			// Bail from the filtering entirely if the values are not set.
 			return;
 		}
 

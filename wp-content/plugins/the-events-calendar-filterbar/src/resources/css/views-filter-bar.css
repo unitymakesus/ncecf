@@ -8,7 +8,8 @@
  * @see: http://moderntribe.github.io/products-engineering/css/
  */
 
-.tribe-events-filter-view.tribe-filters-closed .tribe-events #tribe_events_filters_wrapper.tribe-events-filters-horizontal, .tribe-events-filter-view.tribe-filters-closed .tribe-events #tribe_events_filters_wrapper.tribe-events-filters-vertical {
+.tribe-events #tribe_events_filters_wrapper.tribe-events-filters-horizontal,
+		.tribe-events #tribe_events_filters_wrapper.tribe-events-filters-vertical {
 			margin-top: 0;
 		}
 

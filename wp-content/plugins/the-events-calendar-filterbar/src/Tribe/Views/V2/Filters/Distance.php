@@ -55,6 +55,6 @@ class Distance extends \Tribe__Events__Pro__Geo_Loc_Filter {
 	 * @return string A comma-separated list of Venue IDs, e.g. `23` or `23,89`.
 	 */
 	public static function build_query_arg_value( $value, $context_key, Context $context ) {
-		return absint( $value );
+		return null !== $value ? absint( $value ) : null;
 	}
 }

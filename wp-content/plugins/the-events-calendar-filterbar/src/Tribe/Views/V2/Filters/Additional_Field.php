@@ -45,8 +45,7 @@ class Additional_Field extends \Tribe__Events__Filterbar__Filters__Additional_Fi
 		);
 
 		if ( ! isset( $additional_fields[ $this->slug ] ) ) {
-			// We have to return a non-empty array.
-			return [ '' ];
+			return null;
 		}
 
 		return is_array( $additional_fields[ $this->slug ] )

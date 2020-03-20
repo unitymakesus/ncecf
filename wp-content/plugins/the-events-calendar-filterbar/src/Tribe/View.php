@@ -40,7 +40,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 */
 		protected static $defaultMuFilters;
 
-		const VERSION = '4.9.0';
+		const VERSION = '4.9.2';
 
 		/**
 		 * The Events Calendar Required Version
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 * @deprecated 4.6
 		 *
 		 */
-		const REQUIRED_TEC_VERSION = '5.0.0';
+		const REQUIRED_TEC_VERSION = '5.0.1-dev';
 
 		/**
 		 * Where in the themes we will look for templates
@@ -558,7 +558,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		}
 
 		public function display_dynamic_a11y_notice() {
-			if ( tribe_get_option( 'liveFiltersUpdate', true ) ) {
+			if ( 'automatic' === tribe_get_option( 'liveFiltersUpdate', 'automatic' ) ) {
 				echo '<div class="a11y-hidden" aria-label="' . __( 'Accessibility Form Notice', 'tribe-events-filter-view' ) . '">';
 				echo __( 'Notice: Utilizing the form controls will dynamically update the content', 'tribe-events-filter-view' );
 				echo '</div>';

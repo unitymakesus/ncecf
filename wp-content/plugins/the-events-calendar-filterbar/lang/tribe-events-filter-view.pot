@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the The Events Calendar: Filter Bar package.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar: Filter Bar 4.9.0-\n"
+"Project-Id-Version: The Events Calendar: Filter Bar 4.9.2\n"
 "Report-Msgid-Bugs-To: http://m.tri.be/191x\n"
-"POT-Creation-Date: 2020-01-23 20:33:42+00:00\n"
+"POT-Creation-Date: 2020-02-19 15:59:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-01-23 20:33\n"
+"PO-Revision-Date: 2020-02-19 15:59\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 
@@ -205,7 +205,7 @@ msgctxt "Featured Events active fitler display label"
 msgid "Active"
 msgstr ""
 
-#: src/Tribe/View.php:408 src/Tribe/Views/V2/Filters/Context_Filter.php:212
+#: src/Tribe/View.php:408 src/Tribe/Views/V2/Filters/Context_Filter.php:217
 msgid "Event Category"
 msgstr ""
 
@@ -213,39 +213,39 @@ msgstr ""
 msgid "Cost (%s)"
 msgstr ""
 
-#: src/Tribe/View.php:419 src/Tribe/Views/V2/Filters/Context_Filter.php:221
+#: src/Tribe/View.php:419 src/Tribe/Views/V2/Filters/Context_Filter.php:226
 msgid "Tags"
 msgstr ""
 
-#: src/Tribe/View.php:423 src/Tribe/Views/V2/Filters/Context_Filter.php:223
+#: src/Tribe/View.php:423 src/Tribe/Views/V2/Filters/Context_Filter.php:228
 msgid "Venues"
 msgstr ""
 
-#: src/Tribe/View.php:427 src/Tribe/Views/V2/Filters/Context_Filter.php:219
+#: src/Tribe/View.php:427 src/Tribe/Views/V2/Filters/Context_Filter.php:224
 msgid "Organizers"
 msgstr ""
 
-#: src/Tribe/View.php:431 src/Tribe/Views/V2/Filters/Context_Filter.php:216
+#: src/Tribe/View.php:431 src/Tribe/Views/V2/Filters/Context_Filter.php:221
 msgid "Day"
 msgstr ""
 
-#: src/Tribe/View.php:435 src/Tribe/Views/V2/Filters/Context_Filter.php:222
+#: src/Tribe/View.php:435 src/Tribe/Views/V2/Filters/Context_Filter.php:227
 msgid "Time"
 msgstr ""
 
-#: src/Tribe/View.php:439 src/Tribe/Views/V2/Filters/Context_Filter.php:215
+#: src/Tribe/View.php:439 src/Tribe/Views/V2/Filters/Context_Filter.php:220
 msgid "Country"
 msgstr ""
 
-#: src/Tribe/View.php:443 src/Tribe/Views/V2/Filters/Context_Filter.php:213
+#: src/Tribe/View.php:443 src/Tribe/Views/V2/Filters/Context_Filter.php:218
 msgid "City"
 msgstr ""
 
-#: src/Tribe/View.php:447 src/Tribe/Views/V2/Filters/Context_Filter.php:220
+#: src/Tribe/View.php:447 src/Tribe/Views/V2/Filters/Context_Filter.php:225
 msgid "State/Province"
 msgstr ""
 
-#: src/Tribe/View.php:452 src/Tribe/Views/V2/Filters/Context_Filter.php:218
+#: src/Tribe/View.php:452 src/Tribe/Views/V2/Filters/Context_Filter.php:223
 msgid "Featured Events"
 msgstr ""
 
@@ -257,11 +257,11 @@ msgstr ""
 msgid "Notice: Utilizing the form controls will dynamically update the content"
 msgstr ""
 
-#: src/Tribe/Views/V2/Filters/Context_Filter.php:214
+#: src/Tribe/Views/V2/Filters/Context_Filter.php:219
 msgid "Cost ($)"
 msgstr ""
 
-#: src/Tribe/Views/V2/Filters/Context_Filter.php:217
+#: src/Tribe/Views/V2/Filters/Context_Filter.php:222
 msgid "Distance"
 msgstr ""
 
@@ -360,14 +360,14 @@ msgstr ""
 msgid "Events Filter Bar"
 msgstr ""
 
-#: the-events-calendar-filter-view.php:176
+#: the-events-calendar-filter-view.php:177
 msgid ""
 "To begin using The Events Calendar: Filter Bar, please install the latest "
 "version of"
 msgstr ""
 
-#: the-events-calendar-filter-view.php:178
 #: the-events-calendar-filter-view.php:179
+#: the-events-calendar-filter-view.php:180
 msgid "The Events Calendar"
 msgstr ""
 

@@ -54,7 +54,6 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		add_action( 'tribe_template_after_include:events/v2/components/filter-bar', [ $this, 'action_include_filter_bar' ], 10, 3 );
 		add_action( 'tribe_events_filter_view_do_display_filters', [ $this, 'display_filters' ] );
 		add_action( 'tribe_events_pro_shortcode_tribe_events_before_assets', [ $this, 'action_include_assets' ] );
-		add_action( 'tribe_events_pro_shortcode_toggle_view_hooks', [ $this, 'on_shortcode_toggle_view_hooks' ] );
 	}
 
 	/**
@@ -138,13 +137,11 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @param array                           $name     Template name.
 	 * @param \Tribe\Events\Views\V2\Template $template Current instance of the template.
 	 *
-	 * @return string
+	 * @return string|void
 	 */
 	public function action_include_filter_bar( $file, $name, $template ) {
-		$context = $template->get_context();
-
-		if ( ! $this->should_display_filters || $context->get( 'shortcode', false ) ) {
-			return '';
+		if ( ! $this->container->make( Filters::class )->should_display_filters( $template->get_view() ) ) {
+			return;
 		}
 
 		return $this->container->make( Template::class )->template( 'filter-bar', $template->get_values() );
@@ -218,9 +215,9 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 */
 	public function filter_body_class( $classes ) {
 		$layout       = tribe( Filters::class )->get_layout_setting();
-		$live_refresh = tribe_get_option( 'liveFiltersUpdate', true );
+		$live_refresh = tribe_get_option( 'liveFiltersUpdate', 'automatic' );
 
-		if ( ! empty( $live_refresh ) ) {
+		if ( 'automatic' === $live_refresh ) {
 			$classes[] = 'tribe-filters-live-update';
 		}
 

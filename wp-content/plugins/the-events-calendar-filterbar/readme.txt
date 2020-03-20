@@ -3,9 +3,9 @@
 Contributors: ModernTribe, barry.hughes, bordoni, borkweb, brianjessee, brook-tribe, faction23, geoffgraham, ggwicz, jazbek, jbrinley, joshlimecuda, leahkoerper, lucatume, mastromktg, mat-lipe, mdbitz, neillmcshea, nicosantos, peterchester, reid.peifer, roblagatta, ryancurban, shane.pearlman, thatdudebutch,  zbtirrell
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget, pro, filters, categories, sort, tags, taxonomy, find, search
 Donate link: http://m.tri.be/29
-Requires at least: 4.5
+Requires at least: 4.9
 Tested up to: 5.3.2
-Stable tag: 4.9.0
+Stable tag: 4.9.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -54,10 +54,10 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 
 = Requirements =
 
-* PHP 5.2.4 or greater (recommended: PHP 5.4 or greater)
-* WordPress 4.4 or above
+* PHP 5.6 or greater (recommended: PHP 5.4 or greater)
+* WordPress 4.9 or above
 * jQuery 1.11.x
-* The Events Calendar 4.5 or above
+* The Events Calendar 5.0 or above
 
 = Where to Begin =
 
@@ -194,6 +194,21 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18h9" target="_blank">The Events Calendar: iCal Importer</a>
 
 == Changelog ==
+
+= [4.9.2] 2020-02-19 =
+
+* Version - Filter Bar 4.9.2 is only compatible with The Events Calendar 5.0.2 and higher
+* Tweak - Update the conditional checks for the new live refresh radio controls. [TEC-3072]
+* Fix - Stop force-enqueuing tribe styles when Filter Bar is loaded. [FBAR-69]
+* Language - 0 new strings added, 12 updated, 0 fuzzied, and 0 obsoleted
+
+= [4.9.1] 2020-02-12 =
+
+* Version - Filter Bar 4.9.1 is only compatible with The Events Calendar 5.0.1 and higher
+* Fix - Do not display filter bar on venue and organizer pages for new views. [FBAR-60]
+* Fix - Set margin for filter bar for new views so the filter bar doesn't overlap with the header. [FBAR-61]
+* Fix - Dependency checker now correctly identifies when The Events Calendar is missing on activation of Filter Bar or deactivation of The Events Calendar with Event Tickets active. [FBAR-15]
+* Language - 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted
 
 = [4.9.0] 2020-01-27 =
 
