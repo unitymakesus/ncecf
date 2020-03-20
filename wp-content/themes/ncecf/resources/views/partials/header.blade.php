@@ -23,7 +23,8 @@
           {!! wp_nav_menu(['theme_location' => 'header_social', 'menu_class' => 'social-icons right-align', 'menu_id' => 'header-social']) !!}
         @endif
         {!! get_search_form(false) !!}
-        <div class="right-align"><a href="https://www.mightycause.com/organization/Buildthefoundation" target="_blank" rel="noopener" class="btn btn-blue">Donate</a></div>
+        <div class="right-align">
+          <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LY3HR422QLMA8" target="_blank" rel="noopener" class="btn btn-blue">Donate</a></div>
       </div>
     </div>
 
