@@ -22,3 +22,16 @@ add_action('customize_register', function (\WP_Customize_Manager $wp_customize) 
 add_action('customize_preview_init', function () {
     wp_enqueue_script('sage/customizer.js', asset_path('scripts/customizer.js'), ['customize-preview'], null, true);
 });
+
+/**
+ * ACF Theme Options
+ */
+if ( function_exists('acf_add_options_page') ) {
+    acf_add_options_page([
+      'page_title' 	=> 'Theme General Settings',
+      'menu_title'	=> 'Theme Settings',
+      'menu_slug' 	=> 'theme-general-settings',
+      'capability'	=> 'edit_posts',
+      'redirect'	=> false,
+    ]);
+}

@@ -1,4 +1,17 @@
 <a href="#content" class="screen-reader-text">Skip to content</a>
+
+@if (get_field('global_alert_bar_enable', 'options'))
+  <div class="alert-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 text-center">
+          {!! get_field('global_alert_bar_message', 'option') !!}
+        </div>
+      </div>
+    </div>
+  </div>
+@endif
+
 <header class="banner" role="banner">
   <nav role="navigation">
     <div class="container">
