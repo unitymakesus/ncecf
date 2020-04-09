@@ -161,3 +161,37 @@ add_shortcode('people', function($atts) {
 
 	return ob_get_clean();
 });
+
+/**
+ * Display posts by tag shortcode.
+ */
+add_shortcode('display_posts_by_tag', function($atts, $content = null) {
+    global $post;
+
+    extract(shortcode_atts([
+        'tag'     => '',
+        'num'     => '5',
+        'order'   => 'DESC',
+        'orderby' => 'post_date',
+    ], $atts));
+
+    $args = [
+        'tag'            => $tag,
+        'posts_per_page' => $num,
+        'order'          => $order,
+        'orderby'        => $orderby,
+    ];
+
+    $output = '';
+
+    $posts = get_posts($args);
+
+    foreach ($posts as $post) {
+        setup_postdata($post);
+        $output .= '<li><a href="'. get_the_permalink() .'">'. get_the_title() .'</a></li>';
+    }
+
+    wp_reset_postdata();
+
+    return '<ul>'. $output .'</ul>';
+});
