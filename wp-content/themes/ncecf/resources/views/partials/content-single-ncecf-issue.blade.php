@@ -1,3 +1,7 @@
+@php
+$the_id = get_the_ID();
+@endphp
+
 <section class="container" role="region" aria-label="Introduction">
   <div class="row">
     <div class="col l7 m6 s12">
@@ -141,7 +145,7 @@
         @endforeach
       </div>
       <div class="row">
-        <p class="center-align"><a href="/resources/?_resource_issue={{ get_the_id() }}" class="btn btn-green">See All Related Resources</a></p>
+        <p class="center-align"><a href="/resources/?_resource_issue={{ $the_id }}" class="btn btn-green">See All Related Resources</a></p>
       </div>
     </div>
   @endif
@@ -165,7 +169,7 @@
               </header>
             </article>
           @endwhile
-          <p><a href="/news/?_related_issues={{ get_the_id() }}" class="btn btn-slate">All Related Posts</a></p>
+          <p><a href="/news/?_related_issues={{ $the_id }}" class="btn btn-slate">All Related Posts</a></p>
           @php (wp_reset_postdata())
         </div>
       @endif
