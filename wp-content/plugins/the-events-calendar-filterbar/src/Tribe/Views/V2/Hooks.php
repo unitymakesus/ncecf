@@ -140,6 +140,13 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @return string|void
 	 */
 	public function action_include_filter_bar( $file, $name, $template ) {
+
+		// Prevent Including the Filter Bar if on a Shortcode
+		$context = $template->get_context();
+		if ( $context->get( 'shortcode'  ) ) {
+			return;
+		}
+
 		if ( ! $this->container->make( Filters::class )->should_display_filters( $template->get_view() ) ) {
 			return;
 		}
@@ -222,10 +229,24 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		}
 
 		if ( 'vertical' === $layout ) {
-			$classes[] = 'tribe-filters-open';
+			/**
+			 * Allows filtering of whether vertical filters initially display closed.
+			 *
+			 * @since 4.9.3
+			 *
+			 * @param bool $init_closed Boolean on whether to initially display vertical filters closed or not.
+			 */
+			$init_closed = apply_filters( 'tribe_events_filter_bar_views_v2_vertical_init_closed', true );
 
-			// See if we have the closed class
-			$key = array_search( 'tribe-filters-closed', $classes );
+			$filter_classes = [ 'tribe-filters-closed', 'tribe-filters-open' ];
+			if ( empty( $init_closed ) ) {
+				$filter_classes = array_reverse( $filter_classes );
+			}
+
+			$classes[] = $filter_classes[0];
+
+			// See if we have the opposite filter class.
+			$key = array_search( $filter_classes[1], $classes );
 
 			// Remove it from the array
 			if ( ! empty( $key ) ) {

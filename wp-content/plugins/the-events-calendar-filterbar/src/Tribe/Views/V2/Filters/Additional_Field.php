@@ -22,7 +22,7 @@ use Tribe__Utils__Array as Arr;
 class Additional_Field extends \Tribe__Events__Filterbar__Filters__Additional_Field {
 	use Context_Filter;
 
-	public function set_meta_key( string $meta_key ) {
+	public function set_meta_key( $meta_key ) {
 		$this->meta_key = $meta_key;
 	}
 

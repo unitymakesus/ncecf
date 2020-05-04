@@ -68,6 +68,41 @@
 		.tribe-events-c-promo {
 			clear: both;
 		}
-	}
 
+		.tribe_events_filters_reset {
+			display: block;
+			width: 100%;
+			padding: 12px 0 13px;
+
+			.tribe-reset-icon {
+				line-height: 24px;
+				margin-right: 10px;
+			}
+		}
+	}
+}
+
+.tribe-dropdown {
+	&.select2-container {
+		.select2-dropdown {
+			&.select2-dropdown--below {
+				margin-top:0;
+			}
+
+			&.select2-dropdown--above {
+				margin-bottom:0;
+			}
+		}
+		.select2-results {
+			ul {
+				margin: 0;
+				padding: 0;
+				.select2-results__option {
+					margin: 0;
+					padding: 6px;
+					font-size: 12px;
+				}
+			}
+		}
+	}
 }

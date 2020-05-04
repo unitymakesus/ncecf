@@ -12,33 +12,9 @@ class Tribe__Events__Filterbar__Settings {
 		add_action( 'tribe_settings_after_content_tab_filter-view', array( $this, 'addSettingsContent' ) );
 		add_action( 'tribe_settings_save_tab_filter-view', array( $this, 'save_settings_tab' ), 10, 0 );
 		add_action( 'wp_before_admin_bar_render', array( $this, 'add_toolbar_item' ), 12 );
-		add_filter( 'tribe_general_settings_tab_fields', [ $this, 'filter_live_update_tooltip' ], 15 );
+		add_filter( 'tribe_events_liveupdate_automatic_label_text', [ $this, 'liveupdate_automatic_label_text' ] );
+		add_filter( 'tribe_events_liveupdate_manual_label_text', [ $this, 'liveupdate_manual_label_text' ] );
 	}
-
-	/**
-	 * Modifies the Live update tooltip properly.
-	 *
-	 * @since  4.9.0
-	 *
-	 * @param  array $fields  Fields that were passed for the Settigns tab.
-	 *
-	 * @return array          Fields after changing the tooltip.
-	 */
-	public function filter_live_update_tooltip( $fields ) {
-		if ( empty( $fields['liveFiltersUpdate'] ) ) {
-			return $fields;
-		}
-
-		$disable_bar = tribe_is_truthy( tribe_get_option( 'tribeDisableTribeBar', false ) );
-		if ( $disable_bar && ! tribe_events_views_v2_is_enabled() ) {
-			return $fields;
-		}
-
-		$fields['liveFiltersUpdate']['tooltip'] .= esc_html__( '(Note: When Live Refresh is enabled, TEC functionality may not be fully compliant with Web Accessibility Standards)', 'tribe-events-filter-view' );
-
-		return $fields;
-	}
-
 
 	public function addAdminScriptsAndStyles() {
 		global $current_screen;
@@ -66,7 +42,6 @@ class Tribe__Events__Filterbar__Settings {
 		$fields = $this->get_field_definitions();
 		new Tribe__Settings_Tab( 'filter-view', __( 'Filters', 'tribe-events-filter-view' ), array( 'priority' => 36, 'fields' => $fields ) );
 	}
-
 
 	/**
 	 * Add the content to the settings tab.
@@ -126,7 +101,10 @@ class Tribe__Events__Filterbar__Settings {
 			),
 			'events_filters_section_description' => array(
 				'type' => 'html',
-				'html' => '<p class="description">' . __( 'The settings below allow you to enable or disable front-end event filters. Uncheck the box to hide the filter. Drag and drop active filters to re-arrange them.', 'tribe-events-filter-view' ) . '</p>
+				'html' => '<p class="description">' .  sprintf(
+					esc_html__( 'The settings below allow you to enable or disable front-end %s filters. Uncheck the box to hide the filter. Drag and drop active filters to re-arrange them.', 'tribe-events-filter-view' ),
+					tribe_get_event_label_singular()
+				) . '</p>
 						   <p class="description">' . __( 'Expand an active filter to edit the label and choose from a subset of input types (dropdown, select, range slider, checkbox and radio).', 'tribe-events-filter-view' ) . '</p>',
 			),
 			'events_filters_available_filters' => array(
@@ -178,5 +156,31 @@ class Tribe__Events__Filterbar__Settings {
 			'href' => $link,
 			'title' => __( 'Filter Bar', 'tribe-events-filter-view' ),
 		) );
+	}
+
+	/**
+	 * Modify the live update label when Filterbar Is active and is automatic.
+	 *
+	 * @since 4.9.3
+	 *
+	 * @param string $text Previous text used for label.
+	 *
+	 * @return string New label based on filterbar.
+	 */
+	public function liveupdate_automatic_label_text( $text ) {
+		return __( 'Enabled: datepicker and filter selections automatically update calendar views', 'tribe-events-filter-view' );
+	}
+
+	/**
+	 * Modify the live update label when Filterbar Is active and is manual.
+	 *
+	 * @since 4.9.3
+	 *
+	 * @param string $text Previous text used for label.
+	 *
+	 * @return string New label based on filterbar.
+	 */
+	public function liveupdate_manual_label_text( $text ) {
+		return __( 'Disabled: users must manually submit date search and Filter Bar', 'tribe-events-filter-view' );
 	}
 }

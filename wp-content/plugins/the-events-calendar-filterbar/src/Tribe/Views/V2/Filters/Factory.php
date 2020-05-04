@@ -99,17 +99,17 @@ class Factory {
 	 */
 	public static function context_to_filters_map() {
 		$map = [
+			'filterbar_category'       => Category::class,
 			'filterbar_cost'           => Cost::class,
+			'filterbar_tag'            => Tag::class,
 			'filterbar_venue'          => Venue::class,
+			'filterbar_organizer'      => Organizer::class,
 			'filterbar_day_of_week'    => Day_Of_Week::class,
 			'filterbar_time_of_day'    => Time_Of_Day::class,
 			'filterbar_country'        => Country::class,
 			'filterbar_city'           => City::class,
-			'filterbar_featured'       => Featured_Events::class,
-			'filterbar_category'       => Category::class,
-			'filterbar_tag'            => Tag::class,
-			'filterbar_organizer'      => Organizer::class,
 			'filterbar_state_province' => State::class,
+			'filterbar_featured'       => Featured_Events::class,
 		];
 
 		if ( class_exists( 'Tribe__Events__Pro__Geo_Loc_Filter' ) ) {

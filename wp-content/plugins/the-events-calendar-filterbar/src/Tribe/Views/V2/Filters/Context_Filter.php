@@ -214,18 +214,18 @@ trait Context_Filter {
 	public static function get_filter_default_name( $filter_class, $context_key ) {
 		$map = [
 			'Tribe\Events\Filterbar\Views\V2\Filters\Additional_Field' => $context_key,
-			'Tribe\Events\Filterbar\Views\V2\Filters\Category'         => __( 'Event Category', 'tribe-events-filter-view' ),
+			'Tribe\Events\Filterbar\Views\V2\Filters\Category'         => sprintf( esc_html__( '%s Category', 'tribe-events-filter-view' ), tribe_get_event_label_singular() ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\City'             => __( 'City', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Cost'             => __( 'Cost ($)', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Country'          => __( 'Country', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Day_Of_Week'      => __( 'Day', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Distance'         => __( 'Distance', 'tribe-events-filter-view' ),
-			'Tribe\Events\Filterbar\Views\V2\Filters\Featured_Events'  => __( 'Featured Events', 'tribe-events-filter-view' ),
-			'Tribe\Events\Filterbar\Views\V2\Filters\Organizer'        => __( 'Organizers', 'tribe-events-filter-view' ),
+			'Tribe\Events\Filterbar\Views\V2\Filters\Featured_Events'  => sprintf( esc_html__( 'Featured %s', 'tribe-events-filter-view' ), tribe_get_event_label_plural() ),
+			'Tribe\Events\Filterbar\Views\V2\Filters\Organizer'        => tribe_get_organizer_label_plural(),
 			'Tribe\Events\Filterbar\Views\V2\Filters\State'            => __( 'State/Province', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Tag'              => __( 'Tags', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Time_Of_Day'      => __( 'Time', 'tribe-events-filter-view' ),
-			'Tribe\Events\Filterbar\Views\V2\Filters\Venue'            => __( 'Venues', 'tribe-events-filter-view' ),
+			'Tribe\Events\Filterbar\Views\V2\Filters\Venue'            => tribe_get_venue_label_plural(),
 		];
 
 		return Arr::get( $map, $filter_class, $context_key );

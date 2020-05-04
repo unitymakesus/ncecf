@@ -4,8 +4,8 @@ Contributors: ModernTribe, barry.hughes, bordoni, borkweb, brianjessee, brook-tr
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget, pro, filters, categories, sort, tags, taxonomy, find, search
 Donate link: http://m.tri.be/29
 Requires at least: 4.9
-Tested up to: 5.3.2
-Stable tag: 4.9.2
+Tested up to: 5.4
+Stable tag: 4.10.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -194,6 +194,26 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18h9" target="_blank">The Events Calendar: iCal Importer</a>
 
 == Changelog ==
+
+= [4.10.0] 2020-04-23 =
+
+* Tweak - Deprecate Select2 3.5.4 in favor of SelectWoo
+* Tweak - Load plugin text domain on the new `tribe_load_text_domains` action hook, which fires on `init` instead of on the `plugins_loaded` hook. [FBAR-94]
+* Fix - Prevent PHP errors from happening during bulk activation or deactivation of the plugin [TCMN-53]
+* Fix - Update events, venues, and organizers to use dynamic labels. [FBAR-82]
+* Fix - Additional Fields filter so that it only shows the individual values and not a combination of values choosen. [FBAR-88]
+* Language - 2 new strings added, 34 updated, 3 fuzzied, and 6 obsoleted
+
+= [4.9.3] 2020-03-23 =
+
+* Fix - Prevent warning from popping when using Additional Fields (PRO) with Filterbar on PHP 5.6 [FBAR-81]
+* Fix - Resolve Checkbox behavior for additional fields on filter bar [FBAR-84]
+* Fix - Allow links to be clicked when filter bar is open on mobile. [FBAR-66]
+* Fix - Default vertical filter bar to start closed, fix JS around filter bar for V2. [FBAR-72]
+* Fix - Allow reset button to reset filters and update view even when live refresh is disabled. [FBAR-75]
+* Fix - Prevent Filter Bar template from loading when navigating in a shortcode view. [FBAR-76]
+* Tweak - Modify the Live Update labels for Automatic and Manual for better clarification of the behavior for customers. [FBAR-79]
+* Language - 2 new strings added, 18 updated, 0 fuzzied, and 1 obsoleted
 
 = [4.9.2] 2020-02-19 =
 

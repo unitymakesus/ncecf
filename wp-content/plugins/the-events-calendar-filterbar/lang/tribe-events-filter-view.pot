@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the The Events Calendar: Filter Bar package.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar: Filter Bar 4.9.2\n"
+"Project-Id-Version: The Events Calendar: Filter Bar 4.10.0\n"
 "Report-Msgid-Bugs-To: http://m.tri.be/191x\n"
-"POT-Creation-Date: 2020-02-19 15:59:19+00:00\n"
+"POT-Creation-Date: 2020-04-21 02:59:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-02-19 15:59\n"
+"PO-Revision-Date: 2020-04-21 02:59\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 
@@ -16,46 +16,46 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: src/Tribe/Filter.php:368
+#: src/Tribe/Filter.php:369
 msgid "Select an Item"
 msgstr ""
 
-#: src/Tribe/Filter.php:389
+#: src/Tribe/Filter.php:391 src/Tribe/View.php:232
 msgctxt "Featured Events active filter display label"
 msgid "Active"
 msgstr ""
 
-#: src/Tribe/Filter.php:638
+#: src/Tribe/Filter.php:640
 msgid "Title: %s"
 msgstr ""
 
-#: src/Tribe/Filter.php:656
+#: src/Tribe/Filter.php:658
 msgid "Type: %s %s %s"
 msgstr ""
 
-#: src/Tribe/Filter.php:660
+#: src/Tribe/Filter.php:662
 msgid "Dropdown"
 msgstr ""
 
-#: src/Tribe/Filter.php:665 src/Tribe/Filters/Cost.php:64
+#: src/Tribe/Filter.php:667 src/Tribe/Filters/Cost.php:64
 msgid "Checkboxes"
 msgstr ""
 
-#: src/Tribe/Filter.php:670
+#: src/Tribe/Filter.php:672
 msgid "Multi-Select"
 msgstr ""
 
-#: src/Tribe/Filters/Additional_Field.php:68
+#: src/Tribe/Filters/Additional_Field.php:70
 msgctxt "additional fields filter logic setting"
 msgid "Match all"
 msgstr ""
 
-#: src/Tribe/Filters/Additional_Field.php:74
+#: src/Tribe/Filters/Additional_Field.php:76
 msgctxt "additional fields filter logic setting"
 msgid "Match any"
 msgstr ""
 
-#: src/Tribe/Filters/Additional_Field.php:78
+#: src/Tribe/Filters/Additional_Field.php:80
 msgctxt "additional fields filter logic setting"
 msgid "Logic:"
 msgstr ""
@@ -68,32 +68,32 @@ msgstr ""
 msgid "Range Slider"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:69
-msgid "Events are considered free when cost field is: %s %s"
+#: src/Tribe/Filters/Cost.php:71
+msgid "Used as the identifier for free %s"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:74
+#: src/Tribe/Filters/Cost.php:76
 msgid "\"%s\" or empty or set to zero"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:75
-msgid "Used as the identifier for free Events"
-msgstr ""
-
-#: src/Tribe/Filters/Cost.php:81
+#: src/Tribe/Filters/Cost.php:91
 msgid "Only when set to zero"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:89
+#: src/Tribe/Filters/Cost.php:95
+msgid "%s are considered free when cost field is: %s %s"
+msgstr ""
+
+#: src/Tribe/Filters/Cost.php:105
 msgctxt "Used as the identifier for free Events"
 msgid "Free"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:101
+#: src/Tribe/Filters/Cost.php:117
 msgid "Other"
 msgstr ""
 
-#: src/Tribe/Filters/Cost.php:105
+#: src/Tribe/Filters/Cost.php:121
 msgid "Free"
 msgstr ""
 
@@ -125,135 +125,125 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: src/Tribe/Filters/Featured_Events.php:43
-msgid "Show featured events only"
+#: src/Tribe/Filters/Featured_Events.php:44
+msgid "Show featured %s only"
 msgstr ""
 
-#: src/Tribe/Filters/Time_Of_Day.php:12
+#: src/Tribe/Filters/Time_Of_Day.php:17
 msgid "All Day"
 msgstr ""
 
-#: src/Tribe/Filters/Time_Of_Day.php:13
+#: src/Tribe/Filters/Time_Of_Day.php:18
 msgid "Morning"
 msgstr ""
 
-#: src/Tribe/Filters/Time_Of_Day.php:14
+#: src/Tribe/Filters/Time_Of_Day.php:19
 msgid "Afternoon"
 msgstr ""
 
-#: src/Tribe/Filters/Time_Of_Day.php:15
+#: src/Tribe/Filters/Time_Of_Day.php:20
 msgid "Evening"
 msgstr ""
 
-#: src/Tribe/Filters/Time_Of_Day.php:16
+#: src/Tribe/Filters/Time_Of_Day.php:21
 msgid "Night"
 msgstr ""
 
-#: src/Tribe/Settings.php:37
-msgid ""
-"(Note: When Live Refresh is enabled, TEC functionality may not be fully "
-"compliant with Web Accessibility Standards)"
-msgstr ""
-
-#: src/Tribe/Settings.php:67 src/Tribe/Settings.php:125
+#: src/Tribe/Settings.php:43 src/Tribe/Settings.php:100
 msgid "Filters"
 msgstr ""
 
-#: src/Tribe/Settings.php:129
+#: src/Tribe/Settings.php:105
 msgid ""
-"The settings below allow you to enable or disable front-end event filters. "
+"The settings below allow you to enable or disable front-end %s filters. "
 "Uncheck the box to hide the filter. Drag and drop active filters to re-"
 "arrange them."
 msgstr ""
 
-#: src/Tribe/Settings.php:130
+#: src/Tribe/Settings.php:108
 msgid ""
 "Expand an active filter to edit the label and choose from a subset of input "
 "types (dropdown, select, range slider, checkbox and radio)."
 msgstr ""
 
-#: src/Tribe/Settings.php:142
+#: src/Tribe/Settings.php:120
 msgid "Filters Layout"
 msgstr ""
 
-#: src/Tribe/Settings.php:145
+#: src/Tribe/Settings.php:123
 msgid "Vertical"
 msgstr ""
 
-#: src/Tribe/Settings.php:146
+#: src/Tribe/Settings.php:124
 msgid "Horizontal"
 msgstr ""
 
-#: src/Tribe/Settings.php:152
+#: src/Tribe/Settings.php:130
 msgid "Filter Bar default state"
 msgstr ""
 
-#: src/Tribe/Settings.php:155
+#: src/Tribe/Settings.php:133
 msgid "Stay collapsed until visitors open it"
 msgstr ""
 
-#: src/Tribe/Settings.php:156
+#: src/Tribe/Settings.php:134
 msgid "Show on initial page load"
 msgstr ""
 
-#: src/Tribe/Settings.php:179
+#: src/Tribe/Settings.php:157
 msgid "Filter Bar"
 msgstr ""
 
-#: src/Tribe/View.php:232
-msgctxt "Featured Events active fitler display label"
-msgid "Active"
+#: src/Tribe/Settings.php:171
+msgid ""
+"Enabled: datepicker and filter selections automatically update calendar views"
+msgstr ""
+
+#: src/Tribe/Settings.php:184
+msgid "Disabled: users must manually submit date search and Filter Bar"
 msgstr ""
 
 #: src/Tribe/View.php:408 src/Tribe/Views/V2/Filters/Context_Filter.php:217
-msgid "Event Category"
+msgid "%s Category"
 msgstr ""
 
-#: src/Tribe/View.php:413
+#: src/Tribe/View.php:415
 msgid "Cost (%s)"
 msgstr ""
 
-#: src/Tribe/View.php:419 src/Tribe/Views/V2/Filters/Context_Filter.php:226
+#: src/Tribe/View.php:421 src/Tribe/Views/V2/Filters/Context_Filter.php:226
 msgid "Tags"
 msgstr ""
 
-#: src/Tribe/View.php:423 src/Tribe/Views/V2/Filters/Context_Filter.php:228
-msgid "Venues"
-msgstr ""
-
-#: src/Tribe/View.php:427 src/Tribe/Views/V2/Filters/Context_Filter.php:224
-msgid "Organizers"
-msgstr ""
-
-#: src/Tribe/View.php:431 src/Tribe/Views/V2/Filters/Context_Filter.php:221
+#: src/Tribe/View.php:433 src/Tribe/Views/V2/Filters/Context_Filter.php:221
 msgid "Day"
 msgstr ""
 
-#: src/Tribe/View.php:435 src/Tribe/Views/V2/Filters/Context_Filter.php:227
+#: src/Tribe/View.php:437 src/Tribe/Views/V2/Filters/Context_Filter.php:227
 msgid "Time"
 msgstr ""
 
-#: src/Tribe/View.php:439 src/Tribe/Views/V2/Filters/Context_Filter.php:220
+#: src/Tribe/View.php:441 src/Tribe/Views/V2/Filters/Context_Filter.php:220
 msgid "Country"
 msgstr ""
 
-#: src/Tribe/View.php:443 src/Tribe/Views/V2/Filters/Context_Filter.php:218
+#: src/Tribe/View.php:445 src/Tribe/Views/V2/Filters/Context_Filter.php:218
 msgid "City"
 msgstr ""
 
-#: src/Tribe/View.php:447 src/Tribe/Views/V2/Filters/Context_Filter.php:225
+#: src/Tribe/View.php:449 src/Tribe/Views/V2/Filters/Context_Filter.php:225
 msgid "State/Province"
 msgstr ""
 
-#: src/Tribe/View.php:452 src/Tribe/Views/V2/Filters/Context_Filter.php:223
-msgid "Featured Events"
+#: src/Tribe/View.php:454 src/Tribe/Views/V2/Filters/Context_Filter.php:223
+msgid "Featured %s"
 msgstr ""
 
-#: src/Tribe/View.php:562
+#: src/Tribe/View.php:564
 msgid "Accessibility Form Notice"
 msgstr ""
 
-#: src/Tribe/View.php:563
+#: src/Tribe/View.php:565
 msgid "Notice: Utilizing the form controls will dynamically update the content"
 msgstr ""
 
@@ -360,14 +350,14 @@ msgstr ""
 msgid "Events Filter Bar"
 msgstr ""
 
-#: the-events-calendar-filter-view.php:177
+#: the-events-calendar-filter-view.php:179
 msgid ""
 "To begin using The Events Calendar: Filter Bar, please install the latest "
 "version of"
 msgstr ""
 
-#: the-events-calendar-filter-view.php:179
-#: the-events-calendar-filter-view.php:180
+#: the-events-calendar-filter-view.php:181
+#: the-events-calendar-filter-view.php:182
 msgid "The Events Calendar"
 msgstr ""
 

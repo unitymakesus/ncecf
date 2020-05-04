@@ -66,20 +66,36 @@ class Tribe__Events__Filterbar__Filters__Cost extends Tribe__Events__Filterbar__
 		);
 
 		$name = $this->get_admin_field_name( 'free' );
-		$cost_field = sprintf( __( 'Events are considered free when cost field is: %s %s', 'tribe-events-filter-view' ),
-			sprintf( '<label><input type="radio" name="%s" value="unset_or_0" %s /> %s</label>',
-				$name,
-				checked( $this->free, 'unset_or_0', false ),
-				sprintf(
-					__( '"%s" or empty or set to zero', 'tribe-events-filter-view' ),
-					'<strong><abbr title="' . __( 'Used as the identifier for free Events', 'tribe-events-filter-view' ) . '">' . $this->get_free_string() . '</abbr></strong>'
-				)
-			),
-			sprintf( '<label><input type="radio" name="%s" value="set_to_0" %s /> %s</label>',
-				$name,
-				checked( $this->free, 'set_to_0', false ),
-				__( 'Only when set to zero', 'tribe-events-filter-view' )
-			)
+		$free_string = $this->get_free_string();
+		$free_identifier_title_text = sprintf(
+			esc_html__( 'Used as the identifier for free %s', 'tribe-events-filter-view' ),
+			tribe_get_event_label_plural()
+		);
+
+		$empty_or_zero_label = sprintf(
+			__( '"%s" or empty or set to zero', 'tribe-events-filter-view' ),
+			"<strong><abbr title='{$free_identifier_title_text}'>{$free_string}</abbr></strong>"
+		);
+
+		$empty_or_zero_input = sprintf(
+			'<label><input type="radio" name="%s" value="unset_or_0" %s /> %s</label>',
+			$name,
+			checked( $this->free, 'unset_or_0', false ),
+			$empty_or_zero_label
+		);
+
+		$only_when_zero = sprintf(
+			'<label><input type="radio" name="%s" value="set_to_0" %s /> %s</label>',
+			$name,
+			checked( $this->free, 'set_to_0', false ),
+			__( 'Only when set to zero', 'tribe-events-filter-view' )
+		);
+
+		$cost_field = sprintf(
+			__( '%s are considered free when cost field is: %s %s', 'tribe-events-filter-view' ),
+			tribe_get_event_label_plural(),
+			$empty_or_zero_input,
+			$only_when_zero
 		);
 
 		return '<div class="tribe_events_active_filter_type_options">' . $type_field . $cost_field . '</div>';

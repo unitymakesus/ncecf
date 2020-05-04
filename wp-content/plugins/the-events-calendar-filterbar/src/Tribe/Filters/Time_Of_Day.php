@@ -6,6 +6,11 @@
 class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filterbar__Filter {
 	public $type = 'checkbox';
 
+	// These are needed to make the join aliases unique
+	protected $alias = '';
+	protected $tod_start_alias = '';
+	protected $tod_duration_alias = '';
+
 	protected function get_values() {
 		// The time-of-day filter.
 		$time_of_day_array = array(
@@ -36,13 +41,17 @@ class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filt
 			unset( $values[ $all_day_index ] );
 		}
 
+		$this->alias = 'all_day_' . uniqid();
+		$this->tod_start_alias = 'tod_start_date_' . uniqid();
+		$this->tod_duration_alias = 'tod_duration_' . uniqid();
+
 		$joinType = empty( $all_day_index ) ? 'LEFT' : 'INNER';
 
-		$this->joinClause .= " {$joinType} JOIN {$wpdb->postmeta} AS all_day ON ({$wpdb->posts}.ID = all_day.post_id AND all_day.meta_key = '_EventAllDay')";
+		$this->joinClause .= " {$joinType} JOIN {$wpdb->postmeta} AS {$this->alias} ON ({$wpdb->posts}.ID = {$this->alias}.post_id AND {$this->alias}.meta_key = '_EventAllDay')";
 
 		if ( ! empty( $values ) ) { // values other than allday
-			$this->joinClause .= " INNER JOIN {$wpdb->postmeta} AS tod_start_date ON ({$wpdb->posts}.ID = tod_start_date.post_id AND tod_start_date.meta_key = '_EventStartDate')";
-			$this->joinClause .= " INNER JOIN {$wpdb->postmeta} AS tod_duration ON ({$wpdb->posts}.ID = tod_duration.post_id AND tod_duration.meta_key = '_EventDuration')";
+			$this->joinClause .= " INNER JOIN {$wpdb->postmeta} AS {$this->tod_start_alias} ON ({$wpdb->posts}.ID = {$this->tod_start_alias}.post_id AND {$this->tod_start_alias}.meta_key = '_EventStartDate')";
+			$this->joinClause .= " INNER JOIN {$wpdb->postmeta} AS {$this->tod_duration_alias} ON ({$wpdb->posts}.ID = {$this->tod_duration_alias}.post_id AND {$this->tod_duration_alias}.meta_key = '_EventDuration')";
 		}
 	}
 
@@ -51,9 +60,9 @@ class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filt
 		$clauses = [];
 
 		if ( in_array( 'allday', $this->currentValue ) ) {
-			$clauses[] = "(all_day.meta_value = 'yes')";
+			$clauses[] = "({$this->alias}.meta_value = 'yes')";
 		} else {
-			$this->whereClause = " AND ( all_day.meta_id IS NULL OR all_day.meta_value != 'yes' ) ";
+			$this->whereClause = " AND ( {$this->alias}.meta_id IS NULL OR {$this->alias}.meta_value != 'yes' ) ";
 		}
 
 		foreach ( $this->currentValue as $time_range_string ) {
@@ -69,18 +78,26 @@ class Tribe__Events__Filterbar__Filters__Time_Of_Day extends Tribe__Events__Filt
 
 			$is_overnight_range = $range_start_hour > $range_end_hour;
 			if ( $is_overnight_range ) {
-				$clauses[] = $wpdb->prepare( '
-				(
-					   ( TIME(CAST(tod_start_date.meta_value as DATETIME)) < %s )
-					OR ( TIME(CAST(tod_start_date.meta_value as DATETIME)) >= %s )
-					OR ( MOD(TIME_TO_SEC(TIMEDIFF(%s, TIME(CAST(tod_start_date.meta_value as DATETIME)))) + 86400, 86400) < tod_duration.meta_value )
-				)', $range_end_time, $range_start_time, $range_end_time );
+				$clauses[] = $wpdb->prepare(
+					"(
+						( TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)) < %s )
+						OR ( TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)) >= %s )
+						OR ( MOD(TIME_TO_SEC(TIMEDIFF(%s, TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)))) + 86400, 86400) < {$this->tod_duration_alias}.meta_value )
+					)",
+					$range_end_time,
+					$range_start_time,
+					$range_end_time
+				);
 			} else {
-				$clauses[] = $wpdb->prepare( '
-				(
-					   ( TIME(CAST(tod_start_date.meta_value as DATETIME)) >= %s AND TIME(CAST(tod_start_date.meta_value as DATETIME)) < %s )
-					OR ( MOD(TIME_TO_SEC(TIMEDIFF(%s, TIME(CAST(tod_start_date.meta_value as DATETIME)))) + 86400, 86400) < tod_duration.meta_value )
-				)', $range_start_time, $range_end_time, $range_start_time );
+				$clauses[] = $wpdb->prepare(
+					"(
+						( TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)) >= %s AND TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)) < %s )
+						OR ( MOD(TIME_TO_SEC(TIMEDIFF(%s, TIME(CAST({$this->tod_start_alias}.meta_value as DATETIME)))) + 86400, 86400) < {$this->tod_duration_alias}.meta_value )
+					)",
+					$range_start_time,
+					$range_end_time,
+					$range_start_time
+				);
 			}
 		}
 		$this->whereClause .= ' AND (' . implode( ' OR ', $clauses ) . ')';

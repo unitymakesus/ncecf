@@ -40,7 +40,10 @@ class Tribe__Events__Filterbar__Filters__Featured_Events extends Tribe__Events__
 	protected function get_values() {
 		return array(
 			'featured' => array(
-				'name'  => __( 'Show featured events only', 'tribe-events-filter-view' ),
+				'name'  => sprintf(
+					esc_html__( 'Show featured %s only', 'tribe-events-filter-view' ),
+					tribe_get_event_label_plural_lowercase()
+				),
 				'value' => '1',
 			),
 		);
@@ -51,7 +54,7 @@ class Tribe__Events__Filterbar__Filters__Featured_Events extends Tribe__Events__
 		global $wpdb;
 
 		$clause = "INNER JOIN {$wpdb->postmeta} AS {$this->table_alias}
-			ON ({$wpdb->posts}.ID = {$this->table_alias}.post_id 
+			ON ({$wpdb->posts}.ID = {$this->table_alias}.post_id
 			AND {$this->table_alias}.meta_key = %s)";
 
 		$this->joinClause = $wpdb->prepare( $clause, Tribe__Events__Featured_Events::FEATURED_EVENT_KEY );

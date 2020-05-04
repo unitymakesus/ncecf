@@ -333,6 +333,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 										placeholder="<?php esc_attr_e( 'Select', 'tribe-events-filter-view' ); ?>"
 										type="hidden"
 										value="<?php echo esc_attr( $current_value ); ?>"
+										style="width: 100%;" <?php /* This is required for selectWoo styling to prevent select box overflow */ ?>
 									>
 								</div>
 							</div>
@@ -367,6 +368,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 										name="<?php echo esc_attr( 'tribe_' . $this->slug ); ?>"
 										placeholder="<?php esc_attr_e( 'Select an Item', 'tribe-events-filter-view' ); ?>"
 										type="hidden"
+										style="width: 100%;" <?php /* This is required for selectWoo styling to prevent select box overflow */ ?>
 										value="<?php echo isset( $select_filters ) ? esc_attr( $select_filters ) : ''; ?>"
 									>
 								</div>

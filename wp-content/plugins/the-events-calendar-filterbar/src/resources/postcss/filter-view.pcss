@@ -29,6 +29,11 @@
 		padding: 0;
 	}
 
+	.tribe-dropdown {
+		font-size: 12px;
+		width: auto;
+	}
+
 	ul,
 	ul li {
 		list-style: none;
@@ -401,8 +406,25 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3875d7', endColorstr='#2a62bc', GradientType=0);
 }
 
-.tribe-section-content-field .select2-container {
-	width: 100%;
+.tribe-section-content-field {
+
+	select {
+		width: 100%;
+	}
+
+	.select2-container {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+
+		.selection {
+			float: left;
+			height: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+		}
+	}
 }
 
 

@@ -1,3 +1,5 @@
+/* global tribe, tribe_dropdowns */
+
 /**
  * Makes sure we have all the required levels on the Tribe Object
  *
@@ -74,6 +76,30 @@ tribe.events.views.filterBar = {};
 		shouldSubmit: false,
 		isLiveRefresh: false,
 		mobileInitialized: false,
+	};
+
+	/**
+	 * Determine whether filters are horizontal or not.
+	 *
+	 * @since 4.9.3
+	 *
+	 * @param {jQuery} $filterBar jQuery object of the filter bar.
+	 *
+	 * @return {bool}
+	 */
+	obj.areFiltersHorizontal = function( $filterBar ) {
+		return $filterBar.hasClass( obj.selectors.filterBarHorizontalClass.className() );
+	};
+
+	/**
+	 * Determine whether filters are open or not.
+	 *
+	 * @since 4.9.3
+	 *
+	 * @return {bool}
+	 */
+	obj.areFiltersOpen = function() {
+		return $body.hasClass( obj.selectors.tribeFiltersOpen.className() );
 	};
 
 	/**
@@ -191,17 +217,14 @@ tribe.events.views.filterBar = {};
 		obj.resetSelect2( $filterBar );
 		obj.resetActiveFilters( $filterBar );
 
-		var isHorizontal = $filterBar.hasClass( obj.selectors.filterBarHorizontalClass.className() );
-		if ( isHorizontal ) {
+		if ( obj.areFiltersHorizontal( $filterBar ) ) {
 			$filterBar
 				.find( obj.selectors.filterItem )
 				.addClass( obj.selectors.filterItemClosedClass.className() );
 		}
 
-		if ( obj.state.isLiveRefresh ) {
-			obj.state.shouldSubmit = false;
-			$form.submit();
-		}
+		obj.state.shouldSubmit = false;
+		$form.submit();
 
 		$body.removeClass( 'tribe-reset-on' );
 	};
@@ -393,10 +416,9 @@ tribe.events.views.filterBar = {};
 	obj.toggleFilterGroup = function( event ) {
 		event.stopPropagation();
 		var $filterBar = event.data.filterBar;
-		var isHorizontal = $filterBar.hasClass( obj.selectors.filterBarHorizontalClass.className() );
 		var $filterItem = event.data.target.closest( obj.selectors.filterItem );
 
-		if ( isHorizontal ) {
+		if ( obj.areFiltersHorizontal( $filterBar ) ) {
 			$filterBar
 				.find( obj.selectors.filterItem )
 				.not( $filterItem )
@@ -447,20 +469,21 @@ tribe.events.views.filterBar = {};
 	 * @return {void}
 	 */
 	obj.handleResize = function( event ) {
-		var containerState = event.data.container.data( 'tribeEventsState' );
-		var isMobile = ( containerState && containerState.isMobile ) || true; // fallback to true if container state is undefined
+		var $container = event.data.container;
+		var containerState = $container.data( 'tribeEventsState' );
+		var isMobile = containerState.isMobile;
 
-		if ( ! isMobile ) {
+		if ( ! isMobile && obj.state.mobileInitialized ) {
 			obj.state.mobileInitialized = false;
-			return;
-		}
+			var $filterBar = $container.find( obj.selectors.filterBar );
 
-		if ( obj.state.mobileInitialized ) {
-			return;
+			if ( ! obj.areFiltersOpen() && ! obj.areFiltersHorizontal( $filterBar ) ) {
+				obj.openFilters();
+			}
+		} else if ( isMobile && ! obj.state.mobileInitialized ) {
+			obj.state.mobileInitialized = true;
+			obj.closeFilters();
 		}
-
-		obj.state.mobileInitialized = true;
-		obj.closeFilters();
 	};
 
 	/**
@@ -679,7 +702,11 @@ tribe.events.views.filterBar = {};
 		$dropdowns.tribe_dropdowns();
 
 		var containerState = $container.data( 'tribeEventsState' );
-		var isMobile = ( containerState && containerState.isMobile ) || true; // fallback to true if container state is undefined
+		var isMobile = containerState.isMobile;
+
+		if ( ! isMobile && ! obj.areFiltersHorizontal( $filterBar ) ) {
+			obj.openFilters();
+		}
 
 		obj.state.mobileInitialized = isMobile;
 	};
@@ -698,6 +725,18 @@ tribe.events.views.filterBar = {};
 	obj.deinit = function( event, jqXHR, settings ) {
 		var $container = event.data.container;
 		obj.unbindEvents( $container );
+
+		var $dropdowns = $container.find( tribe_dropdowns.selector.dropdown );
+
+		$dropdowns.each( function ( index, dropdown ) {
+			var $dropdown = $( dropdown );
+			if ( ! $dropdown.is( 'input, select' ) ) {
+				return;
+			}
+
+			$dropdown.data( 'select2' ).destroy();
+		} );
+
 		$container.off( 'beforeAjaxSuccess.tribeEvents', obj.deinit )
 	};
 

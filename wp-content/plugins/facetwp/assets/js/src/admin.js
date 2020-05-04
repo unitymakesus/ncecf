@@ -1612,6 +1612,7 @@
                     if ('search' == val || 'pager' == val) {
                         this.facet.source = '';
                     }
+                    this.facet.source_other = '';
                 },
                 'facet.ghosts': function(val) {
                     if ('no' == val) {
@@ -1764,7 +1765,7 @@
                         method: 'POST',
                         dataType: 'json',
                         data: {
-                            action: 'facetwp_save',
+                            action: 'facetwp_save_settings',
                             nonce: FWP.nonce,
                             data: JSON.stringify(data)
                         }

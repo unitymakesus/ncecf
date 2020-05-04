@@ -38,6 +38,11 @@
 		padding: 0;
 	}
 
+#tribe_events_filters_wrapper .tribe-dropdown {
+		font-size: 12px;
+		width: auto;
+	}
+
 #tribe_events_filters_wrapper ul,
 	#tribe_events_filters_wrapper ul li {
 		list-style: none;
@@ -411,9 +416,23 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3875d7', endColorstr='#2a62bc', GradientType=0);
 }
 
+.tribe-section-content-field select {
+		width: 100%;
+	}
+
 .tribe-section-content-field .select2-container {
-	width: 100%;
-}
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+
+.tribe-section-content-field .select2-container .selection {
+			float: left;
+			height: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 100%;
+		}
 
 /* Filter Sliders */
 
@@ -695,10 +714,8 @@
 				display: inline-block;
 				height: 0;
 				margin: 5px 0 0 4px;
-				-webkit-transform: rotate(0);
-				        transform: rotate(0);
-				-webkit-transform-origin: 50% 25%;
-				        transform-origin: 50% 25%;
+				transform: rotate(0);
+				transform-origin: 50% 25%;
 				transition: .25s ease-in-out;
 				width: 0;
 				vertical-align: middle;

@@ -38,7 +38,6 @@
 .tribe-filters-open #tribe_events_filters_wrapper,
 		.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-horizontal,
 		.tribe-filters-open #tribe_events_filters_wrapper.tribe-events-filters-vertical {
-			bottom: 0;
 			box-sizing: border-box;
 			left: 0;
 			margin: 0;

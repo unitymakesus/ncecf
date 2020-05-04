@@ -40,7 +40,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 		 */
 		protected static $defaultMuFilters;
 
-		const VERSION = '4.9.2';
+		const VERSION = '4.10.0';
 
 		/**
 		 * The Events Calendar Required Version
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			$settings_page = new Tribe__Events__Filterbar__Settings();
 			$settings_page->set_hooks();
 
-			add_action( 'init', array( $this, 'loadTextDomain' ) );
+			add_action( 'tribe_load_text_domains', [ $this, 'loadTextDomain' ] );
 
 			// Load multisite defaults
 			if ( is_multisite() ) {
@@ -229,7 +229,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			wp_localize_script( 'tribe-filterbar-js', 'tribe_filter', array(
 				'reverse_position'       => tribe_get_option( 'reverseCurrencyPosition', false ),
 				'currency_symbol'        => tribe_get_option( 'defaultCurrencySymbol' ),
-				'featured_active_filter' => _x( 'Active', 'Featured Events active fitler display label', 'tribe-events-filter-view' ),
+				'featured_active_filter' => _x( 'Active', 'Featured Events active filter display label', 'tribe-events-filter-view' ),
 			) );
 		}
 
@@ -405,8 +405,10 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 
 			tribe_singleton(
 				'filterbar.filters.category',
-				new Tribe__Events__Filterbar__Filters__Category( __( 'Event Category', 'tribe-events-filter-view' ), 'eventcategory' )
+				new Tribe__Events__Filterbar__Filters__Category( sprintf( esc_html__( '%s Category', 'tribe-events-filter-view' ), tribe_get_event_label_singular() ), 'eventcategory' )
 			);
+
+
 			tribe_singleton(
 				'filterbar.filters.cost',
 				new Tribe__Events__Filterbar__Filters__Cost(
@@ -420,11 +422,11 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			);
 			tribe_singleton(
 				'filterbar.filters.venue',
-				new Tribe__Events__Filterbar__Filters__Venue( __( 'Venues', 'tribe-events-filter-view' ), 'venues' )
+				new Tribe__Events__Filterbar__Filters__Venue( tribe_get_venue_label_plural(), 'venues' )
 			);
 			tribe_singleton(
 				'filterbar.filters.organizer',
-				new Tribe__Events__Filterbar__Filters__Organizer( __( 'Organizers', 'tribe-events-filter-view' ), 'organizers' )
+				new Tribe__Events__Filterbar__Filters__Organizer( tribe_get_organizer_label_plural(), 'organizers' )
 			);
 			tribe_singleton(
 				'filterbar.filters.day-of-week',
@@ -449,7 +451,7 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__View' ) ) {
 			tribe_singleton(
 				'filterbar.filters.featured-events',
 				new Tribe__Events__Filterbar__Filters__Featured_Events(
-					__( 'Featured Events', 'tribe-events-filter-view' ),
+					sprintf( esc_html__( 'Featured %s', 'tribe-events-filter-view' ), tribe_get_event_label_plural() ),
 					'featuredevent'
 				)
 			);
