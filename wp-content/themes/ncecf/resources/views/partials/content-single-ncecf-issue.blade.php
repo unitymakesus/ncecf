@@ -13,11 +13,11 @@ $the_id = get_the_ID();
     <div class="col l5 m6 s12">
       @php ($visual = get_field('visual'))
 
-      @if ($visual[0][acf_fc_layout] == 'iframe')
-        {!! $visual[0][iframe_code] !!}
-      @elseif ($visual[0][acf_fc_layout] == 'image')
+      @if ($visual[0]['acf_fc_layout'] == 'iframe')
+        {!! $visual[0]['iframe_code'] !!}
+      @elseif ($visual[0]['acf_fc_layout'] == 'image')
         <img class="z-depth-1" src="{!! $visual[0]['image']['sizes']['large'] !!}" srcset="{!! $visual[0]['image']['sizes']['medium'] !!} 320w, {!! $visual[0]['image']['sizes']['large'] !!} 992w" />
-      @elseif ($visual[0][acf_fc_layout] == 'oembed')
+      @elseif ($visual[0]['acf_fc_layout'] == 'oembed')
         <div class="embed-container">
         	{!! $visual[0]['oembed_code'] !!}
         </div>
