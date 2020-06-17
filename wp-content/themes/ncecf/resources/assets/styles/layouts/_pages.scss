@@ -56,6 +56,19 @@
   }
 }
 
+.page-header__buttons {
+  margin: 2rem 0;
+
+  @media #{$medium-and-up} {
+    display: flex;
+    justify-content: center;
+  }
+
+  a {
+    margin: 0.25rem;
+  }
+}
+
 @media (max-width: 767px) {
   .news-list {
     margin-bottom: 30px;

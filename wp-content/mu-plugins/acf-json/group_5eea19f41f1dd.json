@@ -1,0 +1,60 @@
+{
+    "key": "group_5eea19f41f1dd",
+    "title": "Page Header Links",
+    "fields": [
+        {
+            "key": "field_5eea19f9cbd97",
+            "label": "Page Header Links",
+            "name": "page_header_links",
+            "type": "repeater",
+            "instructions": "Add up to 2 links to display in the page header.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_5eea1a23cbd98",
+            "min": 0,
+            "max": 2,
+            "layout": "row",
+            "button_label": "Add Link",
+            "sub_fields": [
+                {
+                    "key": "field_5eea1a23cbd98",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "ncecf-initiative"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1592400581
+}

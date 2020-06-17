@@ -21,5 +21,15 @@
     @else
       <h1>{{ get_the_title($id) }}</h1>
     @endif
+
+    @if (have_rows('page_header_links'))
+      <div class="page-header__buttons">
+        @while (have_rows('page_header_links')) @php the_row() @endphp
+          @if ($link = get_sub_field('link'))
+            <a class="btn" href="{{ $link['url'] }}" target="{{ $link['target'] ?? '_self' }}">{{ $link['title'] }}</a>
+          @endif
+        @endwhile
+      </div>
+    @endif
   </div>
 </div>
