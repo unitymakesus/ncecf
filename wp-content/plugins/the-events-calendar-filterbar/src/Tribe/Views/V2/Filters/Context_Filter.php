@@ -198,6 +198,15 @@ trait Context_Filter {
 			'Tribe\Events\Filterbar\Views\V2\Filters\Venue'            => 'venues',
 		];
 
+		/**
+		 * Allows filtering the option key map, so other plugins can add their own filters.
+		 *
+		 * @since TBD
+		 *
+		 * @param array<string,string> $map The map of classes to option keys.
+		 */
+		$map = apply_filters( 'tribe_events_filter_bar_option_key_map', $map );
+
 		return Arr::get( $map, $filter_class, $context_key );
 	}
 
@@ -227,6 +236,15 @@ trait Context_Filter {
 			'Tribe\Events\Filterbar\Views\V2\Filters\Time_Of_Day'      => __( 'Time', 'tribe-events-filter-view' ),
 			'Tribe\Events\Filterbar\Views\V2\Filters\Venue'            => tribe_get_venue_label_plural(),
 		];
+
+		/**
+		 * Allows filtering the default names map, so other plugins can add their own filters.
+		 *
+		 * @since TBD
+		 *
+		 * @param array<string,string> $map The map of classes to filter names.
+		 */
+		$map = apply_filters( 'tribe_events_filter_bar_default_filter_names_map', $map );
 
 		return Arr::get( $map, $filter_class, $context_key );
 	}

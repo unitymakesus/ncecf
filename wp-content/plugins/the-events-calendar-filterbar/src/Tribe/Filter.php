@@ -340,7 +340,6 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						</div>
 					<?php
 					break;
-
 					//Option for Select2 Dropdown
 					case 'multiselect':
 						//Setup options in Tribe Dropdown format
@@ -442,11 +441,26 @@ if ( ! class_exists( 'Tribe__Events__Filterbar__Filter' ) ) {
 						}
 						$section_title = esc_html( stripslashes( $this->title ) );
 						$section_slug  = sanitize_html_class( $section_title );
+
+						$selected_name   = '';
+						if ( ! empty( $current_value ) ) {
+							$selected_option = array_filter(
+								$values,
+								function( $value ) use ( $current_value, $selected_name ) {
+									return $current_value === trim( $value[ 'value' ] );
+								}
+							);
+
+							if ( ! empty( $selected_option ) ) {
+								$selected_option = array_pop( $selected_option );
+								$selected_name   = $selected_option['name'];
+							}
+						}
 						?>
 						<legend class="tribe-events-filters-legend">
 							<button class="tribe-events-filters-group-heading" type="button" aria-expanded="false" aria-controls="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">
 								<?php echo $section_title; ?><span class="horizontal-drop-indicator"></span>
-								<span class="tribe-filter-status"><?php ?></span>
+								<span class="tribe-filter-status"><?php echo esc_html( $selected_name ); ?></span>
 							</button>
 						</legend>
 						<div class="tribe-events-filter-group tribe-events-filter-radio" id="tribe-filter-<?php echo esc_attr( $section_slug ); ?>">

@@ -4,8 +4,8 @@ Contributors: ModernTribe, barry.hughes, bordoni, borkweb, brianjessee, brook-tr
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget, pro, filters, categories, sort, tags, taxonomy, find, search
 Donate link: http://m.tri.be/29
 Requires at least: 4.9
-Tested up to: 5.4
-Stable tag: 4.10.0
+Tested up to: 5.5
+Stable tag: 4.10.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -194,6 +194,18 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18h9" target="_blank">The Events Calendar: iCal Importer</a>
 
 == Changelog ==
+
+= [4.10.2] 2020-08-24 =
+
+* Tweak - Add a link to the Filter Bar settings on the plugin admin listing. [FBAR-114]
+* Tweak - Added the `tribe_events_filter_bar_option_key_map` and `tribe_events_filter_bar_default_filter_names_map` filters to allow adding, removing, or otherwise modifying, Filter Bar filters in the context of Views v2. [VE-147]
+* Fix - Add proper "applied" labelling for filters using radio buttons. [VE-147]
+* Fix - Prevent Horizontal Filters using select to jump when using the search field for V1 [BTRIA-452]
+* Language - 4 new strings added, 31 updated, 0 fuzzied, and 0 obsoleted
+
+= [4.10.1] 2020-07-27 =
+
+* Fix - Prevent Horizontal Filters using select to jump when using the search field for V2 [FBAR-112]
 
 = [4.10.0] 2020-04-23 =
 

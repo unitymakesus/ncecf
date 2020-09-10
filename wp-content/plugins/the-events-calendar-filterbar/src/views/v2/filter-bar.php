@@ -45,8 +45,8 @@ $classes = [ 'tribe-events-filters-' . $layout, 'tribe-clearfix' ];
 				/**
 				 * Todo to revisit filter bar codebase
 				 *
-				 * @todo @gbordoni when revisiting filterbar codebase for a more complete refresh, we need
-				 *       to remove this usage, it's the oposite of what we intend with the templating system.
+				 * @todo @bordoni when revisiting filterbar codebase for a more complete refresh, we need
+				 *       to remove this usage, it's the opposite of what we intend with the templating system.
 				 */
 				do_action( 'tribe_events_filter_view_do_display_filters', $this->get( 'view' )->get_context() );
 				?>

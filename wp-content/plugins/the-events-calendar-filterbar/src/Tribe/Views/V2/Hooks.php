@@ -19,6 +19,7 @@ namespace Tribe\Events\Filterbar\Views\V2;
 
 use Tribe\Events\Views\V2\View_Interface;
 use Tribe__Context as Context;
+use Tribe__Events__Filterbar__View as Main;
 
 /**
  * Class Hooks.
@@ -54,6 +55,13 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		add_action( 'tribe_template_after_include:events/v2/components/filter-bar', [ $this, 'action_include_filter_bar' ], 10, 3 );
 		add_action( 'tribe_events_filter_view_do_display_filters', [ $this, 'display_filters' ] );
 		add_action( 'tribe_events_pro_shortcode_tribe_events_before_assets', [ $this, 'action_include_assets' ] );
+
+		/**
+		 * @todo Remove this once the facelift goes live.
+		 */
+		if ( ! tribe_events_filterbar_views_v2_is_enabled() ) {
+			return;
+		}
 	}
 
 	/**
@@ -72,6 +80,15 @@ class Hooks extends \tad_DI52_ServiceProvider {
 		add_filter( 'tribe_events_views_v2_rest_params', [ $this, 'filter_view_rest_params' ], 10, 2 );
 		add_filter( 'body_class', [ $this, 'filter_body_class' ] );
 		add_filter( 'tribe_events_views_v2_cache_html_expiration', [ $this, 'filter_cache_html_expiration' ] );
+		add_filter( 'tribe_template_origin_namespace_map', [ $this, 'filter_add_template_origin_namespace' ], 15 );
+		add_filter( 'tribe_template_path_list', [ $this, 'filter_template_path_list' ], 15, 2 );
+
+		/**
+		 * @todo Remove this once the facelift goes live.
+		 */
+		if ( ! tribe_events_filterbar_views_v2_is_enabled() ) {
+			return;
+		}
 	}
 
 	/**
@@ -279,5 +296,53 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 */
 	public function filter_cache_html_expiration() {
 		return HOUR_IN_SECONDS * 11;
+	}
+
+	/**
+	 * Includes Filter Bar into the path namespace mapping, allowing for a better namespacing when loading files.
+	 *
+	 * @since TBD
+	 *
+	 * @param array<string,string> $namespace_map Indexed array containing the namespace as the key and path to `strpos`.
+	 *
+	 * @return array<string,string>  Namespace map after adding Pro to the list.
+	 */
+	public function filter_add_template_origin_namespace( $namespace_map ) {
+		$main                                       = Main::instance();
+		$namespace_map[ $main->template_namespace ] = $main->pluginPath;
+
+		return $namespace_map;
+	}
+
+	/**
+	 * Filters the list of folders TEC will look up to find templates to add the ones defined by Filter Bar.
+	 *
+	 * @since TBD
+	 *
+	 * @param array            $folders  The current list of folders that will be searched template files.
+	 * @param \Tribe__Template $template Which template instance we are dealing with.
+	 *
+	 * @return array<string,array> The filtered list of folders that will be searched for the templates.
+	 */
+	public function filter_template_path_list( array $folders = [], \Tribe__Template $template ) {
+		$main = Main::instance();
+
+		$path = (array) rtrim( $main->pluginPath, '/' );
+
+		// Pick up if the folder needs to be added to the public template path.
+		$folder = $template->get_template_folder();
+
+		if ( ! empty( $folder ) ) {
+			$path = array_merge( $path, $folder );
+		}
+
+		$folders['events-filterbar'] = [
+			'id'        => 'events-filterbar',
+			'namespace' => $main->template_namespace,
+			'priority'  => 25,
+			'path'      => implode( DIRECTORY_SEPARATOR, $path ),
+		];
+
+		return $folders;
 	}
 }

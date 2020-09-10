@@ -521,7 +521,7 @@
 					$( '.tribe_events_filter_item' ).addClass( 'closed' );
 				}
 			} )
-			.on( 'click', '.tribe-events-filter-group', function( e ) {
+			.on( 'click', '.tribe-events-filter-group, .select2-search__field', function( e ) {
 				if ( $horizontal.length && !hover_filters ) {
 					e.stopPropagation();
 				}

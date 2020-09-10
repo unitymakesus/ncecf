@@ -29,7 +29,7 @@ class FacetWP_Request
      * Otherwise, store the GET variables for later use
      */
     function intercept_request() {
-        $action = isset( $_POST['action'] ) ? $_POST['action'] : '';
+        $action = isset( $_POST['action'] ) ? sanitize_key( $_POST['action'] ) : '';
 
         $valid_actions = [
             'facetwp_refresh',
@@ -39,7 +39,7 @@ class FacetWP_Request
         $this->is_refresh = ( 'facetwp_refresh' == $action );
         $this->is_preload = ! in_array( $action, $valid_actions );
         $prefix = FWP()->helper->get_setting( 'prefix' );
-        $tpl = isset( $_POST['data']['template'] ) ? $_POST['data']['template'] : '';
+        $is_css_tpl = isset( $_POST['data']['template'] ) && 'wp' == $_POST['data']['template'];
 
         // Pageload
         if ( $this->is_preload ) {
@@ -64,25 +64,50 @@ class FacetWP_Request
 
             if ( ! empty( $data['http_params']['get'] ) ) {
                 foreach ( $data['http_params']['get'] as $key => $val ) {
-                    $_GET[ $key ] = $val;
+                    if ( ! isset( $_GET[ $key ] ) ) {
+                        $_GET[ $key ] = $val;
+                    }
                 }
             }
         }
 
-        if ( $this->is_preload || 'wp' == $tpl ) {
+        if ( $this->is_preload || $is_css_tpl ) {
+            add_filter( 'posts_pre_query', [ $this, 'abort_query' ], 10, 2 );
             add_action( 'pre_get_posts', [ $this, 'sacrificial_lamb' ], 998 );
             add_action( 'pre_get_posts', [ $this, 'update_query_vars' ], 999 );
         }
 
-        if ( ! $this->is_preload && 'wp' == $tpl && 'facetwp_autocomplete_load' != $action ) {
+        if ( ! $this->is_preload && $is_css_tpl && 'facetwp_autocomplete_load' != $action ) {
             add_action( 'shutdown', [ $this, 'inject_template' ], 0 );
             ob_start();
         }
     }
 
 
+    /**
+     * FacetWP runs the archive query before WP gets the chance.
+     * This hook prevents the query from running twice, by letting us inject the
+     * first query's posts (and counts) into the "main" query.
+     */
+    function abort_query( $posts, $query ) {
+        $do_abort = apply_filters( 'facetwp_archive_abort_query', true, $query );
+        $is_main_query = ( true === $query->get( 'facetwp', false ) );
+        $has_query_run = ( ! empty( FWP()->facet->query ) );
+
+        if ( $do_abort && $is_main_query && $has_query_run ) {
+            $posts = FWP()->facet->query->posts;
+            $query->found_posts = FWP()->facet->query->found_posts;
+            $query->max_num_pages = FWP()->facet->query->max_num_pages;
+        }
+
+        return $posts;
+    }
+
+
+    /**
+     * Fixes https://core.trac.wordpress.org/ticket/40393
+     */
     function sacrificial_lamb( $query ) {
-        // Fix for WP core issue #40393
     }
 
 
@@ -118,23 +143,29 @@ class FacetWP_Request
             // Set the flag
             $query->set( 'facetwp', true );
 
+            // Unset "s" if empty or WP_Query will set is_search() to true
+            if ( '' == $query->get( 's' ) && ! isset( $_GET['s'] ) ) {
+                $query->set( 's', null );
+            }
+
             // Store the default WP query vars
             $this->query_vars = $query->query_vars;
 
             // Notify
             do_action( 'facetwp_found_main_query' );
 
-            // No URL variables
-            if ( $this->is_preload && empty( $this->url_vars ) ) {
-                return;
-            }
-
             // Generate the FWP output
             $data = ( $this->is_preload ) ? $this->process_preload_data() : $this->process_post_data();
             $this->output = FWP()->facet->render( $data );
 
-            // Set up the updated query_vars
+            // Set the updated query vars
             $query->query_vars = FWP()->facet->query_args;
+
+            if ( 'product_query' == $query->get( 'wc_query' ) ) {
+                wc_set_loop_prop( 'total', FWP()->facet->pager_args['total_rows'] );
+                wc_set_loop_prop( 'total_pages', FWP()->facet->pager_args['total_pages'] );
+                wc_set_loop_prop( 'current_page', FWP()->facet->pager_args['page'] );
+            }
         }
     }
 
@@ -208,6 +239,11 @@ class FacetWP_Request
             'extras'            => [],
             'paged'             => 1,
         ];
+
+        // Support "/page/X/" on preload
+        if ( ! empty( $this->query_vars['paged'] ) ) {
+            $params['paged'] = (int) $this->query_vars['paged'];
+        }
 
         foreach ( $this->url_vars as $key => $val ) {
             if ( 'paged' == $key ) {
