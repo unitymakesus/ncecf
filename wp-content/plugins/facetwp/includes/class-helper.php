@@ -254,7 +254,7 @@ final class FacetWP_Helper
         $output = [];
         $parents = [];
 
-        $terms = get_terms( $taxonomy, [ 'hide_empty' => false ] );
+        $terms = get_terms( [ 'taxonomy' => $taxonomy, 'hide_empty' => false, 'lang' => '' ] );
         if ( is_wp_error( $terms ) ) {
             return $output;
         }

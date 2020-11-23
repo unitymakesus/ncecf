@@ -173,6 +173,11 @@ class FacetWP_Indexer
             // Store the pre-index settings (see FacetWP_Diff)
             update_option( 'facetwp_settings_last_index', get_option( 'facetwp_settings' ), 'no' );
 
+            // PHP sessions are blocking, so close if active
+            if ( PHP_SESSION_ACTIVE === session_status() ) {
+                session_write_close();
+            }
+
             // Bypass the PHP timeout
             ini_set( 'max_execution_time', 0 );
 

@@ -1,11 +1,11 @@
 === The Events Calendar ===
 
-Contributors: ModernTribe, borkweb, barry.hughes, bordoni, brianjessee, aguseo, Camwyn, cliffpaulick, courane01, faction23, GeoffBel, geoffgraham, jbrinley, jentheo, leahkoerper, lucatume, neillmcshea, nicosantos, patriciahillebrandt, peterchester, paulskim, reid.peifer, roblagatta, ryancurban, shane.pearlman, vicskf, zbtirrell, juanfra
+Contributors: ModernTribe, borkweb,bordoni, brianjessee, aguseo, camwynsp, cliffpaulick, GeoffBel, geoffgraham, jentheo, leahkoerper, lucatume, neillmcshea, patriciahillebrandt, peterchester, paulskim, reid.peifer, shane.pearlman, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget
 Donate link: https://m.tri.be/29
 Requires at least: 4.9.14
-Stable tag: 5.1.6
-Tested up to: 5.5
+Stable tag: 5.2.1.1
+Tested up to: 5.5.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,7 +26,7 @@ See the calendar in action on our [demo experience](https://m.tri.be/1ajs). Just
 
 Looking for additional features like recurring events, ticket sales, user-submitted events, automatic imports, and more?
 
-<strong>Check out [Events Calendar Pro](https://m.tri.be/mj), [Event Aggregator](https://m.tri.be/197u), and [more add-ons](https://m.tri.be/2a)</strong>
+<strong>Check out [Events Calendar Pro](https://m.tri.be/mj), [Event Aggregator](https://m.tri.be/197u), and [more add-ons](https://m.tri.be/2a)</strong> ...and all of them are on sale from November 23-30 during our annual 💰[Black Friday Sale](https://m.tri.be/1aod)💰
 
 = 🔌🎨 Plug and Play or Customize =
 
@@ -221,6 +221,37 @@ Previous versions of The Events Calendar are not cross-compatible with 5.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [5.2.1.1] 2020-11-19 =
+
+* Tweak - Update version of Freemius to the latest version 2.4.1 [TEC-3668]
+
+= [5.2.1] 2020-10-22 =
+
+* Tweak - Change Views v2 AJAX request method from GET to POST to avoid issues with too long URLs. [TEC-3283]
+* Tweak - Add the `tribe_events_views_v2_endpoint_method` filter to allow controlling the HTTP method Views should use to fetch their content from the back-end endpoint. [TEC-3283]
+* Tweak - Add the `tribe_events_views_v2_endpoint_url` filter to allow controlling the URL Views should use to fetch their content from the back-end endpoint. [TEC-3283]
+* Fix - Prevent Event Aggregator 15 minute Cron Schedule from being created when not required (props @jetxpert) [EA-317]
+* Fix - Add filter to toggle off the event templates hijack. [TEC-3521]
+* Fix - Correct url for current month iCal export link. [TEC-3575]
+* Fix - Avoid loading the same CSS file twice on the back-end. [TEC-3623]
+* Fix - Ensure ECP shortcode prev/next urls handle categories gracefully. [ECP-492]
+* Language - 3 new strings added, 200 updated, 0 fuzzied, and 0 obsoleted
+
+= [5.2.0] 2020-09-28 =
+
+* Fix - Fix the order of the List View when the PRO is set to show only the first instance of a Recurring Event. [ECP-467]
+* Fix - Fix a PHP error that would arise when during the translation, by the WPML plugin, of some strings. [TEC-3454, TEC-3578]
+* Fix - Fix a compatibility issue with the WPML plugin that would prevent some options from being translated correctly. [TEC-3454]
+* Fix - Generation and usage of translated strings that would cause issues with the WPML plugin. [TEC-3454]
+* Tweak - Use the `border-small` class for the today button, add new border button styles to customizer. [FBAR-143]
+* Tweak - Add missing CSS classes to the Event Categories label on the single event page. [TEC-3478]
+* Tweak - Adjust accordion trigger selector to allow multiple space-separated `data-js` attributes. [FBAR-125]
+* Tweak - Adjust spacing on header to prevent screen overflow. [FBAR-132]
+* Tweak - Adjust aria attributes and add loader text to make ajax loading more accessible. [FBAR-147]
+* Tweak - Add the `tribe_events_latest_past_view_display_template` filter to allow controlling the display of templates  in the context of the Latest Past Events View. [FBAR-148]
+* Tweak - Allow passing of additional data to the AJAX request by use of container data. [FBAR-162]
+* Language - 2 new strings added, 20 updated, 0 fuzzied, and 0 obsoleted
 
 = [5.1.6] 2020-08-24 =
 
@@ -700,16 +731,16 @@ Remember to always make a backup of your database and files before updating!
 = [4.7.2] 2018-12-13 =
 
 * Feature - Added new action `tribe_events_before_event_template_data_date_display` and `tribe_events_after_event_template_data_date_display`
-* Tweak - Corrected font on time picker components in Event Date Time block [116907]
-* Tweak - Adjusted padding on the Event Date Time block [118697]
-* Tweak - Set default start time to 8:00am and default end time to 5:00pm in Event Date Time block [118112]
-* Fix - Corrected an issue where feature detection of async-process support would fire too many requests [118876]
+* Tweak - Corrected font on time picker components in Event Date Time block [116907]
+* Tweak - Adjusted padding on the Event Date Time block [118697]
+* Tweak - Set default start time to 8:00am and default end time to 5:00pm in Event Date Time block [118112]
+* Fix - Corrected an issue where feature detection of async-process support would fire too many requests [118876]
 * Fix - Removed tribe_events_template_data()'s dependency on Events Calendar PRO, which could lead to a fatal error under some conditions [119263]
 * Fix - Made the Event Date Time block respect the timezone settings [118682]
 * Fix - Removed Price block dashboard gap [118683]
 * Fix - Made sure all block editor code for Meta saving is PHP 5.2 compatible
 * Fix - Prevented `undefined` from been displayed at the Event Date Time separator fields [119337]
-* Fix - Solved 500 error when trying to update an event [118058]s
+* Fix - Solved 500 error when trying to update an event [118058]s
 
 = [4.7.1] 2018-12-05 =
 

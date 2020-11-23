@@ -9,6 +9,21 @@
         return val === $(this).attr('placeholder') ? '' : val;
     }
 
+    /* ======== Support duplicate facets ======== */
+
+    $('.facetwp-facet').each(function() {
+
+        // jQuery doesn't support useCapture, so add the event listeners manually
+        // useCapture handles outer elements first (unlike event bubbling)
+        this.addEventListener('click', function() {
+            var $items = $('.facetwp-facet-' + $(this).data('name'));
+            if (1 < $items.length) {
+                $items.addClass('facetwp-ignore');
+                $(this).removeClass('facetwp-ignore');
+            }
+        }, true);
+    });
+
     /* ======== Autocomplete ======== */
 
     FWP.hooks.addAction('facetwp/refresh/autocomplete', function($this, facet_name) {

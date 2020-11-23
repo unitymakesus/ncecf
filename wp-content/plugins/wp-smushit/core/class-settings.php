@@ -487,6 +487,8 @@ class Settings {
 
 		delete_site_option( WP_SMUSH_PREFIX . 'networkwide' );
 		delete_site_option( WP_SMUSH_PREFIX . 'hide_smush_welcome' );
+		delete_site_option( WP_SMUSH_PREFIX . 'hide_upgrade_notice' );
+		delete_site_option( WP_SMUSH_PREFIX . 'hide_blackfriday_modal' );
 		$this->delete_setting( WP_SMUSH_PREFIX . 'settings' );
 		$this->delete_setting( WP_SMUSH_PREFIX . 'image_sizes' );
 		$this->delete_setting( WP_SMUSH_PREFIX . 'resize_sizes' );
@@ -650,6 +652,7 @@ class Settings {
 			'exclude-classes' => FILTER_SANITIZE_STRING,
 			'footer'          => FILTER_VALIDATE_BOOLEAN,
 			'native'          => FILTER_VALIDATE_BOOLEAN,
+			'noscript'        => FILTER_VALIDATE_BOOLEAN,
 		);
 
 		$settings = filter_input_array( INPUT_POST, $args );
@@ -792,6 +795,7 @@ class Settings {
 			'exclude-classes' => array(),
 			'footer'          => true,
 			'native'          => false,
+			'noscript'        => false,
 		);
 
 		$this->set_setting( WP_SMUSH_PREFIX . 'lazy_load', $defaults );
