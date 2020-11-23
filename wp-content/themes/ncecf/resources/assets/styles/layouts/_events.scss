@@ -244,3 +244,11 @@ nav {
   @extend .btn;
   @extend .btn-slate;
 }
+
+.tribe-events-nav-previous > a,
+.tribe-events-nav-next > a {
+  @extend .btn;
+  @extend .btn-slate;
+
+  margin-top: 0 !important;
+}
