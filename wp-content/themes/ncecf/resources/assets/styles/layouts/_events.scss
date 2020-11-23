@@ -245,6 +245,10 @@ nav {
   @extend .btn-slate;
 }
 
+#tribe_events_filters_wrapper.tribe-events-filters-horizontal .tribe-filter-status {
+  display: none;
+}
+
 .tribe-events-nav-previous > a,
 .tribe-events-nav-next > a {
   @extend .btn;
