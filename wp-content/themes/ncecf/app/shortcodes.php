@@ -195,3 +195,65 @@ add_shortcode('display_posts_by_tag', function($atts, $content = null) {
 
     return '<ul>'. $output .'</ul>';
 });
+
+/**
+ * Action Map Expectation
+ */
+add_shortcode('list-expectations', function($atts) {
+    extract( shortcode_atts([
+        //'type' => 'staff'
+    ], $atts ) );
+
+    $am_expectation = new \WP_Query([
+        'post_type' => 'ncecf-expectations',
+        'posts_per_page' => -1,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+    ]);
+    global $post;
+    ob_start();
+
+    if ($am_expectation->have_posts()) : while ($am_expectation->have_posts()) : $am_expectation->the_post();
+
+        ?>
+
+
+        <?php
+        //$imgdata = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');
+                    $thumbnail = get_field('expectation_wheel_photo');
+        // if ($imgdata[1] < 400) {
+        //   $thumbnail = get_the_post_thumbnail_url('thumbnail');
+        // } else {
+        //   $thumbnail = $imgdata[0];
+        // }
+        ?>
+                <div class="single-expectation">
+
+                    <div class="single-expectation-background" style="background-image: url('<?php echo $thumbnail['sizes']['large']; ?>')">
+                            <div class="single-expectation-title">
+
+                                <a href="<?php echo get_permalink(); ?>">
+                                    <span class="expectation-term">
+                                        <?php
+                                        $term_list = get_the_terms($post->ID, 'ncecf-expectations-assignment');
+                                        foreach($term_list as $term_single) {
+                                            echo $term_single->name;
+                                        }
+                                        ?>
+                                    </span>
+                                    <span class="expectation-title"><?php the_title(); ?></span>
+                                    <span class="expectation-link">Explore</span>
+                                </a>
+
+                            </div>
+                    </div>
+                </div>
+        <?php
+        endwhile; endif; wp_reset_postdata(); ?>
+
+    <div class="expectation-wheel-center">
+        <span>Pathways Action Framework</span>
+    </div>
+<?php
+    return ob_get_clean();
+});
