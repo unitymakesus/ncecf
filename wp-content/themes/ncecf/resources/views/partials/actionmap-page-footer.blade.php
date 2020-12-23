@@ -8,7 +8,7 @@
 
         <img src="{!! get_stylesheet_directory_uri() !!}/assets/images/action-map/pathways-logo-white.png" />
 
-        {!! wp_nav_menu(['menu' => '172', 'menu_class' => '', 'menu_id' => 'action-map-footer-nav']) !!}
+        {!! wp_nav_menu(['theme_location' => 'action_map_header', 'menu_class' => '', 'menu_id' => 'action-map-footer-nav']) !!}
 
       </div>
     </div>

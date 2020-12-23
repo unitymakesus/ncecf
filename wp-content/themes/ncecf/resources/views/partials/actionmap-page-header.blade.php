@@ -11,7 +11,7 @@
       <a href="{{ site_url() }}/pathways-action-map-home/">  <img src="{!! get_stylesheet_directory_uri() !!}/assets/images/action-map/pathways-logo.png" /></a>
       </div>
       <div class="col m10">
-        {!! wp_nav_menu(['menu' => 'Action Map Header', 'menu_class' => '', 'menu_id' => 'action_map_header']) !!}
+        {!! wp_nav_menu(['theme_location' => 'action_map_header', 'menu_class' => '', 'menu_id' => 'action_map_header']) !!}
       </div>
     </div>
 </div>

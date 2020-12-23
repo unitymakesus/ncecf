@@ -9,6 +9,6 @@
 </div>
 
 {!! wp_nav_menu([
-  'menu' => 'Action Map Sidebar',
+  'theme_location' => 'action_map_sidebar',
   'menu_id' => 'action_map_sidebar',
   ]) !!}

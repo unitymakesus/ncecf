@@ -41,7 +41,9 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
-        'header_social' => __('Header Social Links', 'sage')
+        'header_social' => __('Header Social Links', 'sage'),
+        'action_map_header' => __('Action Map Header', 'sage'),
+        'action_map_sidebar' => __('Action Map Sidebar', 'sage'),
     ]);
 
     /**
