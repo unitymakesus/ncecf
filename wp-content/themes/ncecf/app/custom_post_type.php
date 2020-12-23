@@ -199,6 +199,163 @@ function create_post_type() {
   );
   register_post_type( 'ncecf-person', $argsStaff );
 
+    $argsActionMapExpect = array(
+        'labels' => array(
+            'name'          => 'Action Map',
+            'singular_name' => 'Initiative',
+            //'add_new' => 'Add New Expectation',
+            'add_new_item'       => 'Add New Initiatives',
+            'all_items'          => 'Initiatives',
+            'edit'               => 'Edit',
+            'edit_item'          => 'Edit Initiative',
+            'new_item'           => 'New Initiative',
+            'view_item'          => 'View Initiative',
+            'search_items'       => 'Search Initiative',
+            'not_found'          => 'Nothing found in the Database.',
+            'not_found_in_trash' => 'Nothing found in Trash',
+            'parent_item_colon'  => ''
+        ),
+        'public'              => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_nav_menus'   => true,
+        'menu_position'       => 21,
+        'menu_icon'           => 'dashicons-location-alt',
+        'capability_type'     => 'post',
+        'hierarchical'        => false,
+        'supports'            => array(
+            'title',
+            'editor',
+            'author',
+            'revisions',
+            'page-attributes',
+            'thumbnail',
+            'excerpt'
+        ),
+        'has_archive' => false,
+        'rewrite'     => array(
+            'slug' => 'pathways/initiatives'
+        )
+    );
+    register_post_type( 'ncecf-actionmap',  $argsActionMapExpect );
+
+    $argsActionmapExpectation = array(
+        'labels' => array(
+            'name'               => 'Expectations',
+            'singular_name'      => 'Expectation',
+            'add_new'            => 'Add New',
+            'add_new_item'       => 'Add New Expectation',
+            'edit'               => 'Edit',
+            'edit_item'          => 'Edit Expectations',
+            'new_item'           => 'New Expectation',
+            'view_item'          => 'View Expectation',
+            'search_items'       => 'Search Expectations',
+            'not_found'          => 'Nothing found in the Database.',
+            'not_found_in_trash' => 'Nothing found in Trash',
+            'parent_item_colon'  => ''
+        ),
+        'public'              => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => 'edit.php?post_type=ncecf-actionmap',
+        'show_in_nav_menus'   => true,
+        //'menu_position' => 20,
+        //'menu_icon' => 'dashicons-groups',
+        'capability_type' => 'post',
+        'hierarchical'    => false,
+        'supports'        => array(
+            'title',
+            'editor',
+            'revisions',
+            'page-attributes',
+            'thumbnail'
+        ),
+        'has_archive' => false,
+        'rewrite'     => array(
+            'slug' => 'pathways/expectations'
+        )
+    );
+    register_post_type( 'ncecf-expectations', $argsActionmapExpectation );
+
+    $argsActionmapStrategy = array(
+        'labels' => array(
+            'name'               => 'Strategies',
+            'singular_name'      => 'Strategy',
+            'add_new'            => 'Add New',
+            'add_new_item'       => 'Add New Strategy',
+            'edit'               => 'Edit',
+            'edit_item'          => 'Edit Strategy',
+            'new_item'           => 'New Strategy',
+            'view_item'          => 'View Strategy',
+            'search_items'       => 'Search Strategy',
+            'not_found'          => 'Nothing found in the Database.',
+            'not_found_in_trash' => 'Nothing found in Trash',
+            'parent_item_colon'  => ''
+        ),
+        'public'              => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => 'edit.php?post_type=ncecf-actionmap',
+        'show_in_nav_menus'   => false,
+        //'menu_position' => 20,
+        //'menu_icon' => 'dashicons-groups',
+        'capability_type' => 'post',
+        'hierarchical'    => false,
+        'supports'        => array(
+            'title',
+            'editor',
+            'revisions',
+            'page-attributes',
+            'thumbnail'
+        ),
+        'has_archive' => false,
+        'rewrite'     => array(
+            'slug' => 'pathways/strategies'
+        )
+    );
+    register_post_type( 'ncecf-strategies', $argsActionmapStrategy );
+
+    $argsActionmapActions = array(
+        'labels' => array(
+            'name'               => 'Actions',
+            'singular_name'      => 'Action',
+            'add_new'            => 'Add New',
+            'add_new_item'       => 'Add New Action',
+            'edit'               => 'Edit',
+            'edit_item'          => 'Edit Action',
+            'new_item'           => 'New Action',
+            'view_item'          => 'View Action',
+            'search_items'       => 'Search Actions',
+            'not_found'          => 'Nothing found in the Database.',
+            'not_found_in_trash' => 'Nothing found in Trash',
+            'parent_item_colon'  => ''
+        ),
+        'public'              => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => 'edit.php?post_type=ncecf-actionmap',
+        'show_in_nav_menus'   => true,
+        //'menu_position' => 20,
+        //'menu_icon' => 'dashicons-groups',
+        'capability_type' => 'post',
+        'hierarchical'    => false,
+        'supports'        => array(
+            'title',
+            'editor',
+            'revisions',
+            'page-attributes',
+            'thumbnail'
+        ),
+        'has_archive' => false,
+        'rewrite'     => array(
+            'slug' => 'pathways/actions'
+        )
+    );
+    register_post_type( 'ncecf-actions', $argsActionmapActions );
 }
 
 add_action( 'init', __NAMESPACE__.'\\create_post_type' );
