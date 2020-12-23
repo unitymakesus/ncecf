@@ -1,11 +1,11 @@
 === The Events Calendar: Filter Bar ===
 
-Contributors: ModernTribe, barry.hughes, bordoni, borkweb, brianjessee, brook-tribe, faction23, geoffgraham, ggwicz, jazbek, jbrinley, joshlimecuda, leahkoerper, lucatume, mastromktg, mat-lipe, mdbitz, neillmcshea, nicosantos, peterchester, reid.peifer, roblagatta, ryancurban, shane.pearlman, thatdudebutch,  zbtirrell
+Contributors: ModernTribe, borkweb,bordoni, brianjessee, aguseo, camwynsp, cliffpaulick, GeoffBel, geoffgraham, jentheo, leahkoerper, lucatume, neillmcshea, patriciahillebrandt, peterchester, paulskim, reid.peifer, shane.pearlman, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, modern tribe, tribe, widget, pro, filters, categories, sort, tags, taxonomy, find, search
 Donate link: http://m.tri.be/29
-Requires at least: 4.9
-Tested up to: 5.5.1
-Stable tag: 5.0.1
+Requires at least: 4.9.14
+Tested up to: 5.6.0
+Stable tag: 5.0.3.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -194,6 +194,22 @@ Our Premium Plugins:
 * <a href="http://m.tri.be/18h9" target="_blank">The Events Calendar: iCal Importer</a>
 
 == Changelog ==
+
+= [5.0.3.1] 2020-12-21 =
+
+* Fix - Update The Events Calendar minimum required version to avoid activation issues.
+
+= [5.0.3] 2020-12-15 =
+
+* Feature - V2 Customizer - Add background color css overrides. [FBAR-206]
+* Fix - Correctly handle pagination requests on Views v2 when Filter Bar is active to paginate on first click of Previous or Next links. [FBAR-208]
+* Fix - Avoid errors when using Views v2 and setting the `TRIBE_EVENTS_FILTERBAR_V1_VIEWS` constant to `true`. [FBAR-212]
+
+
+= [5.0.2] 2020-12-02 =
+
+* Tweak - Add a filter to allow views to "turn off" Filter Bar classes on their container. [TBD]
+* Language - 0 new strings added, 3 updated, 0 fuzzied, and 0 obsoleted
 
 = [5.0.1] 2020-10-22 =
 
@@ -508,7 +524,7 @@ Our Premium Plugins:
 * Incorporated new Catalan translation files, courtesy of Oriol Carol
 * Incorporated updated Greek translation files, courtesy of Yannis Troullinos
 * Incorporated new Polish translation files, courtesy of Marcin Lacki
-* Incorporated new Russian transltion files, courtesy of Evgenii Rybak
+* Incorporated new Russian translation files, courtesy of Evgenii Rybak
 
 = 3.8 =
 

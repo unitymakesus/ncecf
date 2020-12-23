@@ -128,6 +128,7 @@ class Factory extends Compatibility_Factory {
 				'is_open'          => $is_open,
 				'name'             => $filter->get_name_field(),
 				'fields'           => $filter->get_fields_data_by_type(),
+				'type'             => 'select' === $filter->type ? 'dropdown' : $filter->type,
 			];
 
 			$template_var_filters[] = $filter_data;

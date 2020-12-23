@@ -19,6 +19,7 @@ namespace Tribe\Events\Filterbar\Views\V2;
 
 use Tribe\Events\Views\V2\View_Interface;
 use Tribe__Context as Context;
+use Tribe__Template;
 
 /**
  * Class Hooks.
@@ -56,7 +57,6 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @since 4.9.0
 	 */
 	public function register() {
-		$this->container->singleton( Customizer::class, Customizer::class );
 		$this->container->singleton( Body_Classes::class, Body_Classes::class );
 		tribe( Body_Classes::class )->register();
 
@@ -158,14 +158,11 @@ class Hooks extends \tad_DI52_ServiceProvider {
 	 * @return string|void
 	 */
 	public function action_include_filter_bar( $file, $name, $template ) {
-
-		// Prevent Including the Filter Bar if on a Shortcode
-		$context = $template->get_context();
-		if ( $context->get( 'shortcode'  ) ) {
+		if ( ! $this->container->make( Filters::class )->should_display_filters( $template->get_view() ) ) {
 			return;
 		}
 
-		if ( ! $this->container->make( Filters::class )->should_display_filters( $template->get_view() ) ) {
+		if ( Template::is_using_shortcode( $template ) ) {
 			return;
 		}
 

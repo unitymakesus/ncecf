@@ -99,7 +99,7 @@ tribe.filterBar.filterBarState = {};
 	/**
 	 * Setup filter bar.
 	 *
-	 * @since  TBD
+	 * @since  5.0.2
 	 *
 	 * @param  {HTMLElement} container HTML element of the container containing the script tag calling setup
 	 *

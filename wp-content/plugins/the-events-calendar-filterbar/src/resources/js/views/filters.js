@@ -340,7 +340,7 @@ tribe.filterBar.filters = {};
 	/**
 	 * Set flag for filter bar request.
 	 *
-	 * @since  TBD
+	 * @since  5.0.2
 	 *
 	 * @param  {jQuery} $container jQuery object of view container.
 	 *

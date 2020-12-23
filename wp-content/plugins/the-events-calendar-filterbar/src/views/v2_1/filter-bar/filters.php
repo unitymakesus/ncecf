@@ -58,6 +58,7 @@ if ( 'horizontal' === $layout ) {
 					'container_id'         => Arr::get( $filter, 'container_id', '' ),
 					'container_labelledby' => $container_labelledby,
 					'fields'               => Arr::get( $filter, 'fields', [] ),
+					'type'                 => Arr::get( $filter, 'type', '' ),
 				]
 			);
 			?>

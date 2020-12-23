@@ -162,7 +162,7 @@ tribe.filterBar.filterMultiselects = {};
 	 *
 	 * @todo: @paulmskim this will be removed once a more permanent solution can be put in place.
 	 *
-	 * @since  TBD
+	 * @since  5.0.2
 	 *
 	 * @param  {Event} event event object for 'keydown' event.
 	 *
@@ -177,7 +177,7 @@ tribe.filterBar.filterMultiselects = {};
 	 *
 	 * @todo: @paulmskim this will be removed once a more permanent solution can be put in place.
 	 *
-	 * @since  TBD
+	 * @since  5.0.2
 	 *
 	 * @param  {Event} event event object for 'focusin' event.
 	 *
@@ -192,7 +192,7 @@ tribe.filterBar.filterMultiselects = {};
 	 *
 	 * @todo: @paulmskim this will be removed once a more permanent solution can be put in place.
 	 *
-	 * @since  TBD
+	 * @since  5.0.2
 	 *
 	 * @param  {Event} event event object for 'focusout' event.
 	 *

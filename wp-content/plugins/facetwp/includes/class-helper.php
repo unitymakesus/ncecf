@@ -401,7 +401,7 @@ final class FacetWP_Helper
 
         $value = str_replace( ' ', '-', strtolower( $value ) );
         $value = preg_replace( '/[-]{2,}/', '-', $value );
-        $value = ( 50 < strlen( $value ) ) ? md5( $value ) : $value;
+        $value = ( 50 < strlen( $value ) ) ? substr( $value, 0, 50 ) : $value;
         return $value;
     }
 
