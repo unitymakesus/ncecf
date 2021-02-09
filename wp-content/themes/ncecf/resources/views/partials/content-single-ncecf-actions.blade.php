@@ -79,7 +79,7 @@
 
                 <a href="{{ the_permalink() }}">
                 {{ $expect_name }}:
-                <?php echo get_menu_label_by_post_id(get_the_ID(), 'Action Map Header'); ?>
+                <?php echo App\get_menu_label_by_post_id(get_the_ID(), 'Action Map Header'); ?>
                 </a>
 
             @endwhile

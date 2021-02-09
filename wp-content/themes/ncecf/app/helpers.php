@@ -138,3 +138,22 @@ function display_sidebar()
     isset($display) || $display = apply_filters('sage/display_sidebar', false);
     return $display;
 }
+
+/**
+ * Pathways helper.
+ */
+function get_menu_label_by_post_id($post_id, $menu) {
+    $menu_title = '';
+    $nav = wp_get_nav_menu_items($menu);
+
+    foreach ( $nav as $item ) {
+
+        if ( $post_id == $item->object_id ) {
+            $menu_title = $item->post_title;
+            break;
+        }
+
+    }
+
+    return ($menu_title !== '') ? $menu_title : get_the_title($post_id);
+}
